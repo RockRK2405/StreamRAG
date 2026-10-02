@@ -1,0 +1,25 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:00.000] u1   USER       #0: "I need"
+[00:00.000] u1   CONTROLLER WAIT     no_content  conf=1.00 stab=0.15 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:00.300] u1   USER       #1: "information"
+[00:00.301] u1   CONTROLLER WAIT     no_content  conf=1.00 stab=0.5 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:00.600] u1   USER       #2: "about the fog signal"
+[00:00.602] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.833 worth=0.867 nov=1.0 act=INFO_REQUEST
+[00:00.602] u1   QUERY      Q1 v1 "the fog signal"
+[00:00.602] u1   RETRIEVAL  START Q1 [provisional] queue_wait=0.16ms
+[00:00.613] u1   RETRIEVAL  DONE  Q1 status=ok 10.734ms top: fixture_lighthouse_manual §3, fixture_observatory_notes §1, fixture_lighthouse_manual §2
+[00:00.900] u1   USER       #3: "during a storm"
+[00:00.902] u1   CONTROLLER WAIT     cooldown  conf=1.00 stab=0.967 worth=0.9 nov=0.333 act=INFO_REQUEST
+[00:01.400] u1   UTTERANCE  FINALIZED reason=endpoint transcript="I need information about the fog signal during a storm"
+[00:01.401] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.83 stab=1.0 worth=0.9 nov=0.333 act=INFO_REQUEST
+[00:01.402] u1   QUERY      Q2 v2 "the fog signal during a storm" supersedes Q1 (refines)
+[00:01.402] u1   RETRIEVAL  START Q2 [final] queue_wait=0.116ms
+[00:01.413] u1   RETRIEVAL  DONE  Q2 status=ok 11.247ms top: fixture_lighthouse_manual §3, fixture_observatory_notes §1, fixture_lighthouse_manual §2
+[00:01.413] u1   TURN       retrievals=2 lead_time=797.722ms ttfr=602.177ms post_final=12.894ms final_query=Q2
+[00:02.900] u2   USER       #0: "make that"
+[00:02.901] u2   CONTROLLER WAIT     trailing_function_word  conf=0.86 stab=0.142 worth=0.2 nov=1.0 act=UNKNOWN
+[00:03.200] u2   USER       #1: "shorter"
+[00:03.201] u2   CONTROLLER SKIP     presentation_restructure  conf=0.90 stab=0.608 worth=0.0 nov=1.0 act=PRESENTATION
+[00:03.700] u2   UTTERANCE  FINALIZED reason=endpoint transcript="make that shorter"
+[00:03.701] u2   CONTROLLER SKIP     presentation_restructure  conf=0.90 stab=0.658 worth=0.0 nov=1.0 act=PRESENTATION
+[00:03.701] u2   TURN       retrievals=0 lead_time=n/a ttfr=n/a post_final=n/a final_query=None

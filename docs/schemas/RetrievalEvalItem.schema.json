@@ -1,0 +1,96 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Case Id"
+    },
+    "category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Category"
+    },
+    "gold": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Gold",
+      "type": "array"
+    },
+    "gold_level": {
+      "default": "section",
+      "enum": [
+        "chunk",
+        "section",
+        "document"
+      ],
+      "title": "Gold Level",
+      "type": "string"
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "is_fixture": {
+      "default": false,
+      "title": "Is Fixture",
+      "type": "boolean"
+    },
+    "item_id": {
+      "title": "Item Id",
+      "type": "string"
+    },
+    "query": {
+      "minLength": 1,
+      "title": "Query",
+      "type": "string"
+    },
+    "split": {
+      "anyOf": [
+        {
+          "enum": [
+            "tune",
+            "test"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Split"
+    }
+  },
+  "required": [
+    "item_id",
+    "query",
+    "gold"
+  ],
+  "title": "RetrievalEvalItem",
+  "type": "object"
+}

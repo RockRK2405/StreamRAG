@@ -1,0 +1,30 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.561] u1   USER       #0: "I need information about"
+[00:01.561] u1   CONTROLLER WAIT     no_content  conf=1.00 stab=0.15 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:02.161] u1   CONTROLLER WAIT     no_content  conf=1.00 stab=0.25 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:02.717] u1   USER       #1: "the fog signal"
+[00:02.717] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.833 worth=0.867 nov=1.0 act=INFO_REQUEST
+[00:02.717] u1   INTENTS    v1 +I1 | I1[OTHER] 'the fog signal'
+[00:02.717] u1   QUERY      Q1 for I1 v1 "the fog signal"
+[00:02.717] u1   MULTI      B1 start Q1 (parallel)
+[00:02.717] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:02.727] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: fixture_lighthouse_manual §3, fixture_observatory_notes §1, fixture_lighthouse_manual §2
+[00:02.727] u1   MULTI      B1 done makespan=10.0ms
+[00:02.727] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_lighthouse_manual §3<I1>, E2=fixture_observatory_notes §1<I1>, E3=fixture_lighthouse_manual §2<I1>, E4=fixture_lighthouse_manual §0<I1>, E5=fixture_lighthouse_manual §1<I1>
+[00:03.317] u1   CONTROLLER SKIP     redundant_query  conf=1.00 stab=0.933 worth=0.867 nov=0.0 act=INFO_REQUEST
+[00:03.473] u1   USER       #2: "and also"
+[00:03.473] u1   CONTROLLER WAIT     trailing_function_word  conf=0.42 stab=0.583 worth=0.867 nov=0.0 act=INFO_REQUEST
+[00:04.073] u1   CONTROLLER WAIT     trailing_function_word  conf=0.42 stab=0.583 worth=0.867 nov=0.0 act=INFO_REQUEST
+[00:04.156] u1   USER       #3: "the lens"
+[00:04.156] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.84 stab=0.95 worth=0.9 nov=0.5 act=INFO_REQUEST
+[00:04.156] u1   INTENTS    v2 +I2 | I1[OTHER] 'the fog signal'; I2[OTHER] 'the lens'
+[00:04.156] u1   QUERY      Q2 for I2 v1 "the lens"
+[00:04.156] u1   MULTI      B2 start Q2 (parallel) reuse I1
+[00:04.156] u1   RETRIEVAL  START Q2/I2 [provisional] queue_wait=0.0ms
+[00:04.166] u1   RETRIEVAL  DONE  Q2/I2 status=ok 10.0ms top: fixture_lighthouse_manual §1.2, fixture_lighthouse_manual §1.1, fixture_lighthouse_manual §0
+[00:04.166] u1   MULTI      B2 done makespan=10.0ms
+[00:04.166] u1   FUSED      provisional intent_aware/none coverage=1.0 items=8: E1=fixture_lighthouse_manual §3<I1>, E2=fixture_observatory_notes §1<I1+I2>, E3=fixture_lighthouse_manual §2<I1>, E4=fixture_lighthouse_manual §1<I1>, E5=fixture_lighthouse_manual §1.2<I2>, E6=fixture_lighthouse_manual §1.1<I2>
+[00:04.656] u1   UTTERANCE  FINALIZED reason=endpoint transcript="I need information about the fog signal and also the lens"
+[00:04.656] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.86 stab=1.0 worth=0.9 nov=0.5 act=INFO_REQUEST
+[00:04.656] u1   FUSED      final intent_aware/none coverage=1.0 items=8: E1=fixture_lighthouse_manual §3<I1>, E2=fixture_observatory_notes §1<I1+I2>, E3=fixture_lighthouse_manual §2<I1>, E4=fixture_lighthouse_manual §1<I1>, E5=fixture_lighthouse_manual §1.2<I2>, E6=fixture_lighthouse_manual §1.1<I2>
+[00:04.656] u1   TURN       intents=2 retrievals=2 versions=2 coverage=1.0 lead_time=1939.4ms post_final=0.0ms sub_queries=['the fog signal', 'the lens']

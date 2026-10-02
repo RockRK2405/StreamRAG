@@ -1,0 +1,11 @@
+{
+  "identical": true,
+  "behavior_identical": true,
+  "ok": true,
+  "n_original": 32,
+  "n_replayed": 32,
+  "n_differences": 0,
+  "first_difference": null,
+  "behavior_differences": [],
+  "source_mode": "virtual"
+}

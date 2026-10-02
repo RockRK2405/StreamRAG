@@ -1,0 +1,318 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "batch_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Batch Id"
+    },
+    "citations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "created_at_ms": {
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
+    },
+    "decision_reason": {
+      "title": "Decision Reason",
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "evidence_set_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Set Id"
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "intent_version": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Version"
+    },
+    "lineage_root": {
+      "title": "Lineage Root",
+      "type": "string"
+    },
+    "query_id": {
+      "title": "Query Id",
+      "type": "string"
+    },
+    "query_text": {
+      "title": "Query Text",
+      "type": "string"
+    },
+    "relation": {
+      "default": "initial",
+      "enum": [
+        "initial",
+        "refines",
+        "replaces"
+      ],
+      "title": "Relation",
+      "type": "string"
+    },
+    "retrieval_completed_at_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retrieval Completed At Ms"
+    },
+    "retrieval_queued_at_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retrieval Queued At Ms"
+    },
+    "retrieval_started_at_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retrieval Started At Ms"
+    },
+    "retrieval_status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retrieval Status"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "source_spans": {
+      "default": [],
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "integer"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Source Spans",
+      "type": "array"
+    },
+    "stale": {
+      "default": false,
+      "title": "Stale",
+      "type": "boolean"
+    },
+    "stale_at_completion": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale At Completion"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "enum": [
+            "superseded_query",
+            "intent_superseded",
+            "intent_removed"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "status": {
+      "default": "pending",
+      "enum": [
+        "pending",
+        "queued",
+        "in_flight",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "superseded_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Superseded By"
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes"
+    },
+    "terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Terms",
+      "type": "array"
+    },
+    "tick": {
+      "enum": [
+        "chunk",
+        "stability_timer",
+        "utterance_end"
+      ],
+      "title": "Tick",
+      "type": "string"
+    },
+    "transcript_snapshot": {
+      "title": "Transcript Snapshot",
+      "type": "string"
+    },
+    "trigger": {
+      "enum": [
+        "provisional",
+        "final"
+      ],
+      "title": "Trigger",
+      "type": "string"
+    },
+    "trigger_chunk": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trigger Chunk"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "query_id",
+    "session_id",
+    "utterance_id",
+    "version",
+    "query_text",
+    "transcript_snapshot",
+    "created_at_ms",
+    "trigger",
+    "tick",
+    "decision_reason",
+    "lineage_root"
+  ],
+  "title": "QueryRecord",
+  "type": "object"
+}

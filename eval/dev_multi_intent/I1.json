@@ -1,0 +1,53 @@
+{
+  "case_id": "I1",
+  "category": "I_over_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): comparison",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what is the difference",
+          "timestamp_s": 1.5743
+        },
+        {
+          "chunk_index": 1,
+          "text": "between the wick",
+          "timestamp_s": 2.7962
+        },
+        {
+          "chunk_index": 2,
+          "text": "and the lens",
+          "timestamp_s": 3.9842
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "difference between the wick and the lens",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1",
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 4.4842,
+      "utterance_id": "u1",
+      "utterance_text": "what is the difference between the wick and the lens"
+    }
+  ]
+}

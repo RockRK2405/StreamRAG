@@ -1,0 +1,82 @@
+# Generic English lexicon for rule-based intent decomposition (Phase 5, docs/multi_intent/02).
+# Domain-neutral by design: no corpus, benchmark or guide-example vocabulary (anti-hardcoding tests scan this file).
+# The controller lexicon (configs/controller_lexicon.yaml) supplies fillers, request heads, question words,
+# auxiliaries, social and backchannel words; this file adds what decomposition needs on top of it.
+
+# Coordination inside one request clause ("X and Y") -> candidate split into sibling intents (guarded).
+coordinators: [and, plus, "&"]
+# Markers that add a further request even without a question word ("I need X and also Y").
+addition_phrases: ["and also", "as well as", "along with", "in addition to", "and additionally", "and then", "and too",
+                   "also", "additionally", "plus", "besides"]
+# "X or Y" is one need (a choice or comparison): never split on these.
+alternatives: [or, either, nor]
+comparison_cues: [difference, differences, differ, differs, compare, compared, comparing, comparison, versus, vs,
+                  "better than", "worse than", "the same as", "as opposed to"]
+# Range / pair constructions that must stay together.
+pair_openers: [between, both]
+
+# Nouns that never form an intent on their own ("information about X" -> X).
+generic_nouns: [information, info, details, detail, something, anything, things, thing, stuff, question, questions,
+                help, everything, overview, idea, data, bit, lot, topic, topics, aspect, aspects, knowledge, facts]
+# Facet nouns: an intent made only of these needs a topic ("the requirements" -> requirements *for what?*).
+aspect_nouns: [requirement, requirements, rule, rules, process, processes, procedure, procedures, step, steps, timeline,
+               timelines, schedule, schedules, deadline, deadlines, cost, costs, fee, fees, price, prices, eligibility,
+               criteria, criterion, policy, policies, limit, limits, exception, exceptions, documents, document,
+               duration, benefits, benefit, conditions, condition, options, option, instructions, guidelines,
+               regulations, restrictions, restriction, frequency, status, method, methods, way, ways, time, times,
+               age, process, application, applications, purpose, reason, reasons, location, place]
+
+# Prepositions that introduce the topic of an aspect ("requirements FOR x", "rules ABOUT x").
+topic_prepositions: [about, for, of, "on", regarding, concerning, around, re]
+# Prepositions that introduce a restriction when they follow a complete request ("... for applicants from z").
+restriction_prepositions: [for, from, in, during, at, "on", under, within, after, before, without, with, near, between,
+                           among, inside, outside, across, per, by, while, until, since, through, throughout, over]
+
+# Constraint markers. A clause opened by one of these attaches to intents as a constraint, never as an intent.
+focus_markers: [especially, particularly, specifically, mainly, mostly, primarily, chiefly, notably, precisely]
+focus_phrases: ["in particular", "with a focus on", "focusing on", "with respect to", "with regard to",
+                "in terms of", "more specifically", "and especially", "and particularly", "and specifically"]
+condition_markers: [if, unless, assuming, provided, whenever, once]
+condition_phrases: ["in case", "only if", "even if", "as long as", "provided that", "in the event", "only when",
+                    "in the case of", "in cases where", "so long as"]
+# Explicit "applies to everything" scope.
+scope_all_phrases: ["for both", "for all", "for each", "for all of them", "for both of them", "in both cases",
+                    "in all cases", "for all of these", "for each of them", "for everything", "for all three",
+                    "for all of those", "in each case", "for either"]
+
+# Self-correction. Strong markers only: weak words such as "actually" or "sorry" alone are treated as fillers.
+correction_phrases: ["i meant", "i mean", "what i meant", "what i mean", "no wait", "scratch that", "let me rephrase",
+                     "correction", "i should have said", "not that"]
+correction_replacement_phrases: ["instead of", "rather than", "and not", "but not"]
+correction_words: [instead, rather]
+
+# Anaphora resolved against an earlier intent's topic (pronouns; demonstratives used without a following noun).
+anaphora: [it, its, that, this, they, them, their, those, these, one, ones]
+locative_anaphora: [there, then, here]
+
+# A follow-up utterance opened like this may continue the previous utterance's topic (ellipsis).
+follow_up_openers: ["and what about", "what about", "how about", "and how about", "what else about", "and for",
+                    "and also", "and", "also", "then", "same for", "and the"]
+
+# Verbs that open an imperative request ("explain the x", "list the y").
+request_verbs: [explain, describe, list, outline, clarify, define, detail, show, give, find, check, walk, remind,
+                tell, share, provide, summarise, identify]
+# Verbs that embed a following question ("I want to KNOW how ..."): a question word after them is not a new clause.
+embedding_verbs: [know, ask, asking, wondering, wonder, tell, explain, understand, sure, curious, idea, learn, find,
+                  out, see, show, check, confirm, clarify, describe, about, "on", of, me, us, remember, decide, figure]
+
+# Intent types (docs/multi_intent/01). First matching type in this order wins; cues are matched in the intent's own
+# text (not in its constraints). Multi-word cues are phrases.
+intent_types:
+  EXCEPTION: [exception, exceptions, except, exempt, exemption, exemptions, excluded, exclusion, waiver]
+  COMPARISON: [difference, differences, differ, compare, compared, comparison, versus, vs, "better than"]
+  REQUIREMENT: [requirement, requirements, required, require, requires, eligible, eligibility, criteria, allowed,
+                permitted, permission, must, "need to", "have to", qualify, rule, rules, policy, mandatory, may, "can i",
+                "can we", "is it ok", prohibited, forbidden]
+  TIMELINE: ["how long", when, "how often", "what time", deadline, timeline, schedule, duration, "how soon",
+             "by when", frequency, date, dates]
+  PROCEDURAL: ["how do", "how does", "how to", "how can", "how should", "how is", "how are", steps, step, process,
+               procedure, apply, application, instructions, "what do", "what should"]
+  DEFINITION: [define, definition, meaning, "what does", mean, "what is meant", "what is a", "what is an"]
+  FACTUAL: ["how many", "how much", "how high", "how far", "how big", "how heavy", "how tall", "how old", "how hot",
+            "how cold", what, which, where, who, whom, whose]

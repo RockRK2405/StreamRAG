@@ -1,0 +1,80 @@
+{
+  "annotation": {},
+  "case_id": "fog_asr-authored",
+  "category": "early_retrieval",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-fog_asr-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 116,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "fog signal storm",
+            "timestamp_s": 1.2651
+          },
+          {
+            "chunk_index": 1,
+            "text": "how often",
+            "timestamp_s": 2.0573
+          },
+          {
+            "chunk_index": 2,
+            "text": "does it sound",
+            "timestamp_s": 3.2881
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": true,
+              "constraints": [],
+              "description": "fog signal storm how often does it sound",
+              "gold_evidence": [
+                "fixture_lighthouse_manual \u00a73"
+              ],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 3.7881,
+        "utterance_id": "u1",
+        "utterance_text": "fog signal storm how often does it sound",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

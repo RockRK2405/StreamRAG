@@ -1,0 +1,80 @@
+{
+  "case_id": "K3",
+  "category": "K_duplicate",
+  "description": "DEV SUITE (fixture domain): question repeated in the next utterance",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how many crates",
+          "timestamp_s": 1.2417
+        },
+        {
+          "chunk_index": 1,
+          "text": "can a picker fill",
+          "timestamp_s": 2.6313
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates a picker can fill",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.1313,
+      "utterance_id": "u1",
+      "utterance_text": "how many crates can a picker fill"
+    },
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how many crates",
+          "timestamp_s": 1.0204
+        },
+        {
+          "chunk_index": 1,
+          "text": "can a picker fill",
+          "timestamp_s": 2.3508
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates a picker can fill",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u2.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 0,
+      "expected_relationships": [],
+      "utterance_end_s": 2.8508,
+      "utterance_id": "u2",
+      "utterance_text": "how many crates can a picker fill"
+    }
+  ]
+}

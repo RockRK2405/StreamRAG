@@ -1,0 +1,85 @@
+{
+  "case_id": "L2",
+  "category": "L_changed_intent",
+  "description": "DEV SUITE (fixture domain): correction in the next utterance",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.0718
+        },
+        {
+          "chunk_index": 1,
+          "text": "the lens",
+          "timestamp_s": 1.9535
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the lens",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": true
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 2.4535,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the lens"
+    },
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "actually I meant",
+          "timestamp_s": 1.2323
+        },
+        {
+          "chunk_index": 1,
+          "text": "the lamp",
+          "timestamp_s": 2.0101
+        },
+        {
+          "chunk_index": 2,
+          "text": "not the lens",
+          "timestamp_s": 3.0656
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the lamp",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u2.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.5656,
+      "utterance_id": "u2",
+      "utterance_text": "actually I meant the lamp not the lens"
+    }
+  ]
+}

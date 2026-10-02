@@ -1,0 +1,67 @@
+{
+  "case_id": "I4",
+  "category": "I_over_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): narrative with many nouns",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "so yesterday I walked past",
+          "timestamp_s": 1.8353
+        },
+        {
+          "chunk_index": 1,
+          "text": "the orchard and the tool shed",
+          "timestamp_s": 4.3927
+        },
+        {
+          "chunk_index": 2,
+          "text": "and the cool room",
+          "timestamp_s": 6.0931
+        },
+        {
+          "chunk_index": 3,
+          "text": "with my sister and her dog",
+          "timestamp_s": 8.5532
+        },
+        {
+          "chunk_index": 4,
+          "text": "anyway how many crates",
+          "timestamp_s": 10.0057
+        },
+        {
+          "chunk_index": 5,
+          "text": "can a picker fill per shift",
+          "timestamp_s": 12.1496
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates per picker per shift",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 12.6496,
+      "utterance_id": "u1",
+      "utterance_text": "so yesterday I walked past the orchard and the tool shed and the cool room with my sister and her dog anyway how many crates can a picker fill per shift"
+    }
+  ]
+}

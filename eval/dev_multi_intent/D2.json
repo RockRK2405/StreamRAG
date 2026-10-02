@@ -1,0 +1,58 @@
+{
+  "case_id": "D2",
+  "category": "D_intent_constraint",
+  "description": "DEV SUITE (fixture domain): bare focus word",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the rules for ladders",
+          "timestamp_s": 2.2262
+        },
+        {
+          "chunk_index": 1,
+          "text": "especially overnight",
+          "timestamp_s": 2.8829
+        }
+      ],
+      "expected_constraints": [
+        {
+          "applies_to": [
+            "u1.g1"
+          ],
+          "scope": "local",
+          "text": "overnight"
+        }
+      ],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "ladder rules, overnight",
+          "gold_evidence": [
+            "Doc_07 \u00a72.2",
+            "Doc_07 \u00a72.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "overnight"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.3829,
+      "utterance_id": "u1",
+      "utterance_text": "what are the rules for ladders especially overnight"
+    }
+  ]
+}

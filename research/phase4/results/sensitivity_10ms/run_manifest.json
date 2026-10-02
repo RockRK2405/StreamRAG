@@ -1,0 +1,57 @@
+{
+  "REPORTABLE": false,
+  "cases_dir": "/Users/rudrakhale/Desktop/SamsungHackathon/eval/dev_streaming",
+  "command": "",
+  "config_hash": "44a0c0c235f806ed36fe73a83134ad4bfd97359d847a32c7f91a317cc8c8ca01",
+  "created_at": "2026-10-02T12:09:40Z",
+  "embedding_model": {
+    "build_batch_size": 8,
+    "dimension": 384,
+    "max_length": 512,
+    "model_files_sha256": {
+      "1_Pooling/config.json": "d1caf60c96f5fba2157c0c26b76d80818fad6cf0b8eb5e73ec372ff9818eba5c",
+      "config.json": "094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750",
+      "onnx/model.onnx": "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    },
+    "name": "bge-small-en-v1.5",
+    "normalize": true,
+    "pooling": "cls",
+    "repo": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "runtime": "onnxruntime-cpu",
+    "truncated_chunks": 0
+  },
+  "environment": {
+    "code": {
+      "git_dirty": true,
+      "git_sha": "uncommitted",
+      "package_version": "0.3.0"
+    },
+    "implementation": "CPython",
+    "machine": "arm64",
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "onnxruntime": "1.30.0",
+      "pydantic": "2.13.5",
+      "pypdf": "6.19.0",
+      "pyyaml": "6.0.3",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "streamrag": "0.3.0",
+      "tokenizers": "0.23.2",
+      "torch": "2.14.1"
+    },
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0"
+  },
+  "index_content_hash": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+  "mode": "virtual",
+  "n_cases": 63,
+  "policies": [
+    "controller",
+    "end_only"
+  ]
+}

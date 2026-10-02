@@ -1,0 +1,76 @@
+{
+  "case_id": "D3",
+  "category": "D_intent_constraint",
+  "description": "DEV SUITE (fixture domain): restriction after two needs",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how high are the crates stacked",
+          "timestamp_s": 1.9918
+        },
+        {
+          "chunk_index": 1,
+          "text": "and how many can a picker fill",
+          "timestamp_s": 4.7348
+        },
+        {
+          "chunk_index": 2,
+          "text": "for the night shift",
+          "timestamp_s": 6.3789
+        }
+      ],
+      "expected_constraints": [
+        {
+          "applies_to": [
+            "u1.g1",
+            "u1.g2"
+          ],
+          "scope": "global",
+          "text": "for the night shift"
+        }
+      ],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "maximum crate stack height",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "night"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "crates a picker can fill",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "night"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 6.8789,
+      "utterance_id": "u1",
+      "utterance_text": "how high are the crates stacked and how many can a picker fill for the night shift"
+    }
+  ]
+}

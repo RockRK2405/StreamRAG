@@ -1,0 +1,165 @@
+{
+  "additionalProperties": false,
+  "description": "One controller decision. ``signals`` holds the computed inputs; ``confidence`` is derived from them by a\ndocumented formula (docs/streaming/03). Nothing here is hand-set.",
+  "properties": {
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "decision": {
+      "enum": [
+        "WAIT",
+        "RETRIEVE",
+        "SKIP"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "ledger_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ledger Ref"
+    },
+    "policy": {
+      "default": "rules",
+      "title": "Policy",
+      "type": "string"
+    },
+    "query_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Query Text"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "signals": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "default": {},
+      "title": "Signals",
+      "type": "object"
+    },
+    "skip_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "suppressed",
+            "redundant",
+            "budget",
+            "not_worthy"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Skip Kind"
+    },
+    "t_session_ms": {
+      "minimum": 0,
+      "title": "T Session Ms",
+      "type": "number"
+    },
+    "tick": {
+      "enum": [
+        "chunk",
+        "stability_timer",
+        "utterance_end"
+      ],
+      "title": "Tick",
+      "type": "string"
+    },
+    "trigger": {
+      "anyOf": [
+        {
+          "enum": [
+            "provisional",
+            "final"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trigger"
+    },
+    "trigger_chunk": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trigger Chunk"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision",
+    "reason",
+    "confidence",
+    "tick",
+    "session_id",
+    "utterance_id",
+    "t_session_ms"
+  ],
+  "title": "RetrievalDecision",
+  "type": "object"
+}

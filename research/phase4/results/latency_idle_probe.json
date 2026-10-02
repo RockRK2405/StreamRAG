@@ -1,0 +1,23 @@
+{
+  "main_back_to_back": {
+    "n": 40,
+    "p50": 2.986,
+    "p95": 3.285
+  },
+  "thread_back_to_back": {
+    "n": 40,
+    "p50": 3.168,
+    "p95": 3.651
+  },
+  "main_after_300ms_idle": {
+    "n": 40,
+    "p50": 9.297,
+    "p95": 11.481
+  },
+  "thread_after_300ms_idle": {
+    "n": 40,
+    "p50": 9.491,
+    "p95": 11.896
+  },
+  "label": "TEST FIXTURE ONLY - NOT A BENCHMARK RESULT"
+}

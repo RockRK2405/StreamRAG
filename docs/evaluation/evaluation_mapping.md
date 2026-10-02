@@ -1,0 +1,29 @@
+# Evaluation Mapping (updated in Phase 5)
+
+**Status legend:**
+
+| Status | Meaning |
+|---|---|
+| **Implemented + measured on dev suite** | Works, with numbers from the team-authored dev suite on the *fictional fixture domain*. NOT REPORTABLE as official, and not held-out (written by the same team as the controller). |
+| **Implemented, unmeasured** | Code exists; no data yet |
+| **Blocked** | Needs the official corpus or official labels |
+| **Later phase** | Not built yet |
+
+**No requirement below is claimed as satisfied on official data.** No official benchmark data exists yet.
+
+| Samsung requirement (source) | Implementation | Telemetry | Benchmark | Metric | Status (Phase 5) |
+|---|---|---|---|---|---|
+| **G2 Early retrieval** ≥ 80% of eligible queries [G§5 p5] | Chunk manager → rule-first `RetrievalController` → async executor | `RETRIEVAL_STARTED.t_session_ms`, `UTTERANCE_FINALIZED.t_session_ms` | `bench/streaming.py` early-retrieval benchmark (`research/phase4`) | `early_retrieval_rate` over eligible turns (retrieval required, ≥ 2 chunks); `lead_time_ms`; `useful_early_rate` | Measured on dev suite (Phase 4 report §13). **Official: blocked.** |
+| **G2 Low false triggers on no-retrieval cases** [G§5 p5] | Act classifier (presentation / social / backchannel / meta) + not-worthy rule | `RETRIEVAL_DECISION` (SKIP reasons), `RETRIEVAL_SKIPPED` | Suppression benchmark (dev suite: 19 non-retrieval turns) | `false_retrieval_rate`, `suppression_rate`, `missed_retrieval_rate` | Measured on dev suite (§14). **Official: blocked.** |
+| **Streaming behavior / full duplex** [D s7], [G§1 p1] | `StreamingSession` (virtual + realtime), non-blocking `AsyncExecutor` | Full event trace; `queue_wait_ms` | Realtime dev-suite run; async tests | Chunks processed while retrieval in flight (tested); `ttfr_ms` | Implemented + tested |
+| **No retrieval storms** [G§6 p5 #1] | Cooldown, budget (+ reserved final), novelty, in-flight guard, queued cancellation | `RETRIEVAL_DECISION` WAIT reasons; `RETRIEVAL_CANCELLED` | Controller ablation (A / B / C) | Retrievals per utterance, `duplicate_retrievals` | Measured on dev suite (§15) |
+| **Latency** (TTFT reported [D s7]; team targets `[T]`) | Retrieval during speech; evidence ready at end | `latency_ms`, `wall.measured_ms`, `wall.controller_ms` | Realtime run + profile (`research/phase4/results/profile.json`) | `post_final_retrieval_latency_ms`, `evidence_ready_at_end_rate`, controller p50/p95 | Measured (§16). TTFT itself is a later phase (no generation yet). |
+| **Retrieval correctness** [D s7 "retrieval recall"] | Phase 3 hybrid retrieval behind the controller | Evidence ids per query | Fixture `final_success@5` (sanity only) | Recall@k on official labels | Fixture sanity only. **Official: blocked.** |
+| **G6 Telemetry**: timestamps, triggers, citations, lineage, token cost [G§5 p5] | `EventBus` → validated `TelemetryEvent` JSONL | All events | Schema validation in tests | Trace coverage | Retrieval-side fields complete. Token cost: later phase (no LLM yet). |
+| **Replayability** (debugging; supports G1 reproducibility) | `ReplayEngine` | Self-describing traces | Replay check in tests and the benchmark run | `identical` | Implemented + verified (virtual mode) |
+| **G3 Multi-intent** ≥ 70% [G§5 p5] | Rule-first `IntentDecomposer` + `IntentTracker` (versions, delta), optional gated LLM check (no backend) | `INTENTS_UPDATED`, `INTENT_DETECTED` / `_UPDATED` / `_SUPERSEDED` | `bench/multi_intent.py` on `eval/dev_multi_intent` (53 cases, categories A–L + S) | Intent P/R/F1 (Hungarian, τ = 0.5, separate MiniLM matcher), lenient/strict G3 on compound utterances, constraint P/R + scope, relationship P/R, context retention, supersession recall | Measured on dev suite (Phase 5 report §17): blind run and post-fix run reported. **Official: blocked** (needs official multi-intent cases). |
+| **Sub-queries / parallel retrieval** [G§1 p1, §2 p2] | `IntentQueryBuilder` (span-traceable), `MultiQueryRetriever` / streaming coordinator through the Phase 3 service | `QUERY_GENERATED`, `MULTI_QUERY_STARTED` / `_COMPLETED` (intent_id, query_id on every retrieval event) | Dispatch latency study, ablation A–E | Per-intent Recall@k (fixture sanity), sequential vs parallel vs batched latency, retrievals per utterance, duplicate queries | Measured (report §8, §18, §19) |
+| **Evidence fusion / dedup / rerank** [G§2 p2], RRF + dedup minimum (K3) | `EvidenceFusionEngine` (intent-aware default), cross-intent dedup, pluggable rerank, numeric conflict flags | `EVIDENCE_DEDUPLICATED`, `EVIDENCE_FUSED`, `RERANK_STARTED` / `_COMPLETED` | Fusion strategy comparison (concat / global score / RRF / intent-aware), rerank arms | Intent Coverage@k, overall Recall@k, duplicate-evidence rate, fusion and rerank latency | Measured on dev suite (report §11, §12). Fixture corpus (14 chunks) is too small to separate the strategies at k ≥ 5. |
+| **G4 Grounding** ≥ 85% [G§5 p5] | — | — | — | — | Later phase (Phase 7) |
+| **G5 Session refinement** [G§5 p5] | Intent versions and deltas, per-intent ledger lineage, supersession with stale evidence retained, session ledger reuse | `INTENTS_UPDATED.delta`, `INTENT_SUPERSEDED`, `TURN_COMPLETED.lineage` | Streaming dev run: delta retrieval, duplicate queries | Re-retrieval of unchanged intents (0 measured), versions per utterance | Delta retrieval within an utterance implemented and measured; cross-turn late-detail refinement of answers is Phase 6 |
+| **G1 Reproducibility** [G§5 p4] | Lockfiles, manifests, deterministic virtual mode | Run manifests | — | — | Container packaging is a later phase |

@@ -1,0 +1,36 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.544] u1   USER       #0: "What are the rules"
+[00:01.544] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.767 worth=0.933 nov=1.0 act=INFO_REQUEST
+[00:01.544] u1   INTENTS    v1 +I1 | I1[REQUIREMENT] 'What are the rules'
+[00:01.544] u1   QUERY      Q1 for I1 v1 "What are the rules"
+[00:01.544] u1   MULTI      B1 start Q1 (parallel)
+[00:01.544] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:01.554] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: fixture_lighthouse_manual §2, Doc_07 §0, fixture_lighthouse_manual §0
+[00:01.554] u1   MULTI      B1 done makespan=10.0ms
+[00:01.554] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_lighthouse_manual §2<I1>, E2=Doc_07 §0<I1>, E3=fixture_lighthouse_manual §0<I1>, E4=Doc_07 §2.1<I1>, E5=Doc_07 §2.2<I1>
+[00:02.144] u1   CONTROLLER SKIP     redundant_query  conf=1.00 stab=0.867 worth=0.933 nov=0.0 act=INFO_REQUEST
+[00:03.566] u1   USER       #1: "for ladders in the orchard,"
+[00:03.566] u1   CONTROLLER WAIT     trailing_function_word  conf=0.42 stab=0.583 worth=0.967 nov=0.667 act=INFO_REQUEST
+[00:04.166] u1   CONTROLLER WAIT     trailing_function_word  conf=0.35 stab=0.65 worth=0.967 nov=0.667 act=INFO_REQUEST
+[00:05.672] u1   USER       #2: "how are the wicks trimmed,"
+[00:05.672] u1   CONTROLLER WAIT     trailing_function_word  conf=0.39 stab=0.61 worth=1.0 nov=0.8 act=INFO_REQUEST
+[00:06.272] u1   CONTROLLER WAIT     trailing_function_word  conf=0.35 stab=0.65 worth=1.0 nov=0.8 act=INFO_REQUEST
+[00:07.644] u1   USER       #3: "and when is the telescope recalibrated?"
+[00:07.644] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.97 stab=1.0 worth=1.0 nov=0.857 act=INFO_REQUEST
+[00:07.644] u1   INTENTS    v2 +I2,I3 ~I1 | I1[REQUIREMENT] 'What are the rules for ladders in the orchard'; I2[PROCEDURAL] 'how are the wicks trimmed'; I3[TIMELINE] 'when is the telescope recalibrated'
+[00:07.644] u1   QUERY      Q2 for I2 v1 "how are the wicks trimmed"
+[00:07.644] u1   QUERY      Q3 for I3 v1 "when is the telescope recalibrated"
+[00:07.644] u1   QUERY      Q4 for I1 v2 "What are the rules for ladders in the orchard" supersedes Q1 (refines)
+[00:07.644] u1   MULTI      B2 start Q2,Q3,Q4 (parallel)
+[00:07.644] u1   RETRIEVAL  START Q2/I2 [provisional] queue_wait=0.0ms
+[00:07.644] u1   RETRIEVAL  START Q3/I3 [provisional] queue_wait=0.0ms
+[00:07.644] u1   RETRIEVAL  START Q4/I1 [provisional] queue_wait=0.0ms
+[00:07.654] u1   RETRIEVAL  DONE  Q2/I2 status=ok 10.0ms top: fixture_lighthouse_manual §1.1, fixture_lighthouse_manual §1.2, Doc_07 §4
+[00:07.654] u1   RETRIEVAL  DONE  Q3/I3 status=ok 10.0ms top: fixture_observatory_notes §1, fixture_lighthouse_manual §1, fixture_lighthouse_manual §1.2
+[00:07.654] u1   RETRIEVAL  DONE  Q4/I1 status=ok 10.0ms top: Doc_07 §2.1, Doc_07 §2.2, Doc_07 §1
+[00:07.654] u1   MULTI      B2 done makespan=10.0ms
+[00:07.654] u1   FUSED      provisional intent_aware/none coverage=1.0 items=8: E1=Doc_07 §2.1<I1>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §1<I1>, E4=fixture_lighthouse_manual §1.1<I2+I3>, E5=fixture_lighthouse_manual §1.2<I2+I3>, E6=Doc_07 §4<I1+I2>
+[00:08.144] u1   UTTERANCE  FINALIZED reason=endpoint transcript="What are the rules for ladders in the orchard, how are the wicks trimmed, and when is the telescope recalibrated?"
+[00:08.144] u1   CONTROLLER SKIP     budget_exhausted  conf=1.00 stab=1.0 worth=1.0 nov=0.571 act=INFO_REQUEST
+[00:08.144] u1   FUSED      final intent_aware/none coverage=1.0 items=8: E1=Doc_07 §2.1<I1>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §1<I1>, E4=fixture_lighthouse_manual §1.1<I2+I3>, E5=fixture_lighthouse_manual §1.2<I2+I3>, E6=Doc_07 §4<I1+I2>
+[00:08.144] u1   TURN       intents=3 retrievals=4 versions=2 coverage=1.0 lead_time=6599.9ms post_final=0.0ms sub_queries=['What are the rules for ladders in the orchard', 'how are the wicks trimmed', 'when is the telescope recalibrated']

@@ -1,0 +1,706 @@
+{
+  "$defs": {
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_to": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "constraint_id": {
+          "title": "Constraint Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "focus",
+            "condition",
+            "restriction"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "marker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Marker"
+        },
+        "op": {
+          "default": "set",
+          "enum": [
+            "set",
+            "retract"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "global",
+            "local"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "scope_confidence": {
+          "default": 1.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Scope Confidence",
+          "type": "number"
+        },
+        "scope_reason": {
+          "default": "",
+          "title": "Scope Reason",
+          "type": "string"
+        },
+        "source_span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "kind",
+        "text",
+        "scope",
+        "source_span"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "DropRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "intent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent Id"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "reason"
+      ],
+      "title": "DropRecord",
+      "type": "object"
+    },
+    "InheritedContext": {
+      "additionalProperties": false,
+      "description": "Words an intent's query borrows from elsewhere (another clause, intent or utterance) - never invented.",
+      "properties": {
+        "from_intent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Intent"
+        },
+        "reason": {
+          "enum": [
+            "distributed_pp",
+            "fronted_context",
+            "anaphora",
+            "follow_up_ellipsis",
+            "correction_aspect"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "replaces": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaces"
+        },
+        "source_span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "reason",
+        "source_span"
+      ],
+      "title": "InheritedContext",
+      "type": "object"
+    },
+    "Intent": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aspect"
+        },
+        "components": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/QueryComponent"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "confidence_signals": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "default": {},
+          "title": "Confidence Signals",
+          "type": "object"
+        },
+        "constraint_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraint Ids",
+          "type": "array"
+        },
+        "created_at_ms": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Created At Ms",
+          "type": "number"
+        },
+        "entities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "inherited_context": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/InheritedContext"
+          },
+          "title": "Inherited Context",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "intent_type": {
+          "default": "OTHER",
+          "enum": [
+            "FACTUAL",
+            "PROCEDURAL",
+            "REQUIREMENT",
+            "TIMELINE",
+            "EXCEPTION",
+            "DEFINITION",
+            "COMPARISON",
+            "OTHER"
+          ],
+          "title": "Intent Type",
+          "type": "string"
+        },
+        "lineage_root": {
+          "default": "",
+          "title": "Lineage Root",
+          "type": "string"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "priority": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "priority_score": {
+          "default": 0.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "provenance": {
+          "$ref": "#/$defs/IntentProvenance"
+        },
+        "query_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Query Ids",
+          "type": "array"
+        },
+        "resolved_text": {
+          "minLength": 1,
+          "title": "Resolved Text",
+          "type": "string"
+        },
+        "session_id": {
+          "title": "Session Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "ACTIVE",
+          "enum": [
+            "ACTIVE",
+            "SUPERSEDED",
+            "MERGED",
+            "DROPPED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "superseded_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Superseded By"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "topic": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Topic"
+        },
+        "topic_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceSpan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "type_cues": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Type Cues",
+          "type": "array"
+        },
+        "unresolved_references": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved References",
+          "type": "array"
+        },
+        "updated_at_ms": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Updated At Ms",
+          "type": "number"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "version": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "intent_id",
+        "session_id",
+        "utterance_id",
+        "text",
+        "resolved_text",
+        "confidence",
+        "provenance"
+      ],
+      "title": "Intent",
+      "type": "object"
+    },
+    "IntentProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "clause_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clause Index"
+        },
+        "source": {
+          "enum": [
+            "rule",
+            "rule_fallback",
+            "llm",
+            "reconciled"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "split": {
+          "enum": [
+            "single",
+            "clause",
+            "coordination",
+            "correction",
+            "fallback"
+          ],
+          "title": "Split",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "split",
+        "span"
+      ],
+      "title": "IntentProvenance",
+      "type": "object"
+    },
+    "IntentRelationship": {
+      "additionalProperties": false,
+      "properties": {
+        "cue": {
+          "default": "",
+          "title": "Cue",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "DEPENDENT",
+            "FOLLOW_UP",
+            "REFINEMENT",
+            "COMPARISON_WITH",
+            "CONSTRAINT_OF"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "source",
+        "target"
+      ],
+      "title": "IntentRelationship",
+      "type": "object"
+    },
+    "MergeRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "into": {
+          "title": "Into",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "duplicate",
+            "near_duplicate",
+            "fixed_phrase"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "into",
+        "reason"
+      ],
+      "title": "MergeRecord",
+      "type": "object"
+    },
+    "QueryComponent": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "source": {
+          "enum": [
+            "intent",
+            "inherited",
+            "constraint"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "source",
+        "span"
+      ],
+      "title": "QueryComponent",
+      "type": "object"
+    },
+    "SourceSpan": {
+      "additionalProperties": false,
+      "description": "Characters ``[start, end)`` of one utterance's transcript; ``text`` must equal that substring.",
+      "properties": {
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SourceSpan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "created_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
+    },
+    "decomposition_confidence": {
+      "default": 0.0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Decomposition Confidence",
+      "type": "number"
+    },
+    "dropped": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DropRecord"
+      },
+      "title": "Dropped",
+      "type": "array"
+    },
+    "global_constraints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Global Constraints",
+      "type": "array"
+    },
+    "intents": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Intent"
+      },
+      "title": "Intents",
+      "type": "array"
+    },
+    "local_constraints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Local Constraints",
+      "type": "array"
+    },
+    "merged": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MergeRecord"
+      },
+      "title": "Merged",
+      "type": "array"
+    },
+    "original_text": {
+      "default": "",
+      "title": "Original Text",
+      "type": "string"
+    },
+    "relationships": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IntentRelationship"
+      },
+      "title": "Relationships",
+      "type": "array"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "rule",
+        "rule_fallback",
+        "llm",
+        "reconciled"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "superseded": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Superseded",
+      "type": "array"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "session_id",
+    "utterance_id",
+    "version",
+    "source"
+  ],
+  "title": "IntentSet",
+  "type": "object"
+}

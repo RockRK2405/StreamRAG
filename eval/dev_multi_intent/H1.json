@@ -1,0 +1,67 @@
+{
+  "case_id": "H1",
+  "category": "H_shared_context",
+  "description": "DEV SUITE (fixture domain): distributed topic",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the rules",
+          "timestamp_s": 1.3562
+        },
+        {
+          "chunk_index": 1,
+          "text": "and the schedule",
+          "timestamp_s": 2.46
+        },
+        {
+          "chunk_index": 2,
+          "text": "for pruning",
+          "timestamp_s": 3.2986
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "pruning rules",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "pruning"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "pruning schedule",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "pruning"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 3.7986,
+      "utterance_id": "u1",
+      "utterance_text": "what are the rules and the schedule for pruning"
+    }
+  ]
+}

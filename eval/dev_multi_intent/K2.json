@@ -1,0 +1,52 @@
+{
+  "case_id": "K2",
+  "category": "K_duplicate",
+  "description": "DEV SUITE (fixture domain): same need, two phrasings",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how is the lens polished",
+          "timestamp_s": 1.8411
+        },
+        {
+          "chunk_index": 1,
+          "text": "and how do you",
+          "timestamp_s": 3.3947
+        },
+        {
+          "chunk_index": 2,
+          "text": "polish the lens",
+          "timestamp_s": 4.6311
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "how the lens is polished",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 5.1311,
+      "utterance_id": "u1",
+      "utterance_text": "how is the lens polished and how do you polish the lens"
+    }
+  ]
+}

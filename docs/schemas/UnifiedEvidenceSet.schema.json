@@ -1,0 +1,545 @@
+{
+  "$defs": {
+    "EvidenceConflict": {
+      "additionalProperties": false,
+      "description": "Potential conflict found by a conservative typed-value heuristic. Not verified: a later grounding stage\nmust decide; the unified set only refuses to merge such items silently.",
+      "properties": {
+        "conflict_id": {
+          "title": "Conflict Id",
+          "type": "string"
+        },
+        "detail": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Detail",
+          "type": "object"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Intent Ids",
+          "type": "array"
+        },
+        "kind": {
+          "const": "numeric_value",
+          "title": "Kind",
+          "type": "string"
+        },
+        "status": {
+          "const": "potential",
+          "default": "potential",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "kind",
+        "intent_ids",
+        "evidence_ids"
+      ],
+      "title": "EvidenceConflict",
+      "type": "object"
+    },
+    "EvidenceHit": {
+      "additionalProperties": false,
+      "properties": {
+        "bm25_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bm25 Rank"
+        },
+        "dense_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dense Rank"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query Id"
+        },
+        "rank": {
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "rerank_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rerank Score"
+        },
+        "retrieval_method": {
+          "enum": [
+            "bm25",
+            "dense",
+            "hybrid_rrf",
+            "hybrid_rrf_rerank",
+            "dense_rerank",
+            "bm25_rerank"
+          ],
+          "title": "Retrieval Method",
+          "type": "string"
+        },
+        "rrf_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rrf Score"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "intent_id",
+        "retrieval_method",
+        "rank",
+        "score"
+      ],
+      "title": "EvidenceHit",
+      "type": "object"
+    },
+    "EvidenceRelation": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "DUPLICATES",
+            "RELATED",
+            "CONTRADICTS"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "type",
+        "basis"
+      ],
+      "title": "EvidenceRelation",
+      "type": "object"
+    },
+    "FusedEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "alternates": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Alternates",
+          "type": "array"
+        },
+        "best_rank_by_intent": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "default": {},
+          "title": "Best Rank By Intent",
+          "type": "object"
+        },
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "conflict_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflict Ids",
+          "type": "array"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "fused_score": {
+          "default": 0.0,
+          "title": "Fused Score",
+          "type": "number"
+        },
+        "hits": {
+          "items": {
+            "$ref": "#/$defs/EvidenceHit"
+          },
+          "minItems": 1,
+          "title": "Hits",
+          "type": "array"
+        },
+        "intent_relevance": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "default": {},
+          "title": "Intent Relevance",
+          "type": "object"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "section_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section Title"
+        },
+        "selected_for": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected For",
+          "type": "array"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "supporting_intents": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Intents",
+          "type": "array"
+        },
+        "supporting_queries": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Queries",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "token_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Token Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "label",
+        "evidence_id",
+        "chunk_id",
+        "document_id",
+        "section_id",
+        "citation",
+        "text",
+        "source_path",
+        "char_start",
+        "char_end",
+        "supporting_intents",
+        "supporting_queries",
+        "selected_for",
+        "hits"
+      ],
+      "title": "FusedEvidence",
+      "type": "object"
+    },
+    "IntentCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "best_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Best Rank"
+        },
+        "candidates": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Candidates",
+          "type": "integer"
+        },
+        "covered": {
+          "default": false,
+          "title": "Covered",
+          "type": "boolean"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "labels": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Labels",
+          "type": "array"
+        },
+        "query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query Id"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "no_candidates",
+            "retrieval_failed",
+            "pending"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent_id",
+        "status"
+      ],
+      "title": "IntentCoverage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "conflicts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceConflict"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "dedup": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Dedup",
+      "type": "object"
+    },
+    "intent_set_version": {
+      "minimum": 0,
+      "title": "Intent Set Version",
+      "type": "integer"
+    },
+    "items": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FusedEvidence"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "per_intent": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IntentCoverage"
+      },
+      "title": "Per Intent",
+      "type": "array"
+    },
+    "relations": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceRelation"
+      },
+      "title": "Relations",
+      "type": "array"
+    },
+    "rerank": {
+      "default": "none",
+      "enum": [
+        "none",
+        "intent_ce",
+        "cross_intent_dense",
+        "cross_intent_ce"
+      ],
+      "title": "Rerank",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "strategy": {
+      "enum": [
+        "concat",
+        "global_score",
+        "rrf",
+        "intent_aware"
+      ],
+      "title": "Strategy",
+      "type": "string"
+    },
+    "timings_ms": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Timings Ms",
+      "type": "object"
+    },
+    "token_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Token Count",
+      "type": "integer"
+    },
+    "top_k": {
+      "minimum": 1,
+      "title": "Top K",
+      "type": "integer"
+    },
+    "unified_set_id": {
+      "title": "Unified Set Id",
+      "type": "string"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "warnings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "unified_set_id",
+    "session_id",
+    "utterance_id",
+    "intent_set_version",
+    "strategy",
+    "top_k"
+  ],
+  "title": "UnifiedEvidenceSet",
+  "type": "object"
+}

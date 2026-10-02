@@ -1,0 +1,51 @@
+# Generic English lexicon for the rule-based act classifier and QueryBuilder (Phase 4).
+# Domain-neutral by design (anti-hardcoding: no corpus or benchmark vocabulary). Disclosed configuration.
+
+fillers: [um, uh, er, erm, hmm, mm, uhm, like, basically, well, so, okay, ok, actually, just, anyway, alright]
+filler_phrases: ["you know", "i mean", "kind of", "sort of", "let me see", "let me think"]
+
+request_heads: ["i want to know", "i wanna know", "i would like to know", "i'd like to know", "can you tell me",
+                "could you tell me", "tell me", "i need to know", "i need information", "i need", "i'm looking for",
+                "looking for", "i was wondering", "i wanted to ask", "quick question", "do you know", "please explain",
+                "explain", "what about", "i'm curious", "i am curious", "any idea", "help me understand"]
+question_words: [what, what's, whats, when, where, which, who, whom, whose, why, how, whether]
+aux_questions: [can, could, does, do, did, is, are, was, were, will, would, should, may, might, must, has, have, am]
+
+# Words that leave a phrase incomplete when they end the transcript (trailing => WAIT)
+dangling: [the, a, an, of, to, for, in, "on", at, by, with, about, from, into, onto, and, or, but, if, when, that,
+           which, whether, my, your, our, their, its, his, her, is, are, was, were, be, been, need, want, know, ask,
+           tell, how, what, where, who, why, can, could, does, do, should, would, will, i, we, me, some, any, this,
+           these, those, very, more, less, than, also, then, not, "no", because, so, like, um, uh]
+
+social: [thanks, thank, cheers, great, cool, perfect, awesome, nice, hello, hi, hey, morning, afternoon, evening,
+         bye, goodbye, appreciate, helpful, helps, help, welcome, wonderful, excellent, lovely, brilliant, fine, good]
+social_phrases: ["got it", "sounds good", "no problem", "all good", "that's great", "that helps"]
+backchannel: [mm-hm, mhm, mmhm, uh-huh, okay, ok, right, yeah, "yes", yep, sure, hmm, alright, mm, aha, uh, um]
+backchannel_phrases: ["i see"]
+
+presentation_verbs: [repeat, rephrase, restate, reword, shorten, condense, simplify, summarize, summarise, translate,
+                     recap, reformat, abbreviate, paraphrase]
+presentation_phrases: ["say that again", "say it again", "go over that", "make that shorter", "make it shorter",
+                       "make that simpler", "make it simpler", "in bullets", "as bullets", "bullet points",
+                       "in one line", "in a table", "as a list"]
+presentation_objects: [that, it, this, those, them, answer, answers, response, previous, last, above, earlier,
+                       evidence, retrieved, results, result, summary, said, output, reply]
+format_words: [bullet, bullets, points, point, list, table, words, sentence, sentences, line, lines, shorter, longer,
+               simpler, short, brief, briefly, version, format, paragraph, two, three, one, few]
+languages: [hindi, english, french, spanish, german, tamil, telugu, kannada, marathi, bengali, gujarati, japanese,
+            korean, chinese, arabic, portuguese, italian]
+
+meta_phrases: ["what did i ask", "what was my question", "which sources", "which documents", "what sources",
+               "where did you get", "what did you say", "what were we talking about"]
+more_info_phrases: ["more detail", "more details", "elaborate", "explain more", "tell me more", "expand on",
+                    "go deeper", "more information"]
+
+# Prototype classifier seeds (used only when controller.act_classifier = prototype). Generic phrasings.
+prototypes:
+  INFO_REQUEST: ["what is the rule for this", "how often does this need to happen", "can you tell me the procedure",
+                 "what are the requirements for that", "is it allowed to do this", "when does this take place"]
+  PRESENTATION: ["say that again in fewer words", "put your answer into bullet points", "repeat what you just said",
+                 "make the previous answer more concise", "rewrite that as a table"]
+  SOCIAL: ["thank you very much", "great that is helpful", "good morning to you", "nice, appreciate it"]
+  BACKCHANNEL: ["mm-hm", "okay right", "yeah sure", "uh-huh"]
+  META: ["which documents did you rely on", "what was the question I asked earlier"]

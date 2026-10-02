@@ -1,0 +1,83 @@
+{
+  "case_id": "F2",
+  "category": "F_follow_up",
+  "description": "DEV SUITE (fixture domain): follow-up with an unseen facet",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the rules",
+          "timestamp_s": 1.6409
+        },
+        {
+          "chunk_index": 1,
+          "text": "for observatory visits",
+          "timestamp_s": 2.8634
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "rules for observatory visits",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.3634,
+      "utterance_id": "u1",
+      "utterance_text": "what are the rules for observatory visits"
+    },
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "and the opening hours?",
+          "timestamp_s": 1.6134
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "when the observatory is open for visits",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u2.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "observatory"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [
+        {
+          "source": "u2.g1",
+          "target": "u1.g1",
+          "type": "FOLLOW_UP"
+        }
+      ],
+      "utterance_end_s": 2.1134,
+      "utterance_id": "u2",
+      "utterance_text": "and the opening hours?"
+    }
+  ]
+}

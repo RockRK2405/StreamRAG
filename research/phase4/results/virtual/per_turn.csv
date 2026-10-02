@@ -1,0 +1,253 @@
+case_id,category,utterance_id,n_chunks,retrieval_required,eligible,retrieval_count,retrieved_early,false_retrieval,useful_early,useless_provisional,duplicate_retrievals,cancelled,lead_time_ms,ttfr_ms,post_final_ms,utterance_ms,final_success@5,final_query,policy
+ack_mmhm-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1237.5,,,end_only
+ack_okay-authored,suppression,u1,1,False,False,0,False,False,False,0,0,0,,,,499.99999999999994,,,end_only
+ack_thanks-authored,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1847.9,10.0,1847.9,,a lot,end_only
+ack_thanks-auto,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1511.0,10.0,1511.0,,a lot,end_only
+calibration_time-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2029.9,10.0,2029.9,True,how long does the telescope calibration take,end_only
+calibration_time-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2040.0,10.0,2040.0,True,how long does the telescope calibration take,end_only
+casual-authored,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2052.4,10.0,2052.4,,I'm going to grab a coffee first,end_only
+casual-auto,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2109.0,10.0,2109.0,,I'm going to grab a coffee first,end_only
+crates-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3444.2,10.0,3444.2000000000003,True,how many crates can a picker fill in one shift,end_only
+crates-auto,single_intent,u1,5,True,True,1,False,False,False,0,0,0,0.0,3602.4,10.0,3602.4,True,how many crates can a picker fill in one shift,end_only
+crates_single-authored,single_intent,u1,1,True,False,1,False,False,False,0,0,0,0.0,500.0,10.0,500.0000000000002,True,how many crates per shift,end_only
+crates_single-auto,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,1544.0,10.0,1544.0,True,how many crates per shift,end_only
+damaged_fruit-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2387.7,10.0,2387.7,True,what happens to damaged fruit during the harvest,end_only
+damaged_fruit-auto,single_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,2742.8,10.0,2742.7999999999997,True,what happens to damaged fruit during the harvest,end_only
+dome-authored,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,1763.1,10.0,1763.1,True,when does the observatory open its dome,end_only
+dome-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2627.6,10.0,2627.6,True,when does the observatory open its dome,end_only
+dome_log-authored,early_retrieval,u1,4,True,True,1,False,False,False,0,0,0,0.0,2628.3,10.0,2628.2999999999997,True,dome status logging how often do observers record it,end_only
+dome_log-auto,early_retrieval,u1,5,True,True,1,False,False,False,0,0,0,0.0,3002.2,10.0,3002.2,True,dome status logging how often do observers record it,end_only
+fog_asr-authored,early_retrieval,u1,3,True,True,1,False,False,False,0,0,0,0.0,2523.0,10.0,2523.0,True,fog signal storm how often does it sound,end_only
+fog_asr-auto,early_retrieval,u1,4,True,True,1,False,False,False,0,0,0,0.0,2440.7,10.0,2440.7000000000003,True,fog signal storm how often does it sound,end_only
+fog_storm-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3212.4,10.0,3212.4,True,what happens with the fog signal during a storm,end_only
+fog_storm-auto,single_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,3296.6,10.0,3296.6,True,what happens with the fog signal during a storm,end_only
+got_it-authored,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,2168.6,10.0,2168.6,,you much,end_only
+got_it-auto,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,1692.6,10.0,1692.6,,you much,end_only
+ink_single-authored,single_intent,u1,1,True,False,1,False,False,False,0,0,0,0.0,500.0,10.0,500.0,True,what ink is used in the logbook,end_only
+ink_single-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2508.0,10.0,2508.0,True,what ink is used in the logbook,end_only
+ladder_overnight-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3590.5,10.0,3590.5,True,are ladders allowed to stay in the orchard overnight or not,end_only
+ladder_overnight-auto,single_intent,u1,5,True,True,1,False,False,False,0,0,0,0.0,3743.9,10.0,3743.9000000000005,True,are ladders allowed to stay in the orchard overnight or not,end_only
+ladder_rule-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3393.3,10.0,3393.3,True,what is the rule for using a ladder in the orchard,end_only
+ladder_rule-auto,single_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,4207.8,10.0,4207.8,True,what is the rule for using a ladder in the orchard,end_only
+lamp_cleaning-authored,incremental_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3478.0,10.0,3478.0000000000005,True,how often the lamp has to be cleaned,end_only
+lamp_cleaning-auto,incremental_intent,u1,6,True,True,1,False,False,False,0,0,0,0.0,4767.7,10.0,4767.7,True,how often the lamp has to be cleaned,end_only
+lens-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2508.2,10.0,2508.2,True,what should the keeper use to polish the lens,end_only
+lens-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2906.6,10.0,2906.6,True,what should the keeper use to polish the lens,end_only
+logbook-authored,incremental_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,4862.6,10.0,4862.6,True,what has to be written in the logbook for each watch,end_only
+logbook-auto,incremental_intent,u1,6,True,True,1,False,False,False,0,0,0,0.0,4965.2,10.0,4965.2,True,what has to be written in the logbook for each watch,end_only
+meta-authored,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1575.4,10.0,1575.3999999999999,,what did I ask you before,end_only
+meta-auto,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1575.4,10.0,1575.3999999999999,,what did I ask you before,end_only
+out_of_corpus-authored,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,1288.6,10.0,1288.6,,who won the cricket championship yesterday,end_only
+out_of_corpus-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2034.2,10.0,2034.1999999999998,,who won the cricket championship yesterday,end_only
+planting-authored,single_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,3984.1,10.0,3984.1000000000004,True,when do the saplings get planted and how much water do they,end_only
+planting-auto,single_intent,u1,5,True,True,1,False,False,False,0,0,0,0.0,4484.5,10.0,4484.5,True,when do the saplings get planted and how much water do they,end_only
+pruning-authored,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,2208.2,10.0,2208.2,True,pruning in the orchard,end_only
+pruning-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2601.6,10.0,2601.6,True,pruning in the orchard,end_only
+recalibration_single-authored,single_intent,u1,1,True,False,1,False,False,False,0,0,0,0.0,500.0,10.0,500.0,True,when is the telescope recalibrated,end_only
+recalibration_single-auto,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,1195.4,10.0,1195.4,True,when is the telescope recalibrated,end_only
+repeat_prev-authored,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2330.5,10.0,2330.5,,could you repeat the previous answer please,end_only
+repeat_prev-auto,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2465.6,10.0,2465.6,,could you repeat the previous answer please,end_only
+shorter-authored,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,893.6,10.0,893.5999999999999,,make that shorter,end_only
+stack_height-authored,long_streaming,u1,7,True,True,1,False,False,False,0,0,0,0.0,10454.1,10.0,10454.099999999999,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves,end_only
+stack_height-auto,long_streaming,u1,13,True,True,1,False,False,False,0,0,0,0.0,11865.4,10.0,11865.4,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves,end_only
+summarize_evidence-authored,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2480.7,10.0,2480.7,,can you summarize the retrieved evidence,end_only
+summarize_evidence-auto,suppression,u1,4,False,False,1,False,True,False,0,0,0,0.0,2758.3,10.0,2758.3,,can you summarize the retrieved evidence,end_only
+thinking-authored,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2758.4,10.0,2758.3999999999996,,for a second,end_only
+thinking-auto,suppression,u1,3,False,False,1,False,True,False,0,0,0,0.0,2084.2,10.0,2084.2,,for a second,end_only
+tool_shed-authored,irrelevant_continuation,u1,5,True,True,1,False,False,False,0,0,0,0.0,5500.0,10.0,5500.0,True,the tool shed what do workers do before they leave,end_only
+tool_shed-auto,irrelevant_continuation,u1,6,True,True,1,False,False,False,0,0,0,0.0,5081.2,10.0,5081.2,True,the tool shed what do workers do before they leave,end_only
+translate-authored,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1208.4,10.0,1208.3999999999999,,translate that into hindi,end_only
+translate-auto,suppression,u1,2,False,False,1,False,True,False,0,0,0,0.0,1208.4,10.0,1208.3999999999999,,translate that into hindi,end_only
+visitors_controls-authored,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,3297.2,10.0,3297.2,True,whether visitors can touch the telescope controls,end_only
+visitors_controls-auto,single_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,3245.4,10.0,3245.3999999999996,True,whether visitors can touch the telescope controls,end_only
+wick_height-authored,incremental_intent,u1,4,True,True,1,False,False,False,0,0,0,0.0,4490.2,10.0,4490.2,True,how high the wicks should be trimmed in the lighthouse,end_only
+wick_height-auto,incremental_intent,u1,6,True,True,1,False,False,False,0,0,0,0.0,5690.5,10.0,5690.5,True,how high the wicks should be trimmed in the lighthouse,end_only
+ack_mmhm-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1237.5,,,every_chunk
+ack_okay-authored,suppression,u1,1,False,False,0,False,False,False,0,0,0,,,,499.99999999999994,,,every_chunk
+ack_thanks-authored,suppression,u1,2,False,False,1,True,True,True,0,0,0,500.0,1347.9,0.0,1847.9,,a lot,every_chunk
+ack_thanks-auto,suppression,u1,2,False,False,1,True,True,True,0,0,0,500.0,1011.0,0.0,1511.0,,a lot,every_chunk
+calibration_time-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2029.9,0.0,0.0,2029.9,True,how long does the telescope calibration take,every_chunk
+calibration_time-auto,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2040.0,0.0,0.0,2040.0,True,how long does the telescope calibration take,every_chunk
+casual-authored,suppression,u1,3,False,False,3,True,True,True,0,0,0,2052.4,0.0,0.0,2052.4,,I'm going to grab a coffee first,every_chunk
+casual-auto,suppression,u1,3,False,False,3,True,True,True,0,0,0,2109.0,0.0,0.0,2109.0,,I'm going to grab a coffee first,every_chunk
+crates-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3444.2,0.0,0.0,3444.2000000000003,True,how many crates can a picker fill in one shift,every_chunk
+crates-auto,single_intent,u1,5,True,True,5,True,False,True,0,0,0,3602.4,0.0,0.0,3602.4,True,how many crates can a picker fill in one shift,every_chunk
+crates_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0000000000002,True,how many crates per shift,every_chunk
+crates_single-auto,single_intent,u1,2,True,True,2,True,False,True,0,0,0,1544.0,0.0,0.0,1544.0,True,how many crates per shift,every_chunk
+damaged_fruit-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2387.7,0.0,0.0,2387.7,True,what happens to damaged fruit during the harvest,every_chunk
+damaged_fruit-auto,single_intent,u1,4,True,True,4,True,False,True,0,0,0,2742.8,0.0,0.0,2742.7999999999997,True,what happens to damaged fruit during the harvest,every_chunk
+dome-authored,single_intent,u1,2,True,True,2,True,False,True,0,0,0,1763.1,0.0,0.0,1763.1,True,when does the observatory open its dome,every_chunk
+dome-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1785.6,842.0,0.0,2627.6,True,when does the observatory open its dome,every_chunk
+dome_log-authored,early_retrieval,u1,4,True,True,4,True,False,True,0,0,0,2628.3,0.0,0.0,2628.2999999999997,True,dome status logging how often do observers record it,every_chunk
+dome_log-auto,early_retrieval,u1,5,True,True,5,True,False,True,0,0,0,3002.2,0.0,0.0,3002.2,True,dome status logging how often do observers record it,every_chunk
+fog_asr-authored,early_retrieval,u1,3,True,True,3,True,False,True,0,0,0,2523.0,0.0,0.0,2523.0,True,fog signal storm how often does it sound,every_chunk
+fog_asr-auto,early_retrieval,u1,4,True,True,4,True,False,True,0,0,0,2440.7,0.0,0.0,2440.7000000000003,True,fog signal storm how often does it sound,every_chunk
+fog_storm-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3212.4,0.0,0.0,3212.4,True,what happens with the fog signal during a storm,every_chunk
+fog_storm-auto,single_intent,u1,4,True,True,4,True,False,True,0,0,0,3296.6,0.0,0.0,3296.6,True,what happens with the fog signal during a storm,every_chunk
+got_it-authored,suppression,u1,2,False,False,1,True,True,True,0,0,0,500.0,1668.6,0.0,2168.6,,you much,every_chunk
+got_it-auto,suppression,u1,3,False,False,1,True,True,True,0,0,0,500.0,1192.6,0.0,1692.6,,you much,every_chunk
+ink_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,what ink is used in the logbook,every_chunk
+ink_single-auto,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2508.0,0.0,0.0,2508.0,True,what ink is used in the logbook,every_chunk
+ladder_overnight-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3590.5,0.0,0.0,3590.5,True,are ladders allowed to stay in the orchard overnight or not,every_chunk
+ladder_overnight-auto,single_intent,u1,5,True,True,5,True,False,True,0,1,0,3743.9,0.0,0.0,3743.9000000000005,True,are ladders allowed to stay in the orchard overnight or not,every_chunk
+ladder_rule-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3393.3,0.0,0.0,3393.3,True,what is the rule for using a ladder in the orchard,every_chunk
+ladder_rule-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,3025.8,1182.0,0.0,4207.8,True,what is the rule for using a ladder in the orchard,every_chunk
+lamp_cleaning-authored,incremental_intent,u1,3,True,True,2,True,False,True,0,0,0,1886.0,1592.0,0.0,3478.0000000000005,True,how often the lamp has to be cleaned,every_chunk
+lamp_cleaning-auto,incremental_intent,u1,6,True,True,4,True,False,True,0,0,0,2880.7,1887.0,0.0,4767.7,True,how often the lamp has to be cleaned,every_chunk
+lens-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2508.2,0.0,0.0,2508.2,True,what should the keeper use to polish the lens,every_chunk
+lens-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1695.3,1211.3,0.0,2906.6,True,what should the keeper use to polish the lens,every_chunk
+logbook-authored,incremental_intent,u1,4,True,True,3,True,False,True,0,0,0,2964.8,1897.8,0.0,4862.6,True,what has to be written in the logbook for each watch,every_chunk
+logbook-auto,incremental_intent,u1,6,True,True,3,True,False,True,0,0,0,2562.9,2402.3,0.0,4965.2,True,what has to be written in the logbook for each watch,every_chunk
+meta-authored,suppression,u1,2,False,False,1,True,True,True,0,0,0,500.0,1075.4,0.0,1575.3999999999999,,what did I ask you before,every_chunk
+meta-auto,suppression,u1,2,False,False,1,True,True,True,0,0,0,500.0,1075.4,0.0,1575.3999999999999,,what did I ask you before,every_chunk
+out_of_corpus-authored,single_intent,u1,2,True,True,2,True,False,True,0,0,0,1288.6,0.0,0.0,1288.6,,who won the cricket championship yesterday,every_chunk
+out_of_corpus-auto,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2034.2,0.0,0.0,2034.1999999999998,,who won the cricket championship yesterday,every_chunk
+planting-authored,single_intent,u1,4,True,True,4,True,False,True,0,0,0,3984.1,0.0,0.0,3984.1000000000004,True,when do the saplings get planted and how much water do they,every_chunk
+planting-auto,single_intent,u1,5,True,True,4,True,False,True,0,0,0,3622.7,861.8,0.0,4484.5,True,when do the saplings get planted and how much water do they,every_chunk
+pruning-authored,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,1708.2,0.0,2208.2,True,pruning in the orchard,every_chunk
+pruning-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1320.5,1281.1,0.0,2601.6,True,pruning in the orchard,every_chunk
+recalibration_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,when is the telescope recalibrated,every_chunk
+recalibration_single-auto,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,695.4,0.0,1195.4,True,when is the telescope recalibrated,every_chunk
+repeat_prev-authored,suppression,u1,3,False,False,2,True,True,True,0,0,0,920.1,1410.4,0.0,2330.5,,could you repeat the previous answer please,every_chunk
+repeat_prev-auto,suppression,u1,3,False,False,2,True,True,True,0,0,0,1760.4,705.2,0.0,2465.6,,could you repeat the previous answer please,every_chunk
+shorter-authored,suppression,u1,2,False,False,2,True,True,True,0,0,0,893.6,0.0,0.0,893.5999999999999,,make that shorter,every_chunk
+stack_height-authored,long_streaming,u1,7,True,True,7,True,False,True,0,0,0,10454.1,0.0,0.0,10454.099999999999,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves,every_chunk
+stack_height-auto,long_streaming,u1,13,True,True,12,True,False,True,0,0,0,11166.1,699.3,0.0,11865.4,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves,every_chunk
+summarize_evidence-authored,suppression,u1,3,False,False,3,True,True,True,0,1,0,2480.7,0.0,0.0,2480.7,,can you summarize the retrieved evidence,every_chunk
+summarize_evidence-auto,suppression,u1,4,False,False,3,True,True,True,0,1,0,1960.4,797.9,0.0,2758.3,,can you summarize the retrieved evidence,every_chunk
+thinking-authored,suppression,u1,3,False,False,1,True,True,True,0,0,0,500.0,2258.4,0.0,2758.3999999999996,,for a second,every_chunk
+thinking-auto,suppression,u1,3,False,False,2,True,True,True,0,0,0,2084.2,0.0,0.0,2084.2,,for a second,every_chunk
+tool_shed-authored,irrelevant_continuation,u1,5,True,True,3,True,False,True,0,0,0,3069.7,2430.3,0.0,5500.0,True,the tool shed what do workers do before they leave,every_chunk
+tool_shed-auto,irrelevant_continuation,u1,6,True,True,5,True,False,True,0,0,0,5081.2,0.0,0.0,5081.2,True,the tool shed what do workers do before they leave,every_chunk
+translate-authored,suppression,u1,2,False,False,2,True,True,True,0,0,0,1208.4,0.0,0.0,1208.3999999999999,,translate that into hindi,every_chunk
+translate-auto,suppression,u1,2,False,False,2,True,True,True,0,0,0,1208.4,0.0,0.0,1208.3999999999999,,translate that into hindi,every_chunk
+visitors_controls-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,2242.8,1054.4,0.0,3297.2,True,whether visitors can touch the telescope controls,every_chunk
+visitors_controls-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,2191.0,1054.4,0.0,3245.3999999999996,True,whether visitors can touch the telescope controls,every_chunk
+wick_height-authored,incremental_intent,u1,4,True,True,3,True,False,True,0,0,0,2972.6,1517.6,0.0,4490.2,True,how high the wicks should be trimmed in the lighthouse,every_chunk
+wick_height-auto,incremental_intent,u1,6,True,True,4,True,False,True,0,0,0,3304.7,2385.8,0.0,5690.5,True,how high the wicks should be trimmed in the lighthouse,every_chunk
+ack_mmhm-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1237.5,,,controller
+ack_okay-authored,suppression,u1,1,False,False,0,False,False,False,0,0,0,,,,499.99999999999994,,,controller
+ack_thanks-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1847.9,,,controller
+ack_thanks-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1511.0,,,controller
+calibration_time-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,890.1,1139.8,10.0,2029.9,True,how long does the telescope calibration take,controller
+calibration_time-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1280.1,759.9,0.0,2040.0,True,how long does the telescope calibration take,controller
+casual-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2052.4,,,controller
+casual-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2109.0,,,controller
+crates-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3444.2,0.0,0.0,3444.2000000000003,True,how many crates can a picker fill in one shift,controller
+crates-auto,single_intent,u1,5,True,True,2,True,False,True,0,0,0,1924.6,1677.8,0.0,3602.4,True,how many crates can a picker fill in one,controller
+crates_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0000000000002,True,how many crates per shift,controller
+crates_single-auto,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,1044.0,0.0,1544.0,True,how many crates per shift,controller
+damaged_fruit-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1711.3,676.4,0.0,2387.7,True,what happens to damaged fruit during the harvest,controller
+damaged_fruit-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,2742.8,0.0,0.0,2742.7999999999997,True,what happens to damaged fruit during the harvest,controller
+dome-authored,single_intent,u1,2,True,True,2,True,False,True,0,0,0,1763.1,0.0,0.0,1763.1,True,when does the observatory open its dome,controller
+dome-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1785.6,842.0,0.0,2627.6,True,when does the observatory open its dome,controller
+dome_log-authored,early_retrieval,u1,4,True,True,3,True,False,True,0,0,0,2628.3,0.0,0.0,2628.2999999999997,True,dome status logging how often do observers record it,controller
+dome_log-auto,early_retrieval,u1,5,True,True,2,True,False,True,0,0,0,3002.2,0.0,0.0,3002.2,True,dome status logging how often do observers record,controller
+fog_asr-authored,early_retrieval,u1,3,True,True,2,True,False,True,0,0,0,2523.0,0.0,0.0,2523.0,True,fog signal storm how often,controller
+fog_asr-auto,early_retrieval,u1,4,True,True,2,True,False,True,0,0,0,2440.7,0.0,0.0,2440.7000000000003,True,fog signal storm how often,controller
+fog_storm-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3212.4,0.0,0.0,3212.4,True,what happens with the fog signal during a storm,controller
+fog_storm-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,3296.6,0.0,0.0,3296.6,True,what happens with the fog signal during a storm,controller
+got_it-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,2168.6,,,controller
+got_it-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1692.6,,,controller
+ink_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,what ink is used in the logbook,controller
+ink_single-auto,single_intent,u1,3,True,True,3,True,False,True,0,0,0,2508.0,0.0,0.0,2508.0,True,what ink is used in the logbook,controller
+ladder_overnight-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3590.5,0.0,10.0,3590.5,True,are ladders allowed to stay in the orchard overnight or not,controller
+ladder_overnight-auto,single_intent,u1,5,True,True,3,True,False,True,0,0,0,3743.9,0.0,10.0,3743.9000000000005,True,are ladders allowed to stay in the orchard overnight or not,controller
+ladder_rule-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3393.3,0.0,0.0,3393.3,True,what is the rule for using a ladder in the orchard,controller
+ladder_rule-auto,single_intent,u1,4,True,True,2,True,False,True,0,0,0,1708.5,2499.3,0.0,4207.8,True,what is the rule for using a ladder in the orchard,controller
+lamp_cleaning-authored,incremental_intent,u1,3,True,True,2,True,False,True,0,0,0,1886.0,1592.0,0.0,3478.0000000000005,True,how often the lamp has to be cleaned,controller
+lamp_cleaning-auto,incremental_intent,u1,6,True,True,2,True,False,True,0,0,0,2062.4,2705.3,0.0,4767.7,True,how often the lamp has to be cleaned,controller
+lens-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1296.9,1211.3,0.0,2508.2,True,what should the keeper use to polish the lens,controller
+lens-auto,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2406.6,0.0,2906.6,True,what should the keeper use to polish the lens,controller
+logbook-authored,incremental_intent,u1,4,True,True,2,True,False,True,0,0,0,1735.2,3127.4,0.0,4862.6,True,what has to be written in the logbook for each watch,controller
+logbook-auto,incremental_intent,u1,6,True,True,2,True,False,True,0,0,0,1507.8,3457.4,0.0,4965.2,True,what has to be written in the logbook for each watch,controller
+meta-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1575.3999999999999,,,controller
+meta-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1575.3999999999999,,,controller
+out_of_corpus-authored,single_intent,u1,2,True,True,1,False,False,False,0,0,0,0.0,1288.6,10.0,1288.6,,who won the cricket championship yesterday,controller
+out_of_corpus-auto,single_intent,u1,3,True,True,1,False,False,False,0,0,0,0.0,2034.2,10.0,2034.1999999999998,,who won the cricket championship yesterday,controller
+planting-authored,single_intent,u1,4,True,True,3,True,False,True,0,0,0,3984.1,0.0,0.0,3984.1000000000004,True,when do the saplings get planted and how much water,controller
+planting-auto,single_intent,u1,5,True,True,2,True,False,True,0,0,0,3622.7,861.8,0.0,4484.5,True,when do the saplings get planted and how much water,controller
+pruning-authored,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,1708.2,0.0,2208.2,True,pruning in the orchard,controller
+pruning-auto,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2101.6,0.0,2601.6,True,pruning in the orchard,controller
+recalibration_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,when is the telescope recalibrated,controller
+recalibration_single-auto,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,695.4,0.0,1195.4,True,when is the telescope recalibrated,controller
+repeat_prev-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2330.5,,,controller
+repeat_prev-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2465.6,,,controller
+shorter-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,893.5999999999999,,,controller
+stack_height-authored,long_streaming,u1,7,True,True,3,True,False,True,0,0,0,8356.2,2097.9,0.0,10454.099999999999,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked,controller
+stack_height-auto,long_streaming,u1,13,True,True,3,True,False,True,0,0,0,8564.5,3300.9,0.0,11865.4,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked,controller
+summarize_evidence-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2480.7,,,controller
+summarize_evidence-auto,suppression,u1,4,False,False,0,False,False,False,0,0,0,,,,2758.3,,,controller
+thinking-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2758.3999999999996,,,controller
+thinking-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2084.2,,,controller
+tool_shed-authored,irrelevant_continuation,u1,5,True,True,2,True,False,True,0,0,0,3069.7,2430.3,0.0,5500.0,True,the tool shed what do workers do before they leave,controller
+tool_shed-auto,irrelevant_continuation,u1,6,True,True,3,True,False,True,0,0,0,3072.7,2008.5,0.0,5081.2,True,the tool shed what do workers do before they leave,controller
+translate-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1208.3999999999999,,,controller
+translate-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1208.3999999999999,,,controller
+visitors_controls-authored,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2797.2,0.0,3297.2,True,whether visitors can touch the telescope controls,controller
+visitors_controls-auto,single_intent,u1,4,True,True,1,True,False,True,0,0,0,883.9,2361.5,0.0,3245.3999999999996,True,whether visitors can touch the telescope,controller
+wick_height-authored,incremental_intent,u1,4,True,True,3,True,False,True,0,0,0,2972.6,1517.6,0.0,4490.2,True,how high the wicks should be trimmed in the lighthouse,controller
+wick_height-auto,incremental_intent,u1,6,True,True,1,True,False,True,0,0,0,500.0,5190.5,0.0,5690.5,True,how high the wicks should be trimmed in the lighthouse,controller
+ack_mmhm-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1237.5,,,controller_prototype
+ack_okay-authored,suppression,u1,1,False,False,0,False,False,False,0,0,0,,,,499.99999999999994,,,controller_prototype
+ack_thanks-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1847.9,,,controller_prototype
+ack_thanks-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1511.0,,,controller_prototype
+calibration_time-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,890.1,1139.8,10.0,2029.9,True,how long does the telescope calibration take,controller_prototype
+calibration_time-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1280.1,759.9,0.0,2040.0,True,how long does the telescope calibration take,controller_prototype
+casual-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2052.4,,,controller_prototype
+casual-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2109.0,,,controller_prototype
+crates-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3444.2,0.0,0.0,3444.2000000000003,True,how many crates can a picker fill in one shift,controller_prototype
+crates-auto,single_intent,u1,5,True,True,2,True,False,True,0,0,0,1924.6,1677.8,0.0,3602.4,True,how many crates can a picker fill in one,controller_prototype
+crates_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0000000000002,True,how many crates per shift,controller_prototype
+crates_single-auto,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,1044.0,0.0,1544.0,True,how many crates per shift,controller_prototype
+damaged_fruit-authored,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1711.3,676.4,0.0,2387.7,True,what happens to damaged fruit during the harvest,controller_prototype
+damaged_fruit-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,2742.8,0.0,0.0,2742.7999999999997,True,what happens to damaged fruit during the harvest,controller_prototype
+dome-authored,single_intent,u1,2,True,True,2,True,False,True,0,0,0,1763.1,0.0,0.0,1763.1,True,when does the observatory open its dome,controller_prototype
+dome-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1785.6,842.0,0.0,2627.6,True,when does the observatory open its dome,controller_prototype
+dome_log-authored,early_retrieval,u1,4,True,True,3,True,False,True,0,0,0,2628.3,0.0,0.0,2628.2999999999997,True,dome status logging how often do observers record it,controller_prototype
+dome_log-auto,early_retrieval,u1,5,True,True,1,True,False,True,0,0,0,873.9,2128.3,0.0,3002.2,True,dome status logging how often do observers record,controller_prototype
+fog_asr-authored,early_retrieval,u1,3,True,True,2,True,False,True,0,0,0,2523.0,0.0,0.0,2523.0,True,fog signal storm how often,controller_prototype
+fog_asr-auto,early_retrieval,u1,4,True,True,2,True,False,True,0,0,0,2440.7,0.0,0.0,2440.7000000000003,True,fog signal storm how often,controller_prototype
+fog_storm-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3212.4,0.0,0.0,3212.4,True,what happens with the fog signal during a storm,controller_prototype
+fog_storm-auto,single_intent,u1,4,True,True,3,True,False,True,0,0,0,3296.6,0.0,0.0,3296.6,True,what happens with the fog signal during a storm,controller_prototype
+got_it-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,2168.6,,,controller_prototype
+got_it-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,1692.6,,,controller_prototype
+ink_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,what ink is used in the logbook,controller_prototype
+ink_single-auto,single_intent,u1,3,True,True,2,True,False,True,0,0,0,1810.6,697.4,0.0,2508.0,True,what ink is used in the logbook,controller_prototype
+ladder_overnight-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3590.5,0.0,10.0,3590.5,True,are ladders allowed to stay in the orchard overnight or not,controller_prototype
+ladder_overnight-auto,single_intent,u1,5,True,True,3,True,False,True,0,0,0,3743.9,0.0,10.0,3743.9000000000005,True,are ladders allowed to stay in the orchard overnight or not,controller_prototype
+ladder_rule-authored,single_intent,u1,3,True,True,3,True,False,True,0,0,0,3393.3,0.0,0.0,3393.3,True,what is the rule for using a ladder in the orchard,controller_prototype
+ladder_rule-auto,single_intent,u1,4,True,True,2,True,False,True,0,0,0,1708.5,2499.3,0.0,4207.8,True,what is the rule for using a ladder in the orchard,controller_prototype
+lamp_cleaning-authored,incremental_intent,u1,3,True,True,2,True,False,True,0,0,0,1886.0,1592.0,0.0,3478.0000000000005,True,how often the lamp has to be cleaned,controller_prototype
+lamp_cleaning-auto,incremental_intent,u1,6,True,True,2,True,False,True,0,0,0,2062.4,2705.3,0.0,4767.7,True,how often the lamp has to be cleaned,controller_prototype
+lens-authored,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2008.2,0.0,2508.2,True,what should the keeper use to polish the lens,controller_prototype
+lens-auto,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2406.6,0.0,2906.6,True,what should the keeper use to polish the lens,controller_prototype
+logbook-authored,incremental_intent,u1,4,True,True,2,True,False,True,0,0,0,1735.2,3127.4,0.0,4862.6,True,what has to be written in the logbook for each watch,controller_prototype
+logbook-auto,incremental_intent,u1,6,True,True,2,True,False,True,0,0,0,1507.8,3457.4,0.0,4965.2,True,what has to be written in the logbook for each watch,controller_prototype
+meta-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1575.3999999999999,,,controller_prototype
+meta-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1575.3999999999999,,,controller_prototype
+out_of_corpus-authored,single_intent,u1,2,True,True,0,False,False,False,0,0,0,,,,1288.6,,,controller_prototype
+out_of_corpus-auto,single_intent,u1,3,True,True,0,False,False,False,0,0,0,,,,2034.1999999999998,,,controller_prototype
+planting-authored,single_intent,u1,4,True,True,3,True,False,True,0,0,0,3984.1,0.0,0.0,3984.1000000000004,True,when do the saplings get planted and how much water,controller_prototype
+planting-auto,single_intent,u1,5,True,True,2,True,False,True,0,0,0,3622.7,861.8,0.0,4484.5,True,when do the saplings get planted and how much water,controller_prototype
+pruning-authored,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,1708.2,0.0,2208.2,True,pruning in the orchard,controller_prototype
+pruning-auto,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2101.6,0.0,2601.6,True,pruning in the orchard,controller_prototype
+recalibration_single-authored,single_intent,u1,1,True,False,1,True,False,True,0,0,0,500.0,0.0,0.0,500.0,True,when is the telescope recalibrated,controller_prototype
+recalibration_single-auto,single_intent,u1,2,True,True,1,True,False,True,0,0,0,500.0,695.4,0.0,1195.4,True,when is the telescope recalibrated,controller_prototype
+repeat_prev-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2330.5,,,controller_prototype
+repeat_prev-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2465.6,,,controller_prototype
+shorter-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,893.5999999999999,,,controller_prototype
+stack_height-authored,long_streaming,u1,7,True,True,3,True,False,True,0,0,0,8356.2,2097.9,0.0,10454.099999999999,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked,controller_prototype
+stack_height-auto,long_streaming,u1,13,True,True,4,True,False,True,0,0,0,9806.4,2059.0,10.0,11865.4,True,we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves,controller_prototype
+summarize_evidence-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2480.7,,,controller_prototype
+summarize_evidence-auto,suppression,u1,4,False,False,0,False,False,False,0,0,0,,,,2758.3,,,controller_prototype
+thinking-authored,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2758.3999999999996,,,controller_prototype
+thinking-auto,suppression,u1,3,False,False,0,False,False,False,0,0,0,,,,2084.2,,,controller_prototype
+tool_shed-authored,irrelevant_continuation,u1,5,True,True,0,False,False,False,0,0,0,,,,5500.0,False,,controller_prototype
+tool_shed-auto,irrelevant_continuation,u1,6,True,True,1,True,False,True,0,0,0,2006.1,3075.1,0.0,5081.2,True,the tool shed what do workers,controller_prototype
+translate-authored,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1208.3999999999999,,,controller_prototype
+translate-auto,suppression,u1,2,False,False,0,False,False,False,0,0,0,,,,1208.3999999999999,,,controller_prototype
+visitors_controls-authored,single_intent,u1,3,True,True,1,True,False,True,0,0,0,500.0,2797.2,0.0,3297.2,True,whether visitors can touch the telescope controls,controller_prototype
+visitors_controls-auto,single_intent,u1,4,True,True,1,True,False,True,0,0,0,883.9,2361.5,0.0,3245.3999999999996,True,whether visitors can touch the telescope,controller_prototype
+wick_height-authored,incremental_intent,u1,4,True,True,0,False,False,False,0,0,0,,,,4490.2,False,,controller_prototype
+wick_height-auto,incremental_intent,u1,6,True,True,0,False,False,False,0,0,0,,,,5690.5,False,,controller_prototype

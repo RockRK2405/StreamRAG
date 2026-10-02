@@ -1,0 +1,76 @@
+{
+  "case_id": "G1",
+  "category": "G_pronoun",
+  "description": "DEV SUITE (fixture domain): pronoun in the next sentence",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "Tell me about",
+          "timestamp_s": 1.0587
+        },
+        {
+          "chunk_index": 1,
+          "text": "the fog signal.",
+          "timestamp_s": 2.3097
+        },
+        {
+          "chunk_index": 2,
+          "text": "And how often",
+          "timestamp_s": 3.3669
+        },
+        {
+          "chunk_index": 3,
+          "text": "does it sound?",
+          "timestamp_s": 4.4369
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the fog signal",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "how often the fog signal sounds",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "fog"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "DEPENDENT"
+        }
+      ],
+      "utterance_end_s": 4.9369,
+      "utterance_id": "u1",
+      "utterance_text": "Tell me about the fog signal. And how often does it sound?"
+    }
+  ]
+}

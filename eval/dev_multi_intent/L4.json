@@ -1,0 +1,68 @@
+{
+  "case_id": "L4",
+  "category": "L_changed_intent",
+  "description": "DEV SUITE (fixture domain): 'scratch that' correction",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what do workers do",
+          "timestamp_s": 1.3757
+        },
+        {
+          "chunk_index": 1,
+          "text": "before leaving the tool shed",
+          "timestamp_s": 3.3886
+        },
+        {
+          "chunk_index": 2,
+          "text": "scratch that",
+          "timestamp_s": 4.1092
+        },
+        {
+          "chunk_index": 3,
+          "text": "where are ladders stored",
+          "timestamp_s": 5.7801
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "tool shed leaving procedure",
+          "gold_evidence": [
+            "Doc_07 \u00a74"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": true
+        },
+        {
+          "answerable": true,
+          "description": "where ladders are stored",
+          "gold_evidence": [
+            "Doc_07 \u00a72.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 6.2801,
+      "utterance_id": "u1",
+      "utterance_text": "what do workers do before leaving the tool shed scratch that where are ladders stored"
+    }
+  ]
+}

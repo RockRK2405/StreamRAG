@@ -1,0 +1,58 @@
+{
+  "case_id": "J3",
+  "category": "J_under_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): two questions without a conjunction",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how high are wicks trimmed",
+          "timestamp_s": 1.8984
+        },
+        {
+          "chunk_index": 1,
+          "text": "how often is the lamp cleaned",
+          "timestamp_s": 4.4911
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "wick trimming height",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "lamp cleaning frequency",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 4.9911,
+      "utterance_id": "u1",
+      "utterance_text": "how high are wicks trimmed how often is the lamp cleaned"
+    }
+  ]
+}

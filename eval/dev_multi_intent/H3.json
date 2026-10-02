@@ -1,0 +1,67 @@
+{
+  "case_id": "H3",
+  "category": "H_shared_context",
+  "description": "DEV SUITE (fixture domain): two activities sharing an object",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.1782
+        },
+        {
+          "chunk_index": 1,
+          "text": "cleaning and logging",
+          "timestamp_s": 2.4996
+        },
+        {
+          "chunk_index": 2,
+          "text": "for the lamp",
+          "timestamp_s": 3.5857
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "lamp cleaning",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "lamp"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "lamp logging",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "lamp"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 4.0857,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about cleaning and logging for the lamp"
+    }
+  ]
+}

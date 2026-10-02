@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "document_id": {
+      "title": "Document Id",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "key": {
+      "title": "Key",
+      "type": "string"
+    },
+    "section_id": {
+      "title": "Section Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "key",
+    "evidence_ids",
+    "document_id",
+    "section_id"
+  ],
+  "title": "Citation",
+  "type": "object"
+}

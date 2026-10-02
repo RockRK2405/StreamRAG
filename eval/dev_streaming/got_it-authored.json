@@ -1,0 +1,62 @@
+{
+  "annotation": {},
+  "case_id": "got_it-authored",
+  "category": "suppression",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-got_it-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 129,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "got it",
+            "timestamp_s": 0.7891
+          },
+          {
+            "chunk_index": 1,
+            "text": "thank you so much",
+            "timestamp_s": 2.4577
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": false,
+          "suppression_reason": null,
+          "turn_type": "social",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 2.9577,
+        "utterance_id": "u1",
+        "utterance_text": "got it thank you so much",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

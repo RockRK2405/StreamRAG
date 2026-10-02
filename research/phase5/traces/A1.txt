@@ -1,0 +1,37 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.202] u1   USER       #0: "how high should"
+[00:01.202] u1   CONTROLLER WAIT     trailing_function_word  conf=0.58 stab=0.417 worth=0.933 nov=1.0 act=INFO_REQUEST
+[00:01.802] u1   CONTROLLER WAIT     trailing_function_word  conf=0.48 stab=0.517 worth=0.933 nov=1.0 act=INFO_REQUEST
+[00:02.800] u1   USER       #1: "the wicks be trimmed"
+[00:02.800] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.97 stab=0.933 worth=1.0 nov=1.0 act=INFO_REQUEST
+[00:02.800] u1   INTENTS    v1 +I1 | I1[FACTUAL] 'how high should the wicks be trimmed'
+[00:02.800] u1   QUERY      Q1 for I1 v1 "how high should the wicks be trimmed"
+[00:02.800] u1   MULTI      B1 start Q1 (parallel)
+[00:02.800] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:02.810] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: fixture_lighthouse_manual §1.1, Doc_07 §3, fixture_lighthouse_manual §1.2
+[00:02.810] u1   MULTI      B1 done makespan=10.0ms
+[00:02.810] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_lighthouse_manual §1.1<I1>, E2=Doc_07 §3<I1>, E3=fixture_lighthouse_manual §1.2<I1>, E4=Doc_07 §4<I1>, E5=Doc_07 §2.2<I1>
+[00:03.400] u1   CONTROLLER SKIP     redundant_query  conf=1.00 stab=1.0 worth=1.0 nov=0.0 act=INFO_REQUEST
+[00:04.219] u1   USER       #2: "and how do keepers"
+[00:04.219] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.84 stab=0.975 worth=1.0 nov=0.25 act=INFO_REQUEST
+[00:04.219] u1   INTENTS    v2 +I2 | I1[FACTUAL] 'how high should the wicks be trimmed'; I2[PROCEDURAL] 'how do keepers'
+[00:04.219] u1   QUERY      Q2 for I2 v1 "how do keepers"
+[00:04.219] u1   MULTI      B2 start Q2 (parallel) reuse I1
+[00:04.219] u1   RETRIEVAL  START Q2/I2 [provisional] queue_wait=0.0ms
+[00:04.229] u1   RETRIEVAL  DONE  Q2/I2 status=ok 10.0ms top: fixture_lighthouse_manual §3, fixture_lighthouse_manual §1.2, fixture_lighthouse_manual §1
+[00:04.229] u1   MULTI      B2 done makespan=10.0ms
+[00:04.229] u1   FUSED      provisional intent_aware/none coverage=1.0 items=8: E1=fixture_lighthouse_manual §1.1<I1>, E2=Doc_07 §3<I1>, E3=Doc_07 §4<I1+I2>, E4=Doc_07 §2.2<I1>, E5=fixture_lighthouse_manual §3<I2>, E6=fixture_lighthouse_manual §1.2<I1+I2>
+[00:04.819] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.85 stab=1.0 worth=1.0 nov=0.25 act=INFO_REQUEST
+[00:05.479] u1   USER       #3: "polish the lens"
+[00:05.479] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.89 stab=0.967 worth=1.0 nov=0.5 act=INFO_REQUEST
+[00:05.479] u1   INTENTS    v3 ~I2 | I1[FACTUAL] 'how high should the wicks be trimmed'; I2[PROCEDURAL] 'how do keepers polish the lens'
+[00:05.479] u1   QUERY      Q3 for I2 v2 "how do keepers polish the lens" supersedes Q2 (refines)
+[00:05.479] u1   MULTI      B3 start Q3 (parallel) reuse I1
+[00:05.479] u1   RETRIEVAL  START Q3/I2 [provisional] queue_wait=0.0ms
+[00:05.489] u1   RETRIEVAL  DONE  Q3/I2 status=ok 10.0ms top: fixture_lighthouse_manual §1.2, fixture_lighthouse_manual §1.1, fixture_lighthouse_manual §1
+[00:05.489] u1   MULTI      B3 done makespan=10.0ms
+[00:05.489] u1   FUSED      provisional intent_aware/none coverage=1.0 items=7: E1=fixture_lighthouse_manual §1.1<I1+I2>, E2=Doc_07 §3<I1>, E3=Doc_07 §4<I1+I2>, E4=Doc_07 §2.2<I1>, E5=fixture_lighthouse_manual §1.2<I1+I2>, E6=fixture_lighthouse_manual §1<I2>
+[00:05.979] u1   UTTERANCE  FINALIZED reason=endpoint transcript="how high should the wicks be trimmed and how do keepers polish the lens"
+[00:05.979] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.90 stab=1.0 worth=1.0 nov=0.5 act=INFO_REQUEST
+[00:05.979] u1   FUSED      final intent_aware/none coverage=1.0 items=7: E1=fixture_lighthouse_manual §1.1<I1+I2>, E2=Doc_07 §3<I1>, E3=Doc_07 §4<I1+I2>, E4=Doc_07 §2.2<I1>, E5=fixture_lighthouse_manual §1.2<I1+I2>, E6=fixture_lighthouse_manual §1<I2>
+[00:05.979] u1   TURN       intents=2 retrievals=3 versions=3 coverage=1.0 lead_time=3178.9ms post_final=0.0ms sub_queries=['how high should the wicks be trimmed', 'how do keepers polish the lens']

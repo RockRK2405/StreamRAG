@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "citations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "claim_id": {
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "introduced_by_constraint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Introduced By Constraint"
+    },
+    "introduced_in": {
+      "minimum": 1,
+      "title": "Introduced In",
+      "type": "integer"
+    },
+    "modified_in": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Modified In",
+      "type": "array"
+    },
+    "status": {
+      "default": "active",
+      "enum": [
+        "active",
+        "retracted"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "type": {
+      "default": "FACTUAL",
+      "enum": [
+        "FACTUAL",
+        "UNCERTAINTY",
+        "CONNECTIVE",
+        "CLARIFICATION"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "verdict": {
+      "default": "UNCHECKED",
+      "enum": [
+        "SUPPORTED",
+        "PARTIAL",
+        "UNSUPPORTED",
+        "INVALID_CITATION",
+        "UNCHECKED"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim_id",
+    "text",
+    "introduced_in"
+  ],
+  "title": "Claim",
+  "type": "object"
+}

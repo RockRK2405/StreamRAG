@@ -1,0 +1,302 @@
+{
+  "$defs": {
+    "EmbeddingInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "build_batch_size": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Build Batch Size"
+        },
+        "dimension": {
+          "minimum": 1,
+          "title": "Dimension",
+          "type": "integer"
+        },
+        "max_length": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Length"
+        },
+        "model_files_sha256": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Model Files Sha256",
+          "type": "object"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "normalize": {
+          "default": true,
+          "title": "Normalize",
+          "type": "boolean"
+        },
+        "pooling": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pooling"
+        },
+        "repo": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Repo"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision"
+        },
+        "runtime": {
+          "title": "Runtime",
+          "type": "string"
+        },
+        "truncated_chunks": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Truncated Chunks",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "runtime",
+        "dimension"
+      ],
+      "title": "EmbeddingInfo",
+      "type": "object"
+    },
+    "SourceFile": {
+      "additionalProperties": false,
+      "properties": {
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "document_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Id"
+        },
+        "format": {
+          "title": "Format",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "status": {
+          "default": "loaded",
+          "enum": [
+            "loaded",
+            "skipped",
+            "error"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "format"
+      ],
+      "title": "SourceFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Everything needed to reproduce an index. Never contains benchmark answers.",
+  "properties": {
+    "artifacts": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Artifacts",
+      "type": "object"
+    },
+    "bm25_configuration": {
+      "additionalProperties": true,
+      "title": "Bm25 Configuration",
+      "type": "object"
+    },
+    "chunk_count": {
+      "minimum": 0,
+      "title": "Chunk Count",
+      "type": "integer"
+    },
+    "chunking_configuration": {
+      "additionalProperties": true,
+      "title": "Chunking Configuration",
+      "type": "object"
+    },
+    "content_hash": {
+      "default": "",
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "corpus_root": {
+      "title": "Corpus Root",
+      "type": "string"
+    },
+    "corpus_version": {
+      "title": "Corpus Version",
+      "type": "string"
+    },
+    "document_count": {
+      "minimum": 0,
+      "title": "Document Count",
+      "type": "integer"
+    },
+    "embedding_model": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EmbeddingInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "environment": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Environment",
+      "type": "object"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "ids_configuration": {
+      "additionalProperties": true,
+      "title": "Ids Configuration",
+      "type": "object"
+    },
+    "index_config_hash": {
+      "title": "Index Config Hash",
+      "type": "string"
+    },
+    "index_text_configuration": {
+      "additionalProperties": true,
+      "title": "Index Text Configuration",
+      "type": "object"
+    },
+    "index_version": {
+      "title": "Index Version",
+      "type": "string"
+    },
+    "is_test_fixture": {
+      "title": "Is Test Fixture",
+      "type": "boolean"
+    },
+    "normalization_configuration": {
+      "additionalProperties": true,
+      "title": "Normalization Configuration",
+      "type": "object"
+    },
+    "section_count": {
+      "minimum": 0,
+      "title": "Section Count",
+      "type": "integer"
+    },
+    "sections_configuration": {
+      "additionalProperties": true,
+      "title": "Sections Configuration",
+      "type": "object"
+    },
+    "source_files": {
+      "items": {
+        "$ref": "#/$defs/SourceFile"
+      },
+      "title": "Source Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "index_version",
+    "corpus_version",
+    "corpus_root",
+    "is_test_fixture",
+    "generated_at",
+    "source_files",
+    "document_count",
+    "section_count",
+    "chunk_count",
+    "chunking_configuration",
+    "normalization_configuration",
+    "sections_configuration",
+    "ids_configuration",
+    "index_text_configuration",
+    "bm25_configuration",
+    "index_config_hash"
+  ],
+  "title": "CorpusManifest",
+  "type": "object"
+}

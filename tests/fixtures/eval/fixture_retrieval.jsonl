@@ -1,0 +1,6 @@
+{"item_id": "fx-01", "query": "how high should wicks be trimmed", "gold": ["fixture_lighthouse_manual §1.1"], "gold_level": "section", "is_fixture": true}
+{"item_id": "fx-02", "query": "how often does the fog signal sound during a storm", "gold": ["fixture_lighthouse_manual §3"], "gold_level": "section", "is_fixture": true}
+{"item_id": "fx-03", "query": "maximum crates per shift for a picker", "gold": ["Doc_07 §3"], "gold_level": "section", "is_fixture": true}
+{"item_id": "fx-04", "query": "can ladders stay in the orchard overnight", "gold": ["Doc_07 §2.2"], "gold_level": "section", "is_fixture": true}
+{"item_id": "fx-05", "query": "when is the telescope recalibrated", "gold": ["fixture_observatory_notes §1"], "gold_level": "section", "is_fixture": true}
+{"item_id": "fx-06", "query": "what must be logged for every watch", "gold": ["fixture_lighthouse_manual §2"], "gold_level": "section", "is_fixture": true}

@@ -1,0 +1,85 @@
+{
+  "case_id": "B1",
+  "category": "B_three_independent",
+  "description": "DEV SUITE (fixture domain): three needs across documents",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "What are the rules",
+          "timestamp_s": 1.5441
+        },
+        {
+          "chunk_index": 1,
+          "text": "for ladders in the orchard,",
+          "timestamp_s": 3.566
+        },
+        {
+          "chunk_index": 2,
+          "text": "how are the wicks trimmed,",
+          "timestamp_s": 5.6719
+        },
+        {
+          "chunk_index": 3,
+          "text": "and when is the telescope recalibrated?",
+          "timestamp_s": 7.644
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "rules for using ladders in the orchard",
+          "gold_evidence": [
+            "Doc_07 \u00a72.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [
+            "ladder rules"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "how wicks are trimmed",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "wick trimming"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "when the telescope is recalibrated",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g3",
+          "paraphrases": [
+            "telescope recalibration schedule"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 3,
+      "expected_relationships": [],
+      "utterance_end_s": 8.144,
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard, how are the wicks trimmed, and when is the telescope recalibrated?"
+    }
+  ]
+}

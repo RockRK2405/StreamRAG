@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "TranscriptChunkPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_index": {
+          "minimum": 0,
+          "title": "Chunk Index",
+          "type": "integer"
+        },
+        "replaces_chunk_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaces Chunk Index"
+        },
+        "stability": {
+          "default": "final",
+          "enum": [
+            "final",
+            "partial"
+          ],
+          "title": "Stability",
+          "type": "string"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "timestamp_s": {
+          "minimum": 0,
+          "title": "Timestamp S",
+          "type": "number"
+        },
+        "utterance_offset_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Utterance Offset S"
+        }
+      },
+      "required": [
+        "chunk_index",
+        "timestamp_s"
+      ],
+      "title": "TranscriptChunkPayload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "payload": {
+      "$ref": "#/$defs/TranscriptChunkPayload"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "type": {
+      "const": "TRANSCRIPT_CHUNK",
+      "default": "TRANSCRIPT_CHUNK",
+      "title": "Type",
+      "type": "string"
+    },
+    "utterance_id": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Utterance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "utterance_id",
+    "payload"
+  ],
+  "title": "TranscriptChunk",
+  "type": "object"
+}

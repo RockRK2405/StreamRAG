@@ -1,0 +1,34 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.992] u1   USER       #0: "how high are the crates stacked"
+[00:01.992] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.96 stab=0.9 worth=1.0 nov=1.0 act=INFO_REQUEST
+[00:01.992] u1   INTENTS    v1 +I1 | I1[FACTUAL] 'how high are the crates stacked'
+[00:01.992] u1   QUERY      Q1 for I1 v1 "how high are the crates stacked"
+[00:01.992] u1   MULTI      B1 start Q1 (parallel)
+[00:01.992] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:02.002] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: Doc_07 §3, Doc_07 §2.2, Doc_07 §2.1
+[00:02.002] u1   MULTI      B1 done makespan=10.0ms
+[00:02.002] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=Doc_07 §3<I1>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §2.1<I1>, E4=fixture_lighthouse_manual §1.1<I1>, E5=Doc_07 §1<I1>
+[00:02.592] u1   CONTROLLER SKIP     redundant_query  conf=1.00 stab=1.0 worth=1.0 nov=0.0 act=INFO_REQUEST
+[00:04.735] u1   USER       #1: "and how many can a picker fill"
+[00:04.735] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.95 worth=1.0 nov=0.5 act=INFO_REQUEST
+[00:04.735] u1   INTENTS    v2 +I2 | I1[FACTUAL] 'how high are the crates stacked'; I2[FACTUAL] 'how many can a picker fill'
+[00:04.735] u1   QUERY      Q2 for I2 v1 "how many can a picker fill"
+[00:04.735] u1   MULTI      B2 start Q2 (parallel) reuse I1
+[00:04.735] u1   RETRIEVAL  START Q2/I2 [provisional] queue_wait=0.0ms
+[00:04.745] u1   RETRIEVAL  DONE  Q2/I2 status=ok 10.0ms top: Doc_07 §3, Doc_07 §1, Doc_07 §2
+[00:04.745] u1   MULTI      B2 done makespan=10.0ms
+[00:04.745] u1   FUSED      provisional intent_aware/none coverage=1.0 items=7: E1=Doc_07 §3<I1+I2>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §2.1<I1>, E4=fixture_lighthouse_manual §1.1<I1+I2>, E5=Doc_07 §1<I1+I2>, E6=Doc_07 §2<I2>
+[00:05.335] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.90 stab=1.0 worth=1.0 nov=0.5 act=INFO_REQUEST
+[00:06.379] u1   USER       #2: "for the night shift"
+[00:06.379] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.92 stab=0.975 worth=1.0 nov=0.625 act=INFO_REQUEST
+[00:06.379] u1   INTENTS    v3 ~I2 | I1[FACTUAL] 'how high are the crates stacked'; I2[FACTUAL] 'how many can a picker fill for the night shift'
+[00:06.379] u1   QUERY      Q3 for I2 v2 "how many can a picker fill for the night shift" supersedes Q2 (refines)
+[00:06.379] u1   MULTI      B3 start Q3 (parallel) reuse I1
+[00:06.379] u1   RETRIEVAL  START Q3/I2 [provisional] queue_wait=0.0ms
+[00:06.389] u1   RETRIEVAL  DONE  Q3/I2 status=ok 10.0ms top: Doc_07 §3, fixture_observatory_notes §1, fixture_lighthouse_manual §3
+[00:06.389] u1   MULTI      B3 done makespan=10.0ms
+[00:06.389] u1   FUSED      provisional intent_aware/none coverage=1.0 items=8: E1=Doc_07 §3<I1+I2>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §2.1<I1>, E4=fixture_lighthouse_manual §1.1<I1+I2>, E5=Doc_07 §1<I1>, E6=fixture_observatory_notes §1<I2>
+[00:06.879] u1   UTTERANCE  FINALIZED reason=endpoint transcript="how high are the crates stacked and how many can a picker fill for the night shift"
+[00:06.879] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.88 stab=1.0 worth=1.0 nov=0.375 act=INFO_REQUEST
+[00:06.879] u1   FUSED      final intent_aware/none coverage=1.0 items=8: E1=Doc_07 §3<I1+I2>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §2.1<I1>, E4=fixture_lighthouse_manual §1.1<I1+I2>, E5=Doc_07 §1<I1>, E6=fixture_observatory_notes §1<I2>
+[00:06.879] u1   TURN       intents=2 retrievals=3 versions=3 coverage=1.0 lead_time=4887.1ms post_final=0.0ms sub_queries=['how high are the crates stacked', 'how many can a picker fill for the night shift']

@@ -1,0 +1,67 @@
+{
+  "annotation": {},
+  "case_id": "repeat_prev-authored",
+  "category": "suppression",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-repeat_prev-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 125,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "could you",
+            "timestamp_s": 0.8616
+          },
+          {
+            "chunk_index": 1,
+            "text": "repeat the previous answer",
+            "timestamp_s": 2.272
+          },
+          {
+            "chunk_index": 2,
+            "text": "please",
+            "timestamp_s": 2.6921
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": false,
+          "suppression_reason": null,
+          "turn_type": "presentation",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 3.1921,
+        "utterance_id": "u1",
+        "utterance_text": "could you repeat the previous answer please",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

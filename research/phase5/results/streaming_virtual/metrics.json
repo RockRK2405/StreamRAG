@@ -1,0 +1,50 @@
+{
+  "REPORTABLE": false,
+  "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+  "cases": 53,
+  "duplicate_queries_same_intent": 0,
+  "embedder": "bge-small-en-v1.5",
+  "index_content_hash": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+  "intent_set_versions": {
+    "max": 4,
+    "mean": 2.1,
+    "n": 60,
+    "p50": 2.0,
+    "p95": 4.0
+  },
+  "lead_time_ms": {
+    "max": 6599.9,
+    "mean": 2408.0068,
+    "n": 59,
+    "p50": 2237.0,
+    "p95": 5479.65
+  },
+  "ledger_hits": 2,
+  "matched_intent_early_or_reused_rate": 0.9891,
+  "matched_intent_early_rate": 0.9783,
+  "matched_intents_eligible": 92,
+  "post_final_ms": {
+    "max": 10.0,
+    "mean": 0.678,
+    "n": 59,
+    "p50": 0.0,
+    "p95": 10.0
+  },
+  "queries_minus_expected": {
+    "max": 3,
+    "mean": 0.7333,
+    "n": 60,
+    "p50": 1.0,
+    "p95": 2.0
+  },
+  "queries_per_utterance": {
+    "max": 5,
+    "mean": 2.3,
+    "n": 60,
+    "p50": 2.0,
+    "p95": 4.0
+  },
+  "unified_coverage": 0.9831,
+  "unified_overall_recall": 0.9831,
+  "utterances": 60
+}

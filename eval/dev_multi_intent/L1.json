@@ -1,0 +1,70 @@
+{
+  "case_id": "L1",
+  "category": "L_changed_intent",
+  "description": "DEV SUITE (fixture domain): explicit replacement",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "Tell me the requirements",
+          "timestamp_s": 1.6035
+        },
+        {
+          "chunk_index": 1,
+          "text": "for ladders.",
+          "timestamp_s": 2.3794
+        },
+        {
+          "chunk_index": 2,
+          "text": "Actually, I meant crates",
+          "timestamp_s": 3.7378
+        },
+        {
+          "chunk_index": 3,
+          "text": "instead of ladders.",
+          "timestamp_s": 5.0295
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "ladder requirements",
+          "gold_evidence": [
+            "Doc_07 \u00a72.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": true
+        },
+        {
+          "answerable": true,
+          "description": "crate requirements",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "crates"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 5.5295,
+      "utterance_id": "u1",
+      "utterance_text": "Tell me the requirements for ladders. Actually, I meant crates instead of ladders."
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "case_id": "A1",
+  "category": "A_two_independent",
+  "description": "DEV SUITE (fixture domain): two lighthouse needs, ASR style",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how high should",
+          "timestamp_s": 1.2021
+        },
+        {
+          "chunk_index": 1,
+          "text": "the wicks be trimmed",
+          "timestamp_s": 2.8
+        },
+        {
+          "chunk_index": 2,
+          "text": "and how do keepers",
+          "timestamp_s": 4.2189
+        },
+        {
+          "chunk_index": 3,
+          "text": "polish the lens",
+          "timestamp_s": 5.4789
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "wick trimming height",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [
+            "how high wicks are trimmed"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "how the lens is polished",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "lens polishing method"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 5.9789,
+      "utterance_id": "u1",
+      "utterance_text": "how high should the wicks be trimmed and how do keepers polish the lens"
+    }
+  ]
+}

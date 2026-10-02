@@ -1,0 +1,76 @@
+{
+  "case_id": "D4",
+  "category": "D_intent_constraint",
+  "description": "DEV SUITE (fixture domain): fronted restriction",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "for visitors,",
+          "timestamp_s": 0.8676
+        },
+        {
+          "chunk_index": 1,
+          "text": "what are the observatory rules",
+          "timestamp_s": 3.0039
+        },
+        {
+          "chunk_index": 2,
+          "text": "and when is the dome open",
+          "timestamp_s": 5.1802
+        }
+      ],
+      "expected_constraints": [
+        {
+          "applies_to": [
+            "u1.g1",
+            "u1.g2"
+          ],
+          "scope": "global",
+          "text": "for visitors"
+        }
+      ],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "observatory rules for visitors",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "visitors"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "when the dome is open",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "visitors"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 5.6802,
+      "utterance_id": "u1",
+      "utterance_text": "for visitors, what are the observatory rules and when is the dome open"
+    }
+  ]
+}

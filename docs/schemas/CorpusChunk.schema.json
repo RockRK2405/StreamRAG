@@ -1,0 +1,132 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "char_end": {
+      "minimum": 0,
+      "title": "Char End",
+      "type": "integer"
+    },
+    "char_start": {
+      "minimum": 0,
+      "title": "Char Start",
+      "type": "integer"
+    },
+    "chunk_id": {
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "citation": {
+      "title": "Citation",
+      "type": "string"
+    },
+    "document_id": {
+      "title": "Document Id",
+      "type": "string"
+    },
+    "index_text": {
+      "title": "Index Text",
+      "type": "string"
+    },
+    "page_end": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page End"
+    },
+    "page_start": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page Start"
+    },
+    "part": {
+      "minimum": 1,
+      "title": "Part",
+      "type": "integer"
+    },
+    "position": {
+      "minimum": 0,
+      "title": "Position",
+      "type": "integer"
+    },
+    "position_in_section": {
+      "minimum": 0,
+      "title": "Position In Section",
+      "type": "integer"
+    },
+    "section_id": {
+      "title": "Section Id",
+      "type": "string"
+    },
+    "section_path": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Section Path",
+      "type": "array"
+    },
+    "section_title": {
+      "title": "Section Title",
+      "type": "string"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "starts_mid_sentence": {
+      "default": false,
+      "title": "Starts Mid Sentence",
+      "type": "boolean"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "text_sha1": {
+      "title": "Text Sha1",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "token_count": {
+      "minimum": 0,
+      "title": "Token Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "chunk_id",
+    "document_id",
+    "section_id",
+    "part",
+    "citation",
+    "title",
+    "section_title",
+    "text",
+    "index_text",
+    "source_path",
+    "char_start",
+    "char_end",
+    "position",
+    "position_in_section",
+    "token_count",
+    "text_sha1"
+  ],
+  "title": "CorpusChunk",
+  "type": "object"
+}

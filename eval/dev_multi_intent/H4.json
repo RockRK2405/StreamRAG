@@ -1,0 +1,67 @@
+{
+  "case_id": "H4",
+  "category": "H_shared_context",
+  "description": "DEV SUITE (fixture domain): two facets of one topic",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the requirements",
+          "timestamp_s": 1.3803
+        },
+        {
+          "chunk_index": 1,
+          "text": "and the timeline",
+          "timestamp_s": 2.6763
+        },
+        {
+          "chunk_index": 2,
+          "text": "for telescope calibration",
+          "timestamp_s": 3.8758
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "telescope calibration requirements",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "telescope"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "telescope calibration timeline",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "telescope"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 4.3758,
+      "utterance_id": "u1",
+      "utterance_text": "what are the requirements and the timeline for telescope calibration"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "case_id": "J2",
+  "category": "J_under_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): nominal need + question, no punctuation",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "the requirements for ladders",
+          "timestamp_s": 1.5067
+        },
+        {
+          "chunk_index": 1,
+          "text": "how long does pruning take",
+          "timestamp_s": 3.3113
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "ladder requirements",
+          "gold_evidence": [
+            "Doc_07 \u00a72.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "duration of pruning",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 3.8113,
+      "utterance_id": "u1",
+      "utterance_text": "the requirements for ladders how long does pruning take"
+    }
+  ]
+}

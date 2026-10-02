@@ -1,0 +1,70 @@
+{
+  "case_id": "A5",
+  "category": "A_two_independent",
+  "description": "DEV SUITE (fixture domain): two orchard needs, question restart",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what do workers do",
+          "timestamp_s": 1.4733
+        },
+        {
+          "chunk_index": 1,
+          "text": "before leaving the tool shed",
+          "timestamp_s": 3.378
+        },
+        {
+          "chunk_index": 2,
+          "text": "and where do ladders",
+          "timestamp_s": 4.753
+        },
+        {
+          "chunk_index": 3,
+          "text": "go overnight",
+          "timestamp_s": 5.447
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "what workers must do before leaving the tool shed",
+          "gold_evidence": [
+            "Doc_07 \u00a74"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "where ladders are kept overnight",
+          "gold_evidence": [
+            "Doc_07 \u00a72.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "ladder storage overnight"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 5.947,
+      "utterance_id": "u1",
+      "utterance_text": "what do workers do before leaving the tool shed and where do ladders go overnight"
+    }
+  ]
+}

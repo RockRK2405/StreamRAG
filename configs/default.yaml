@@ -1,0 +1,156 @@
+# StreamRAG default configuration — Phase 3 (corpus & retrieval foundation).
+# Every value here is a team engineering default, NOT an official Samsung threshold.
+# Values marked "provisional" must be re-validated once the official corpus is available.
+
+paths:
+  corpus: ./corpus               # official corpus location (git-ignored). Override: --corpus or STREAMRAG_CORPUS
+  index_root: ./indexes
+  models_dir: ./models
+  model_registry: ./configs/models.yaml
+  runs_dir: ./runs
+
+corpus:
+  include_extensions: [".txt", ".md", ".pdf"]   # adapters implemented; add more only if the corpus needs them
+  fixture_marker: TEST_FIXTURE_ONLY             # a corpus dir containing this file is a test fixture
+  on_invalid_document: skip                     # skip (recorded in manifest) | error
+  doc_id_strategy: native_or_stem               # native_or_stem | native_or_ordinal
+  native_doc_id_pattern: "^(?i:doc)[ _-]?(\\d+)"
+
+normalization:
+  unicode_form: NFKC
+  dehyphenate: true
+  join_wrapped_lines: true
+  strip_page_numbers: true
+  strip_repeated_headers_footers: true
+  header_footer_min_pages: 3
+  header_footer_min_fraction: 0.6
+
+sections:
+  markdown_headings: true
+  numbered_headings: true
+  caps_headings: true          # only used when a document has no markdown/numbered headings
+  max_heading_words: 12
+  pdf_page_sections_when_no_headings: true
+
+chunking:                      # provisional — see research/phase3/chunking_report.md
+  strategy: paragraph          # section | paragraph | token
+  target_tokens: 180           # tokens = regex words (\w+); ~1.2-1.4 wordpieces each
+  max_tokens: 300
+  overlap_tokens: 40           # paragraph: whole trailing sentences; token: sliding window overlap
+  min_tokens: 25
+  keep_lead_in_with_list: true
+
+ids:
+  chunk_id_template: "{document_id}§{section_id}#{part}"
+  citation_template: "{document_id} §{section_id}"
+
+index_text:
+  template: "{header}: {text}"   # header = document title > section path (deduplicated); indexed by BM25 + dense
+
+lexical:
+  k1: 1.5
+  b: 0.75
+  stemming: snowball           # snowball | none
+  stopwords: stopwords_en.txt  # generic English list in src/streamrag/resources
+  normalize_number_words: true
+
+dense:
+  embedder: bge-small-en-v1.5  # registry name in configs/models.yaml, or "hashing" (TEST/OFFLINE ONLY, not semantic)
+  batch_size: 8                # measured: same throughput as 32, ~half the peak RSS (research/phase3)
+  intra_op_threads: 0          # 0 = onnxruntime default
+
+retrieval:
+  mode: hybrid                 # bm25 | dense | hybrid
+  top_k: 10
+  lexical_k: 50
+  dense_k: 50
+  rrf_k: 60
+  dense_min_similarity: null   # optional similarity cut-off (null = none); model-specific, calibrate first
+  on_dense_failure: degrade    # degrade (lexical-only, flagged in EvidenceSet.warnings) | error
+  dense_timeout_ms: 1000
+
+dedup:
+  enabled: true
+  near_duplicates: true
+  near_dup_cosine: 0.97        # provisional (Phase 2 default); validated only on fixtures so far
+  near_dup_jaccard: 0.9
+  overlap_merge_ratio: 0.8     # merge overlapping same-section chunks only if overlap >= 80% of the shorter
+
+rerank:
+  enabled: false               # ablation switch; adoption pending Exp 3 on real labels
+  model: ms-marco-minilm-l6-v2
+  rerank_k: 20
+  timeout_ms: 600
+  batch_size: 32
+
+telemetry:
+  log_level: INFO
+  log_format: json             # json | text
+
+# --------------------------------------------------------------------------------------------------
+# Phase 4: streaming engine + retrieval controller. One canonical schema; names map to Phase 2 §8/§25.3.
+# All values are team engineering defaults (NOT official thresholds), set from Phase 2 design reasoning,
+# not tuned on any evaluation data.
+controller:
+  strategy: rules                  # rules (controller) | end_only (ablation A) | every_chunk (ablation B)
+  act_classifier: rules            # rules | prototype (embedding nearest-centroid; Exp 8 ablation)
+  lexicon: ./configs/controller_lexicon.yaml
+  min_content_tokens: 2            # Phase 2 sufficiency: >= 2 content tokens ...
+  anchor_idf_floor: 1.0            # ... and >= 1 corpus-vocabulary term with IDF >= floor (Phase 2 idf_floor)
+  strong_anchor_strength: 0.8      # ... or a single very rare corpus term (anchor_strength >= this) is enough
+  min_stability: 0.65              # semantic-stability score needed for a provisional RETRIEVE
+  min_worthiness: 0.5              # retrieval-worthiness score needed (provisional) / to retrieve UNKNOWN acts at end
+  act_suppress_confidence: 0.8     # SKIP suppressed acts only when this confident (Phase 2 act_suppress_confidence)
+  stability_quiet_ms: 600          # no new words for this long => quiet tick re-evaluates (Phase 2 Δt_stable)
+  novelty_threshold: 0.25          # SKIP as redundant if 1 - max term-Jaccard vs prior queries < this
+  retrieval_cooldown_ms: 400       # min stream-time gap between provisional RETRIEVE decisions (Phase 2 min_interval)
+  max_retrievals_per_utterance: 4  # Phase 2 provisional_budget; one slot reserved for the final query
+  reserve_final_retrieval: true
+  allow_parallel_retrieval: true
+  max_concurrent_retrievals: 2
+  cancel_superseded: queued_only   # never | queued_only (running retrievals always complete; see docs/streaming/06)
+  endpoint_timeout_ms: 3000        # fallback only: no chunk/UTTERANCE_END this long => finalize(reason=timeout).
+                                   # Phase 2 said 2000; raised because 5-6-word chunks @2.6 wps (+jitter) arrive up to
+                                   # 2.10-2.13 s apart and 2000 truncated a dev-suite utterance (Phase 4 report §17)
+
+streaming:
+  mode: virtual                    # virtual (deterministic discrete-event) | realtime (asyncio + wall clock)
+  speed: 1.0                       # realtime only: >1 compresses the input timeline
+  sim_retrieval_latency_ms: 10     # virtual mode: modeled retrieval latency (Phase 3 measured hybrid p95 ~5.6 ms)
+  retrieval_timeout_ms: 2000
+  retrieval_mode: hybrid
+  top_k: 10
+  rerank: false
+  words_per_second: 2.6            # simulator: speaking rate used to time chunks
+  end_gap_ms: 500                  # simulator: silence between last chunk and UTTERANCE_END (guide example: 0.5 s)
+
+# --------------------------------------------------------------------------------------------------
+# Phase 5: multi-intent decomposition, per-intent retrieval and evidence fusion (docs/multi_intent/).
+# Team engineering defaults (NOT official thresholds). Values marked [measured] were chosen from the Phase 5
+# dev-suite experiments in research/phase5 (fixture domain; see PHASE_5_MULTI_INTENT_REPORT.md).
+multi_intent:
+  enabled: false                   # true: the streaming session decomposes intents and retrieves per intent
+  lexicon: ./configs/intent_lexicon.yaml
+  max_intents: 4                   # active intents per utterance; extra intents are ranked and dropped with a reason
+  max_queries_per_utterance: 10
+  max_queries_per_intent: 3        # provisional + refined + final
+  max_candidates_per_intent: 5     # top_k per intent retrieval
+  max_concurrent_retrievals: 3
+  dispatch: parallel               # parallel | sequential | batched
+  intent_cooldown_ms: 400          # same as Phase 4 retrieval_cooldown_ms, applied per intent
+  duplicate_jaccard: 0.8           # Phase 2 §9.5 intra-set duplicate rule (lexical Jaccard >= 0.8)
+  match_jaccard: 0.5               # version tracking: a new draft intent continues an existing one
+  refine_containment: 0.6          # query relation 'refines' (Phase 4 value)
+  carryover: true                  # anaphora + follow-up ellipsis inherit context from earlier intents
+  llm_check: "off"                 # off | gated (Phase 2 §9.6); no LLM backend is configured (ADR-007 Q2 open)
+  llm_check_wait_ms: 300
+
+fusion:
+  strategy: intent_aware           # concat | global_score | rrf | intent_aware (ADR-009 quota round-robin)
+  top_k: 8                         # unified evidence items
+  min_per_intent: 2                # coverage floor per intent
+  section_cap_per_intent: 2        # ADR-009
+  rrf_k: 60
+  rerank: none                     # none | intent_ce | cross_intent_dense | cross_intent_ce
+  rerank_k: 20
+  conflict_check: true             # conservative typed-value check (numbers/units across documents)

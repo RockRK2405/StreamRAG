@@ -1,0 +1,69 @@
+{
+  "case_id": "E3",
+  "category": "E_refinement",
+  "description": "DEV SUITE (fixture domain): narrower logbook need",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the logbook rules",
+          "timestamp_s": 2.0657
+        },
+        {
+          "chunk_index": 1,
+          "text": "and also",
+          "timestamp_s": 2.8347
+        },
+        {
+          "chunk_index": 2,
+          "text": "what ink the logbook entries use",
+          "timestamp_s": 4.8731
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "logbook rules",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a72"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "ink used for logbook entries",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a72"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "REFINEMENT"
+        }
+      ],
+      "utterance_end_s": 5.3731,
+      "utterance_id": "u1",
+      "utterance_text": "what are the logbook rules and also what ink the logbook entries use"
+    }
+  ]
+}

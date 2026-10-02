@@ -1,0 +1,70 @@
+{
+  "case_id": "C3",
+  "category": "C_incremental_second",
+  "description": "DEV SUITE (fixture domain): second need after a self-interruption",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me how the telescope",
+          "timestamp_s": 1.9483
+        },
+        {
+          "chunk_index": 1,
+          "text": "is recalibrated",
+          "timestamp_s": 2.8252
+        },
+        {
+          "chunk_index": 2,
+          "text": "oh and also",
+          "timestamp_s": 4.0238
+        },
+        {
+          "chunk_index": 3,
+          "text": "who may visit the observatory",
+          "timestamp_s": 6.2084
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "how the telescope is recalibrated",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "who may visit the observatory",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "visitor rules"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 6.7084,
+      "utterance_id": "u1",
+      "utterance_text": "tell me how the telescope is recalibrated oh and also who may visit the observatory"
+    }
+  ]
+}

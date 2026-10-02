@@ -1,0 +1,67 @@
+{
+  "case_id": "A2",
+  "category": "A_two_independent",
+  "description": "DEV SUITE (fixture domain): two orchard needs",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "when are saplings planted",
+          "timestamp_s": 1.3578
+        },
+        {
+          "chunk_index": 1,
+          "text": "and what happens",
+          "timestamp_s": 2.3807
+        },
+        {
+          "chunk_index": 2,
+          "text": "to damaged fruit",
+          "timestamp_s": 3.4458
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "when saplings are planted",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [
+            "planting time of saplings"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "what is done with damaged fruit",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "handling of damaged fruit"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 3.9458,
+      "utterance_id": "u1",
+      "utterance_text": "when are saplings planted and what happens to damaged fruit"
+    }
+  ]
+}

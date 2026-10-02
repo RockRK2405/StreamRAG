@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "streamrag"
+version = "0.3.0"
+description = "Samsung PRISM Theme 4 - Streaming Live RAG (Phase 3: corpus & retrieval foundation)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary - hackathon submission" }
+dependencies = [
+  "pydantic>=2.6,<3",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "pyyaml>=6.0",
+  "snowballstemmer>=2.2",
+  "tokenizers>=0.15",
+  "onnxruntime>=1.17",
+]
+
+[project.optional-dependencies]
+pdf = ["pypdf>=4.0"]
+models = ["huggingface_hub>=0.23"]
+dev = ["pytest>=8.0"]
+# research-only: PyTorch runtime comparison for the embedding benchmark (not used by the retrieval stack)
+bench-torch = ["torch>=2.4", "sentence-transformers>=3.0"]
+
+[project.scripts]
+streamrag = "streamrag.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+streamrag = ["resources/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+markers = [
+  "model: requires downloaded model files under models/ (skipped if absent)",
+  "slow: slower integration tests",
+]

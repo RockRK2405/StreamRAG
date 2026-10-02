@@ -1,0 +1,374 @@
+{
+  "REPORTABLE": false,
+  "arm_latency_ms_at_k0": {
+    "A_single_query": {
+      "max": 4.9787,
+      "mean": 3.2427,
+      "n": 60,
+      "p50": 3.1989,
+      "p95": 3.6905
+    },
+    "E_cross_intent_ce": {
+      "max": 68.6472,
+      "mean": 21.9964,
+      "n": 59,
+      "p50": 14.9931,
+      "p95": 46.8503
+    },
+    "E_cross_intent_dense": {
+      "max": 5.3395,
+      "mean": 3.4865,
+      "n": 59,
+      "p50": 3.2345,
+      "p95": 5.0959
+    },
+    "E_intent_ce": {
+      "max": 34.6086,
+      "mean": 16.8667,
+      "n": 59,
+      "p50": 14.1348,
+      "p95": 25.9388
+    },
+    "fusion_concat": {
+      "max": 0.2402,
+      "mean": 0.1095,
+      "n": 59,
+      "p50": 0.1042,
+      "p95": 0.1564
+    },
+    "fusion_global_score": {
+      "max": 0.1337,
+      "mean": 0.073,
+      "n": 59,
+      "p50": 0.0691,
+      "p95": 0.1054
+    },
+    "fusion_intent_aware": {
+      "max": 0.1923,
+      "mean": 0.0667,
+      "n": 59,
+      "p50": 0.0618,
+      "p95": 0.0952
+    },
+    "fusion_rrf": {
+      "max": 0.1363,
+      "mean": 0.0669,
+      "n": 59,
+      "p50": 0.0636,
+      "p95": 0.1023
+    }
+  },
+  "arms": {
+    "A_single_query": {
+      "3": {
+        "coverage": 0.9605,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9605
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "E_cross_intent_ce": {
+      "3": {
+        "coverage": 0.9774,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9774
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "E_cross_intent_dense": {
+      "3": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "E_intent_ce": {
+      "3": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "fusion_concat": {
+      "3": {
+        "coverage": 0.9096,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9096
+      },
+      "5": {
+        "coverage": 0.935,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.935
+      },
+      "8": {
+        "coverage": 0.9774,
+        "duplicate_rate": 0.125,
+        "overall_recall": 0.9774
+      }
+    },
+    "fusion_global_score": {
+      "3": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "fusion_intent_aware": {
+      "3": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "5": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    },
+    "fusion_rrf": {
+      "3": {
+        "coverage": 0.9463,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9463
+      },
+      "5": {
+        "coverage": 0.9774,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9774
+      },
+      "8": {
+        "coverage": 0.9831,
+        "duplicate_rate": 0.0,
+        "overall_recall": 0.9831
+      }
+    }
+  },
+  "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+  "cases": 53,
+  "compound_utterances": 30,
+  "constraint_attachment_accuracy": 1.0,
+  "constraint_scope_accuracy_multi": 1.0,
+  "constraints": {
+    "f1": 0.8333,
+    "fn": 1,
+    "fp": 1,
+    "precision": 0.8333,
+    "recall": 0.8333,
+    "tp": 5
+  },
+  "context_required": 24,
+  "context_retention": 0.7917,
+  "embedder": "bge-small-en-v1.5",
+  "g3_lenient": 1.0,
+  "g3_strict": 0.9667,
+  "index_content_hash": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+  "intent_count_exact_rate": 0.9833,
+  "intents": {
+    "f1": 0.984,
+    "fn": 2,
+    "fp": 1,
+    "precision": 0.9892,
+    "recall": 0.9787,
+    "tp": 92
+  },
+  "intents_by_category": {
+    "A_two_independent": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 10
+    },
+    "B_three_independent": {
+      "f1": 0.9565,
+      "fn": 1,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.9167,
+      "tp": 11
+    },
+    "C_incremental_second": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 8
+    },
+    "D_intent_constraint": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 7
+    },
+    "E_refinement": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 8
+    },
+    "F_follow_up": {
+      "f1": 0.875,
+      "fn": 1,
+      "fp": 1,
+      "precision": 0.875,
+      "recall": 0.875,
+      "tp": 7
+    },
+    "G_pronoun": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 8
+    },
+    "H_shared_context": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 8
+    },
+    "I_over_decomposition_trap": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 5
+    },
+    "J_under_decomposition_trap": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 9
+    },
+    "K_duplicate": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 4
+    },
+    "L_changed_intent": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 4
+    },
+    "S_single": {
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 3
+    }
+  },
+  "latency_ms": {
+    "decompose": {
+      "max": 1.0432,
+      "mean": 0.5058,
+      "n": 60,
+      "p50": 0.4971,
+      "p95": 0.9086
+    },
+    "multi_retrieval": {
+      "max": 7.4482,
+      "mean": 4.4806,
+      "n": 59,
+      "p50": 4.5352,
+      "p95": 6.749
+    },
+    "query_generation": {
+      "max": 0.1799,
+      "mean": 0.0901,
+      "n": 60,
+      "p50": 0.0919,
+      "p95": 0.1552
+    }
+  },
+  "matcher": "0.5*cos(all-minilm-l6-v2)+0.5*termF1",
+  "per_intent_recall_at_k": {
+    "3": 0.9681,
+    "5": 0.9681,
+    "8": 0.9681
+  },
+  "relationships": {
+    "f1": 0.6667,
+    "fn": 6,
+    "fp": 0,
+    "precision": 1.0,
+    "recall": 0.5,
+    "tp": 6
+  },
+  "superseded_gold": 4,
+  "supersession_recall": 1.0,
+  "tau_eval": 0.5,
+  "utterances": 60
+}

@@ -1,0 +1,539 @@
+{
+  "REPORTABLE": false,
+  "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+  "cases": 53,
+  "embedder": "bge-small-en-v1.5",
+  "index_content_hash": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+  "note": "python_heap_peak excludes ONNX native allocations",
+  "reps": 30,
+  "results": {
+    "idle0ms/n1/batched": {
+      "critical_path_ms": {
+        "max": 2.878,
+        "mean": 2.5559,
+        "n": 30,
+        "p50": 2.4916,
+        "p95": 2.842
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 1,
+      "python_heap_peak_kib": 34.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 2.8795,
+        "mean": 2.5571,
+        "n": 30,
+        "p50": 2.4927,
+        "p95": 2.8439
+      }
+    },
+    "idle0ms/n1/parallel": {
+      "critical_path_ms": {
+        "max": 2.9058,
+        "mean": 2.6441,
+        "n": 30,
+        "p50": 2.6316,
+        "p95": 2.8661
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "parallel",
+      "n_queries": 1,
+      "python_heap_peak_kib": 36.7,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 2.9436,
+        "mean": 2.6749,
+        "n": 30,
+        "p50": 2.657,
+        "p95": 2.8914
+      }
+    },
+    "idle0ms/n1/sequential": {
+      "critical_path_ms": {
+        "max": 2.8792,
+        "mean": 2.6907,
+        "n": 30,
+        "p50": 2.6886,
+        "p95": 2.8597
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 1,
+      "python_heap_peak_kib": 33.9,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 2.8805,
+        "mean": 2.6917,
+        "n": 30,
+        "p50": 2.6894,
+        "p95": 2.8608
+      }
+    },
+    "idle0ms/n2/batched": {
+      "critical_path_ms": {
+        "max": 4.5487,
+        "mean": 4.2912,
+        "n": 30,
+        "p50": 4.2899,
+        "p95": 4.5457
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 2,
+      "python_heap_peak_kib": 58.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 4.5508,
+        "mean": 4.2929,
+        "n": 30,
+        "p50": 4.2914,
+        "p95": 4.5477
+      }
+    },
+    "idle0ms/n2/parallel": {
+      "critical_path_ms": {
+        "max": 13.4541,
+        "mean": 5.275,
+        "n": 30,
+        "p50": 4.3379,
+        "p95": 9.2698
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 2,
+      "mode": "parallel",
+      "n_queries": 2,
+      "python_heap_peak_kib": 60.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 13.4956,
+        "mean": 5.4348,
+        "n": 30,
+        "p50": 4.4694,
+        "p95": 9.309
+      }
+    },
+    "idle0ms/n2/sequential": {
+      "critical_path_ms": {
+        "max": 5.4875,
+        "mean": 2.89,
+        "n": 30,
+        "p50": 2.7893,
+        "p95": 3.0738
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 2,
+      "python_heap_peak_kib": 56.4,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 8.4551,
+        "mean": 5.5365,
+        "n": 30,
+        "p50": 5.4432,
+        "p95": 5.8849
+      }
+    },
+    "idle0ms/n3/batched": {
+      "critical_path_ms": {
+        "max": 5.5243,
+        "mean": 5.1994,
+        "n": 30,
+        "p50": 5.2413,
+        "p95": 5.463
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 3,
+      "python_heap_peak_kib": 82.2,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 5.5267,
+        "mean": 5.2014,
+        "n": 30,
+        "p50": 5.2435,
+        "p95": 5.4654
+      }
+    },
+    "idle0ms/n3/parallel": {
+      "critical_path_ms": {
+        "max": 13.3159,
+        "mean": 7.3084,
+        "n": 30,
+        "p50": 6.5836,
+        "p95": 10.705
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 3,
+      "mode": "parallel",
+      "n_queries": 3,
+      "python_heap_peak_kib": 83.0,
+      "rss_max_kib_growth": 32768,
+      "total_ms": {
+        "max": 13.7274,
+        "mean": 7.7392,
+        "n": 30,
+        "p50": 6.9942,
+        "p95": 11.1699
+      }
+    },
+    "idle0ms/n3/sequential": {
+      "critical_path_ms": {
+        "max": 7.1199,
+        "mean": 3.2767,
+        "n": 30,
+        "p50": 2.8901,
+        "p95": 5.6187
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 3,
+      "python_heap_peak_kib": 78.7,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 12.6243,
+        "mean": 8.6166,
+        "n": 30,
+        "p50": 8.2537,
+        "p95": 11.0513
+      }
+    },
+    "idle0ms/n4/batched": {
+      "critical_path_ms": {
+        "max": 7.1253,
+        "mean": 6.5675,
+        "n": 30,
+        "p50": 6.5599,
+        "p95": 6.9939
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 4,
+      "python_heap_peak_kib": 105.7,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 7.1275,
+        "mean": 6.5697,
+        "n": 30,
+        "p50": 6.5619,
+        "p95": 6.9962
+      }
+    },
+    "idle0ms/n4/parallel": {
+      "critical_path_ms": {
+        "max": 13.6172,
+        "mean": 8.5176,
+        "n": 30,
+        "p50": 8.1687,
+        "p95": 11.5829
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 3,
+      "mode": "parallel",
+      "n_queries": 4,
+      "python_heap_peak_kib": 104.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 14.1012,
+        "mean": 9.4825,
+        "n": 30,
+        "p50": 9.1013,
+        "p95": 12.9486
+      }
+    },
+    "idle0ms/n4/sequential": {
+      "critical_path_ms": {
+        "max": 8.2101,
+        "mean": 4.4287,
+        "n": 30,
+        "p50": 4.0635,
+        "p95": 7.2995
+      },
+      "idle_before_ms": 0,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 4,
+      "python_heap_peak_kib": 100.3,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 17.3475,
+        "mean": 12.3868,
+        "n": 30,
+        "p50": 11.8375,
+        "p95": 15.7191
+      }
+    },
+    "idle300ms/n1/batched": {
+      "critical_path_ms": {
+        "max": 14.8862,
+        "mean": 11.5588,
+        "n": 30,
+        "p50": 11.6506,
+        "p95": 13.5347
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 1,
+      "python_heap_peak_kib": 34.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 14.8934,
+        "mean": 11.5667,
+        "n": 30,
+        "p50": 11.657,
+        "p95": 13.5409
+      }
+    },
+    "idle300ms/n1/parallel": {
+      "critical_path_ms": {
+        "max": 19.7531,
+        "mean": 10.6714,
+        "n": 30,
+        "p50": 10.7394,
+        "p95": 13.232
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "parallel",
+      "n_queries": 1,
+      "python_heap_peak_kib": 36.7,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 19.9176,
+        "mean": 10.8472,
+        "n": 30,
+        "p50": 10.9253,
+        "p95": 13.4382
+      }
+    },
+    "idle300ms/n1/sequential": {
+      "critical_path_ms": {
+        "max": 12.6869,
+        "mean": 9.9541,
+        "n": 30,
+        "p50": 10.5376,
+        "p95": 12.6376
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 1,
+      "python_heap_peak_kib": 33.8,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 12.692,
+        "mean": 9.9596,
+        "n": 30,
+        "p50": 10.5434,
+        "p95": 12.6431
+      }
+    },
+    "idle300ms/n2/batched": {
+      "critical_path_ms": {
+        "max": 17.0319,
+        "mean": 13.9408,
+        "n": 30,
+        "p50": 14.2209,
+        "p95": 16.3273
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 2,
+      "python_heap_peak_kib": 58.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 17.0385,
+        "mean": 13.9482,
+        "n": 30,
+        "p50": 14.2294,
+        "p95": 16.3343
+      }
+    },
+    "idle300ms/n2/parallel": {
+      "critical_path_ms": {
+        "max": 15.2837,
+        "mean": 13.1511,
+        "n": 30,
+        "p50": 13.1313,
+        "p95": 15.0591
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 2,
+      "mode": "parallel",
+      "n_queries": 2,
+      "python_heap_peak_kib": 61.9,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 16.526,
+        "mean": 13.7352,
+        "n": 30,
+        "p50": 13.7933,
+        "p95": 15.7329
+      }
+    },
+    "idle300ms/n2/sequential": {
+      "critical_path_ms": {
+        "max": 13.704,
+        "mean": 11.1007,
+        "n": 30,
+        "p50": 11.2289,
+        "p95": 12.7957
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 2,
+      "python_heap_peak_kib": 56.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 18.9934,
+        "mean": 16.848,
+        "n": 30,
+        "p50": 17.1105,
+        "p95": 18.6098
+      }
+    },
+    "idle300ms/n3/batched": {
+      "critical_path_ms": {
+        "max": 17.8515,
+        "mean": 15.8093,
+        "n": 30,
+        "p50": 15.9279,
+        "p95": 17.3298
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 3,
+      "python_heap_peak_kib": 82.4,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 17.8603,
+        "mean": 15.8181,
+        "n": 30,
+        "p50": 15.9351,
+        "p95": 17.3381
+      }
+    },
+    "idle300ms/n3/parallel": {
+      "critical_path_ms": {
+        "max": 20.0021,
+        "mean": 16.5064,
+        "n": 30,
+        "p50": 16.4707,
+        "p95": 18.3508
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 3,
+      "mode": "parallel",
+      "n_queries": 3,
+      "python_heap_peak_kib": 83.3,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 21.0973,
+        "mean": 18.5298,
+        "n": 30,
+        "p50": 18.6588,
+        "p95": 19.9808
+      }
+    },
+    "idle300ms/n3/sequential": {
+      "critical_path_ms": {
+        "max": 14.5689,
+        "mean": 11.3392,
+        "n": 30,
+        "p50": 11.3181,
+        "p95": 13.5263
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 3,
+      "python_heap_peak_kib": 78.8,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 25.5759,
+        "mean": 22.0448,
+        "n": 30,
+        "p50": 22.3309,
+        "p95": 24.5405
+      }
+    },
+    "idle300ms/n4/batched": {
+      "critical_path_ms": {
+        "max": 20.4139,
+        "mean": 17.9732,
+        "n": 30,
+        "p50": 18.3466,
+        "p95": 19.8466
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "batched",
+      "n_queries": 4,
+      "python_heap_peak_kib": 105.7,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 20.4223,
+        "mean": 17.9817,
+        "n": 30,
+        "p50": 18.3554,
+        "p95": 19.8557
+      }
+    },
+    "idle300ms/n4/parallel": {
+      "critical_path_ms": {
+        "max": 19.723,
+        "mean": 17.1452,
+        "n": 30,
+        "p50": 17.4841,
+        "p95": 18.7458
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 3,
+      "mode": "parallel",
+      "n_queries": 4,
+      "python_heap_peak_kib": 104.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 25.0391,
+        "mean": 20.4882,
+        "n": 30,
+        "p50": 20.4765,
+        "p95": 22.721
+      }
+    },
+    "idle300ms/n4/sequential": {
+      "critical_path_ms": {
+        "max": 13.5134,
+        "mean": 11.1838,
+        "n": 30,
+        "p50": 11.0404,
+        "p95": 13.008
+      },
+      "idle_before_ms": 300,
+      "max_concurrency": 1,
+      "mode": "sequential",
+      "n_queries": 4,
+      "python_heap_peak_kib": 100.5,
+      "rss_max_kib_growth": 0,
+      "total_ms": {
+        "max": 28.3242,
+        "mean": 26.8256,
+        "n": 30,
+        "p50": 27.0891,
+        "p95": 28.277
+      }
+    }
+  }
+}

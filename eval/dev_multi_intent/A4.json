@@ -1,0 +1,70 @@
+{
+  "case_id": "A4",
+  "category": "A_two_independent",
+  "description": "DEV SUITE (fixture domain): two observatory needs, same section",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "can visitors touch",
+          "timestamp_s": 1.293
+        },
+        {
+          "chunk_index": 1,
+          "text": "the telescope controls",
+          "timestamp_s": 2.5102
+        },
+        {
+          "chunk_index": 2,
+          "text": "and when does",
+          "timestamp_s": 3.8349
+        },
+        {
+          "chunk_index": 3,
+          "text": "the dome open",
+          "timestamp_s": 4.9691
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "whether visitors may touch the telescope controls",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "when the dome is opened",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "dome opening conditions"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 5.4691,
+      "utterance_id": "u1",
+      "utterance_text": "can visitors touch the telescope controls and when does the dome open"
+    }
+  ]
+}

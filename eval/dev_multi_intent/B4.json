@@ -1,0 +1,76 @@
+{
+  "case_id": "B4",
+  "category": "B_three_independent",
+  "description": "DEV SUITE (fixture domain): three lighthouse topics as a comma list",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.227
+        },
+        {
+          "chunk_index": 1,
+          "text": "wick trimming, lens polishing,",
+          "timestamp_s": 2.6188
+        },
+        {
+          "chunk_index": 2,
+          "text": "and the lamp register",
+          "timestamp_s": 4.0662
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "wick trimming",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "lens polishing",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "the lamp register",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g3",
+          "paraphrases": [
+            "recording lamp cleaning"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 3,
+      "expected_relationships": [],
+      "utterance_end_s": 4.5662,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about wick trimming, lens polishing, and the lamp register"
+    }
+  ]
+}

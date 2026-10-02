@@ -1,0 +1,72 @@
+{
+  "annotation": {},
+  "case_id": "summarize_evidence-auto",
+  "category": "suppression",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=auto",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-summarize_evidence-auto",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "auto_2_3_words",
+          "jitter": 0.15,
+          "seed": 127,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "can you",
+            "timestamp_s": 0.6641
+          },
+          {
+            "chunk_index": 1,
+            "text": "summarize the",
+            "timestamp_s": 1.462
+          },
+          {
+            "chunk_index": 2,
+            "text": "retrieved evidence",
+            "timestamp_s": 2.246
+          },
+          {
+            "chunk_index": 3,
+            "text": "for me",
+            "timestamp_s": 2.9224
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": false,
+          "suppression_reason": null,
+          "turn_type": "presentation",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 3.4224,
+        "utterance_id": "u1",
+        "utterance_text": "can you summarize the retrieved evidence for me",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

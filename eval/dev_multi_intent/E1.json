@@ -1,0 +1,69 @@
+{
+  "case_id": "E1",
+  "category": "E_refinement",
+  "description": "DEV SUITE (fixture domain): general + narrower need",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about the lamp",
+          "timestamp_s": 1.8733
+        },
+        {
+          "chunk_index": 1,
+          "text": "and also explain",
+          "timestamp_s": 2.9633
+        },
+        {
+          "chunk_index": 2,
+          "text": "the lamp register",
+          "timestamp_s": 4.2616
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the lamp",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "the lamp register",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "REFINEMENT"
+        }
+      ],
+      "utterance_end_s": 4.7616,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the lamp and also explain the lamp register"
+    }
+  ]
+}

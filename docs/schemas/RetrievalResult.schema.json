@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "RetrievalHit": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "dense_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dense Rank"
+        },
+        "lexical_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lexical Rank"
+        },
+        "rerank_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rerank Score"
+        },
+        "rrf_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rrf Score"
+        }
+      },
+      "required": [
+        "chunk_id"
+      ],
+      "title": "RetrievalHit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Telemetry-facing summary of one search (payload of RETRIEVAL_COMPLETED, spec §6.3 #5).",
+  "properties": {
+    "latency_ms": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Latency Ms",
+      "type": "object"
+    },
+    "n_candidates": {
+      "minimum": 0,
+      "title": "N Candidates",
+      "type": "integer"
+    },
+    "results": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RetrievalHit"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "retrieval_id": {
+      "title": "Retrieval Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "partial",
+        "degraded",
+        "empty",
+        "error"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "retrieval_id",
+    "status",
+    "latency_ms",
+    "n_candidates"
+  ],
+  "title": "RetrievalResult",
+  "type": "object"
+}

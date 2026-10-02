@@ -1,0 +1,38 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.603] u1   USER       #0: "Tell me the requirements"
+[00:01.603] u1   CONTROLLER WAIT     low_specificity  conf=0.43 stab=0.567 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:02.204] u1   CONTROLLER WAIT     low_specificity  conf=0.33 stab=0.667 worth=0.55 nov=1.0 act=INFO_REQUEST
+[00:02.379] u1   USER       #1: "for ladders."
+[00:02.379] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.933 worth=0.778 nov=1.0 act=INFO_REQUEST
+[00:02.379] u1   INTENTS    v1 +I1 | I1[REQUIREMENT] 'the requirements for ladders'
+[00:02.379] u1   QUERY      Q1 for I1 v1 "the requirements for ladders"
+[00:02.379] u1   MULTI      B1 start Q1 (parallel)
+[00:02.379] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:02.389] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: Doc_07 §2.1, Doc_07 §2.2, Doc_07 §4
+[00:02.389] u1   MULTI      B1 done makespan=10.0ms
+[00:02.389] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=Doc_07 §2.1<I1>, E2=Doc_07 §2.2<I1>, E3=Doc_07 §4<I1>, E4=Doc_07 §3<I1>, E5=fixture_lighthouse_manual §2<I1>
+[00:02.979] u1   CONTROLLER SKIP     redundant_query  conf=1.00 stab=0.933 worth=0.778 nov=0.0 act=INFO_REQUEST
+[00:03.738] u1   USER       #2: "Actually, I meant crates"
+[00:03.738] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.83 stab=0.95 worth=0.867 nov=0.5 act=INFO_REQUEST
+[00:03.738] u1   INTENTS    v2 +I2 superseded I1->I2 | I2[REQUIREMENT] 'crates'
+[00:03.738] u1   INTENT     I1 SUPERSEDED by I2 (i meant)
+[00:03.738] u1   QUERY      Q2 for I2 v1 "requirements crates"
+[00:03.738] u1   MULTI      B2 start Q2 (parallel)
+[00:03.738] u1   RETRIEVAL  START Q2/I2 [provisional] queue_wait=0.0ms
+[00:03.748] u1   RETRIEVAL  DONE  Q2/I2 status=ok 10.0ms top: Doc_07 §3, Doc_07 §2.2, fixture_lighthouse_manual §0
+[00:03.748] u1   MULTI      B2 done makespan=10.0ms
+[00:03.748] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=Doc_07 §3<I2>, E2=Doc_07 §2.2<I2>, E3=fixture_lighthouse_manual §0<I2>, E4=Doc_07 §0<I2>, E5=Doc_07 §4<I2>
+[00:04.338] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.85 stab=1.0 worth=0.867 nov=0.5 act=INFO_REQUEST
+[00:05.029] u1   USER       #3: "instead of ladders."
+[00:05.029] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.87 stab=1.0 worth=0.867 nov=0.6 act=INFO_REQUEST
+[00:05.029] u1   INTENTS    v3 ~I2 | I2[REQUIREMENT] 'crates'
+[00:05.029] u1   QUERY      Q3 for I2 v2 "the requirements for crates" supersedes Q2 (refines)
+[00:05.029] u1   MULTI      B3 start Q3 (parallel)
+[00:05.029] u1   RETRIEVAL  START Q3/I2 [provisional] queue_wait=0.0ms
+[00:05.040] u1   RETRIEVAL  DONE  Q3/I2 status=ok 10.0ms top: Doc_07 §3, Doc_07 §4, Doc_07 §2.2
+[00:05.040] u1   MULTI      B3 done makespan=10.0ms
+[00:05.040] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=Doc_07 §3<I2>, E2=Doc_07 §4<I2>, E3=Doc_07 §2.2<I2>, E4=Doc_07 §2.1<I2>, E5=fixture_lighthouse_manual §2<I2>
+[00:05.529] u1   UTTERANCE  FINALIZED reason=endpoint transcript="Tell me the requirements for ladders. Actually, I meant crates instead of ladders."
+[00:05.529] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.87 stab=1.0 worth=0.867 nov=0.6 act=INFO_REQUEST
+[00:05.529] u1   FUSED      final intent_aware/none coverage=1.0 items=5: E1=Doc_07 §3<I2>, E2=Doc_07 §4<I2>, E3=Doc_07 §2.2<I2>, E4=Doc_07 §2.1<I2>, E5=fixture_lighthouse_manual §2<I2>
+[00:05.529] u1   TURN       intents=1 retrievals=3 versions=3 coverage=1.0 lead_time=3150.1ms post_final=0.0ms sub_queries=['the requirements for crates']

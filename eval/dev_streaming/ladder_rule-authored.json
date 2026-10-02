@@ -1,0 +1,80 @@
+{
+  "annotation": {},
+  "case_id": "ladder_rule-authored",
+  "category": "single_intent",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-ladder_rule-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 107,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "what is the rule",
+            "timestamp_s": 1.4215
+          },
+          {
+            "chunk_index": 1,
+            "text": "for using a ladder",
+            "timestamp_s": 2.9974
+          },
+          {
+            "chunk_index": 2,
+            "text": "in the orchard",
+            "timestamp_s": 4.3148
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": true,
+              "constraints": [],
+              "description": "what is the rule for using a ladder in the orchard",
+              "gold_evidence": [
+                "Doc_07 \u00a72.1"
+              ],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 4.8148,
+        "utterance_id": "u1",
+        "utterance_text": "what is the rule for using a ladder in the orchard",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

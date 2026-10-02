@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "SessionStartPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "client": {
+          "default": "replay",
+          "enum": [
+            "replay",
+            "interactive",
+            "asr"
+          ],
+          "title": "Client",
+          "type": "string"
+        },
+        "locale": {
+          "default": "en",
+          "title": "Locale",
+          "type": "string"
+        },
+        "session_started_wall": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Session Started Wall"
+        }
+      },
+      "title": "SessionStartPayload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "payload": {
+      "$ref": "#/$defs/SessionStartPayload",
+      "default": {
+        "client": "replay",
+        "locale": "en",
+        "session_started_wall": null
+      }
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "type": {
+      "const": "SESSION_START",
+      "default": "SESSION_START",
+      "title": "Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id"
+  ],
+  "title": "SessionStart",
+  "type": "object"
+}

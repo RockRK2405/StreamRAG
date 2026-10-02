@@ -1,0 +1,67 @@
+{
+  "case_id": "D1",
+  "category": "D_intent_constraint",
+  "description": "DEV SUITE (fixture domain): focus + restriction",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.255
+        },
+        {
+          "chunk_index": 1,
+          "text": "the fog signal",
+          "timestamp_s": 2.3532
+        },
+        {
+          "chunk_index": 2,
+          "text": "especially",
+          "timestamp_s": 2.7043
+        },
+        {
+          "chunk_index": 3,
+          "text": "during a storm",
+          "timestamp_s": 3.893
+        }
+      ],
+      "expected_constraints": [
+        {
+          "applies_to": [
+            "u1.g1"
+          ],
+          "scope": "global",
+          "text": "during a storm"
+        }
+      ],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the fog signal in stormy weather",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "storm"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 4.393,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the fog signal especially during a storm"
+    }
+  ]
+}

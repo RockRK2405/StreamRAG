@@ -1,0 +1,236 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "alternates": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Alternates",
+      "type": "array"
+    },
+    "bm25_rank": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bm25 Rank"
+    },
+    "bm25_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bm25 Score"
+    },
+    "char_end": {
+      "minimum": 0,
+      "title": "Char End",
+      "type": "integer"
+    },
+    "char_start": {
+      "minimum": 0,
+      "title": "Char Start",
+      "type": "integer"
+    },
+    "chunk_id": {
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "citation": {
+      "title": "Citation",
+      "type": "string"
+    },
+    "dense_rank": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dense Rank"
+    },
+    "dense_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dense Score"
+    },
+    "document_id": {
+      "title": "Document Id",
+      "type": "string"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "default": {},
+      "title": "Metadata",
+      "type": "object"
+    },
+    "overlaps_with": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Overlaps With",
+      "type": "array"
+    },
+    "page_end": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page End"
+    },
+    "page_start": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page Start"
+    },
+    "rank": {
+      "minimum": 1,
+      "title": "Rank",
+      "type": "integer"
+    },
+    "rerank_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rerank Score"
+    },
+    "retrieval_method": {
+      "enum": [
+        "bm25",
+        "dense",
+        "hybrid_rrf",
+        "hybrid_rrf_rerank",
+        "dense_rerank",
+        "bm25_rerank"
+      ],
+      "title": "Retrieval Method",
+      "type": "string"
+    },
+    "rrf_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rrf Score"
+    },
+    "score": {
+      "title": "Score",
+      "type": "number"
+    },
+    "section_id": {
+      "title": "Section Id",
+      "type": "string"
+    },
+    "section_path": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Section Path",
+      "type": "array"
+    },
+    "section_title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Section Title"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "document_id",
+    "section_id",
+    "chunk_id",
+    "citation",
+    "text",
+    "source_path",
+    "char_start",
+    "char_end",
+    "rank",
+    "score",
+    "retrieval_method"
+  ],
+  "title": "Evidence",
+  "type": "object"
+}

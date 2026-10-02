@@ -1,0 +1,46 @@
+NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.
+[00:01.410] u1   USER       #0: "how is the telescope"
+[00:01.410] u1   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.767 worth=0.933 nov=1.0 act=INFO_REQUEST
+[00:01.410] u1   INTENTS    v1 +I1 | I1[PROCEDURAL] 'how is the telescope'
+[00:01.410] u1   QUERY      Q1 for I1 v1 "how is the telescope"
+[00:01.410] u1   MULTI      B1 start Q1 (parallel)
+[00:01.410] u1   RETRIEVAL  START Q1/I1 [provisional] queue_wait=0.0ms
+[00:01.420] u1   RETRIEVAL  DONE  Q1/I1 status=ok 10.0ms top: fixture_observatory_notes §1, fixture_lighthouse_manual §0, fixture_lighthouse_manual §1
+[00:01.420] u1   MULTI      B1 done makespan=10.0ms
+[00:01.420] u1   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_observatory_notes §1<I1>, E2=fixture_lighthouse_manual §0<I1>, E3=fixture_lighthouse_manual §1<I1>, E4=fixture_lighthouse_manual §3<I1>, E5=fixture_lighthouse_manual §2<I1>
+[00:01.797] u1   USER       #1: "recalibrated"
+[00:01.797] u1   CONTROLLER WAIT     cooldown  conf=1.00 stab=0.883 worth=0.967 nov=0.5 act=INFO_REQUEST
+[00:01.797] u1   INTENTS    v2 ~I1 | I1[PROCEDURAL] 'how is the telescope recalibrated'
+[00:01.797] u1   RETRIEVAL  SKIP I1 (intent_cooldown)
+[00:02.297] u1   UTTERANCE  FINALIZED reason=endpoint transcript="how is the telescope recalibrated"
+[00:02.297] u1   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.86 stab=0.933 worth=0.967 nov=0.5 act=INFO_REQUEST
+[00:02.297] u1   QUERY      Q2 for I1 v2 "how is the telescope recalibrated" supersedes Q1 (refines)
+[00:02.297] u1   MULTI      B2 start Q2 (parallel)
+[00:02.297] u1   RETRIEVAL  START Q2/I1 [final] queue_wait=0.0ms
+[00:02.307] u1   RETRIEVAL  DONE  Q2/I1 status=ok 10.0ms top: fixture_observatory_notes §1, fixture_lighthouse_manual §1.2, fixture_lighthouse_manual §1.1
+[00:02.307] u1   MULTI      B2 done makespan=10.0ms
+[00:02.307] u1   FUSED      final intent_aware/none coverage=1.0 items=5: E1=fixture_observatory_notes §1<I1>, E2=fixture_lighthouse_manual §1.2<I1>, E3=fixture_lighthouse_manual §1.1<I1>, E4=fixture_lighthouse_manual §1<I1>, E5=fixture_lighthouse_manual §0<I1>
+[00:02.307] u1   TURN       intents=1 retrievals=2 versions=2 coverage=1.0 lead_time=887.6ms post_final=10.0ms sub_queries=['how is the telescope recalibrated']
+[00:04.922] u2   USER       #0: "and how long"
+[00:04.922] u2   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.88 stab=0.767 worth=0.933 nov=1.0 act=INFO_REQUEST
+[00:04.922] u2   INTENTS    v1 +I2 | I2[TIMELINE] 'how long'
+[00:04.922] u2   QUERY      Q3 for I2 v1 "how long"
+[00:04.922] u2   MULTI      B3 start Q3 (parallel)
+[00:04.922] u2   RETRIEVAL  START Q3/I2 [provisional] queue_wait=0.0ms
+[00:04.932] u2   RETRIEVAL  DONE  Q3/I2 status=ok 10.0ms top: fixture_lighthouse_manual §1.1, fixture_observatory_notes §1, fixture_lighthouse_manual §3
+[00:04.932] u2   MULTI      B3 done makespan=10.0ms
+[00:04.932] u2   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_lighthouse_manual §1.1<I2>, E2=fixture_observatory_notes §1<I2>, E3=fixture_lighthouse_manual §3<I2>, E4=Doc_07 §2<I2>, E5=Doc_07 §3<I2>
+[00:05.522] u2   CONTROLLER SKIP     redundant_query  conf=1.00 stab=0.867 worth=0.933 nov=0.0 act=INFO_REQUEST
+[00:06.010] u2   USER       #1: "does it take"
+[00:06.010] u2   CONTROLLER RETRIEVE stable_retrieval_worthy_request  conf=0.84 stab=0.883 worth=0.967 nov=0.5 act=INFO_REQUEST
+[00:06.010] u2   INTENTS    v2 ~I2 | I2[TIMELINE] 'how long does it take'
+[00:06.010] u2   QUERY      Q4 for I2 v2 "how long does telescope recalibrated take" supersedes Q3 (refines)
+[00:06.010] u2   MULTI      B4 start Q4 (parallel)
+[00:06.010] u2   RETRIEVAL  START Q4/I2 [provisional] queue_wait=0.0ms
+[00:06.020] u2   RETRIEVAL  DONE  Q4/I2 status=ok 10.0ms top: fixture_observatory_notes §1, fixture_lighthouse_manual §1.1, fixture_lighthouse_manual §3
+[00:06.020] u2   MULTI      B4 done makespan=10.0ms
+[00:06.020] u2   FUSED      provisional intent_aware/none coverage=1.0 items=5: E1=fixture_observatory_notes §1<I2>, E2=fixture_lighthouse_manual §1.1<I2>, E3=fixture_lighthouse_manual §3<I2>, E4=Doc_07 §2<I2>, E5=fixture_lighthouse_manual §1.2<I2>
+[00:06.510] u2   UTTERANCE  FINALIZED reason=endpoint transcript="and how long does it take"
+[00:06.510] u2   CONTROLLER RETRIEVE utterance_end_final_query  conf=0.86 stab=0.933 worth=0.967 nov=0.5 act=INFO_REQUEST
+[00:06.510] u2   FUSED      final intent_aware/none coverage=1.0 items=5: E1=fixture_observatory_notes §1<I2>, E2=fixture_lighthouse_manual §1.1<I2>, E3=fixture_lighthouse_manual §3<I2>, E4=Doc_07 §2<I2>, E5=fixture_lighthouse_manual §1.2<I2>
+[00:06.510] u2   TURN       intents=1 retrievals=2 versions=2 coverage=1.0 lead_time=1588.5ms post_final=0.0ms sub_queries=['how long does telescope recalibrated take']

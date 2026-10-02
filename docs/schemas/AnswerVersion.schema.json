@@ -1,0 +1,301 @@
+{
+  "$defs": {
+    "AnswerDiff": {
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Added",
+          "type": "array"
+        },
+        "citations_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citations Added",
+          "type": "array"
+        },
+        "citations_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citations Removed",
+          "type": "array"
+        },
+        "evidence_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Added",
+          "type": "array"
+        },
+        "kept": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Kept",
+          "type": "array"
+        },
+        "modified": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ClaimChange"
+          },
+          "title": "Modified",
+          "type": "array"
+        },
+        "retracted": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Retracted",
+          "type": "array"
+        },
+        "uncertainty_introduced": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainty Introduced",
+          "type": "array"
+        },
+        "uncertainty_resolved": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainty Resolved",
+          "type": "array"
+        }
+      },
+      "title": "AnswerDiff",
+      "type": "object"
+    },
+    "ClaimChange": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "from_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "From Citations",
+          "type": "array"
+        },
+        "from_text": {
+          "title": "From Text",
+          "type": "string"
+        },
+        "to_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "To Citations",
+          "type": "array"
+        },
+        "to_text": {
+          "title": "To Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "from_text",
+        "to_text"
+      ],
+      "title": "ClaimChange",
+      "type": "object"
+    },
+    "UncertaintyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect": {
+          "title": "Aspect",
+          "type": "string"
+        },
+        "intent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent Id"
+        },
+        "kind": {
+          "enum": [
+            "no_evidence",
+            "conflict",
+            "unverified_claim",
+            "ambiguous"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "aspect"
+      ],
+      "title": "UncertaintyItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "citations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "claim_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "created_t_stream_s": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Created T Stream S"
+    },
+    "delta_queries": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Delta Queries",
+      "type": "array"
+    },
+    "diff": {
+      "$ref": "#/$defs/AnswerDiff",
+      "default": {
+        "added": [],
+        "citations_added": [],
+        "citations_removed": [],
+        "evidence_added": [],
+        "kept": [],
+        "modified": [],
+        "retracted": [],
+        "uncertainty_introduced": [],
+        "uncertainty_resolved": []
+      }
+    },
+    "evidence_set_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Set Id"
+    },
+    "frame_slots": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Frame Slots",
+      "type": "object"
+    },
+    "full_rerun": {
+      "default": false,
+      "title": "Full Rerun",
+      "type": "boolean"
+    },
+    "kind": {
+      "enum": [
+        "initial",
+        "refinement",
+        "presentation",
+        "meta",
+        "social",
+        "clarification"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "parent_version": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Version"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "topic_id": {
+      "title": "Topic Id",
+      "type": "string"
+    },
+    "uncertainty": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/UncertaintyItem"
+      },
+      "title": "Uncertainty",
+      "type": "array"
+    },
+    "unverified": {
+      "default": false,
+      "title": "Unverified",
+      "type": "boolean"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "topic_id",
+    "utterance_id",
+    "kind",
+    "text"
+  ],
+  "title": "AnswerVersion",
+  "type": "object"
+}

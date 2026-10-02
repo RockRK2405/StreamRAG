@@ -1,0 +1,86 @@
+{
+  "case_id": "H2",
+  "category": "H_shared_context",
+  "description": "DEV SUITE (fixture domain): fronted restriction, two needs",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "For the night shift,",
+          "timestamp_s": 1.3497
+        },
+        {
+          "chunk_index": 1,
+          "text": "how many crates",
+          "timestamp_s": 2.6638
+        },
+        {
+          "chunk_index": 2,
+          "text": "can a picker fill",
+          "timestamp_s": 4.2148
+        },
+        {
+          "chunk_index": 3,
+          "text": "and what happens",
+          "timestamp_s": 5.3433
+        },
+        {
+          "chunk_index": 4,
+          "text": "to fruit picked after sunset",
+          "timestamp_s": 7.5272
+        }
+      ],
+      "expected_constraints": [
+        {
+          "applies_to": [
+            "u1.g1",
+            "u1.g2"
+          ],
+          "scope": "global",
+          "text": "For the night shift"
+        }
+      ],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates per picker on the night shift",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "night"
+          ],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "handling of fruit picked after sunset",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "night"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 8.0272,
+      "utterance_id": "u1",
+      "utterance_text": "For the night shift, how many crates can a picker fill and what happens to fruit picked after sunset"
+    }
+  ]
+}

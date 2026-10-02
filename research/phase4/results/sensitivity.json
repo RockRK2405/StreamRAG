@@ -1,0 +1,92 @@
+{
+  "10": {
+    "controller": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.9512,
+      "evidence_ready_at_end_rate": 0.8864,
+      "post_final_retrieval_latency_ms": {
+        "max": 10.0,
+        "mean": 1.136,
+        "min": 0.0,
+        "n": 44,
+        "p50": 0.0,
+        "p95": 10.0
+      },
+      "retrievals_total": 89
+    },
+    "end_only": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.0,
+      "evidence_ready_at_end_rate": 0.0,
+      "post_final_retrieval_latency_ms": {
+        "max": 10.0,
+        "mean": 10.0,
+        "min": 10.0,
+        "n": 44,
+        "p50": 10.0,
+        "p95": 10.0
+      },
+      "retrievals_total": 61
+    }
+  },
+  "200": {
+    "controller": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.9512,
+      "evidence_ready_at_end_rate": 0.8864,
+      "post_final_retrieval_latency_ms": {
+        "max": 200.0,
+        "mean": 22.727,
+        "min": 0.0,
+        "n": 44,
+        "p50": 0.0,
+        "p95": 200.0
+      },
+      "retrievals_total": 89
+    },
+    "end_only": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.0,
+      "evidence_ready_at_end_rate": 0.0,
+      "post_final_retrieval_latency_ms": {
+        "max": 200.0,
+        "mean": 200.0,
+        "min": 200.0,
+        "n": 44,
+        "p50": 200.0,
+        "p95": 200.0
+      },
+      "retrievals_total": 61
+    }
+  },
+  "1000": {
+    "controller": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.9512,
+      "evidence_ready_at_end_rate": 0.1364,
+      "post_final_retrieval_latency_ms": {
+        "max": 1000.0,
+        "mean": 463.116,
+        "min": 0.0,
+        "n": 44,
+        "p50": 500.0,
+        "p95": 1000.0
+      },
+      "retrievals_total": 89
+    },
+    "end_only": {
+      "cancelled_retrievals": 0,
+      "early_retrieval_rate": 0.0,
+      "evidence_ready_at_end_rate": 0.0,
+      "post_final_retrieval_latency_ms": {
+        "max": 1000.0,
+        "mean": 1000.0,
+        "min": 1000.0,
+        "n": 44,
+        "p50": 1000.0,
+        "p95": 1000.0
+      },
+      "retrievals_total": 61
+    }
+  }
+}

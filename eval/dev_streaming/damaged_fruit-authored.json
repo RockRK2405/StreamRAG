@@ -1,0 +1,80 @@
+{
+  "annotation": {},
+  "case_id": "damaged_fruit-authored",
+  "category": "single_intent",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-damaged_fruit-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 114,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "what happens to",
+            "timestamp_s": 1.0642
+          },
+          {
+            "chunk_index": 1,
+            "text": "damaged fruit",
+            "timestamp_s": 1.7406
+          },
+          {
+            "chunk_index": 2,
+            "text": "during the harvest",
+            "timestamp_s": 2.9519
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": true,
+              "constraints": [],
+              "description": "what happens to damaged fruit during the harvest",
+              "gold_evidence": [
+                "Doc_07 \u00a73"
+              ],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 3.4519,
+        "utterance_id": "u1",
+        "utterance_text": "what happens to damaged fruit during the harvest",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

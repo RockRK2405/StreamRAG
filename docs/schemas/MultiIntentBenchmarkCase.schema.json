@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "CaseChunk": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_index": {
+          "minimum": 0,
+          "title": "Chunk Index",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "timestamp_s": {
+          "minimum": 0,
+          "title": "Timestamp S",
+          "type": "number"
+        }
+      },
+      "required": [
+        "chunk_index",
+        "timestamp_s",
+        "text"
+      ],
+      "title": "CaseChunk",
+      "type": "object"
+    },
+    "MIGoldConstraint": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "scope": {
+          "enum": [
+            "global",
+            "local"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "scope",
+        "applies_to"
+      ],
+      "title": "MIGoldConstraint",
+      "type": "object"
+    },
+    "MIGoldIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "answerable": {
+          "default": true,
+          "title": "Answerable",
+          "type": "boolean"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "gold_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Gold Evidence",
+          "type": "array"
+        },
+        "gold_intent_id": {
+          "title": "Gold Intent Id",
+          "type": "string"
+        },
+        "paraphrases": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Paraphrases",
+          "type": "array"
+        },
+        "required_query_terms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Query Terms",
+          "type": "array"
+        },
+        "superseded": {
+          "default": false,
+          "title": "Superseded",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "gold_intent_id",
+        "description"
+      ],
+      "title": "MIGoldIntent",
+      "type": "object"
+    },
+    "MIGoldRelation": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "DEPENDENT",
+            "FOLLOW_UP",
+            "REFINEMENT",
+            "COMPARISON_WITH"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "source",
+        "target"
+      ],
+      "title": "MIGoldRelation",
+      "type": "object"
+    },
+    "MIUtterance": {
+      "additionalProperties": false,
+      "properties": {
+        "chunks": {
+          "items": {
+            "$ref": "#/$defs/CaseChunk"
+          },
+          "minItems": 1,
+          "title": "Chunks",
+          "type": "array"
+        },
+        "expected_constraints": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MIGoldConstraint"
+          },
+          "title": "Expected Constraints",
+          "type": "array"
+        },
+        "expected_intents": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MIGoldIntent"
+          },
+          "title": "Expected Intents",
+          "type": "array"
+        },
+        "expected_query_count": {
+          "minimum": 0,
+          "title": "Expected Query Count",
+          "type": "integer"
+        },
+        "expected_relationships": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MIGoldRelation"
+          },
+          "title": "Expected Relationships",
+          "type": "array"
+        },
+        "utterance_end_s": {
+          "minimum": 0,
+          "title": "Utterance End S",
+          "type": "number"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "utterance_text": {
+          "title": "Utterance Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "utterance_text",
+        "chunks",
+        "utterance_end_s",
+        "expected_query_count"
+      ],
+      "title": "MIUtterance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Phase 5 multi-intent case (brief §33). Behaviour + gold evidence only: no answers, no retrieval results.",
+  "properties": {
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "A_two_independent",
+        "B_three_independent",
+        "C_incremental_second",
+        "D_intent_constraint",
+        "E_refinement",
+        "F_follow_up",
+        "G_pronoun",
+        "H_shared_context",
+        "I_over_decomposition_trap",
+        "J_under_decomposition_trap",
+        "K_duplicate",
+        "L_changed_intent",
+        "S_single"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "is_fixture": {
+      "default": false,
+      "title": "Is Fixture",
+      "type": "boolean"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Provenance",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "split": {
+      "default": "tune",
+      "enum": [
+        "tune",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "utterances": {
+      "items": {
+        "$ref": "#/$defs/MIUtterance"
+      },
+      "minItems": 1,
+      "title": "Utterances",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "category",
+    "utterances"
+  ],
+  "title": "MultiIntentBenchmarkCase",
+  "type": "object"
+}

@@ -1,0 +1,46 @@
+{
+  "REPORTABLE": false,
+  "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+  "cases": 53,
+  "embedder": "bge-small-en-v1.5",
+  "end_to_end_ms": {
+    "A_single_query": {
+      "max": 15.5033,
+      "mean": 11.6269,
+      "n": 90,
+      "p50": 11.6144,
+      "p95": 14.0407
+    },
+    "B_mi_sequential": {
+      "max": 27.2211,
+      "mean": 18.9619,
+      "n": 90,
+      "p50": 18.7488,
+      "p95": 24.9347
+    },
+    "C_mi_parallel": {
+      "max": 23.3327,
+      "mean": 17.689,
+      "n": 90,
+      "p50": 17.2928,
+      "p95": 22.4376
+    },
+    "D_parallel_fusion": {
+      "max": 23.6935,
+      "mean": 18.0822,
+      "n": 90,
+      "p50": 17.6728,
+      "p95": 22.9381
+    },
+    "E_parallel_fusion_rerank": {
+      "max": 67.6484,
+      "mean": 47.9025,
+      "n": 90,
+      "p50": 47.7171,
+      "p95": 58.4445
+    }
+  },
+  "index_content_hash": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+  "note": "decomposition + retrieval (+ fusion, + rerank); 300 ms idle before A, B, C as in live streaming",
+  "utterances": 30
+}

@@ -1,0 +1,58 @@
+# Pinned model registry (Phase 3). Revisions are exact Hugging Face commit SHAs.
+# Downloaded at build time by `streamrag fetch-models` into ./models/<name>/ (git-ignored).
+# Justification for each model: docs/decisions/ADR-002 (embedder) and ADR-003 (reranker).
+
+embedders:
+  bge-small-en-v1.5:            # ADR-002 default candidate
+    repo: BAAI/bge-small-en-v1.5
+    revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+    license: MIT
+    onnx_file: onnx/model.onnx
+    files: [onnx/model.onnx, tokenizer.json, config.json, 1_Pooling/config.json]
+    pooling: cls
+    normalize: true
+    max_length: 512
+    # Model card: optional instruction for short-query -> passage retrieval.
+    query_prefix: "Represent this sentence for searching relevant passages: "
+    document_prefix: ""
+
+  all-minilm-l6-v2:             # ADR-002 fallback
+    repo: sentence-transformers/all-MiniLM-L6-v2
+    revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+    license: Apache-2.0
+    onnx_file: onnx/model.onnx
+    files: [onnx/model.onnx, tokenizer.json, config.json, 1_Pooling/config.json]
+    pooling: mean
+    normalize: true
+    max_length: 256
+    query_prefix: ""
+    document_prefix: ""
+
+  all-minilm-l6-v2-qint8-arm64: # latency variant (int8, arm64 kernels); quality impact unmeasured
+    repo: sentence-transformers/all-MiniLM-L6-v2
+    revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+    license: Apache-2.0
+    onnx_file: onnx/model_qint8_arm64.onnx
+    files: [onnx/model_qint8_arm64.onnx, tokenizer.json, config.json, 1_Pooling/config.json]
+    pooling: mean
+    normalize: true
+    max_length: 256
+    query_prefix: ""
+    document_prefix: ""
+
+rerankers:
+  ms-marco-minilm-l6-v2:        # ADR-003 optional cross-encoder (repo renamed upstream; old id redirects)
+    repo: cross-encoder/ms-marco-MiniLM-L6-v2
+    revision: 233902d25c440f23af6f7d6e94d2946bac0bee0a
+    license: Apache-2.0
+    onnx_file: onnx/model.onnx
+    files: [onnx/model.onnx, tokenizer.json, config.json]
+    max_length: 512
+
+  ms-marco-minilm-l6-v2-qint8-arm64:
+    repo: cross-encoder/ms-marco-MiniLM-L6-v2
+    revision: 233902d25c440f23af6f7d6e94d2946bac0bee0a
+    license: Apache-2.0
+    onnx_file: onnx/model_qint8_arm64.onnx
+    files: [onnx/model_qint8_arm64.onnx, tokenizer.json, config.json]
+    max_length: 512

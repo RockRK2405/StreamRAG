@@ -1,0 +1,20 @@
+{
+  "end_only": {
+    "traces": 63,
+    "behavior_identical": 63,
+    "exact_identical": 0,
+    "mismatched": []
+  },
+  "every_chunk": {
+    "traces": 63,
+    "behavior_identical": 63,
+    "exact_identical": 0,
+    "mismatched": []
+  },
+  "controller": {
+    "traces": 63,
+    "behavior_identical": 63,
+    "exact_identical": 0,
+    "mismatched": []
+  }
+}

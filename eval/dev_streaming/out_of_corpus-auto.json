@@ -1,0 +1,78 @@
+{
+  "annotation": {},
+  "case_id": "out_of_corpus-auto",
+  "category": "single_intent",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=auto",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-out_of_corpus-auto",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "auto_2_3_words",
+          "jitter": 0.15,
+          "seed": 121,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "who won",
+            "timestamp_s": 0.674
+          },
+          {
+            "chunk_index": 1,
+            "text": "the cricket",
+            "timestamp_s": 1.4626
+          },
+          {
+            "chunk_index": 2,
+            "text": "championship yesterday",
+            "timestamp_s": 2.2082
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": false,
+              "constraints": [],
+              "description": "who won the cricket championship yesterday",
+              "gold_evidence": [],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 2.7082,
+        "utterance_id": "u1",
+        "utterance_text": "who won the cricket championship yesterday",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

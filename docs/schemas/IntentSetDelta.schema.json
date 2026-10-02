@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "IntentChange": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "items": {
+            "enum": [
+              "text",
+              "constraints",
+              "context"
+            ],
+            "type": "string"
+          },
+          "title": "Changed",
+          "type": "array"
+        },
+        "from_version": {
+          "title": "From Version",
+          "type": "integer"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "to_version": {
+          "title": "To Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "intent_id",
+        "from_version",
+        "to_version",
+        "changed"
+      ],
+      "title": "IntentChange",
+      "type": "object"
+    },
+    "Supersession": {
+      "additionalProperties": false,
+      "properties": {
+        "cue": {
+          "title": "Cue",
+          "type": "string"
+        },
+        "new": {
+          "title": "New",
+          "type": "string"
+        },
+        "old": {
+          "title": "Old",
+          "type": "string"
+        }
+      },
+      "required": [
+        "old",
+        "new",
+        "cue"
+      ],
+      "title": "Supersession",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "What changed between two IntentSet versions; drives delta retrieval (docs/multi_intent/09).",
+  "properties": {
+    "added": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Added",
+      "type": "array"
+    },
+    "affected_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Intents",
+      "type": "array"
+    },
+    "constraints_added": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints Added",
+      "type": "array"
+    },
+    "constraints_removed": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints Removed",
+      "type": "array"
+    },
+    "modified": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IntentChange"
+      },
+      "title": "Modified",
+      "type": "array"
+    },
+    "previous_version": {
+      "minimum": 0,
+      "title": "Previous Version",
+      "type": "integer"
+    },
+    "removed": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Removed",
+      "type": "array"
+    },
+    "superseded": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Supersession"
+      },
+      "title": "Superseded",
+      "type": "array"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "utterance_id",
+    "version",
+    "previous_version"
+  ],
+  "title": "IntentSetDelta",
+  "type": "object"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "I3",
+  "category": "I_over_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): fixed corpus phrase",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.2765
+        },
+        {
+          "chunk_index": 1,
+          "text": "the third and fifth week",
+          "timestamp_s": 3.1701
+        },
+        {
+          "chunk_index": 2,
+          "text": "of planting",
+          "timestamp_s": 3.9807
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "planting weeks",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 4.4807,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the third and fifth week of planting"
+    }
+  ]
+}

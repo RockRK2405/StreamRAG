@@ -1,0 +1,17 @@
+{
+  "NOT_REPORTABLE": "TEST FIXTURE ONLY",
+  "queries": 6,
+  "candidates_reranked_per_query": [
+    14,
+    14,
+    14,
+    14,
+    14,
+    14
+  ],
+  "score_min": -11.48,
+  "score_median": -11.37,
+  "score_max": 8.71,
+  "top1_minus_top2_median": 18.08,
+  "rerank_ms_median_on_fixture": 31.5
+}

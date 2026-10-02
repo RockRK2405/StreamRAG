@@ -1,0 +1,69 @@
+{
+  "case_id": "E2",
+  "category": "E_refinement",
+  "description": "DEV SUITE (fixture domain): narrower need with different words",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about pruning",
+          "timestamp_s": 1.6259
+        },
+        {
+          "chunk_index": 1,
+          "text": "and also explain",
+          "timestamp_s": 2.6514
+        },
+        {
+          "chunk_index": 2,
+          "text": "how thick branches are cut",
+          "timestamp_s": 4.5411
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "pruning",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "how thick branches are cut",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "REFINEMENT"
+        }
+      ],
+      "utterance_end_s": 5.0411,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about pruning and also explain how thick branches are cut"
+    }
+  ]
+}

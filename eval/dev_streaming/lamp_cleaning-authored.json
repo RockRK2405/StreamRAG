@@ -1,0 +1,80 @@
+{
+  "annotation": {},
+  "case_id": "lamp_cleaning-authored",
+  "category": "incremental_intent",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-lamp_cleaning-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 102,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "um can you tell me",
+            "timestamp_s": 1.7201
+          },
+          {
+            "chunk_index": 1,
+            "text": "how often the lamp",
+            "timestamp_s": 3.3121
+          },
+          {
+            "chunk_index": 2,
+            "text": "has to be cleaned",
+            "timestamp_s": 4.6981
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": true,
+              "constraints": [],
+              "description": "um can you tell me how often the lamp has to be cleaned",
+              "gold_evidence": [
+                "fixture_lighthouse_manual \u00a71"
+              ],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 5.1981,
+        "utterance_id": "u1",
+        "utterance_text": "um can you tell me how often the lamp has to be cleaned",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

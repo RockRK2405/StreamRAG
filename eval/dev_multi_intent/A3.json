@@ -1,0 +1,67 @@
+{
+  "case_id": "A3",
+  "category": "A_two_independent",
+  "description": "DEV SUITE (fixture domain): imperative with two topics",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.0153
+        },
+        {
+          "chunk_index": 1,
+          "text": "the storm procedure",
+          "timestamp_s": 2.2932
+        },
+        {
+          "chunk_index": 2,
+          "text": "and the logbook rules",
+          "timestamp_s": 3.7169
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "storm procedure for the keeper",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [
+            "what to do in a storm"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "rules for the logbook",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a72"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "logbook rules"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 4.2169,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the storm procedure and the logbook rules"
+    }
+  ]
+}

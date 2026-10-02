@@ -1,0 +1,63 @@
+{
+  "case_id": "L3",
+  "category": "L_changed_intent",
+  "description": "DEV SUITE (fixture domain): 'no wait' correction",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how often is the lamp cleaned",
+          "timestamp_s": 2.5969
+        },
+        {
+          "chunk_index": 1,
+          "text": "no wait",
+          "timestamp_s": 3.2634
+        },
+        {
+          "chunk_index": 2,
+          "text": "how often is the lens polished",
+          "timestamp_s": 5.4684
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "lamp cleaning frequency",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": true
+        },
+        {
+          "answerable": true,
+          "description": "lens polishing",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 5.9684,
+      "utterance_id": "u1",
+      "utterance_text": "how often is the lamp cleaned no wait how often is the lens polished"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "case_id": "B2",
+  "category": "B_three_independent",
+  "description": "DEV SUITE (fixture domain): three orchard needs as a list",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "I'd like to know",
+          "timestamp_s": 1.5812
+        },
+        {
+          "chunk_index": 1,
+          "text": "the planting weeks,",
+          "timestamp_s": 2.63
+        },
+        {
+          "chunk_index": 2,
+          "text": "the crate limit per shift,",
+          "timestamp_s": 4.5879
+        },
+        {
+          "chunk_index": 3,
+          "text": "and the pruning schedule",
+          "timestamp_s": 5.9875
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "weeks when saplings are planted",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "maximum crates per shift",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "crate limit per picker"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "when pruning happens",
+          "gold_evidence": [
+            "Doc_07 \u00a72"
+          ],
+          "gold_intent_id": "u1.g3",
+          "paraphrases": [
+            "pruning schedule"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 3,
+      "expected_relationships": [],
+      "utterance_end_s": 6.4875,
+      "utterance_id": "u1",
+      "utterance_text": "I'd like to know the planting weeks, the crate limit per shift, and the pruning schedule"
+    }
+  ]
+}

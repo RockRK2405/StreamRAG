@@ -1,0 +1,71 @@
+{
+  "case_id": "G2",
+  "category": "G_pronoun",
+  "description": "DEV SUITE (fixture domain): pronoun after 'and when'",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what is the lamp register",
+          "timestamp_s": 2.1962
+        },
+        {
+          "chunk_index": 1,
+          "text": "and when is it",
+          "timestamp_s": 3.5747
+        },
+        {
+          "chunk_index": 2,
+          "text": "filled in",
+          "timestamp_s": 4.3359
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "what the lamp register is",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "when the lamp register is filled in",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "register"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "DEPENDENT"
+        }
+      ],
+      "utterance_end_s": 4.8359,
+      "utterance_id": "u1",
+      "utterance_text": "what is the lamp register and when is it filled in"
+    }
+  ]
+}

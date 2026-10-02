@@ -1,0 +1,52 @@
+{
+  "case_id": "I5",
+  "category": "I_over_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): generic nouns",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "I need information",
+          "timestamp_s": 1.2125
+        },
+        {
+          "chunk_index": 1,
+          "text": "and details",
+          "timestamp_s": 1.9057
+        },
+        {
+          "chunk_index": 2,
+          "text": "about the lens",
+          "timestamp_s": 3.0414
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the lens",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.5414,
+      "utterance_id": "u1",
+      "utterance_text": "I need information and details about the lens"
+    }
+  ]
+}

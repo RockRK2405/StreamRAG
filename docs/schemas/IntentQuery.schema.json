@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "QueryComponent": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "source": {
+          "enum": [
+            "intent",
+            "inherited",
+            "constraint"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "source",
+        "span"
+      ],
+      "title": "QueryComponent",
+      "type": "object"
+    },
+    "SourceSpan": {
+      "additionalProperties": false,
+      "description": "Characters ``[start, end)`` of one utterance's transcript; ``text`` must equal that substring.",
+      "properties": {
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SourceSpan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One retrieval query generated for one intent version (docs/multi_intent/04).",
+  "properties": {
+    "components": {
+      "items": {
+        "$ref": "#/$defs/QueryComponent"
+      },
+      "minItems": 1,
+      "title": "Components",
+      "type": "array"
+    },
+    "intent_id": {
+      "title": "Intent Id",
+      "type": "string"
+    },
+    "intent_version": {
+      "minimum": 1,
+      "title": "Intent Version",
+      "type": "integer"
+    },
+    "terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Terms",
+      "type": "array"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "intent_id",
+    "intent_version",
+    "utterance_id",
+    "text",
+    "components"
+  ],
+  "title": "IntentQuery",
+  "type": "object"
+}

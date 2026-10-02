@@ -1,0 +1,52 @@
+{
+  "case_id": "S1",
+  "category": "S_single",
+  "description": "DEV SUITE (fixture domain): single need",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how many crates",
+          "timestamp_s": 1.2565
+        },
+        {
+          "chunk_index": 1,
+          "text": "can a picker fill",
+          "timestamp_s": 2.5913
+        },
+        {
+          "chunk_index": 2,
+          "text": "in one shift",
+          "timestamp_s": 3.8352
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates per shift",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 4.3352,
+      "utterance_id": "u1",
+      "utterance_text": "how many crates can a picker fill in one shift"
+    }
+  ]
+}

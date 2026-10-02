@@ -1,0 +1,70 @@
+{
+  "case_id": "C1",
+  "category": "C_incremental_second",
+  "description": "DEV SUITE (fixture domain): second need after 'and also'",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "I need information about",
+          "timestamp_s": 1.5609
+        },
+        {
+          "chunk_index": 1,
+          "text": "the fog signal",
+          "timestamp_s": 2.717
+        },
+        {
+          "chunk_index": 2,
+          "text": "and also",
+          "timestamp_s": 3.4731
+        },
+        {
+          "chunk_index": 3,
+          "text": "the lens",
+          "timestamp_s": 4.1564
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the fog signal",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "the lens",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [
+            "lens care"
+          ],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 4.6564,
+      "utterance_id": "u1",
+      "utterance_text": "I need information about the fog signal and also the lens"
+    }
+  ]
+}

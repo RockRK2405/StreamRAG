@@ -1,0 +1,88 @@
+{
+  "case_id": "F4",
+  "category": "F_follow_up",
+  "description": "DEV SUITE (fixture domain): aspect-only follow-up",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what are the requirements",
+          "timestamp_s": 1.6554
+        },
+        {
+          "chunk_index": 1,
+          "text": "for using a ladder",
+          "timestamp_s": 3.2031
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "ladder requirements",
+          "gold_evidence": [
+            "Doc_07 \u00a72.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.7031,
+      "utterance_id": "u1",
+      "utterance_text": "what are the requirements for using a ladder"
+    },
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what about",
+          "timestamp_s": 0.773
+        },
+        {
+          "chunk_index": 1,
+          "text": "the time limits",
+          "timestamp_s": 2.003
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "time limits for ladder use",
+          "gold_evidence": [
+            "Doc_07 \u00a72.2"
+          ],
+          "gold_intent_id": "u2.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "ladder"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [
+        {
+          "source": "u2.g1",
+          "target": "u1.g1",
+          "type": "FOLLOW_UP"
+        }
+      ],
+      "utterance_end_s": 2.503,
+      "utterance_id": "u2",
+      "utterance_text": "what about the time limits"
+    }
+  ]
+}

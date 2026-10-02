@@ -1,0 +1,79 @@
+{
+  "case_id": "J4",
+  "category": "J_under_decomposition_trap",
+  "description": "DEV SUITE (fixture domain): ASR list without commas",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about",
+          "timestamp_s": 1.321
+        },
+        {
+          "chunk_index": 1,
+          "text": "the planting schedule",
+          "timestamp_s": 2.422
+        },
+        {
+          "chunk_index": 2,
+          "text": "the water each sapling gets",
+          "timestamp_s": 4.2904
+        },
+        {
+          "chunk_index": 3,
+          "text": "and the approved varieties",
+          "timestamp_s": 5.8769
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "planting schedule",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "water per sapling",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "approved sapling varieties",
+          "gold_evidence": [
+            "Doc_07 \u00a71"
+          ],
+          "gold_intent_id": "u1.g3",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 3,
+      "expected_relationships": [],
+      "utterance_end_s": 6.3769,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the planting schedule the water each sapling gets and the approved varieties"
+    }
+  ]
+}

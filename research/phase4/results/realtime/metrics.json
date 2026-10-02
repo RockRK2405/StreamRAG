@@ -1,0 +1,207 @@
+{
+  "REPORTABLE": false,
+  "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT",
+  "mode": "realtime",
+  "policies": {
+    "controller": {
+      "cancelled_retrievals": 0,
+      "controller_decision_wall_ms": {
+        "max": 3.038,
+        "mean": 0.656,
+        "min": 0.087,
+        "n": 411,
+        "p50": 0.58,
+        "p95": 1.347
+      },
+      "duplicate_retrievals": 0,
+      "early_retrieval_rate": 0.9512,
+      "eligible": 41,
+      "evidence_ready_at_end_rate": 0.8864,
+      "false_retrieval_rate": 0.0,
+      "fixture_final_success@5": 1.0,
+      "lead_time_ms": {
+        "max": 8563.288,
+        "mean": 2294.173,
+        "min": -0.998,
+        "n": 41,
+        "p50": 1923.355,
+        "p95": 3983.701
+      },
+      "missed_retrieval_rate": 0.0,
+      "non_retrieval": 19,
+      "post_final_retrieval_latency_ms": {
+        "max": 11.267,
+        "mean": 1.111,
+        "min": 0.0,
+        "n": 44,
+        "p50": 0.0,
+        "p95": 10.084
+      },
+      "retrieval_required": 44,
+      "retrieval_wall_ms": {
+        "max": 15.447,
+        "mean": 8.838,
+        "min": 3.512,
+        "n": 89,
+        "p50": 9.325,
+        "p95": 11.526
+      },
+      "retrievals_on_non_retrieval_turns": 0,
+      "retrievals_per_required_utterance": {
+        "max": 3.0,
+        "mean": 2.023,
+        "min": 1.0,
+        "n": 44,
+        "p50": 2.0,
+        "p95": 3.0
+      },
+      "retrievals_total": 89,
+      "suppression_rate": 1.0,
+      "ttfr_ms": {
+        "max": 5192.097,
+        "mean": 1217.685,
+        "min": 0.285,
+        "n": 44,
+        "p50": 953.738,
+        "p95": 3275.896
+      },
+      "turns": 63,
+      "useful_early_rate": 0.9512,
+      "useless_provisional_retrievals": 0
+    },
+    "end_only": {
+      "cancelled_retrievals": 0,
+      "controller_decision_wall_ms": {
+        "max": 1.419,
+        "mean": 0.358,
+        "min": 0.039,
+        "n": 411,
+        "p50": 0.319,
+        "p95": 0.796
+      },
+      "duplicate_retrievals": 0,
+      "early_retrieval_rate": 0.0,
+      "eligible": 41,
+      "evidence_ready_at_end_rate": 0.0,
+      "false_retrieval_rate": 0.8947,
+      "fixture_final_success@5": 1.0,
+      "lead_time_ms": {
+        "max": -0.244,
+        "mean": -0.807,
+        "min": -1.753,
+        "n": 41,
+        "p50": -0.845,
+        "p95": -0.27
+      },
+      "missed_retrieval_rate": 0.0,
+      "non_retrieval": 19,
+      "post_final_retrieval_latency_ms": {
+        "max": 18.148,
+        "mean": 10.402,
+        "min": 3.772,
+        "n": 44,
+        "p50": 10.62,
+        "p95": 14.936
+      },
+      "retrieval_required": 44,
+      "retrieval_wall_ms": {
+        "max": 16.349,
+        "mean": 9.353,
+        "min": 3.482,
+        "n": 61,
+        "p50": 9.532,
+        "p95": 13.428
+      },
+      "retrievals_on_non_retrieval_turns": 17,
+      "retrievals_per_required_utterance": {
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 44,
+        "p50": 1.0,
+        "p95": 1.0
+      },
+      "retrievals_total": 61,
+      "suppression_rate": 0.1053,
+      "ttfr_ms": {
+        "max": 11867.163,
+        "mean": 3390.303,
+        "min": 500.516,
+        "n": 44,
+        "p50": 3108.207,
+        "p95": 5662.885
+      },
+      "turns": 63,
+      "useful_early_rate": 0.0,
+      "useless_provisional_retrievals": 0
+    },
+    "every_chunk": {
+      "cancelled_retrievals": 0,
+      "controller_decision_wall_ms": {
+        "max": 3.693,
+        "mean": 0.352,
+        "min": 0.04,
+        "n": 411,
+        "p50": 0.306,
+        "p95": 0.68
+      },
+      "duplicate_retrievals": 3,
+      "early_retrieval_rate": 1.0,
+      "eligible": 41,
+      "evidence_ready_at_end_rate": 1.0,
+      "false_retrieval_rate": 0.8947,
+      "fixture_final_success@5": 1.0,
+      "lead_time_ms": {
+        "max": 11165.942,
+        "mean": 2997.82,
+        "min": 499.324,
+        "n": 41,
+        "p50": 2628.05,
+        "p95": 5080.438
+      },
+      "missed_retrieval_rate": 0.0,
+      "non_retrieval": 19,
+      "post_final_retrieval_latency_ms": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "n": 44,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "retrieval_required": 44,
+      "retrieval_wall_ms": {
+        "max": 13.234,
+        "mean": 9.287,
+        "min": 2.924,
+        "n": 174,
+        "p50": 9.689,
+        "p95": 11.916
+      },
+      "retrievals_on_non_retrieval_turns": 31,
+      "retrievals_per_required_utterance": {
+        "max": 12.0,
+        "mean": 3.25,
+        "min": 1.0,
+        "n": 44,
+        "p50": 3.0,
+        "p95": 5.0
+      },
+      "retrievals_total": 174,
+      "suppression_rate": 0.1053,
+      "ttfr_ms": {
+        "max": 2430.688,
+        "mean": 562.037,
+        "min": 0.239,
+        "n": 44,
+        "p50": 0.665,
+        "p95": 2313.854
+      },
+      "turns": 63,
+      "useful_early_rate": 1.0,
+      "useless_provisional_retrievals": 0
+    }
+  },
+  "sim_retrieval_latency_ms": null,
+  "speed": 1.0
+}

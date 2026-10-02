@@ -1,0 +1,88 @@
+{
+  "case_id": "F3",
+  "category": "F_follow_up",
+  "description": "DEV SUITE (fixture domain): pronoun follow-up",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "how is the telescope",
+          "timestamp_s": 1.4096
+        },
+        {
+          "chunk_index": 1,
+          "text": "recalibrated",
+          "timestamp_s": 1.7972
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "how the telescope is recalibrated",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 2.2972,
+      "utterance_id": "u1",
+      "utterance_text": "how is the telescope recalibrated"
+    },
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "and how long",
+          "timestamp_s": 1.1245
+        },
+        {
+          "chunk_index": 1,
+          "text": "does it take",
+          "timestamp_s": 2.213
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "duration of telescope recalibration",
+          "gold_evidence": [
+            "fixture_observatory_notes \u00a71"
+          ],
+          "gold_intent_id": "u2.g1",
+          "paraphrases": [],
+          "required_query_terms": [
+            "telescope"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [
+        {
+          "source": "u2.g1",
+          "target": "u1.g1",
+          "type": "FOLLOW_UP"
+        }
+      ],
+      "utterance_end_s": 2.713,
+      "utterance_id": "u2",
+      "utterance_text": "and how long does it take"
+    }
+  ]
+}

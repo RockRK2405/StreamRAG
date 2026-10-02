@@ -1,0 +1,62 @@
+{
+  "annotation": {},
+  "case_id": "ack_thanks-authored",
+  "category": "suppression",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-ack_thanks-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 123,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "thanks",
+            "timestamp_s": 0.333
+          },
+          {
+            "chunk_index": 1,
+            "text": "that helps a lot",
+            "timestamp_s": 1.6809
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": false,
+          "suppression_reason": null,
+          "turn_type": "social",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 2.1809,
+        "utterance_id": "u1",
+        "utterance_text": "thanks that helps a lot",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

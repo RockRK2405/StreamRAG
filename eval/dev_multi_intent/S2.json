@@ -1,0 +1,52 @@
+{
+  "case_id": "S2",
+  "category": "S_single",
+  "description": "DEV SUITE (fixture domain): single need with a long tail",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "what should the keeper",
+          "timestamp_s": 1.477
+        },
+        {
+          "chunk_index": 1,
+          "text": "use to polish the lens",
+          "timestamp_s": 3.1294
+        },
+        {
+          "chunk_index": 2,
+          "text": "so that it stays clear",
+          "timestamp_s": 4.8664
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "what to polish the lens with",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.2"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 5.3664,
+      "utterance_id": "u1",
+      "utterance_text": "what should the keeper use to polish the lens so that it stays clear"
+    }
+  ]
+}

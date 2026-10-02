@@ -1,0 +1,100 @@
+{
+  "annotation": {},
+  "case_id": "stack_height-authored",
+  "category": "long_streaming",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=authored",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-stack_height-authored",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "authored",
+          "jitter": 0.15,
+          "seed": 115,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "okay so we are setting up",
+            "timestamp_s": 2.5818
+          },
+          {
+            "chunk_index": 1,
+            "text": "the new schedule for next month",
+            "timestamp_s": 4.6797
+          },
+          {
+            "chunk_index": 2,
+            "text": "and I was wondering",
+            "timestamp_s": 6.0397
+          },
+          {
+            "chunk_index": 3,
+            "text": "about the harvest limits",
+            "timestamp_s": 7.3992
+          },
+          {
+            "chunk_index": 4,
+            "text": "specifically how high",
+            "timestamp_s": 8.641
+          },
+          {
+            "chunk_index": 5,
+            "text": "the crates can be stacked",
+            "timestamp_s": 10.7707
+          },
+          {
+            "chunk_index": 6,
+            "text": "before the cart leaves",
+            "timestamp_s": 12.5359
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [
+            {
+              "answerable": true,
+              "constraints": [],
+              "description": "okay so we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves",
+              "gold_evidence": [
+                "Doc_07 \u00a73"
+              ],
+              "gold_intent_id": "g1",
+              "min_evidence": 1,
+              "paraphrases": [],
+              "shared_slots": []
+            }
+          ],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": true,
+          "suppression_reason": null,
+          "turn_type": "query",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 13.0359,
+        "utterance_id": "u1",
+        "utterance_text": "okay so we are setting up the new schedule for next month and I was wondering about the harvest limits specifically how high the crates can be stacked before the cart leaves",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

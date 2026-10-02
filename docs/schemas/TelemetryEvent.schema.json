@@ -1,0 +1,152 @@
+{
+  "$defs": {
+    "EventType": {
+      "description": "Output event vocabulary: spec §6.2 (16 types) amended in Phase 4 (ADR-012 amendment):\nCONTROLLER_DECISION renamed RETRIEVAL_DECISION; added SESSION_STARTED, TRANSCRIPT_UPDATED, QUERY_UPDATED,\nRETRIEVAL_CANCELLED, UTTERANCE_FINALIZED. Phase 5 (ADR-015) added INTENT_DETECTED, INTENT_UPDATED,\nINTENT_SUPERSEDED, QUERY_GENERATED, MULTI_QUERY_STARTED, MULTI_QUERY_COMPLETED, EVIDENCE_DEDUPLICATED,\nRERANK_STARTED, RERANK_COMPLETED. Every event is telemetry.",
+      "enum": [
+        "SESSION_STARTED",
+        "CHUNK_RECEIVED",
+        "TRANSCRIPT_UPDATED",
+        "RETRIEVAL_DECISION",
+        "QUERY_UPDATED",
+        "RETRIEVAL_CANCELLED",
+        "UTTERANCE_FINALIZED",
+        "INTENTS_UPDATED",
+        "INTENT_DETECTED",
+        "INTENT_UPDATED",
+        "INTENT_SUPERSEDED",
+        "QUERY_GENERATED",
+        "MULTI_QUERY_STARTED",
+        "MULTI_QUERY_COMPLETED",
+        "EVIDENCE_DEDUPLICATED",
+        "RERANK_STARTED",
+        "RERANK_COMPLETED",
+        "RETRIEVAL_STARTED",
+        "RETRIEVAL_COMPLETED",
+        "RETRIEVAL_SKIPPED",
+        "EVIDENCE_RERANKED",
+        "EVIDENCE_FUSED",
+        "SYNTHESIS_STARTED",
+        "ANSWER_DELTA",
+        "LLM_CALL",
+        "GROUNDING_CHECKED",
+        "ANSWER_COMMITTED",
+        "TURN_COMPLETED",
+        "ERROR",
+        "SESSION_CLOSED"
+      ],
+      "title": "EventType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Common envelope (spec §6.1). ``event_id`` is deterministic: ``<session_id>:<seq:06d>``.",
+  "properties": {
+    "component": {
+      "title": "Component",
+      "type": "string"
+    },
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Payload",
+      "type": "object"
+    },
+    "query_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Query Id"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "t_session_ms": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T Session Ms"
+    },
+    "t_stream_s": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T Stream S"
+    },
+    "t_wall_ms": {
+      "minimum": 0,
+      "title": "T Wall Ms",
+      "type": "number"
+    },
+    "type": {
+      "$ref": "#/$defs/EventType"
+    },
+    "utterance_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Utterance Id"
+    }
+  },
+  "required": [
+    "event_id",
+    "type",
+    "session_id",
+    "seq",
+    "t_wall_ms",
+    "component"
+  ],
+  "title": "TelemetryEvent",
+  "type": "object"
+}

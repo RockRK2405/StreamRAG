@@ -1,0 +1,67 @@
+{
+  "annotation": {},
+  "case_id": "casual-auto",
+  "category": "suppression",
+  "corpus_ref": {
+    "corpus_id": "tests/fixtures/corpus (TEST FIXTURE)"
+  },
+  "description": "DEV SUITE (fixture domain); chunking=auto",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data"
+  },
+  "schema_version": "1.0",
+  "session": {
+    "session_id": "dev-casual-auto",
+    "turns": [
+      {
+        "chunking": {
+          "generator": "auto_2_3_words",
+          "jitter": 0.15,
+          "seed": 132,
+          "words_per_second": 2.6
+        },
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "text": "I'm going to",
+            "timestamp_s": 1.1235
+          },
+          {
+            "chunk_index": 1,
+            "text": "grab a",
+            "timestamp_s": 1.8715
+          },
+          {
+            "chunk_index": 2,
+            "text": "coffee first",
+            "timestamp_s": 2.7325
+          }
+        ],
+        "expected": {
+          "citations": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          },
+          "clarification_expected": false,
+          "earliest_retrieval_chunk_index": null,
+          "intents": [],
+          "latest_acceptable_first_retrieval_s": null,
+          "reference_answer": null,
+          "refinement": null,
+          "retrieval_required": false,
+          "suppression_reason": null,
+          "turn_type": "social",
+          "uncertainty_expected_for": []
+        },
+        "utterance_end_s": 3.2325,
+        "utterance_id": "u1",
+        "utterance_text": "I'm going to grab a coffee first",
+        "word_timing": []
+      }
+    ]
+  },
+  "split": "test"
+}

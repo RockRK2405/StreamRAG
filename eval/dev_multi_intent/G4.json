@@ -1,0 +1,71 @@
+{
+  "case_id": "G4",
+  "category": "G_pronoun",
+  "description": "DEV SUITE (fixture domain): pronoun with a competing antecedent",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about the tool shed",
+          "timestamp_s": 2.4291
+        },
+        {
+          "chunk_index": 1,
+          "text": "and what workers must do",
+          "timestamp_s": 4.4065
+        },
+        {
+          "chunk_index": 2,
+          "text": "before they leave it",
+          "timestamp_s": 5.8095
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the tool shed",
+          "gold_evidence": [
+            "Doc_07 \u00a74"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "what workers must do before leaving the tool shed",
+          "gold_evidence": [
+            "Doc_07 \u00a74"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [
+            "shed"
+          ],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [
+        {
+          "source": "u1.g2",
+          "target": "u1.g1",
+          "type": "DEPENDENT"
+        }
+      ],
+      "utterance_end_s": 6.3095,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the tool shed and what workers must do before they leave it"
+    }
+  ]
+}

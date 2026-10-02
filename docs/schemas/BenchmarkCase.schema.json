@@ -1,0 +1,474 @@
+{
+  "$defs": {
+    "CaseChunk": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_index": {
+          "minimum": 0,
+          "title": "Chunk Index",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "timestamp_s": {
+          "minimum": 0,
+          "title": "Timestamp S",
+          "type": "number"
+        }
+      },
+      "required": [
+        "chunk_index",
+        "timestamp_s",
+        "text"
+      ],
+      "title": "CaseChunk",
+      "type": "object"
+    },
+    "CaseSession": {
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "title": "Session Id",
+          "type": "string"
+        },
+        "turns": {
+          "items": {
+            "$ref": "#/$defs/CaseTurn"
+          },
+          "minItems": 1,
+          "title": "Turns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "session_id",
+        "turns"
+      ],
+      "title": "CaseSession",
+      "type": "object"
+    },
+    "CaseTurn": {
+      "additionalProperties": false,
+      "properties": {
+        "chunking": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Chunking",
+          "type": "object"
+        },
+        "chunks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CaseChunk"
+          },
+          "title": "Chunks",
+          "type": "array"
+        },
+        "expected": {
+          "$ref": "#/$defs/TurnExpectation"
+        },
+        "utterance_end_s": {
+          "minimum": 0,
+          "title": "Utterance End S",
+          "type": "number"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "utterance_text": {
+          "title": "Utterance Text",
+          "type": "string"
+        },
+        "word_timing": {
+          "default": [],
+          "items": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "title": "Word Timing",
+          "type": "array"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "utterance_text",
+        "utterance_end_s",
+        "expected"
+      ],
+      "title": "CaseTurn",
+      "type": "object"
+    },
+    "CitationExpectation": {
+      "additionalProperties": false,
+      "properties": {
+        "must_include_any_of": {
+          "default": [],
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Must Include Any Of",
+          "type": "array"
+        },
+        "must_not_include": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Must Not Include",
+          "type": "array"
+        },
+        "subset_of_previous": {
+          "default": false,
+          "title": "Subset Of Previous",
+          "type": "boolean"
+        }
+      },
+      "title": "CitationExpectation",
+      "type": "object"
+    },
+    "GoldIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "answerable": {
+          "default": true,
+          "title": "Answerable",
+          "type": "boolean"
+        },
+        "constraints": {
+          "default": [],
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "gold_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Gold Evidence",
+          "type": "array"
+        },
+        "gold_intent_id": {
+          "title": "Gold Intent Id",
+          "type": "string"
+        },
+        "min_evidence": {
+          "default": 1,
+          "minimum": 0,
+          "title": "Min Evidence",
+          "type": "integer"
+        },
+        "paraphrases": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Paraphrases",
+          "type": "array"
+        },
+        "shared_slots": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Shared Slots",
+          "type": "array"
+        }
+      },
+      "required": [
+        "gold_intent_id",
+        "description"
+      ],
+      "title": "GoldIntent",
+      "type": "object"
+    },
+    "RefinementExpectation": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_gold_intents": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Gold Intents",
+          "type": "array"
+        },
+        "delta": {
+          "default": [],
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Delta",
+          "type": "array"
+        },
+        "expected_new_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected New Evidence",
+          "type": "array"
+        },
+        "is_refinement": {
+          "default": true,
+          "title": "Is Refinement",
+          "type": "boolean"
+        },
+        "must_not_reissue_prior_queries": {
+          "default": true,
+          "title": "Must Not Reissue Prior Queries",
+          "type": "boolean"
+        },
+        "must_retain_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Must Retain Citations",
+          "type": "array"
+        },
+        "refines_utterance": {
+          "title": "Refines Utterance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "refines_utterance"
+      ],
+      "title": "RefinementExpectation",
+      "type": "object"
+    },
+    "TurnExpectation": {
+      "additionalProperties": false,
+      "properties": {
+        "citations": {
+          "$ref": "#/$defs/CitationExpectation",
+          "default": {
+            "must_include_any_of": [],
+            "must_not_include": [],
+            "subset_of_previous": false
+          }
+        },
+        "clarification_expected": {
+          "default": false,
+          "title": "Clarification Expected",
+          "type": "boolean"
+        },
+        "earliest_retrieval_chunk_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Earliest Retrieval Chunk Index"
+        },
+        "intents": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/GoldIntent"
+          },
+          "title": "Intents",
+          "type": "array"
+        },
+        "latest_acceptable_first_retrieval_s": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Acceptable First Retrieval S"
+        },
+        "reference_answer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Answer"
+        },
+        "refinement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RefinementExpectation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "retrieval_required": {
+          "title": "Retrieval Required",
+          "type": "boolean"
+        },
+        "suppression_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suppression Reason"
+        },
+        "turn_type": {
+          "enum": [
+            "query",
+            "refinement",
+            "presentation",
+            "social",
+            "backchannel",
+            "meta"
+          ],
+          "title": "Turn Type",
+          "type": "string"
+        },
+        "uncertainty_expected_for": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainty Expected For",
+          "type": "array"
+        }
+      },
+      "required": [
+        "turn_type",
+        "retrieval_required"
+      ],
+      "title": "TurnExpectation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "annotation": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Annotation",
+      "type": "object"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "single_intent",
+        "multi_intent",
+        "incremental_intent",
+        "early_retrieval",
+        "suppression",
+        "late_detail",
+        "multiple_late_details",
+        "ambiguous",
+        "irrelevant_continuation",
+        "long_streaming",
+        "session_isolation"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "corpus_ref": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Corpus Ref",
+      "type": "object"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "is_fixture": {
+      "default": false,
+      "title": "Is Fixture",
+      "type": "boolean"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Provenance",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session": {
+      "$ref": "#/$defs/CaseSession"
+    },
+    "split": {
+      "enum": [
+        "tune",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "category",
+    "split",
+    "session"
+  ],
+  "title": "BenchmarkCase",
+  "type": "object"
+}

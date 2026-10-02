@@ -1,0 +1,47 @@
+{
+  "case_id": "K1",
+  "category": "K_duplicate",
+  "description": "DEV SUITE (fixture domain): same need twice",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "tell me about the wicks",
+          "timestamp_s": 2.0996
+        },
+        {
+          "chunk_index": 1,
+          "text": "and the wicks",
+          "timestamp_s": 3.2152
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "the wicks",
+          "gold_evidence": [
+            "fixture_lighthouse_manual \u00a71.1"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 1,
+      "expected_relationships": [],
+      "utterance_end_s": 3.7152,
+      "utterance_id": "u1",
+      "utterance_text": "tell me about the wicks and the wicks"
+    }
+  ]
+}

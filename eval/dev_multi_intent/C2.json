@@ -1,0 +1,73 @@
+{
+  "case_id": "C2",
+  "category": "C_incremental_second",
+  "description": "DEV SUITE (fixture domain): second need much later",
+  "is_fixture": true,
+  "provenance": {
+    "authored_by": "team",
+    "note": "fictional fixture domain; not official benchmark data; not held-out (same team wrote the rules)"
+  },
+  "schema_version": "1.0",
+  "split": "tune",
+  "utterances": [
+    {
+      "chunks": [
+        {
+          "chunk_index": 0,
+          "text": "so first",
+          "timestamp_s": 0.6983
+        },
+        {
+          "chunk_index": 1,
+          "text": "how many crates",
+          "timestamp_s": 1.8754
+        },
+        {
+          "chunk_index": 2,
+          "text": "can a picker fill",
+          "timestamp_s": 3.522
+        },
+        {
+          "chunk_index": 3,
+          "text": "and then",
+          "timestamp_s": 4.201
+        },
+        {
+          "chunk_index": 4,
+          "text": "what happens to damaged fruit",
+          "timestamp_s": 6.2565
+        }
+      ],
+      "expected_constraints": [],
+      "expected_intents": [
+        {
+          "answerable": true,
+          "description": "crates a picker can fill",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g1",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        },
+        {
+          "answerable": true,
+          "description": "what is done with damaged fruit",
+          "gold_evidence": [
+            "Doc_07 \u00a73"
+          ],
+          "gold_intent_id": "u1.g2",
+          "paraphrases": [],
+          "required_query_terms": [],
+          "superseded": false
+        }
+      ],
+      "expected_query_count": 2,
+      "expected_relationships": [],
+      "utterance_end_s": 6.7565,
+      "utterance_id": "u1",
+      "utterance_text": "so first how many crates can a picker fill and then what happens to damaged fruit"
+    }
+  ]
+}
