@@ -97,6 +97,14 @@
       "title": "Constraints Removed",
       "type": "array"
     },
+    "cross_turn": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Cross Turn",
+      "type": "array"
+    },
     "modified": {
       "default": [],
       "items": {

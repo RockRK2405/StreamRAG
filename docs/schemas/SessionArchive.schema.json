@@ -1,0 +1,97 @@
+{
+  "additionalProperties": false,
+  "description": "What survives archive_session(): debugging metadata, no raw utterance or evidence text.",
+  "properties": {
+    "answer_versions": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Answer Versions",
+      "type": "integer"
+    },
+    "archived_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Archived At Ms",
+      "type": "number"
+    },
+    "change_types": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Change Types",
+      "type": "object"
+    },
+    "claim_status": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Claim Status",
+      "type": "object"
+    },
+    "config_hash": {
+      "title": "Config Hash",
+      "type": "string"
+    },
+    "counters": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Counters",
+      "type": "object"
+    },
+    "evidence_status": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Evidence Status",
+      "type": "object"
+    },
+    "index_content_hash": {
+      "title": "Index Content Hash",
+      "type": "string"
+    },
+    "queries": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Queries",
+      "type": "object"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "session_versions": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Session Versions",
+      "type": "integer"
+    },
+    "transcript_sha1": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Transcript Sha1",
+      "type": "array"
+    },
+    "utterances": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Utterances",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "session_id",
+    "config_hash",
+    "index_content_hash"
+  ],
+  "title": "SessionArchive",
+  "type": "object"
+}

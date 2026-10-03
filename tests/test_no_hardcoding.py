@@ -31,6 +31,8 @@ def _eval_strings(min_words: int = 4):
         case = json.loads(f.read_text())
         for turn in case.get("session", {}).get("turns", []):
             out.add(turn["utterance_text"].lower())
+        for turn in case.get("turns", []):                     # Phase 6 adaptive-session cases
+            out.add(turn["utterance_text"].lower())
         for utt in case.get("utterances", []):                 # Phase 5 multi-intent cases
             out.add(utt["utterance_text"].lower())
             for gi in utt.get("expected_intents", []):

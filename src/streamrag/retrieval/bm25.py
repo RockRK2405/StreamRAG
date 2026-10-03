@@ -39,6 +39,26 @@ class BM25Index:
             self._idf = cached
         return cached
 
+    def rows_with(self, term: str) -> frozenset[int]:
+        """Chunk rows containing an analyzed term (CSC column slice; Phase 6 corpus co-occurrence)."""
+        j = self.vocab.get(term)
+        if j is None:
+            return frozenset()
+        return frozenset(int(r) for r in self.weights.indices[self.weights.indptr[j]:self.weights.indptr[j + 1]])
+
+    def cooccurrence(self, all_of: list[str], any_of: list[str]) -> int:
+        """Number of chunks containing every term of ``all_of`` and at least one term of ``any_of``."""
+        if not all_of or not any_of:
+            return 0
+        rows = None
+        for t in all_of:
+            r = self.rows_with(t)
+            rows = r if rows is None else rows & r
+            if not rows:
+                return 0
+        other = frozenset().union(*(self.rows_with(t) for t in any_of))
+        return len(rows & other)
+
     def term_idf(self, term: str) -> float | None:
         """IDF of an *analyzed* term, or None if the term is not in the corpus vocabulary."""
         j = self.vocab.get(term)

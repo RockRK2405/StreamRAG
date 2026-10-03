@@ -1,0 +1,74 @@
+{
+  "case_id": "X12",
+  "category": "constraint_addition",
+  "description": "anaphoric late detail",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard?",
+      "chunks": [
+        "What are the rules",
+        "for ladders",
+        "in the orchard?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Is that also true at night?",
+      "chunks": [
+        "Is that also",
+        "true at night?"
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders",
+              "night"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": true,
+        "change_types_any": [
+          [
+            "CONSTRAINT_ADDITION"
+          ],
+          [
+            "NEW_INTENT"
+          ]
+        ]
+      }
+    }
+  ]
+}

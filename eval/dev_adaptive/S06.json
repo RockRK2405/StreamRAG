@@ -1,0 +1,70 @@
+{
+  "case_id": "S06",
+  "category": "constraint_removal",
+  "description": "retract a constraint stated in the first turn",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard, especially overnight?",
+      "chunks": [
+        "What are the rules for ladders",
+        "in the orchard,",
+        "especially overnight?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders",
+              "overnight"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Actually, ignore the overnight part.",
+      "chunks": [
+        "Actually, ignore",
+        "the overnight part."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_REMOVAL"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders"
+            ],
+            "forbidden": [
+              "overnight"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [
+          "Doc_07 \u00a72.2"
+        ],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

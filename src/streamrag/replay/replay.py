@@ -11,6 +11,11 @@ Exactness: virtual-mode traces replay identically (all fields except wall-clock 
 measured latencies) and the ``mode`` / config hash necessarily differ; for them the meaningful check is
 ``behavior_identical``: same controller decisions, query versions and finalizations per utterance, in order, and
 the same retrieval outcomes (query, status, evidence ids). Every exact difference is still listed.
+
+Phase 6 session traces: virtual replay is exact for the session events too (context changes, delta plans, evidence /
+claim transitions, session versions, answer versions all derive from logical time). The behaviour signature adds, per
+utterance in order, the context changes and the committed answer version (claims compared by text + status, since
+claim ids follow result arrival order), and, order-free, the delta plans and the final evidence / claim lifecycle.
 """
 
 from __future__ import annotations
@@ -55,6 +60,10 @@ def behavior_signature(events: list[TelemetryEvent]) -> dict:
     the sorted retrieval outcomes (their interleaving with decisions depends on real completion times)."""
     ordered: dict[str, list] = {}
     outcomes: list = []
+    plans: list = []
+    claim_text: dict[str, str] = {}
+    claim_final: dict[str, str] = {}
+    ev_final: dict[str, str] = {}
     for e in events:
         t, p, u = e.type.value, e.payload, e.utterance_id
         if t == "RETRIEVAL_DECISION":
@@ -75,7 +84,29 @@ def behavior_signature(events: list[TelemetryEvent]) -> dict:
             outcomes.append([u, p.get("query_id"), p.get("status"), list(p.get("evidence_ids") or [])])
         elif t == "RETRIEVAL_CANCELLED":
             outcomes.append([u, p.get("query_id"), "cancelled", []])
-    return {"per_utterance": ordered, "retrieval_outcomes": sorted(outcomes, key=json.dumps)}
+        elif t == "CONTEXT_CHANGE_DETECTED":
+            ordered.setdefault(u, []).append(["change", p.get("change_type"), p.get("affected_intents"),
+                                              p.get("new_intents"), p.get("added_constraints"),
+                                              p.get("removed_constraints")])
+        elif t == "DELTA_PLAN_CREATED":
+            plans.append([u, sorted(q["query"]["text"] for q in p["queries_to_create"]),
+                          sorted([q["intent_id"], q["action"]] for q in p["queries_to_reuse"])])
+        elif t == "CLAIM_CREATED":
+            claim_text[p["claim_id"]] = p["text"]
+            claim_final[p["claim_id"]] = p["status"]
+        elif t in ("CLAIM_INVALIDATED", "CLAIM_REVALIDATED"):
+            claim_final[p["claim_id"]] = p["to_status"]
+        elif t in ("EVIDENCE_RETAINED", "EVIDENCE_INVALIDATED", "EVIDENCE_REVALIDATED"):
+            ev_final[f"{p['evidence_id']}@{p['intent_id']}"] = p["to_status"]
+        elif t in ("ANSWER_VERSION_CREATED", "ANSWER_VERSION_UPDATED"):
+            ordered.setdefault(u, []).append(["answer", p.get("kind"), sorted(
+                [s["intent_id"], s["status"], len(s["claim_ids"])] for s in p["sections"])])
+    sig = {"per_utterance": ordered, "retrieval_outcomes": sorted(outcomes, key=json.dumps)}
+    if plans or claim_text:
+        sig["delta_plans"] = sorted(plans, key=json.dumps)
+        sig["claims_final"] = sorted([claim_text.get(c, c), s] for c, s in claim_final.items())
+        sig["evidence_final"] = dict(sorted(ev_final.items()))
+    return sig
 
 
 @dataclass

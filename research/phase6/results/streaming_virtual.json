@@ -1,0 +1,1099 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  },
+  "net_change_type_accuracy": 1.0,
+  "provisional_changes_per_turn": {
+    "max": 3,
+    "mean": 1.5781,
+    "n": 64,
+    "p50": 1.0,
+    "p95": 3.0
+  },
+  "provisional_queries": 87,
+  "queries_generated": 90,
+  "replay": [
+    {
+      "case_id": "S01",
+      "events": 125,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S02",
+      "events": 79,
+      "identical": true,
+      "provisional_queries": 2,
+      "queries_generated": 2
+    },
+    {
+      "case_id": "S03",
+      "events": 147,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S04",
+      "events": 136,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S05",
+      "events": 113,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S06",
+      "events": 110,
+      "identical": true,
+      "provisional_queries": 3,
+      "queries_generated": 3
+    },
+    {
+      "case_id": "S07",
+      "events": 161,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S08",
+      "events": 110,
+      "identical": true,
+      "provisional_queries": 3,
+      "queries_generated": 3
+    },
+    {
+      "case_id": "S09",
+      "events": 160,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S10",
+      "events": 129,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S11",
+      "events": 79,
+      "identical": true,
+      "provisional_queries": 2,
+      "queries_generated": 2
+    },
+    {
+      "case_id": "S12",
+      "events": 170,
+      "identical": true,
+      "provisional_queries": 5,
+      "queries_generated": 5
+    },
+    {
+      "case_id": "S13",
+      "events": 119,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S14",
+      "events": 124,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S15",
+      "events": 143,
+      "identical": true,
+      "provisional_queries": 5,
+      "queries_generated": 5
+    },
+    {
+      "case_id": "S16",
+      "events": 68,
+      "identical": true,
+      "provisional_queries": 2,
+      "queries_generated": 2
+    },
+    {
+      "case_id": "S17",
+      "events": 52,
+      "identical": true,
+      "provisional_queries": 1,
+      "queries_generated": 1
+    },
+    {
+      "case_id": "S18",
+      "events": 49,
+      "identical": true,
+      "provisional_queries": 1,
+      "queries_generated": 1
+    },
+    {
+      "case_id": "S19",
+      "events": 112,
+      "identical": true,
+      "provisional_queries": 3,
+      "queries_generated": 3
+    },
+    {
+      "case_id": "S20",
+      "events": 64,
+      "identical": true,
+      "provisional_queries": 1,
+      "queries_generated": 1
+    },
+    {
+      "case_id": "S21",
+      "events": 183,
+      "identical": true,
+      "provisional_queries": 6,
+      "queries_generated": 6
+    },
+    {
+      "case_id": "S22",
+      "events": 200,
+      "identical": true,
+      "provisional_queries": 6,
+      "queries_generated": 6
+    },
+    {
+      "case_id": "S23",
+      "events": 113,
+      "identical": true,
+      "provisional_queries": 3,
+      "queries_generated": 3
+    },
+    {
+      "case_id": "S24",
+      "events": 79,
+      "identical": true,
+      "provisional_queries": 2,
+      "queries_generated": 2
+    },
+    {
+      "case_id": "S25",
+      "events": 67,
+      "identical": true,
+      "provisional_queries": 2,
+      "queries_generated": 2
+    },
+    {
+      "case_id": "S26",
+      "events": 124,
+      "identical": true,
+      "provisional_queries": 4,
+      "queries_generated": 4
+    },
+    {
+      "case_id": "S27",
+      "events": 31,
+      "identical": true,
+      "provisional_queries": 0,
+      "queries_generated": 1
+    },
+    {
+      "case_id": "S28",
+      "events": 60,
+      "identical": true,
+      "provisional_queries": 0,
+      "queries_generated": 2
+    }
+  ],
+  "replay_exact": 28,
+  "rows": [
+    {
+      "answer_changed": true,
+      "case_id": "S01",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S01",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S02",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S02",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S03",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S03",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S04",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": false,
+      "case_id": "S04",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NO_CHANGE"
+      ],
+      "net": [
+        "NO_CHANGE"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S04",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S05",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT",
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S05",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S06",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "CONSTRAINT_ADDITION",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S06",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "net": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S07",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S07",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S07",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "net": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S08",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "CONSTRAINT_ADDITION",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S08",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "net": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S09",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S09",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S09",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S10",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S10",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CORRECTION"
+      ],
+      "net": [
+        "CORRECTION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S11",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S11",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CORRECTION"
+      ],
+      "net": [
+        "CORRECTION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S12",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S12",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S12",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CORRECTION"
+      ],
+      "net": [
+        "CORRECTION"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S13",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S13",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S14",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S14",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S15",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S15",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S16",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S16",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S17",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": false,
+      "case_id": "S17",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NO_CHANGE"
+      ],
+      "net": [
+        "NO_CHANGE"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": false,
+      "case_id": "S17",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NO_CHANGE"
+      ],
+      "net": [
+        "NO_CHANGE"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S18",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": false,
+      "case_id": "S18",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NO_CHANGE"
+      ],
+      "net": [
+        "NO_CHANGE"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S19",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S19",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S20",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S20",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S21",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S21",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S21",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S22",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S22",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S22",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u3"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S22",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u4"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S22",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u5"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S23",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S23",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S24",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S24",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CORRECTION"
+      ],
+      "net": [
+        "CORRECTION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S25",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S25",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "net": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S26",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT",
+        "REFINEMENT",
+        "REFINEMENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S26",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S27",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S28",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u1"
+    },
+    {
+      "answer_changed": true,
+      "case_id": "S28",
+      "change_ok_net": true,
+      "deferred": [],
+      "detected": [
+        "NEW_INTENT"
+      ],
+      "net": [
+        "NEW_INTENT"
+      ],
+      "utterance_id": "u2"
+    }
+  ],
+  "sessions": 28,
+  "turns": 64
+}

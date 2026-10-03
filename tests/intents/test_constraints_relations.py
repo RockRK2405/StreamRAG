@@ -80,9 +80,12 @@ def test_follow_up_inherits_only_relevant_context(tracker):
     assert [c.text for c in i.inherited_context] == ["observatory visits"]
     assert i.inherited_context[0].source_span.utterance_id == "u1"
     assert [(r.type, r.target) for r in iset.relationships] == [("FOLLOW_UP", "I1")]
-    # a follow-up that names its own topic does not inherit (no blind copying)
-    iset3, _, _ = tracker.update("u3", "And what about the lens?", 2000)
-    assert iset3.intents[0].inherited_context == [] and iset3.relationships == []
+    # Phase 6: a follow-up naming its own topic is a *parallel* question: it inherits the previous need's aspect,
+    # never its topic (no blind copying of X-specific context; the corpus has no chunk with both lens and visits)
+    iset3, _, d3 = tracker.update("u3", "And what about the lens?", 2000)
+    assert [c.text for c in iset3.intents[0].inherited_context] == ["application process"]
+    assert "observatory" not in iset3.intents[0].resolved_text
+    assert d3.follow_ups[0]["decision"] == "parallel"
 
 
 def test_cross_utterance_pronoun(tracker):

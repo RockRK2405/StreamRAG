@@ -1,0 +1,989 @@
+{
+  "$defs": {
+    "AnswerDiff": {
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Added",
+          "type": "array"
+        },
+        "citations_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citations Added",
+          "type": "array"
+        },
+        "citations_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citations Removed",
+          "type": "array"
+        },
+        "evidence_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Added",
+          "type": "array"
+        },
+        "evidence_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Removed",
+          "type": "array"
+        },
+        "kept": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Kept",
+          "type": "array"
+        },
+        "modified": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ClaimChange"
+          },
+          "title": "Modified",
+          "type": "array"
+        },
+        "retracted": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Retracted",
+          "type": "array"
+        },
+        "sections_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Added",
+          "type": "array"
+        },
+        "sections_changed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Changed",
+          "type": "array"
+        },
+        "sections_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Removed",
+          "type": "array"
+        },
+        "sections_unchanged": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Unchanged",
+          "type": "array"
+        },
+        "uncertainty_introduced": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainty Introduced",
+          "type": "array"
+        },
+        "uncertainty_resolved": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainty Resolved",
+          "type": "array"
+        }
+      },
+      "title": "AnswerDiff",
+      "type": "object"
+    },
+    "AnswerSection": {
+      "additionalProperties": false,
+      "description": "One section per active intent of the frame; the unit of (later) partial regeneration.",
+      "properties": {
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "constraints": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "intent_version": {
+          "minimum": 1,
+          "title": "Intent Version",
+          "type": "integer"
+        },
+        "needs_regeneration": {
+          "default": true,
+          "title": "Needs Regeneration",
+          "type": "boolean"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "new",
+          "enum": [
+            "new",
+            "unchanged",
+            "changed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "uncertainty": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/UncertaintyItem"
+          },
+          "title": "Uncertainty",
+          "type": "array"
+        }
+      },
+      "required": [
+        "section_id",
+        "intent_id",
+        "intent_version",
+        "title"
+      ],
+      "title": "AnswerSection",
+      "type": "object"
+    },
+    "AnswerVersion": {
+      "additionalProperties": false,
+      "properties": {
+        "answer_id": {
+          "default": "",
+          "title": "Answer Id",
+          "type": "string"
+        },
+        "change_summary": {
+          "default": "",
+          "title": "Change Summary",
+          "type": "string"
+        },
+        "citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "created_at_ms": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Created At Ms",
+          "type": "number"
+        },
+        "created_t_stream_s": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created T Stream S"
+        },
+        "delta_queries": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Delta Queries",
+          "type": "array"
+        },
+        "diff": {
+          "$ref": "#/$defs/AnswerDiff",
+          "default": {
+            "added": [],
+            "citations_added": [],
+            "citations_removed": [],
+            "evidence_added": [],
+            "evidence_removed": [],
+            "kept": [],
+            "modified": [],
+            "retracted": [],
+            "sections_added": [],
+            "sections_changed": [],
+            "sections_removed": [],
+            "sections_unchanged": [],
+            "uncertainty_introduced": [],
+            "uncertainty_resolved": []
+          }
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "evidence_set_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Set Id"
+        },
+        "frame_slots": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Frame Slots",
+          "type": "object"
+        },
+        "full_rerun": {
+          "default": false,
+          "title": "Full Rerun",
+          "type": "boolean"
+        },
+        "kind": {
+          "enum": [
+            "initial",
+            "refinement",
+            "presentation",
+            "meta",
+            "social",
+            "clarification"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "parent_version": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Version"
+        },
+        "sections": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AnswerSection"
+          },
+          "title": "Sections",
+          "type": "array"
+        },
+        "session_version": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Session Version",
+          "type": "integer"
+        },
+        "supersedes_answer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Answer Id"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "topic_id": {
+          "title": "Topic Id",
+          "type": "string"
+        },
+        "uncertainty": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/UncertaintyItem"
+          },
+          "title": "Uncertainty",
+          "type": "array"
+        },
+        "unverified": {
+          "default": false,
+          "title": "Unverified",
+          "type": "boolean"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version",
+        "topic_id",
+        "utterance_id",
+        "kind"
+      ],
+      "title": "AnswerVersion",
+      "type": "object"
+    },
+    "ClaimChange": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "from_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "From Citations",
+          "type": "array"
+        },
+        "from_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "PENDING_VALIDATION",
+                "SUPPORTED",
+                "PARTIALLY_SUPPORTED",
+                "UNSUPPORTED",
+                "SUPERSEDED",
+                "STALE"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Status"
+        },
+        "from_text": {
+          "title": "From Text",
+          "type": "string"
+        },
+        "to_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "To Citations",
+          "type": "array"
+        },
+        "to_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "PENDING_VALIDATION",
+                "SUPPORTED",
+                "PARTIALLY_SUPPORTED",
+                "UNSUPPORTED",
+                "SUPERSEDED",
+                "STALE"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Status"
+        },
+        "to_text": {
+          "title": "To Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "from_text",
+        "to_text"
+      ],
+      "title": "ClaimChange",
+      "type": "object"
+    },
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_to": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "constraint_id": {
+          "title": "Constraint Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "focus",
+            "condition",
+            "restriction"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "marker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Marker"
+        },
+        "op": {
+          "default": "set",
+          "enum": [
+            "set",
+            "update",
+            "retract"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "replaces": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaces"
+        },
+        "retracted_in": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retracted In"
+        },
+        "scope": {
+          "enum": [
+            "global",
+            "local"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "scope_confidence": {
+          "default": 1.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Scope Confidence",
+          "type": "number"
+        },
+        "scope_reason": {
+          "default": "",
+          "title": "Scope Reason",
+          "type": "string"
+        },
+        "source_span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "retracted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "kind",
+        "text",
+        "scope",
+        "source_span"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "EntityRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "first_seen": {
+          "title": "First Seen",
+          "type": "string"
+        },
+        "intent_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Intent Ids",
+          "type": "array"
+        },
+        "last_seen": {
+          "title": "Last Seen",
+          "type": "string"
+        },
+        "spans": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SourceSpan"
+          },
+          "title": "Spans",
+          "type": "array"
+        },
+        "terms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "terms",
+        "first_seen",
+        "last_seen"
+      ],
+      "title": "EntityRecord",
+      "type": "object"
+    },
+    "SourceSpan": {
+      "additionalProperties": false,
+      "description": "Characters ``[start, end)`` of one utterance's transcript; ``text`` must equal that substring.",
+      "properties": {
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SourceSpan",
+      "type": "object"
+    },
+    "TopicFrame": {
+      "additionalProperties": false,
+      "description": "A topic thread of the session (spec §13.4): the needs one answer is about.",
+      "properties": {
+        "frame_id": {
+          "title": "Frame Id",
+          "type": "string"
+        },
+        "intent_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Intent Ids",
+          "type": "array"
+        },
+        "last_answer_version": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Answer Version"
+        },
+        "opened_in": {
+          "title": "Opened In",
+          "type": "string"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "dormant"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "topic_terms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Topic Terms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "frame_id",
+        "opened_in"
+      ],
+      "title": "TopicFrame",
+      "type": "object"
+    },
+    "TranscriptEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "chars": {
+          "minimum": 0,
+          "title": "Chars",
+          "type": "integer"
+        },
+        "compressed": {
+          "default": false,
+          "title": "Compressed",
+          "type": "boolean"
+        },
+        "final": {
+          "default": false,
+          "title": "Final",
+          "type": "boolean"
+        },
+        "redactions": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Redactions",
+          "type": "integer"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha1": {
+          "title": "Text Sha1",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "text_sha1",
+        "chars"
+      ],
+      "title": "TranscriptEntry",
+      "type": "object"
+    },
+    "UncertaintyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect": {
+          "title": "Aspect",
+          "type": "string"
+        },
+        "intent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent Id"
+        },
+        "kind": {
+          "enum": [
+            "no_evidence",
+            "conflict",
+            "unverified_claim",
+            "ambiguous",
+            "constraint_not_covered"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "aspect"
+      ],
+      "title": "UncertaintyItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Canonical view of the current session (SessionMemory.get_current_state).",
+  "properties": {
+    "active_frame_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Active Frame Id"
+    },
+    "active_queries": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Active Queries",
+      "type": "array"
+    },
+    "answer_state": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AnswerVersion"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "claims": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Claims",
+      "type": "object"
+    },
+    "configuration": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "default": {},
+      "title": "Configuration",
+      "type": "object"
+    },
+    "constraints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "current_utterance_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Current Utterance Id"
+    },
+    "entities": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EntityRecord"
+      },
+      "title": "Entities",
+      "type": "array"
+    },
+    "evidence_store": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "default": {},
+      "title": "Evidence Store",
+      "type": "object"
+    },
+    "frames": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TopicFrame"
+      },
+      "title": "Frames",
+      "type": "array"
+    },
+    "intent_set": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Intent Set",
+      "type": "array"
+    },
+    "query_ledger": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Query Ledger",
+      "type": "array"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "session_version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Session Version",
+      "type": "integer"
+    },
+    "superseded_queries": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Superseded Queries",
+      "type": "array"
+    },
+    "telemetry_state": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Telemetry State",
+      "type": "object"
+    },
+    "transcript_state": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TranscriptEntry"
+      },
+      "title": "Transcript State",
+      "type": "array"
+    }
+  },
+  "required": [
+    "session_id"
+  ],
+  "title": "SessionState",
+  "type": "object"
+}

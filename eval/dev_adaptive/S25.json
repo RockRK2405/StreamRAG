@@ -1,0 +1,72 @@
+{
+  "case_id": "S25",
+  "category": "refinement",
+  "description": "place added to a need",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the ladder rules?",
+      "chunks": [
+        "What are",
+        "the ladder rules?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladder"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "In the orchard.",
+      "chunks": [
+        "In the orchard."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladder",
+              "orchard"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false,
+        "change_types_any": [
+          [
+            "CONSTRAINT_ADDITION"
+          ],
+          [
+            "REFINEMENT"
+          ]
+        ]
+      }
+    }
+  ]
+}

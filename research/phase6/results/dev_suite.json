@@ -1,0 +1,2894 @@
+{
+  "aggregate": {
+    "change_type_accuracy": 1.0,
+    "change_type_accuracy_by_gold": {
+      "CONSTRAINT_ADDITION": {
+        "acc": 1.0,
+        "n": 12
+      },
+      "CONSTRAINT_ADDITION|CONSTRAINT_ADDITION": {
+        "acc": 1.0,
+        "n": 1
+      },
+      "CONSTRAINT_ADDITION|CONSTRAINT_REMOVAL": {
+        "acc": 1.0,
+        "n": 1
+      },
+      "CONSTRAINT_ADDITION|NEW_INTENT": {
+        "acc": 1.0,
+        "n": 1
+      },
+      "CONSTRAINT_REMOVAL": {
+        "acc": 1.0,
+        "n": 3
+      },
+      "CORRECTION": {
+        "acc": 1.0,
+        "n": 4
+      },
+      "NEW_INTENT": {
+        "acc": 1.0,
+        "n": 37
+      },
+      "NEW_INTENT|NEW_INTENT": {
+        "acc": 1.0,
+        "n": 1
+      },
+      "NO_CHANGE": {
+        "acc": 1.0,
+        "n": 4
+      }
+    },
+    "change_type_accuracy_unambiguous": 1.0,
+    "conflicts": {
+      "flagged_when_gold": 2,
+      "flagged_without_gold": 0,
+      "gold": 2
+    },
+    "expected_revalidation_recall": 1.0,
+    "gold_evidence_recall_fixture": 1.0,
+    "isolation_leaks": 0,
+    "need_query_correctness": 0.9844,
+    "retrieval_decision_accuracy": 1.0,
+    "retrieval_verdicts": {
+      "ok": 64
+    },
+    "retrievals": 59,
+    "reused": 3,
+    "turns": 64,
+    "turns_unambiguous": 59
+  },
+  "by_category": {
+    "constraint_addition": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 4
+        },
+        "CONSTRAINT_ADDITION|CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 4
+        },
+        "NEW_INTENT|NEW_INTENT": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NO_CHANGE": {
+          "acc": 1.0,
+          "n": 1
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 11
+      },
+      "retrievals": 12,
+      "reused": 0,
+      "turns": 11,
+      "turns_unambiguous": 10
+    },
+    "constraint_removal": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "CONSTRAINT_REMOVAL": {
+          "acc": 1.0,
+          "n": 3
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 3
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": 1.0,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 7
+      },
+      "retrievals": 6,
+      "reused": 1,
+      "turns": 7,
+      "turns_unambiguous": 6
+    },
+    "constraint_update": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "CONSTRAINT_ADDITION|CONSTRAINT_REMOVAL": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 1
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": 1.0,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 3
+      },
+      "retrievals": 3,
+      "reused": 0,
+      "turns": 3,
+      "turns_unambiguous": 3
+    },
+    "context_isolation": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 6
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 8
+      },
+      "retrievals": 8,
+      "reused": 0,
+      "turns": 8,
+      "turns_unambiguous": 7
+    },
+    "contradiction": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 3
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 2,
+        "flagged_without_gold": 0,
+        "gold": 2
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 3
+      },
+      "retrievals": 3,
+      "reused": 0,
+      "turns": 3,
+      "turns_unambiguous": 3
+    },
+    "correction": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "CORRECTION": {
+          "acc": 1.0,
+          "n": 3
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 3
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 7
+      },
+      "retrievals": 7,
+      "reused": 0,
+      "turns": 7,
+      "turns_unambiguous": 6
+    },
+    "evidence_invalidation": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "CORRECTION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 2
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": 1.0,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 4
+      },
+      "retrievals": 4,
+      "reused": 0,
+      "turns": 4,
+      "turns_unambiguous": 4
+    },
+    "mixed": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION|NEW_INTENT": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 1
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 0.6667,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 2
+      },
+      "retrievals": 2,
+      "reused": 0,
+      "turns": 2,
+      "turns_unambiguous": 1
+    },
+    "new_intent_follow_up": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 3
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 4
+      },
+      "retrievals": 4,
+      "reused": 0,
+      "turns": 4,
+      "turns_unambiguous": 4
+    },
+    "new_intent_independent": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 4
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 4
+      },
+      "retrievals": 4,
+      "reused": 0,
+      "turns": 4,
+      "turns_unambiguous": 4
+    },
+    "refinement": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "CONSTRAINT_ADDITION": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 1
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 2
+      },
+      "retrievals": 2,
+      "reused": 0,
+      "turns": 2,
+      "turns_unambiguous": 2
+    },
+    "reuse": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 4
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": null,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 4
+      },
+      "retrievals": 2,
+      "reused": 2,
+      "turns": 4,
+      "turns_unambiguous": 4
+    },
+    "unchanged_continuation": {
+      "change_type_accuracy": 1.0,
+      "change_type_accuracy_by_gold": {
+        "NEW_INTENT": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "NO_CHANGE": {
+          "acc": 1.0,
+          "n": 3
+        }
+      },
+      "change_type_accuracy_unambiguous": 1.0,
+      "conflicts": {
+        "flagged_when_gold": 0,
+        "flagged_without_gold": 0,
+        "gold": 0
+      },
+      "expected_revalidation_recall": null,
+      "gold_evidence_recall_fixture": 1.0,
+      "isolation_leaks": 0,
+      "need_query_correctness": 1.0,
+      "retrieval_decision_accuracy": 1.0,
+      "retrieval_verdicts": {
+        "ok": 5
+      },
+      "retrievals": 2,
+      "reused": 0,
+      "turns": 5,
+      "turns_unambiguous": 5
+    }
+  },
+  "cases": [
+    {
+      "case_id": "S01",
+      "category": "constraint_addition",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S01",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 2,
+          "gold_evidence_found": 2,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.4011,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S01",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Specifically overnight.",
+          "total_ms": 5.8253,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S02",
+      "category": "constraint_addition",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S02",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What does the keeper do during a storm?",
+          "total_ms": 4.4585,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S02",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm visibl low"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Only when visibility is low.",
+          "total_ms": 6.7986,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S03",
+      "category": "constraint_addition",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S03",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How are crates handled at harvest?",
+          "total_ms": 5.003,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S03",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest fruit pick sunset"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Especially for fruit picked after sunset.",
+          "total_ms": 8.0272,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S04",
+      "category": "constraint_addition",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S04",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.2804,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S04",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NO_CHANGE"
+          ],
+          "gate": "closed:backchannel",
+          "gold": [
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 0,
+          "needs_ok": 0,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "none",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Okay.",
+          "total_ms": 0.06770800973754376,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S04",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard night shift though"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Only for the night shift though.",
+          "total_ms": 7.4086,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S05",
+      "category": "constraint_addition",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S05",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT",
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT",
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 2,
+          "gold_evidence_found": 2,
+          "isolation_leaks": [],
+          "needs_gold": 2,
+          "needs_ok": 2,
+          "queries": {
+            "I1": "wick trim",
+            "I2": "len polish"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 2,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How are the wicks trimmed and how is the lens polished?",
+          "total_ms": 7.7479,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": true,
+          "case_id": "S05",
+          "category": "constraint_addition",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION",
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION",
+              "CONSTRAINT_ADDITION"
+            ],
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 2,
+          "needs_ok": 2,
+          "queries": {
+            "I1": "wick trim sunset",
+            "I2": "len polish sunset"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 2,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Especially before sunset.",
+          "total_ms": 10.8111,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S06",
+      "category": "constraint_removal",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S06",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard, especially overnight?",
+          "total_ms": 5.0324,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S06",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_REMOVAL"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_REMOVAL"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 1,
+          "revalidation_gold": 1,
+          "text": "Actually, ignore the overnight part.",
+          "total_ms": 5.7791,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S07",
+      "category": "constraint_removal",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S07",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.7647,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S07",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Specifically overnight.",
+          "total_ms": 5.6957,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S07",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_REMOVAL"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_REMOVAL"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "reuse",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 1,
+          "revalidation_found": 1,
+          "revalidation_gold": 1,
+          "text": "Never mind the overnight restriction.",
+          "total_ms": 2.089,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S08",
+      "category": "constraint_removal",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S08",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "may visit observatori friday"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Who may visit the observatory, only on Fridays?",
+          "total_ms": 6.3708,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": true,
+          "case_id": "S08",
+          "category": "constraint_removal",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_REMOVAL"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_REMOVAL"
+            ],
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "may visit observatori"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Forget the Friday part.",
+          "total_ms": 7.8793,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S09",
+      "category": "constraint_update",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S09",
+          "category": "constraint_update",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How are crates handled at harvest?",
+          "total_ms": 5.7459,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S09",
+          "category": "constraint_update",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest night shift"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 1,
+          "revalidation_gold": 1,
+          "text": "Only for the night shift.",
+          "total_ms": 7.43,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S09",
+          "category": "constraint_update",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION",
+            "CONSTRAINT_REMOVAL"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION",
+              "CONSTRAINT_REMOVAL"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest day shift"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Sorry, for the day shift.",
+          "total_ms": 7.5023,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S10",
+      "category": "correction",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S10",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 4.8603,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S10",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CORRECTION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CORRECTION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I2": "rule crate orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Sorry, I meant crates instead of ladders.",
+          "total_ms": 6.4725,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S11",
+      "category": "correction",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S11",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "len polish"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How is the lens polished?",
+          "total_ms": 4.9677,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S11",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CORRECTION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CORRECTION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I2": "wick"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Actually, I meant the wick.",
+          "total_ms": 6.8715,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S12",
+      "category": "correction",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S12",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.4979,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S12",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Specifically overnight.",
+          "total_ms": 6.5093,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": true,
+          "case_id": "S12",
+          "category": "correction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CORRECTION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CORRECTION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I2": "rule crate orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Sorry, I meant crates instead of ladders.",
+          "total_ms": 5.7851,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S13",
+      "category": "new_intent_follow_up",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S13",
+          "category": "new_intent_follow_up",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 4.6658,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S13",
+          "category": "new_intent_follow_up",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 2,
+          "needs_ok": 2,
+          "queries": {
+            "I1": "rule ladder orchard",
+            "I2": "rule crate"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What about crates?",
+          "total_ms": 5.6542,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S14",
+      "category": "new_intent_follow_up",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S14",
+          "category": "new_intent_follow_up",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 4.6367,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S14",
+          "category": "new_intent_follow_up",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ],
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What about overnight?",
+          "total_ms": 5.8143,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S15",
+      "category": "new_intent_independent",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S15",
+          "category": "new_intent_independent",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.2026,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S15",
+          "category": "new_intent_independent",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard",
+            "I2": "telescop recalibr"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Now explain how the telescope is recalibrated.",
+          "total_ms": 5.8256,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S16",
+      "category": "new_intent_independent",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S16",
+          "category": "new_intent_independent",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What does the keeper do during a storm?",
+          "total_ms": 5.0216,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S16",
+          "category": "new_intent_independent",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm",
+            "I2": "wick trim"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "And how are the wicks trimmed?",
+          "total_ms": 4.9356,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S17",
+      "category": "unchanged_continuation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S17",
+          "category": "unchanged_continuation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "wick trim"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How are the wicks trimmed?",
+          "total_ms": 4.6169,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S17",
+          "category": "unchanged_continuation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NO_CHANGE"
+          ],
+          "gate": "closed:backchannel",
+          "gold": [
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 0,
+          "needs_ok": 0,
+          "queries": {
+            "I1": "wick trim"
+          },
+          "retrieval_gold": "none",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Okay.",
+          "total_ms": 0.06183299410622567,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S17",
+          "category": "unchanged_continuation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NO_CHANGE"
+          ],
+          "gate": "closed:social_ack",
+          "gold": [
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 0,
+          "needs_ok": 0,
+          "queries": {
+            "I1": "wick trim"
+          },
+          "retrieval_gold": "none",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Thanks.",
+          "total_ms": 0.06437499541789293,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S18",
+      "category": "unchanged_continuation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S18",
+          "category": "unchanged_continuation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "sapl plant"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "When are saplings planted?",
+          "total_ms": 5.8918,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S18",
+          "category": "unchanged_continuation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NO_CHANGE"
+          ],
+          "gate": "closed:social_ack",
+          "gold": [
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 0,
+          "needs_ok": 0,
+          "queries": {
+            "I1": "sapl plant"
+          },
+          "retrieval_gold": "none",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Right, got it.",
+          "total_ms": 0.10966599802486598,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S19",
+      "category": "reuse",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S19",
+          "category": "reuse",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.1091,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S19",
+          "category": "reuse",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ],
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard",
+            "I2": "orchard ladder rule"
+          },
+          "retrieval_gold": "reuse",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 1,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Tell me the orchard ladder rules.",
+          "total_ms": 2.3296,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S20",
+      "category": "reuse",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S20",
+          "category": "reuse",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "len polish"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How is the lens polished?",
+          "total_ms": 5.5551,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S20",
+          "category": "reuse",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ],
+            [
+              "NO_CHANGE"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "len polish",
+            "I2": "len polish"
+          },
+          "retrieval_gold": "reuse",
+          "retrieval_verdict": "ok",
+          "retrievals": 0,
+          "reused": 1,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "The lens, how is it polished?",
+          "total_ms": 2.9658,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S21",
+      "category": "context_isolation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S21",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.2545,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S21",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard",
+            "I2": "telescop recalibr"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Now explain how the telescope is recalibrated.",
+          "total_ms": 5.2608,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S21",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard overnight",
+            "I2": "telescop recalibr"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Back to the ladders, what about overnight?",
+          "total_ms": 6.3937,
+          "utterance_id": "u3"
+        }
+      ]
+    },
+    {
+      "case_id": "S22",
+      "category": "context_isolation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S22",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What does the keeper do during a storm?",
+          "total_ms": 4.5699,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S22",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ],
+            [
+              "REFINEMENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm fog signal"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Specifically about the fog signal.",
+          "total_ms": 6.5408,
+          "utterance_id": "u2"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S22",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm fog signal",
+            "I2": "often telescop recalibr"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How often is the telescope recalibrated?",
+          "total_ms": 5.029,
+          "utterance_id": "u3"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S22",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm fog signal",
+            "I2": "often telescop recalibr",
+            "I3": "sapl plant"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "When are saplings planted?",
+          "total_ms": 5.0599,
+          "utterance_id": "u4"
+        },
+        {
+          "ambiguous": true,
+          "case_id": "S22",
+          "category": "context_isolation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ],
+            [
+              "REFINEMENT"
+            ],
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "keeper storm fog signal",
+            "I2": "often telescop recalibr",
+            "I3": "sapl plant",
+            "I4": "much water get"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How much water do they get?",
+          "total_ms": 5.4268,
+          "utterance_id": "u5"
+        }
+      ]
+    },
+    {
+      "case_id": "S23",
+      "category": "evidence_invalidation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S23",
+          "category": "evidence_invalidation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How are crates handled at harvest?",
+          "total_ms": 4.9196,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S23",
+          "category": "evidence_invalidation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "crate handl harvest night shift"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 1,
+          "revalidation_gold": 1,
+          "text": "Only for the night shift.",
+          "total_ms": 8.6804,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S24",
+      "category": "evidence_invalidation",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S24",
+          "category": "evidence_invalidation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "len polish"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "How is the lens polished?",
+          "total_ms": 5.0668,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S24",
+          "category": "evidence_invalidation",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CORRECTION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CORRECTION"
+            ]
+          ],
+          "gold_evidence": 1,
+          "gold_evidence_found": 1,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I2": "lamp polish"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Sorry, I meant the lamp, not the lens.",
+          "total_ms": 7.2513,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S25",
+      "category": "refinement",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S25",
+          "category": "refinement",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "ladder rule"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the ladder rules?",
+          "total_ms": 5.5121,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S25",
+          "category": "refinement",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "CONSTRAINT_ADDITION"
+          ],
+          "gate": "late_detail",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION"
+            ],
+            [
+              "REFINEMENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "ladder rule orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "In the orchard.",
+          "total_ms": 7.3847,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S26",
+      "category": "mixed",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S26",
+          "category": "mixed",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "What are the rules for ladders in the orchard?",
+          "total_ms": 5.3441,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": true,
+          "case_id": "S26",
+          "category": "mixed",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "CONSTRAINT_ADDITION",
+              "NEW_INTENT"
+            ],
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 2,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "rule ladder orchard",
+            "I2": "crate stack overnight"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Specifically overnight, and how are crates stacked?",
+          "total_ms": 6.467,
+          "utterance_id": "u2"
+        }
+      ]
+    },
+    {
+      "case_id": "S27",
+      "category": "contradiction",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S27",
+          "category": "contradiction",
+          "change_ok": true,
+          "conflict_flagged": true,
+          "conflict_gold": true,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "observatori open dome"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "When does the observatory open its dome?",
+          "total_ms": 5.409,
+          "utterance_id": "u1"
+        }
+      ]
+    },
+    {
+      "case_id": "S28",
+      "category": "contradiction",
+      "turns": [
+        {
+          "ambiguous": false,
+          "case_id": "S28",
+          "category": "contradiction",
+          "change_ok": true,
+          "conflict_flagged": false,
+          "conflict_gold": false,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "may visit observatori"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "Who may visit the observatory?",
+          "total_ms": 4.3781,
+          "utterance_id": "u1"
+        },
+        {
+          "ambiguous": false,
+          "case_id": "S28",
+          "category": "contradiction",
+          "change_ok": true,
+          "conflict_flagged": true,
+          "conflict_gold": true,
+          "detected": [
+            "NEW_INTENT"
+          ],
+          "gate": "open",
+          "gold": [
+            [
+              "NEW_INTENT"
+            ]
+          ],
+          "gold_evidence": 0,
+          "gold_evidence_found": 0,
+          "isolation_leaks": [],
+          "needs_gold": 1,
+          "needs_ok": 1,
+          "queries": {
+            "I1": "may visit observatori",
+            "I2": "dome open"
+          },
+          "retrieval_gold": "required",
+          "retrieval_verdict": "ok",
+          "retrievals": 1,
+          "reused": 0,
+          "revalidation_found": 0,
+          "revalidation_gold": 0,
+          "text": "And when is the dome opened?",
+          "total_ms": 5.2152,
+          "utterance_id": "u2"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  }
+}

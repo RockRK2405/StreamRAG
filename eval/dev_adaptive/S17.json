@@ -1,0 +1,75 @@
+{
+  "case_id": "S17",
+  "category": "unchanged_continuation",
+  "description": "backchannels",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are the wicks trimmed?",
+      "chunks": [
+        "How are",
+        "the wicks trimmed?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "wicks"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Okay.",
+      "chunks": [
+        "Okay."
+      ],
+      "gold": {
+        "change_types": [
+          "NO_CHANGE"
+        ],
+        "retrieval": "none",
+        "need_queries": [],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u3",
+      "utterance_text": "Thanks.",
+      "chunks": [
+        "Thanks."
+      ],
+      "gold": {
+        "change_types": [
+          "NO_CHANGE"
+        ],
+        "retrieval": "none",
+        "need_queries": [],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

@@ -30,6 +30,18 @@
       "title": "Decision Reason",
       "type": "string"
     },
+    "derived_from_change_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Derived From Change Id"
+    },
     "error": {
       "anyOf": [
         {
@@ -89,6 +101,18 @@
     "lineage_root": {
       "title": "Lineage Root",
       "type": "string"
+    },
+    "parent_query_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Query Id"
     },
     "query_id": {
       "title": "Query Id",
@@ -156,6 +180,30 @@
       "default": null,
       "title": "Retrieval Status"
     },
+    "reused_from": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reused From"
+    },
+    "semantic_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Semantic Key"
+    },
     "session_id": {
       "title": "Session Id",
       "type": "string"
@@ -220,7 +268,8 @@
         "in_flight",
         "completed",
         "failed",
-        "cancelled"
+        "cancelled",
+        "reused"
       ],
       "title": "Status",
       "type": "string"

@@ -30,7 +30,7 @@ def make_decomposer(cfg: StreamRagConfig, bundle: IndexBundle) -> IntentDecompos
         anchor_floor=cfg.controller.anchor_idf_floor,
         corpus_pairs=corpus_coordination_pairs([c.text for c in bundle.chunks]),
         max_intents=cfg.multi_intent.max_intents, duplicate_jaccard=cfg.multi_intent.duplicate_jaccard,
-        carryover=cfg.multi_intent.carryover)
+        carryover=cfg.multi_intent.carryover, cooccur_fn=bundle.bm25.cooccurrence)
 
 
 __all__ = ["Decomposition", "DecompositionContext", "DraftIntent", "IntentDecomposer", "IntentLexicon",

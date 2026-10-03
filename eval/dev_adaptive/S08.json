@@ -1,0 +1,78 @@
+{
+  "case_id": "S08",
+  "category": "constraint_removal",
+  "description": "retraction with 'forget'",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Who may visit the observatory, only on Fridays?",
+      "chunks": [
+        "Who may visit",
+        "the observatory,",
+        "only on Fridays?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "visit",
+              "observatory"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [
+          "fixture_observatory_notes \u00a71"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Forget the Friday part.",
+      "chunks": [
+        "Forget",
+        "the Friday part."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_REMOVAL"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "observatory"
+            ],
+            "forbidden": [
+              "friday"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": true,
+        "change_types_any": [
+          [
+            "CONSTRAINT_REMOVAL"
+          ],
+          [
+            "NO_CHANGE"
+          ]
+        ]
+      }
+    }
+  ]
+}

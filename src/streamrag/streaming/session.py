@@ -91,7 +91,8 @@ class StreamingSession:
             return
         self.started = True
         payload = {"input": ev.payload.model_dump(mode="json") if ev else None, "policy": self.policy.name,
-                   "mode": self.sched.mode, "multi_intent": self.mi is not None, **self.meta}
+                   "mode": self.sched.mode, "multi_intent": self.mi is not None,
+                   "session_mode": bool(self.mi is not None and self.mi.engine is not None), **self.meta}
         self.emit(E.SESSION_STARTED, "session", payload)
 
     def _on_chunk(self, ev: TranscriptChunk) -> None:

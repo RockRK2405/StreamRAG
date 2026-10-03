@@ -124,8 +124,10 @@ def cmd_stream(args: argparse.Namespace) -> int:
         ov["controller.strategy"] = args.policy
     if args.mode:
         ov["streaming.mode"] = args.mode
-    if args.multi_intent:
+    if args.multi_intent or args.session:
         ov["multi_intent.enabled"] = "true"
+    if args.session:
+        ov["session.enabled"] = "true"
     args.set = list(args.set) + [f"{k}={v}" for k, v in ov.items()]
     cfg = _cfg(args)
     stack = build_stack(cfg, Path(args.index) if args.index else None)
@@ -162,8 +164,11 @@ def cmd_replay(args: argparse.Namespace) -> int:
     from streamrag.replay import read_trace
     trace = read_trace(Path(args.trace))
     mi = any(e.type.value == "SESSION_STARTED" and e.payload.get("multi_intent") for e in trace)
+    adaptive = any(e.type.value == "SESSION_STARTED" and e.payload.get("session_mode") for e in trace)
     if mi:                                     # replay in the mode the trace was recorded in
         args.set = list(args.set) + ["multi_intent.enabled=true"]
+    if adaptive:
+        args.set = list(args.set) + ["session.enabled=true"]
     cfg = _cfg(args)
     stack = build_stack(cfg, Path(args.index) if args.index else None)
     report = ReplayEngine(cfg, stack.service, stack.policy, stack.index_hash,
@@ -210,6 +215,8 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--gap-ms", type=float, default=1500.0); s.add_argument("--session-id", default="cli")
     s.add_argument("--trace"); s.add_argument("--multi-intent", action="store_true",
                                               help="Phase 5: decompose intents, retrieve per intent, fuse evidence")
+    s.add_argument("--session", action="store_true",
+                   help="Phase 6: adaptive session (late details, delta retrieval, claims, answer versions)")
     s.set_defaults(fn=cmd_stream)
     s = sub.add_parser("replay"); s.add_argument("trace"); s.add_argument("--corpus"); s.add_argument("--index")
     s.add_argument("--embedder"); s.set_defaults(fn=cmd_replay)

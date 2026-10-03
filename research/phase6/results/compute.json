@@ -1,0 +1,41 @@
+{
+  "claim_revalidations_avoided": 3,
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  },
+  "note": "re-render input tokens = tokens (bge-small WordPiece, proxy) of the claim texts in the answer sections Phase 7 would have to re-render; no generation tokens exist yet (no generator)",
+  "rerender_input_tokens_avoided": 148,
+  "retrieval_calls_avoided": 6,
+  "retrieval_calls_avoided_rate": 0.0923,
+  "totals": {
+    "full_restart": {
+      "claims_kept_in_answers": 0,
+      "claims_revalidated": 161,
+      "evidence_retained": 0,
+      "queries_reused": 0,
+      "rerender_input_tokens": 2474,
+      "rerender_sections": 65,
+      "retrieval_calls": 65,
+      "sections_total": 65
+    },
+    "incremental": {
+      "claims_kept_in_answers": 20,
+      "claims_revalidated": 158,
+      "evidence_retained": 93,
+      "queries_reused": 3,
+      "rerender_input_tokens": 2326,
+      "rerender_sections": 62,
+      "retrieval_calls": 59,
+      "sections_total": 65
+    }
+  }
+}

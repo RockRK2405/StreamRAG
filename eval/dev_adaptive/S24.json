@@ -1,0 +1,68 @@
+{
+  "case_id": "S24",
+  "category": "evidence_invalidation",
+  "description": "correction invalidates the old entity's evidence",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How is the lens polished?",
+      "chunks": [
+        "How is the lens",
+        "polished?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "lens"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Sorry, I meant the lamp, not the lens.",
+      "chunks": [
+        "Sorry, I meant",
+        "the lamp, not the lens."
+      ],
+      "gold": {
+        "change_types": [
+          "CORRECTION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "lamp"
+            ],
+            "forbidden": [
+              "lens"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [
+          "fixture_lighthouse_manual \u00a71"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

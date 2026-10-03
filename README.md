@@ -1,6 +1,6 @@
 # StreamRAG — Samsung PRISM GenAI Hackathon 2026–27, Theme 4: Streaming Live RAG
 
-**Current phase: Phase 5, multi-intent decomposition, parallel per-intent retrieval and evidence fusion**, built on the Phase 4 streaming engine and the Phase 3 retrieval foundation.
+**Current phase: Phase 6, adaptive session RAG** (session memory, late-arriving details, delta retrieval, evidence and claim lifecycles, versioned answer state), built on Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
 
 Implemented:
 - corpus ingestion with stable citation IDs;
@@ -9,9 +9,10 @@ Implemented:
 - a versioned **query ledger**, with stale-query handling;
 - async retrieval;
 - structured telemetry and deterministic **replay**;
-- **multi-intent decomposition** (rule-first, validated), versioned intent sets with **delta retrieval** while the user speaks, parallel per-intent retrieval and **intent-aware evidence fusion** into a `UnifiedEvidenceSet`.
+- **multi-intent decomposition** (rule-first, validated), versioned intent sets with **delta retrieval** while the user speaks, parallel per-intent retrieval and **intent-aware evidence fusion** into a `UnifiedEvidenceSet`;
+- **adaptive sessions** (`session.enabled: true`): late details, retractions and corrections across turns become typed context changes; a delta planner re-queries only the affected needs (or reuses earlier evidence); evidence and claims carry lifecycles; the answer is a versioned, claim-level state with diffs and minimal-regeneration markers (`docs/session/`, ADR-016, `PHASE_6_ADAPTIVE_RAG_REPORT.md`).
 
-Not implemented yet: session refinement / late-detail updates (Phase 6), answer generation and grounding (Phase 7). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
+Not implemented yet: answer generation and grounding (Phase 7). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
 
 > **Official corpus status: NOT_AVAILABLE.** No Theme 4 corpus has been supplied yet. Everything under `tests/fixtures/` is a **TEST FIXTURE** (synthetic, fictional) used only to test software. No retrieval-quality results exist yet. Check the status with `streamrag corpus-status`.
 
@@ -72,6 +73,16 @@ Native document IDs (e.g. files named `Doc_12_….pdf`, or a front-matter `id:`)
 - `--multi-intent` (Phase 5) decomposes each utterance into intents, retrieves per intent (only new or changed intents while the user speaks) and prints the fused evidence.
 - `replay` re-runs the trace. A virtual trace must match exactly. A realtime trace must match in behavior (decisions, queries, retrieval outcomes), because its timestamps carry real jitter.
 
+## Adaptive sessions (Phase 6)
+
+```bash
+.venv/bin/streamrag stream --session --interval-ms 300 --text "What are the rules | for ladders | in the orchard?" --text "Specifically | overnight." --text "Okay." --text "Actually, ignore | the overnight restriction." --trace trace.jsonl
+```
+
+- `--session` turns on multi-intent mode plus the adaptive session (`session.enabled`).
+- It prints context changes, delta plans, query reuse, evidence and claim transitions, answer versions with diffs, and a per-turn summary. `replay` detects session traces and replays them exactly.
+- The synchronous drivers for experiments are `streamrag.session.AdaptivePipeline` and `FullRestartPipeline`.
+
 Dev-suite benchmarks (fixture domain; NOT official results):
 
 ```bash
@@ -80,6 +91,10 @@ Dev-suite benchmarks (fixture domain; NOT official results):
 
 ```bash
 .venv/bin/python research/phase5/run_multi_intent_benchmarks.py --index-root /tmp/idx5
+```
+
+```bash
+.venv/bin/python research/phase6/run_adaptive_benchmarks.py --index-root /tmp/idx6 --reps 7
 ```
 
 ## Trying it on the test fixture
@@ -119,10 +134,16 @@ src/streamrag/
   intents/         intent decomposition, tracker (versions/deltas), per-intent queries, validation, optional LLM check
   multi_retrieval/ per-intent retrieval (sequential/parallel/batched) + streaming multi-intent coordinator
   fusion/          cross-intent dedup, fusion strategies, intent-aware rerank, conflicts -> UnifiedEvidenceSet
+  session/         Phase 6: session memory (4 layers, versions, snapshot/restore/reset/archive), adaptive engine,
+                   synchronous incremental + full-restart pipelines, PII redaction
+  context/         change detection + taxonomy, topic frames, late-detail gate, relevant-context selection/compression
+  delta/           delta planner, delta queries, semantic cache, evidence store + lifecycle rules
+  claims/          extractive claims, claim-evidence graph, targeted revalidation, numeric contradiction flags
+  answers/         versioned, sectioned answer state, answer diffs, minimal-regeneration markers
   telemetry/       structured logging, JSONL event sink, timing
   tools/           build-time model download (the only network code)
 tests/             unit/integration tests; tests/fixtures = TEST FIXTURES only
-research/          phase1–5 measurements and reports
+research/          phase1–6 measurements and reports
 docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 ```
 
@@ -130,11 +151,12 @@ docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 
 | Document | Contents |
 |---|---|
+| `PHASE_6_ADAPTIVE_RAG_REPORT.md` | Phase 6: adaptive session RAG; dev-suite, stress-set, full-restart, ablation and scaling results |
 | `PHASE_5_MULTI_INTENT_REPORT.md` | Phase 5: multi-intent decomposition, delta retrieval, fusion; dev-suite results |
 | `PHASE_4_STREAMING_REPORT.md` | Phase 4: streaming engine, controller, ledger; dev-suite results |
 | `PHASE_3_RETRIEVAL_REPORT.md` | Phase 3: what was built, what was measured, what is blocked |
 | `PHASE_2_SYSTEM_SPECIFICATION.md` | Full system specification |
 | `PHASE_1_RESEARCH_DOSSIER.md` | Research dossier |
-| `docs/retrieval/`, `docs/streaming/`, `docs/multi_intent/` | Component docs (Phases 3, 4, 5) |
+| `docs/retrieval/`, `docs/streaming/`, `docs/multi_intent/`, `docs/session/` | Component docs (Phases 3, 4, 5, 6) |
 | `docs/decisions/` | ADRs |
 | `research/phase3/` | Chunking, embedding, profiling and comparison reports |

@@ -14,7 +14,8 @@ PKG = REPO / "src" / "streamrag"
 NETWORK_MODULES = {"socket", "urllib", "http", "requests", "httpx", "aiohttp", "huggingface_hub", "ftplib",
                    "smtplib", "websocket", "websockets", "streamrag.tools"}
 ISOLATED_PACKAGES = ["corpus", "retrieval", "models", "config", "telemetry", "bench", "streaming", "controller",
-                     "ledger", "replay", "intents", "multi_retrieval", "fusion"]
+                     "ledger", "replay", "intents", "multi_retrieval", "fusion", "session", "context", "delta",
+                     "claims", "answers"]
 
 
 def _imports(path):

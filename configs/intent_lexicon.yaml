@@ -33,7 +33,7 @@ restriction_prepositions: [for, from, in, during, at, "on", under, within, after
                            among, inside, outside, across, per, by, while, until, since, through, throughout, over]
 
 # Constraint markers. A clause opened by one of these attaches to intents as a constraint, never as an intent.
-focus_markers: [especially, particularly, specifically, mainly, mostly, primarily, chiefly, notably, precisely]
+focus_markers: [especially, particularly, specifically, mainly, mostly, primarily, chiefly, notably, precisely, only]
 focus_phrases: ["in particular", "with a focus on", "focusing on", "with respect to", "with regard to",
                 "in terms of", "more specifically", "and especially", "and particularly", "and specifically"]
 condition_markers: [if, unless, assuming, provided, whenever, once]
@@ -80,3 +80,15 @@ intent_types:
   DEFINITION: [define, definition, meaning, "what does", mean, "what is meant", "what is a", "what is an"]
   FACTUAL: ["how many", "how much", "how high", "how far", "how big", "how heavy", "how tall", "how old", "how hot",
             "how cold", what, which, where, who, whom, whose]
+
+# Phase 6: late-arriving details across turns.
+# A clause opened by one of these retracts an earlier constraint ("ignore the student restriction").
+retraction_markers: [ignore, forget, disregard, drop, remove, skip, "never mind", "no need for", "leave out",
+                     "doesn't matter", "does not matter", "not just", "not only", "regardless of", "without the",
+                     "get rid of", "take out", "take away"]
+# Words that name a constraint rather than its content ("the student RESTRICTION", "the night PART").
+constraint_words: [restriction, restrictions, constraint, constraints, condition, conditions, part, bit, thing,
+                   filter, filters, limitation, limitations, detail, details, requirement, qualifier, one, stuff]
+# Elliptical follow-up heads whose body may restrict the previous need or replace its topic ("what about z?").
+elliptical_follow_up_heads: ["what about", "how about", "and what about", "and how about", "what if it's",
+                             "and for", "what about for", "how about for"]

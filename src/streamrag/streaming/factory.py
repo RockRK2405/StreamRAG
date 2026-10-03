@@ -30,7 +30,8 @@ class StreamingStack:
             an = self.bundle.analyzer
             self._intent_stack = IntentStack(make_decomposer(self.cfg, self.bundle),
                                              IntentQueryBuilder(lambda t: list(dict.fromkeys(an.tokens(t)))),
-                                             make_fusion_engine(self.cfg, self.bundle, self.service))
+                                             make_fusion_engine(self.cfg, self.bundle, self.service),
+                                             index_hash=self.index_hash)
         return self._intent_stack
 
     def with_config(self, cfg: StreamRagConfig) -> "StreamingStack":

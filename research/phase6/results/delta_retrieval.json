@@ -1,0 +1,2331 @@
+{
+  "all_turns": {
+    "full_restart": {
+      "cache_hits": 0,
+      "claims_revalidated": 161,
+      "evidence_retained": 0,
+      "new_evidence": 297,
+      "retrieval_calls": 65,
+      "retrieval_ms": {
+        "max": 15.5401,
+        "mean": 4.8387,
+        "n": 64,
+        "p50": 4.7111,
+        "p95": 7.104
+      },
+      "reused_active": 0,
+      "total_ms": {
+        "max": 16.4965,
+        "mean": 6.0918,
+        "n": 64,
+        "p50": 5.8492,
+        "p95": 8.8731
+      },
+      "turns": 64
+    },
+    "incremental": {
+      "cache_hits": 3,
+      "claims_revalidated": 158,
+      "evidence_retained": 93,
+      "new_evidence": 181,
+      "retrieval_calls": 59,
+      "retrieval_ms": {
+        "max": 8.7406,
+        "mean": 4.417,
+        "n": 64,
+        "p50": 4.5354,
+        "p95": 6.3093
+      },
+      "reused_active": 0,
+      "total_ms": {
+        "max": 11.478,
+        "mean": 5.5388,
+        "n": 64,
+        "p50": 5.4311,
+        "p95": 8.5866
+      },
+      "turns": 64
+    }
+  },
+  "example_S01_constraint_added": [
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 3.9077,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5246,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.964,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1673,
+      "turn": 2
+    }
+  ],
+  "follow_up_turns_with_a_change": {
+    "full_restart": {
+      "cache_hits": 0,
+      "claims_revalidated": 91,
+      "evidence_retained": 0,
+      "new_evidence": 161,
+      "retrieval_calls": 36,
+      "retrieval_ms": {
+        "max": 7.5833,
+        "mean": 5.2508,
+        "n": 32,
+        "p50": 5.2081,
+        "p95": 6.991
+      },
+      "reused_active": 0,
+      "total_ms": {
+        "max": 9.4833,
+        "mean": 6.9134,
+        "n": 32,
+        "p50": 6.8498,
+        "p95": 9.0637
+      },
+      "turns": 32
+    },
+    "incremental": {
+      "cache_hits": 3,
+      "claims_revalidated": 88,
+      "evidence_retained": 93,
+      "new_evidence": 45,
+      "retrieval_calls": 30,
+      "retrieval_ms": {
+        "max": 8.7406,
+        "mean": 4.7493,
+        "n": 32,
+        "p50": 4.8244,
+        "p95": 6.3846
+      },
+      "reused_active": 0,
+      "total_ms": {
+        "max": 11.478,
+        "mean": 6.2765,
+        "n": 32,
+        "p50": 6.3525,
+        "p95": 8.6482
+      },
+      "turns": 32
+    }
+  },
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  },
+  "note": "new_evidence for full_restart counts every evidence record of the fresh session (nothing is carried over); evidence_retained counts (evidence, need) assignments kept usable without retrieval",
+  "rows": [
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 3.844,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.5862,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 3.9077,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5246,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.8221,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.628,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S01",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.964,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1673,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S02",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5383,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1937,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S02",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 3,
+      "claims_revalidated": 3,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 5.3695,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.0056,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S02",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.9817,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.7924,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S02",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.1943,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.267,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S03",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5325,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.2302,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S03",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 4,
+      "claims_revalidated": 5,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 6.3105,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.7174,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S03",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.3286,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2743,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S03",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.2219,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.8672,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 5.8587,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.5664,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.05700001202058047,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 5.4296,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.1523,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.4393,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.417,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 1.0592,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S04",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.8799,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2786,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S05",
+      "changes": [
+        "NEW_INTENT",
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 5,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 7,
+      "retrieval_ms": 7.6339,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 8.9764,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S05",
+      "changes": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 5,
+      "claims_revalidated": 5,
+      "evidence_retained": 10,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 8.7406,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 11.478,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S05",
+      "changes": [
+        "NEW_INTENT",
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 5,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 7,
+      "retrieval_ms": 7.1555,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 8.1902,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S05",
+      "changes": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 5,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 6,
+      "retrieval_ms": 7.5833,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 9.216,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S06",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 3.8206,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.6837,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S06",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 4,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 4.767,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.8405,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S06",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.1121,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.3704,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S06",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.7679,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.229,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S07",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3521,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.2782,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S07",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 4.981,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.9208,
+      "turn": 2
+    },
+    {
+      "cache_hits": 1,
+      "case_id": "S07",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 1.1714,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 2.119,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S07",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.8735,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.6303,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S07",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.3722,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.9524,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S07",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5064,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.1156,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S08",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 5.6263,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.445,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S08",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 4,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 5.2278,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.2523,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S08",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.4009,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.3913,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S08",
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 1,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.0825,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.3027,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.8022,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.4744,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 4,
+      "claims_revalidated": 4,
+      "evidence_retained": 4,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 5.5916,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.5092,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 4,
+      "claims_revalidated": 4,
+      "evidence_retained": 12,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 6.4751,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.5916,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.7048,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.7057,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.334,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.8324,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S09",
+      "changes": [
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.3617,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.1903,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S10",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.7301,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5225,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S10",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 5.7036,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.6232,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S10",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 15.5401,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 16.4965,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S10",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.7175,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.3032,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S11",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.6543,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.4129,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S11",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 3,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 5.0852,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.0189,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S11",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.0641,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.6766,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S11",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3058,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.8287,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2749,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.0557,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 4.6604,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2016,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 5.0605,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.493,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2054,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1624,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.6334,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.8463,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S12",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.948,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.0028,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S13",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2918,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1457,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S13",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 4.3678,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1382,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S13",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2153,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.0012,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S13",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 6,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 7,
+      "retrieval_ms": 6.812,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 8.4994,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S14",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.0187,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.7662,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S14",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 3.9248,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.4494,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S14",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.619,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.3461,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S14",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.6325,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.1308,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S15",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3516,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.2817,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S15",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2344,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.9756,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S15",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.9955,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.7673,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S15",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 6.2243,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.5618,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S16",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.4162,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.209,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S16",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 3.9006,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.6708,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S16",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 3.6517,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.3341,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S16",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2066,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5625,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2779,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.0228,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.05966699973214418,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.06366599700413644,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5077,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.144,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.8001,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S17",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.7011,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S18",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3235,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.9992,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S18",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.10720899445004761,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S18",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.2108,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.8522,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S18",
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 0,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 0,
+      "retrieval_ms": 0.0,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 0.8447,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S19",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5178,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.3607,
+      "turn": 1
+    },
+    {
+      "cache_hits": 1,
+      "case_id": "S19",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 1.0747,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 1.8133,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S19",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2281,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.9672,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S19",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 6,
+      "retrieval_ms": 6.5445,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 9.4833,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S20",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.9376,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5982,
+      "turn": 1
+    },
+    {
+      "cache_hits": 1,
+      "case_id": "S20",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 2.0902,
+      "retrievals": 0,
+      "reused_active": 0,
+      "total_ms": 3.0109,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S20",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5156,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1933,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S20",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 6,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 7.2098,
+      "retrievals": 2,
+      "reused_active": 0,
+      "total_ms": 8.4418,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2708,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.0378,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5869,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.2872,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 4.52,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.5459,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.1847,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.1147,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 6.3151,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.6438,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S21",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2615,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2112,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.6198,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.3162,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 3,
+      "claims_revalidated": 4,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 4.8818,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.357,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 6.3027,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.0649,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 4,
+      "retrieval_ms": 4.2533,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.835,
+      "turn": 4
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 1,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 5.4481,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.1111,
+      "turn": 5
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.2493,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.928,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 6.1515,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.3026,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.4157,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2032,
+      "turn": 3
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.3911,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.9817,
+      "turn": 4
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S22",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 1,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.426,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.9391,
+      "turn": 5
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S23",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.5738,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.5145,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S23",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 4,
+      "claims_revalidated": 4,
+      "evidence_retained": 4,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 5.8342,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 8.558,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S23",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.9477,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.6323,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S23",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 6.0633,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.2418,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S24",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3607,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.9457,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S24",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 3,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 4.1492,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.2844,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S24",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.8959,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.4852,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S24",
+      "changes": [
+        "CORRECTION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 5.7499,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 7.1884,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S25",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 4.265,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.979,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S25",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 2,
+      "claims_revalidated": 2,
+      "evidence_retained": 5,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 4.5959,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.3479,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S25",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.7303,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.342,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S25",
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.4042,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.7022,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S26",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 5,
+      "retrieval_ms": 5.4495,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.7573,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S26",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 1,
+      "retrieval_ms": 5.1168,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.9049,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S26",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3138,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.9789,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S26",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 4,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 5,
+      "retrieval_ms": 4.3001,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.1216,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S27",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 5.3851,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 6.1526,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S27",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 2,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 2,
+      "retrieval_ms": 4.6934,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.7024,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S28",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 1,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 2,
+      "retrieval_ms": 3.9857,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.8318,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S28",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "incremental",
+      "new_evidence": 0,
+      "retrieval_ms": 4.2142,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.0469,
+      "turn": 2
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S28",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 1,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 2,
+      "retrieval_ms": 4.0684,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 4.7161,
+      "turn": 1
+    },
+    {
+      "cache_hits": 0,
+      "case_id": "S28",
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "claims_affected": 0,
+      "claims_revalidated": 3,
+      "evidence_retained": 0,
+      "mode": "full_restart",
+      "new_evidence": 2,
+      "retrieval_ms": 4.0437,
+      "retrievals": 1,
+      "reused_active": 0,
+      "total_ms": 5.6154,
+      "turn": 2
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+TEST FIXTURE ONLY. Synthetic text written for software tests; it is not part of any real corpus.
+
+Fixture Dome Notes (older edition)
+
+The fixture observatory opens its dome only when the wind speed is below 25 kilometres per hour.
+Observers log the dome status every hour.

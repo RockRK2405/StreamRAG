@@ -10,7 +10,7 @@ from pydantic import Field
 
 from streamrag.models.base import Contract
 
-QueryStatus = Literal["pending", "queued", "in_flight", "completed", "failed", "cancelled"]
+QueryStatus = Literal["pending", "queued", "in_flight", "completed", "failed", "cancelled", "reused"]
 
 
 class QueryRecord(Contract):
@@ -33,6 +33,10 @@ class QueryRecord(Contract):
     intent_id: str | None = None                    # Phase 5: the intent this query serves (None in single-query mode)
     intent_version: int | None = None
     batch_id: str | None = None                     # Phase 5: queries dispatched together (MULTI_QUERY_STARTED)
+    parent_query_id: str | None = None              # Phase 6: query this one was derived from (delta query)
+    derived_from_change_id: str | None = None       # Phase 6: ContextChange that caused it
+    semantic_key: str | None = None                 # Phase 6: cache key (analyzed terms + options + index)
+    reused_from: str | None = None                  # Phase 6: status "reused" -> evidence of this earlier query
     supersedes: str | None = None
     superseded_by: str | None = None
     relation: Literal["initial", "refines", "replaces"] = "initial"

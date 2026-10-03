@@ -40,10 +40,35 @@
           "default": "set",
           "enum": [
             "set",
+            "update",
             "retract"
           ],
           "title": "Op",
           "type": "string"
+        },
+        "replaces": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaces"
+        },
+        "retracted_in": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retracted In"
         },
         "scope": {
           "enum": [
@@ -67,6 +92,15 @@
         },
         "source_span": {
           "$ref": "#/$defs/SourceSpan"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "retracted"
+          ],
+          "title": "Status",
+          "type": "string"
         },
         "text": {
           "minLength": 1,

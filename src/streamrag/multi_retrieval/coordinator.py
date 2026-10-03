@@ -19,6 +19,15 @@ completed evidence stays in the ledger with ``stale_reason`` but is excluded fro
 Gate semantics: the controller's storm guards (utterance cooldown/budget, novelty) are designed for one query per
 utterance; in multi-intent mode they are replaced by per-intent guards, so a decision WAIT{cooldown,
 provisional_budget_exhausted, retrieval_in_flight} or SKIP{redundant, budget} still opens the gate.
+
+Phase 6 (``session.enabled``; docs/session/, ADR-016): an ``AdaptiveSessionEngine`` owns the session state. Every
+gate-open tick: tracker update -> engine.interpret (frames, context changes, delta plan, evidence lifecycle, claim
+invalidation) -> the coordinator executes the plan: ``retrieve`` actions under the same per-intent guards (a guarded
+action is deferred and re-dispatched at the next tick while its need version is current), ``reuse_active`` actions
+re-use the active query, ``cache_hit`` actions create a ``reused`` ledger record. Completed results of a need's
+active query go to engine.on_result (evidence store, claims, revalidation); the answer version is committed at turn
+completion (ANSWER_VERSION_* precede TURN_COMPLETED). The gate also opens for late-arriving details
+(context/cues.py). Turn intents = the utterance's own active needs + the earlier needs the turn changed.
 """
 
 from __future__ import annotations
@@ -26,6 +35,8 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 
+from streamrag.context.cues import late_detail_gate
+from streamrag.context.detector import net_change_types
 from streamrag.fusion.engine import EvidenceFusionEngine, IntentEvidence
 from streamrag.intents.decomposer import IntentDecomposer
 from streamrag.intents.query_builder import IntentQueryBuilder
@@ -56,6 +67,7 @@ class IntentStack:
     decomposer: IntentDecomposer
     query_builder: IntentQueryBuilder
     fusion: EvidenceFusionEngine
+    index_hash: str = ""                                    # Phase 6 semantic cache key component
 
 
 @dataclass
@@ -83,23 +95,54 @@ class MultiIntentCoordinator:
         self.fusion_wall_ms: list[float] = []
         self.rerank_wall_ms: list[float] = []
         self._n_batch = 0
+        self.engine = None
+        if session.cfg.session.enabled:
+            from streamrag.session.engine import AdaptiveSessionEngine
+            self.engine = AdaptiveSessionEngine(session.session_id, session.cfg, self.tracker, session.ledger,
+                                                stack.query_builder, stack.index_hash, session.options,
+                                                emit=session.emit, config_hash=str(session.meta.get("config_hash", "")))
+        self.deferred: dict[str, object] = {}           # intent -> guarded QueryAction awaiting dispatch
+        self.turn_intents: dict[str, list[str]] = {}    # utterance -> needs the turn created or changed
+        self.planned: set[str] = set()                  # utterances with an engine plan
+        self.answers: dict[str, object] = {}            # utterance -> AnswerVersion committed at its turn end
 
     # ------------------------------------------------------------------ controller tick
     def on_decision(self, uid: str, tick: str, decision, now: float, trigger_chunk: int | None) -> None:
-        if not gate_open(decision) and not self._correction_gate(uid, decision):
-            return
         s = self.s
         final = tick == "utterance_end"
+        if self.engine is not None and final:
+            self.engine.observe_utterance(uid, s.chunks.get_current_transcript(uid), True)
+        if not gate_open(decision) and not self._correction_gate(uid, decision):
+            if self.engine is not None and final and uid not in self.planned:
+                self.engine.no_change(uid, f"closed:{decision.reason}", now)
+            return
         transcript = s.chunks.get_current_transcript(uid)
+        if self.engine is not None and s.cfg.session.redact_pii:      # Phase 6: PII never enters session memory
+            from streamrag.session.safety import redact
+            transcript = redact(transcript)[0]
         t0 = time.perf_counter()
         iset, delta, d = self.tracker.update(uid, transcript, now, [r.terms for r in s.ledger.all()], final=final)
         dec_ms = (time.perf_counter() - t0) * 1000.0
         self.decompose_wall_ms.append(dec_ms)
         if delta is not None:
             self._emit_intent_events(uid, iset, delta, d, dec_ms)
+        if self.engine is not None:
+            plan = self.engine.interpret(uid, iset, delta, d, now)
+            if plan is not None:
+                self.planned.add(uid)
+                ids = self.turn_intents.setdefault(uid, [])
+                ids += [i for i in plan.new_intents + plan.affected_intents if i not in ids]
+            elif final and uid not in self.planned:
+                self.engine.no_change(uid, "no_interpretation_change", now)
+            self._execute_plan(uid, plan, tick, now, trigger_chunk, final)
+            return
         self._dispatch(uid, iset, tick, now, trigger_chunk, final)
 
     def _correction_gate(self, uid: str, decision) -> bool:
+        if self.engine is not None:                                # Phase 6: any late-arriving detail
+            return late_detail_gate(decision, bool(self.tracker.active_session_intents()),
+                                    self.s.chunks.get_current_transcript(uid), self.stack.decomposer.lx,
+                                    self.stack.decomposer.terms_fn)
         if decision.reason not in CORRECTION_GATE_REASONS:
             return False                                           # suppressed acts never open the gate
         if not any(it.status == "ACTIVE" for it in self.tracker.intents.values()):
@@ -234,6 +277,100 @@ class MultiIntentCoordinator:
             s.ledger.update(q, status="queued", retrieval_queued_at_ms=s.sched.now_ms())
             s.executor.submit(Job(q, rec.query_text, s.options, s._on_start, s._on_done))
 
+    # ------------------------------------------------------------------ Phase 6: execute an engine delta plan
+    def _execute_plan(self, uid, plan, tick, now, trigger_chunk, final) -> None:
+        s, cfg, eng = self.s, self.cfg, self.engine
+        creates = list(plan.queries_to_create) if plan is not None else []
+        planned = {a.intent_id for a in creates + (plan.queries_to_reuse if plan is not None else [])}
+        for iid, a in list(self.deferred.items()):            # guarded earlier, still the current need version
+            it = self.tracker.intents.get(iid)
+            if it is None or it.status != "ACTIVE" or it.version != a.intent_version or iid in planned:
+                self.deferred.pop(iid)
+                continue
+            creates.append(a)
+            self.deferred.pop(iid)
+        for a in (plan.queries_to_reuse if plan is not None else []):
+            if a.action == "cache_hit":
+                src = s.ledger.get(a.reused_query_id)
+                rec, _ = s.ledger.create(uid, a.query.text, s.chunks.get_current_transcript(uid), [], a.query.terms,
+                                         now, "final" if final else "provisional", trigger_chunk, tick, a.reason,
+                                         intent_id=a.intent_id, intent_version=a.intent_version,
+                                         parent_query_id=a.parent_query_id, derived_from_change_id=a.change_id,
+                                         semantic_key=a.semantic_key, status="reused", reused_from=a.reused_query_id)
+                s.ledger.update(rec.query_id, evidence_ids=list(src.evidence_ids), retrieval_status="cache_hit",
+                                evidence_set_id=src.evidence_set_id, citations=list(src.citations))
+                self.tracker.record_query(a.intent_id, rec.query_id)
+                eng.query_reused(a, uid, now, rec.query_id, s.evidence.get(a.reused_query_id))
+            else:
+                act = s.ledger.get(a.reused_query_id)
+                eng.query_reused(a, uid, now, None, s.evidence.get(a.reused_query_id)
+                                 if act is not None and act.status == "completed" else None)
+        go = []
+        for a in creates:                                     # budgets are per (need, utterance), as in Phase 5
+            n_int = sum(1 for r in s.ledger.for_intent(a.intent_id)
+                        if r.utterance_id == uid and r.status not in ("cancelled", "reused"))
+            n_utt = sum(1 for r in s.ledger.for_utterance(uid) if r.status not in ("cancelled", "reused")) + len(go)
+            last = s.ledger.active_for_intent(a.intent_id)
+            reason = None
+            if n_int >= cfg.max_queries_per_intent:
+                reason = "intent_budget_exhausted"
+            elif n_utt >= cfg.max_queries_per_utterance:
+                reason = "utterance_budget_exhausted"
+            elif not final and last is not None and last.utterance_id == uid \
+                    and now - last.created_at_ms < cfg.intent_cooldown_ms:
+                reason = "intent_cooldown"
+            if reason is not None:
+                self.deferred[a.intent_id] = a
+                s.emit(E.RETRIEVAL_SKIPPED, "multi_query", {"reason": reason, "skip_kind": "budget",
+                                                            "query_text": a.query.text, "deferred": True,
+                                                            "ledger_ref": last.query_id if last else None,
+                                                            "tick": tick}, uid, intent_id=a.intent_id)
+                continue
+            go.append(a)
+        if not go:
+            return
+        self._n_batch += 1
+        bid = f"B{self._n_batch}"
+        qids = []
+        for a in go:
+            spans = [(c.span.start, c.span.end) for c in a.query.components if c.span.utterance_id == uid]
+            rec, prev = s.ledger.create(uid, a.query.text, s.chunks.get_current_transcript(uid), spans, a.query.terms,
+                                        now, "final" if final else "provisional", trigger_chunk, tick, a.reason,
+                                        intent_id=a.intent_id, intent_version=a.intent_version, batch_id=bid,
+                                        parent_query_id=a.parent_query_id, derived_from_change_id=a.change_id,
+                                        semantic_key=a.semantic_key)
+            self.tracker.record_query(a.intent_id, rec.query_id)
+            eng.query_dispatched(a, rec.query_id)
+            s.emit(E.QUERY_GENERATED, "delta_query_generator", {
+                "query_id": rec.query_id, "intent_version": a.intent_version, "query_text": a.query.text,
+                "trigger": rec.trigger, "components": [c.model_dump(mode="json") for c in a.query.components],
+                "relation": rec.relation, "supersedes": rec.supersedes, "lineage_root": rec.lineage_root,
+                "batch_id": bid, "parent_query_id": a.parent_query_id, "derived_from_change_id": a.change_id,
+                "semantic_key": a.semantic_key, "action_reason": a.reason,
+                "superseded_status": prev.status if prev else None}, uid, intent_id=a.intent_id,
+                query_id=rec.query_id)
+            if prev is not None and prev.status == "queued" and s.cfg.controller.cancel_superseded == "queued_only":
+                if s.executor.cancel_queued(prev.query_id):
+                    s.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
+                    s.emit(E.RETRIEVAL_CANCELLED, "query_ledger", {"query_id": prev.query_id,
+                                                                   "reason": "superseded_before_start",
+                                                                   "superseded_by": rec.query_id}, uid,
+                           intent_id=a.intent_id)
+                    self._batch_done(prev.query_id)
+            qids.append(rec.query_id)
+        self.batches[bid] = _Batch(bid, uid, set(qids), qids, now)
+        for q in qids:
+            self.batch_of[q] = bid
+        s.emit(E.MULTI_QUERY_STARTED, "multi_query", {
+            "batch_id": bid, "query_ids": qids, "intent_ids": [a.intent_id for a in go],
+            "dispatch": "parallel" if s.executor.max_concurrency > 1 else "sequential",
+            "max_concurrency": s.executor.max_concurrency, "plan_id": plan.plan_id if plan is not None else None,
+            "reused_intents": [a.intent_id for a in (plan.queries_to_reuse if plan is not None else [])]}, uid)
+        for q in qids:
+            rec = s.ledger.get(q)
+            s.ledger.update(q, status="queued", retrieval_queued_at_ms=s.sched.now_ms())
+            s.executor.submit(Job(q, rec.query_text, s.options, s._on_start, s._on_done))
+
     def _ledger_hit(self, terms: list[str], uid: str):
         """A completed query of an *earlier* utterance with term-Jaccard >= duplicate_jaccard (Phase 2 §9.5)."""
         t = set(terms)
@@ -251,6 +388,12 @@ class MultiIntentCoordinator:
         bid = self.batch_of.get(qid)
         if bid is None:
             return
+        if self.engine is not None:
+            s = self.s
+            rec, es = s.ledger.get(qid), s.evidence.get(qid)
+            cur = s.ledger.active_for_intent(rec.intent_id) if rec.intent_id else None
+            if es is not None and rec.status == "completed" and cur is not None and cur.query_id == qid:
+                self.engine.on_result(rec.intent_id, qid, es, s.sched.logical_now_ms(), rec.utterance_id)
         self.batches[bid].wall_ms[qid] = round(wall_ms, 3)
         self._batch_done(qid)
 
@@ -279,8 +422,38 @@ class MultiIntentCoordinator:
             self.fuse(b.utterance_id, final=False)
 
     # ------------------------------------------------------------------ fusion
+    def _turn_needs(self, uid: str):
+        """Phase 6: the utterance's own active needs + the earlier needs this turn changed (cross-turn)."""
+        own = list(self.tracker.active_intents(uid))
+        ids = {i.intent_id for i in own}
+        extra = [self.tracker.intents[i] for i in self.turn_intents.get(uid, []) if i not in ids
+                 and i in self.tracker.intents and self.tracker.intents[i].status == "ACTIVE"]
+        return own + extra
+
+    def _session_inputs(self, uid: str) -> list[IntentEvidence]:
+        s = self.s
+        out = []
+        for it in self._turn_needs(uid):
+            active = s.ledger.active_for_intent(it.intent_id)
+            done = s.ledger.latest_completed(it.intent_id)
+            src = done
+            if done is not None and done.status == "reused" and done.reused_from:
+                src = s.ledger.get(done.reused_from)
+            es = s.evidence.get(src.query_id) if src else None
+            status = "ok"
+            if es is None:
+                status = "retrieval_failed" if (active is not None and active.status == "failed") else "pending"
+            ref = done or active
+            out.append(IntentEvidence(intent=it, query_text=ref.query_text if ref else it.resolved_text,
+                                      query_id=ref.query_id if ref else None, evidence=es, status=status,
+                                      stale=bool(done is not None and active is not None
+                                                 and done.query_id != active.query_id)))
+        return out
+
     def inputs(self, uid: str) -> list[IntentEvidence]:
         s = self.s
+        if self.engine is not None:
+            return self._session_inputs(uid)
         out = []
         for it in self.tracker.active_intents(uid):
             active = s.ledger.active(uid, it.intent_id)
@@ -332,6 +505,8 @@ class MultiIntentCoordinator:
         return ues
 
     def turn_payload(self, uid: str) -> dict:
+        if self.engine is not None:
+            return self._session_turn_payload(uid)
         s = self.s
         ues = self.fuse(uid, final=True)
         iset = self.tracker.current(uid)
@@ -351,6 +526,46 @@ class MultiIntentCoordinator:
             "lineage": s.ledger.lineage_tree(uid),
             "unified_evidence": ues.model_dump(mode="json", exclude={"timings_ms"}) if ues is not None else None,
             "citations": [i.citation for i in ues.items] if ues is not None else [],
+            "wall": {"fusion_timings_ms": ues.timings_ms if ues is not None else None,
+                     "decompose_ms_total": round(sum(self.decompose_wall_ms), 4)},
+        }
+
+    def _session_turn_payload(self, uid: str) -> dict:
+        s, eng = self.s, self.engine
+        ues = self.fuse(uid, final=True)
+        answer = eng.commit_answer(uid, s.sched.logical_now_ms())     # ANSWER_VERSION_* precede TURN_COMPLETED
+        if answer is not None:
+            self.answers[uid] = answer
+        iset = self.tracker.current(uid)
+        needs = self._turn_needs(uid)
+        active = {it.intent_id: s.ledger.active_for_intent(it.intent_id) for it in needs}
+        changes = [c for c in eng.changes if c.utterance_id == uid]
+        plans = [p for p in eng.plans if p.utterance_id == uid]
+        return {
+            "sub_queries": [a.query_text for a in active.values() if a is not None],
+            "final_query_ids": {i: a.query_id for i, a in active.items() if a is not None},
+            "reused_queries": {a.intent_id: a.reused_query_id for p in plans for a in p.queries_to_reuse},
+            "intent_set": iset.model_dump(mode="json") if iset else None,
+            "intent_set_versions": len(self.tracker.versions(uid)),
+            "superseded_intents": [i for i, it in self.tracker.intents.items()
+                                   if it.utterance_id == uid and it.status == "SUPERSEDED"],
+            "lineage": s.ledger.lineage_tree(uid),
+            "unified_evidence": ues.model_dump(mode="json", exclude={"timings_ms"}) if ues is not None else None,
+            "citations": [i.citation for i in ues.items] if ues is not None else [],
+            "session": {
+                "session_version": eng.memory.version,
+                "turn_intents": [it.intent_id for it in needs],
+                "changes": [{"change_id": c.change_id, "type": c.change_type, "affected": c.affected_intents,
+                             "new": c.new_intents, "added": c.added_constraints, "removed": c.removed_constraints,
+                             "confidence": c.confidence} for c in changes],
+                "net_change_types": net_change_types(changes),
+                "plans": [p.plan_id for p in plans],
+                "deferred": sorted(self.deferred),
+                "answer_id": answer.answer_id if answer is not None else (
+                    eng.answers.get_current_answer_state().answer_id if eng.answers.get_current_answer_state()
+                    else None),
+                "answer_changed": answer is not None,
+                "counters": dict(eng.counters)},
             "wall": {"fusion_timings_ms": ues.timings_ms if ues is not None else None,
                      "decompose_ms_total": round(sum(self.decompose_wall_ms), 4)},
         }

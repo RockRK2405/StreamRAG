@@ -1,0 +1,70 @@
+{
+  "case_id": "S16",
+  "category": "new_intent_independent",
+  "description": "additional need in the same conversation",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What does the keeper do during a storm?",
+      "chunks": [
+        "What does the keeper",
+        "do during a storm?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "And how are the wicks trimmed?",
+      "chunks": [
+        "And how are",
+        "the wicks trimmed?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "wicks"
+            ],
+            "forbidden": [
+              "storm"
+            ]
+          }
+        ],
+        "forbidden_new": [
+          "storm"
+        ],
+        "gold_evidence": [
+          "fixture_lighthouse_manual \u00a71.1"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

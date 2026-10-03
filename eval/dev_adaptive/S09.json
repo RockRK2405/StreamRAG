@@ -1,0 +1,98 @@
+{
+  "case_id": "S09",
+  "category": "constraint_update",
+  "description": "a constraint value is replaced",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are crates handled at harvest?",
+      "chunks": [
+        "How are crates",
+        "handled at harvest?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Only for the night shift.",
+      "chunks": [
+        "Only for the",
+        "night shift."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates",
+              "night"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [
+          "Doc_07 \u00a73"
+        ],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u3",
+      "utterance_text": "Sorry, for the day shift.",
+      "chunks": [
+        "Sorry,",
+        "for the day shift."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION",
+          "CONSTRAINT_REMOVAL"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates",
+              "day"
+            ],
+            "forbidden": [
+              "night"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

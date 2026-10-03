@@ -1,0 +1,233 @@
+{
+  "last_4_turns_ms": {
+    "full_restart": [
+      17.8984,
+      6.139,
+      18.7772,
+      19.3294
+    ],
+    "incremental": [
+      5.4813,
+      0.1007,
+      2.4422,
+      5.5674
+    ]
+  },
+  "latency_saving": 0.6367,
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  },
+  "reps": 7,
+  "retrievals": {
+    "full_restart": 25,
+    "incremental": 9
+  },
+  "rows": [
+    {
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "frame_needs": 1,
+      "full_restart_ms": 5.235,
+      "full_restart_retrievals": 1,
+      "incremental_ms": 5.0409,
+      "incremental_retrievals": 1,
+      "text": "What are the rules for ladders in the orchard?",
+      "turn": 1
+    },
+    {
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 8.7491,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 4.8422,
+      "incremental_retrievals": 1,
+      "text": "What about crates?",
+      "turn": 2
+    },
+    {
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 1.2828,
+      "full_restart_retrievals": 0,
+      "incremental_ms": 0.0593,
+      "incremental_retrievals": 0,
+      "text": "Okay.",
+      "turn": 3
+    },
+    {
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 9.1853,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 6.4626,
+      "incremental_retrievals": 1,
+      "text": "Back to the ladders, what about overnight?",
+      "turn": 4
+    },
+    {
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 1.9674,
+      "full_restart_retrievals": 0,
+      "incremental_ms": 0.0844,
+      "incremental_retrievals": 0,
+      "text": "Thanks.",
+      "turn": 5
+    },
+    {
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 10.3083,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 5.7776,
+      "incremental_retrievals": 1,
+      "text": "And what about the tool shed?",
+      "turn": 6
+    },
+    {
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 11.4885,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 6.7865,
+      "incremental_retrievals": 1,
+      "text": "Only for the night shift.",
+      "turn": 7
+    },
+    {
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 3.5125,
+      "full_restart_retrievals": 0,
+      "incremental_ms": 0.074,
+      "incremental_retrievals": 0,
+      "text": "Okay.",
+      "turn": 8
+    },
+    {
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 11.2738,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 3.6973,
+      "incremental_retrievals": 0,
+      "text": "Actually, ignore the night shift restriction.",
+      "turn": 9
+    },
+    {
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 12.2991,
+      "full_restart_retrievals": 2,
+      "incremental_ms": 5.9939,
+      "incremental_retrievals": 1,
+      "text": "Never mind the overnight restriction.",
+      "turn": 10
+    },
+    {
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "frame_needs": 2,
+      "full_restart_ms": 4.5067,
+      "full_restart_retrievals": 0,
+      "incremental_ms": 0.0812,
+      "incremental_retrievals": 0,
+      "text": "Right.",
+      "turn": 11
+    },
+    {
+      "changes": [
+        "NEW_INTENT"
+      ],
+      "frame_needs": 3,
+      "full_restart_ms": 17.1234,
+      "full_restart_retrievals": 3,
+      "incremental_ms": 5.2976,
+      "incremental_retrievals": 1,
+      "text": "What about damaged fruit?",
+      "turn": 12
+    },
+    {
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "frame_needs": 3,
+      "full_restart_ms": 17.8984,
+      "full_restart_retrievals": 3,
+      "incremental_ms": 5.4813,
+      "incremental_retrievals": 1,
+      "text": "Specifically after sunset.",
+      "turn": 13
+    },
+    {
+      "changes": [
+        "NO_CHANGE"
+      ],
+      "frame_needs": 3,
+      "full_restart_ms": 6.139,
+      "full_restart_retrievals": 0,
+      "incremental_ms": 0.1007,
+      "incremental_retrievals": 0,
+      "text": "Okay, thanks.",
+      "turn": 14
+    },
+    {
+      "changes": [
+        "CONSTRAINT_REMOVAL"
+      ],
+      "frame_needs": 3,
+      "full_restart_ms": 18.7772,
+      "full_restart_retrievals": 3,
+      "incremental_ms": 2.4422,
+      "incremental_retrievals": 0,
+      "text": "Forget the sunset part.",
+      "turn": 15
+    },
+    {
+      "changes": [
+        "CONSTRAINT_ADDITION"
+      ],
+      "frame_needs": 3,
+      "full_restart_ms": 19.3294,
+      "full_restart_retrievals": 3,
+      "incremental_ms": 5.5674,
+      "incremental_retrievals": 1,
+      "text": "What about the crate count?",
+      "turn": 16
+    }
+  ],
+  "sum_of_median_turn_ms": {
+    "full_restart": 159.076,
+    "incremental": 57.789
+  },
+  "turns": 16
+}

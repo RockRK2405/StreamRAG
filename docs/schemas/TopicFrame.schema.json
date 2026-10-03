@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "description": "A topic thread of the session (spec §13.4): the needs one answer is about.",
+  "properties": {
+    "frame_id": {
+      "title": "Frame Id",
+      "type": "string"
+    },
+    "intent_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Intent Ids",
+      "type": "array"
+    },
+    "last_answer_version": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Answer Version"
+    },
+    "opened_in": {
+      "title": "Opened In",
+      "type": "string"
+    },
+    "status": {
+      "default": "active",
+      "enum": [
+        "active",
+        "dormant"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "topic_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Topic Terms",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frame_id",
+    "opened_in"
+  ],
+  "title": "TopicFrame",
+  "type": "object"
+}

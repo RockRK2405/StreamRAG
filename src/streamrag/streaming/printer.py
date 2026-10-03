@@ -71,6 +71,38 @@ def format_event(ev: TelemetryEvent) -> str | None:
                 f"coverage={p['intent_coverage']} items={len(p['items'])}: {items}")
     if t in ("RERANK_STARTED", "RERANK_COMPLETED"):
         return f"{head} RERANK     {t.split('_')[1].lower()} {p['mode']}"
+    # ---------------------------------------------------------------- Phase 6 (adaptive session)
+    if t == "CONTEXT_CHANGE_DETECTED":
+        ks = (f" +{p['added_constraints']}" if p["added_constraints"] else "") + \
+             (f" -{p['removed_constraints']}" if p["removed_constraints"] else "")
+        return (f"{head} CHANGE     {p['change_id']} {p['change_type']} affected={p['affected_intents']} "
+                f"new={p['new_intents']}{ks} frame={p['frame_action']} conf={p['confidence']} ({p['cue']})")
+    if t == "DELTA_PLAN_CREATED":
+        return (f"{head} PLAN       {p['plan_id']} create={[q['intent_id'] + ':' + q['query']['text'] for q in p['queries_to_create']]}"
+                f" reuse={[q['intent_id'] + ':' + q['action'] for q in p['queries_to_reuse']]}"
+                f" supersede={p['queries_to_supersede']} evidence retain={len(p['evidence_to_retain'])}"
+                f" revalidate={len(p['evidence_to_revalidate'])} discard={len(p['evidence_to_discard'])}"
+                f" claims={p['claims_to_revalidate']}")
+    if t == "QUERY_REUSED":
+        return f"{head} REUSE      {p['intent_id']} {p['action']} of {p['reused_query_id']} -> {p['query_id']}"
+    if t in ("EVIDENCE_RETAINED", "EVIDENCE_INVALIDATED", "EVIDENCE_REVALIDATED"):
+        return (f"{head} EVIDENCE   {p['evidence_id']}@{p['intent_id']} {p['from_status']}->{p['to_status']} "
+                f"({p['rule']})")
+    if t == "CLAIM_CREATED":
+        return f"{head} CLAIM      {p['claim_id']} new for {p['intent_id']}: \"{p['text'][:70]}\""
+    if t in ("CLAIM_INVALIDATED", "CLAIM_REVALIDATED"):
+        return f"{head} CLAIM      {p['claim_id']} {p['from_status']}->{p['to_status']} ({p['reason']})"
+    if t in ("ANSWER_VERSION_CREATED", "ANSWER_VERSION_UPDATED"):
+        regen = [s["section_id"] for s in p["sections"] if s["needs_regeneration"]]
+        return (f"{head} ANSWER     {p['answer_id']} v{p['version']} {p['kind']} frame={p['frame_id']} "
+                f"claims={p['claim_ids']} re-render={regen} | {p['change_summary']}")
+    if t in ("SESSION_VERSION_CREATED", "QUERY_SUPERSEDED"):
+        return None
+    if t == "TURN_COMPLETED" and "session" in p:
+        s = p["session"]
+        return (f"{head} TURN       net={s['net_change_types']} turn_needs={s['turn_intents']} "
+                f"sub_queries={p['sub_queries']} answer={s['answer_id']}{' (updated)' if s['answer_changed'] else ''}"
+                f" session_v={s['session_version']}" + (f" deferred={s['deferred']}" if s["deferred"] else ""))
     if t == "TURN_COMPLETED" and "intent_set" in p:
         m = p.get("metrics", {})
 

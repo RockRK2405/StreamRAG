@@ -35,6 +35,14 @@
           "title": "Evidence Added",
           "type": "array"
         },
+        "evidence_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Removed",
+          "type": "array"
+        },
         "kept": {
           "default": [],
           "items": {
@@ -59,6 +67,38 @@
           "title": "Retracted",
           "type": "array"
         },
+        "sections_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Added",
+          "type": "array"
+        },
+        "sections_changed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Changed",
+          "type": "array"
+        },
+        "sections_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Removed",
+          "type": "array"
+        },
+        "sections_unchanged": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Unchanged",
+          "type": "array"
+        },
         "uncertainty_introduced": {
           "default": [],
           "items": {
@@ -79,6 +119,90 @@
       "title": "AnswerDiff",
       "type": "object"
     },
+    "AnswerSection": {
+      "additionalProperties": false,
+      "description": "One section per active intent of the frame; the unit of (later) partial regeneration.",
+      "properties": {
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "constraints": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "intent_version": {
+          "minimum": 1,
+          "title": "Intent Version",
+          "type": "integer"
+        },
+        "needs_regeneration": {
+          "default": true,
+          "title": "Needs Regeneration",
+          "type": "boolean"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "new",
+          "enum": [
+            "new",
+            "unchanged",
+            "changed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "uncertainty": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/UncertaintyItem"
+          },
+          "title": "Uncertainty",
+          "type": "array"
+        }
+      },
+      "required": [
+        "section_id",
+        "intent_id",
+        "intent_version",
+        "title"
+      ],
+      "title": "AnswerSection",
+      "type": "object"
+    },
     "ClaimChange": {
       "additionalProperties": false,
       "properties": {
@@ -94,6 +218,26 @@
           "title": "From Citations",
           "type": "array"
         },
+        "from_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "PENDING_VALIDATION",
+                "SUPPORTED",
+                "PARTIALLY_SUPPORTED",
+                "UNSUPPORTED",
+                "SUPERSEDED",
+                "STALE"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Status"
+        },
         "from_text": {
           "title": "From Text",
           "type": "string"
@@ -105,6 +249,26 @@
           },
           "title": "To Citations",
           "type": "array"
+        },
+        "to_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "PENDING_VALIDATION",
+                "SUPPORTED",
+                "PARTIALLY_SUPPORTED",
+                "UNSUPPORTED",
+                "SUPERSEDED",
+                "STALE"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Status"
         },
         "to_text": {
           "title": "To Text",
@@ -143,7 +307,8 @@
             "no_evidence",
             "conflict",
             "unverified_claim",
-            "ambiguous"
+            "ambiguous",
+            "constraint_not_covered"
           ],
           "title": "Kind",
           "type": "string"
@@ -159,6 +324,16 @@
   },
   "additionalProperties": false,
   "properties": {
+    "answer_id": {
+      "default": "",
+      "title": "Answer Id",
+      "type": "string"
+    },
+    "change_summary": {
+      "default": "",
+      "title": "Change Summary",
+      "type": "string"
+    },
     "citations": {
       "default": [],
       "items": {
@@ -174,6 +349,12 @@
       },
       "title": "Claim Ids",
       "type": "array"
+    },
+    "created_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
     },
     "created_t_stream_s": {
       "anyOf": [
@@ -202,12 +383,25 @@
         "citations_added": [],
         "citations_removed": [],
         "evidence_added": [],
+        "evidence_removed": [],
         "kept": [],
         "modified": [],
         "retracted": [],
+        "sections_added": [],
+        "sections_changed": [],
+        "sections_removed": [],
+        "sections_unchanged": [],
         "uncertainty_introduced": [],
         "uncertainty_resolved": []
       }
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
     },
     "evidence_set_id": {
       "anyOf": [
@@ -258,7 +452,34 @@
       "default": null,
       "title": "Parent Version"
     },
+    "sections": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AnswerSection"
+      },
+      "title": "Sections",
+      "type": "array"
+    },
+    "session_version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Session Version",
+      "type": "integer"
+    },
+    "supersedes_answer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Answer Id"
+    },
     "text": {
+      "default": "",
       "title": "Text",
       "type": "string"
     },
@@ -293,8 +514,7 @@
     "version",
     "topic_id",
     "utterance_id",
-    "kind",
-    "text"
+    "kind"
   ],
   "title": "AnswerVersion",
   "type": "object"

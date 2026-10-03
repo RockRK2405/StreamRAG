@@ -1,0 +1,75 @@
+{
+  "case_id": "X03",
+  "category": "correction",
+  "description": "'scratch that' correction",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard?",
+      "chunks": [
+        "What are the rules",
+        "for ladders",
+        "in the orchard?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Scratch that, I'm asking about crates.",
+      "chunks": [
+        "Scratch that,",
+        "I'm asking about crates."
+      ],
+      "gold": {
+        "change_types": [
+          "CORRECTION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates"
+            ],
+            "forbidden": [
+              "ladders"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": true,
+        "change_types_any": [
+          [
+            "CORRECTION"
+          ],
+          [
+            "NEW_INTENT"
+          ]
+        ]
+      }
+    }
+  ]
+}

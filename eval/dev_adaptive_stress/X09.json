@@ -1,0 +1,74 @@
+{
+  "case_id": "X09",
+  "category": "new_intent_follow_up",
+  "description": "backchannel plus follow-up in one utterance",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What does the keeper do during a storm?",
+      "chunks": [
+        "What does the keeper",
+        "do during a storm?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Got it, and what about the fog signal?",
+      "chunks": [
+        "Got it,",
+        "and what about",
+        "the fog signal?"
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm",
+              "fog"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": true,
+        "change_types_any": [
+          [
+            "CONSTRAINT_ADDITION"
+          ],
+          [
+            "NEW_INTENT"
+          ]
+        ]
+      }
+    }
+  ]
+}

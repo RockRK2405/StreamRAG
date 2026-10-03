@@ -1,0 +1,86 @@
+{
+  "case_id": "S04",
+  "category": "constraint_addition",
+  "description": "restriction after a backchannel",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard?",
+      "chunks": [
+        "What are the rules",
+        "for ladders",
+        "in the orchard?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Okay.",
+      "chunks": [
+        "Okay."
+      ],
+      "gold": {
+        "change_types": [
+          "NO_CHANGE"
+        ],
+        "retrieval": "none",
+        "need_queries": [],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u3",
+      "utterance_text": "Only for the night shift though.",
+      "chunks": [
+        "Only for the",
+        "night shift though."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders",
+              "night",
+              "shift"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

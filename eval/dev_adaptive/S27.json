@@ -1,0 +1,37 @@
+{
+  "case_id": "S27",
+  "category": "contradiction",
+  "description": "two sources state different limits",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "conflict",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "When does the observatory open its dome?",
+      "chunks": [
+        "When does the observatory",
+        "open its dome?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "dome"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": true,
+        "ambiguous": false
+      }
+    }
+  ]
+}

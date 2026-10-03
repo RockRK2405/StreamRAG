@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "EvidenceTransition": {
+      "additionalProperties": false,
+      "properties": {
+        "at_ms": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "At Ms",
+          "type": "number"
+        },
+        "change_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Change Id"
+        },
+        "from_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "ACTIVE",
+                "RETAINED",
+                "REVALIDATION_REQUIRED",
+                "STALE",
+                "SUPERSEDED",
+                "INVALID"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "From Status"
+        },
+        "query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query Id"
+        },
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        },
+        "to_status": {
+          "enum": [
+            "ACTIVE",
+            "RETAINED",
+            "REVALIDATION_REQUIRED",
+            "STALE",
+            "SUPERSEDED",
+            "INVALID"
+          ],
+          "title": "To Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from_status",
+        "to_status",
+        "rule"
+      ],
+      "title": "EvidenceTransition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Applicability of one evidence item to one need (the unit of the evidence lifecycle).",
+  "properties": {
+    "best_rank": {
+      "minimum": 1,
+      "title": "Best Rank",
+      "type": "integer"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "history": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceTransition"
+      },
+      "title": "History",
+      "type": "array"
+    },
+    "intent_id": {
+      "title": "Intent Id",
+      "type": "string"
+    },
+    "intent_version": {
+      "minimum": 1,
+      "title": "Intent Version",
+      "type": "integer"
+    },
+    "query_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Query Ids",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "RETAINED",
+        "REVALIDATION_REQUIRED",
+        "STALE",
+        "SUPERSEDED",
+        "INVALID"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "intent_id",
+    "status",
+    "intent_version",
+    "best_rank"
+  ],
+  "title": "EvidenceAssignment",
+  "type": "object"
+}

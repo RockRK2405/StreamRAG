@@ -17,3 +17,4 @@
 | [ADR-013](ADR-013-corpus-ids-chunking-runtime.md) | Phase 3: `native_or_stem` doc IDs, paragraph 180/300 chunking (provisional), ONNX runtime, batch 8 | Accepted (Phase 3) |
 | [ADR-014](ADR-014-streaming-execution-model.md) | Phase 4: virtual/realtime schedulers, async executor, stale-query policy, endpoint timeout 3 s | Accepted (Phase 4) |
 | [ADR-015](ADR-015-multi-intent-decomposition-and-fusion.md) | Phase 5: rule-first decomposition (validated, optional gated LLM), versioned IntentSets with delta retrieval, controller as gate, intent-aware fusion | Accepted (Phase 5) |
+| [ADR-016](ADR-016-adaptive-session-rag.md) | Phase 6: versioned 4-layer session memory, change detection → delta planning, per-need evidence lifecycle, extractive claims with targeted revalidation, sectioned answer versions, topic frames, redaction at ingestion | Accepted (Phase 6) |

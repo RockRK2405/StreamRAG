@@ -40,6 +40,9 @@ class IntentLexicon:
     request_verbs: frozenset[str]
     embedding_verbs: frozenset[str]
     type_cues: tuple[tuple[str, tuple[tuple[str, ...], ...]], ...]   # ordered (type, phrases)
+    retraction_phrases: tuple[tuple[str, ...], ...] = ()               # Phase 6
+    constraint_words: frozenset[str] = frozenset()
+    elliptical_heads: tuple[tuple[str, ...], ...] = ()
 
     @classmethod
     def load(cls, path: Path, base: ControllerLexicon) -> "IntentLexicon":
@@ -70,7 +73,9 @@ class IntentLexicon:
             correction_words=low("correction_words"), anaphora=low("anaphora"),
             locative_anaphora=low("locative_anaphora"), follow_up_openers=_phrases(d.get("follow_up_openers", [])),
             request_verbs=low("request_verbs"), embedding_verbs=low("embedding_verbs"),
-            type_cues=tuple((t, _phrases(v)) for t, v in types.items()))      # lexicon order = precedence
+            type_cues=tuple((t, _phrases(v)) for t, v in types.items()),     # lexicon order = precedence
+            retraction_phrases=_phrases(d.get("retraction_markers", [])), constraint_words=low("constraint_words"),
+            elliptical_heads=_phrases(d.get("elliptical_follow_up_heads", [])))
 
     # convenience views over the controller lexicon
     @property

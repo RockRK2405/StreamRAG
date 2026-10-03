@@ -1,17 +1,79 @@
 {
+  "$defs": {
+    "ClaimSource": {
+      "additionalProperties": false,
+      "description": "Exact origin of an extractive claim: characters [char_start, char_end) of the evidence text.",
+      "properties": {
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "char_start",
+        "char_end"
+      ],
+      "title": "ClaimSource",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "properties": {
-    "citations": {
+    "claim_id": {
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "confidence": {
+      "default": 0.0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "confidence_signals": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Confidence Signals",
+      "type": "object"
+    },
+    "created_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
+    },
+    "evidence_ids": {
       "default": [],
       "items": {
         "type": "string"
       },
-      "title": "Citations",
+      "title": "Evidence Ids",
       "type": "array"
     },
-    "claim_id": {
-      "title": "Claim Id",
-      "type": "string"
+    "frame_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Id"
     },
     "intent_id": {
       "anyOf": [
@@ -24,6 +86,18 @@
       ],
       "default": null,
       "title": "Intent Id"
+    },
+    "intent_version": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Version"
     },
     "introduced_by_constraint": {
       "anyOf": [
@@ -38,9 +112,16 @@
       "title": "Introduced By Constraint"
     },
     "introduced_in": {
-      "minimum": 1,
-      "title": "Introduced In",
-      "type": "integer"
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Introduced In"
     },
     "modified_in": {
       "default": [],
@@ -50,13 +131,42 @@
       "title": "Modified In",
       "type": "array"
     },
-    "status": {
-      "default": "active",
+    "origin": {
+      "default": "extractive",
       "enum": [
-        "active",
-        "retracted"
+        "extractive",
+        "generated"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ClaimSource"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "status": {
+      "default": "PENDING_VALIDATION",
+      "enum": [
+        "PENDING_VALIDATION",
+        "SUPPORTED",
+        "PARTIALLY_SUPPORTED",
+        "UNSUPPORTED",
+        "SUPERSEDED",
+        "STALE"
       ],
       "title": "Status",
+      "type": "string"
+    },
+    "status_reason": {
+      "default": "",
+      "title": "Status Reason",
       "type": "string"
     },
     "text": {
@@ -75,23 +185,16 @@
       "title": "Type",
       "type": "string"
     },
-    "verdict": {
-      "default": "UNCHECKED",
-      "enum": [
-        "SUPPORTED",
-        "PARTIAL",
-        "UNSUPPORTED",
-        "INVALID_CITATION",
-        "UNCHECKED"
-      ],
-      "title": "Verdict",
-      "type": "string"
+    "updated_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Updated At Ms",
+      "type": "number"
     }
   },
   "required": [
     "claim_id",
-    "text",
-    "introduced_in"
+    "text"
   ],
   "title": "Claim",
   "type": "object"

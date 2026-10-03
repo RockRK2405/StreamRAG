@@ -190,6 +190,20 @@ class FusionConfig(_Cfg):
     conflict_check: bool = True
 
 
+class SessionConfig(_Cfg):
+    """Phase 6: session memory, late-arriving details, delta retrieval, claim/answer state (docs/session/).
+    ``enabled`` requires ``multi_intent.enabled``."""
+
+    enabled: bool = False
+    transcript_window: int = Field(6, ge=1)              # utterances kept verbatim in transcript memory
+    redact_pii: bool = True                              # e-mails, phone/card-like numbers, tokens never stored
+    delta_scope: Literal["corpus", "session_docs_first"] = "corpus"
+    cache: bool = True                                   # semantic retrieval cache (term-set key)
+    frame_overlap_min: int = Field(1, ge=0)              # shared topic terms that keep a new need in the frame
+    claims_per_intent: int = Field(4, ge=1)              # extractive claims registered per intent version
+    claim_min_relevance: float = Field(0.2, ge=0, le=1)  # min share of the intent's terms in a claim sentence
+
+
 class TelemetryConfig(_Cfg):
     log_level: str = "INFO"
     log_format: Literal["json", "text"] = "json"
@@ -212,6 +226,7 @@ class StreamRagConfig(_Cfg):
     streaming: StreamingConfig = StreamingConfig()
     multi_intent: MultiIntentConfig = MultiIntentConfig()
     fusion: FusionConfig = FusionConfig()
+    session: SessionConfig = SessionConfig()
     telemetry: TelemetryConfig = TelemetryConfig()
 
     def resolve_paths(self, base: Path) -> "StreamRagConfig":

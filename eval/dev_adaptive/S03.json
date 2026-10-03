@@ -1,0 +1,70 @@
+{
+  "case_id": "S03",
+  "category": "constraint_addition",
+  "description": "late focus phrase on a harvest need",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are crates handled at harvest?",
+      "chunks": [
+        "How are crates",
+        "handled at harvest?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates",
+              "harvest"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [
+          "Doc_07 \u00a73"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Especially for fruit picked after sunset.",
+      "chunks": [
+        "Especially for fruit",
+        "picked after sunset."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates",
+              "sunset"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [
+          "Doc_07 \u00a73"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

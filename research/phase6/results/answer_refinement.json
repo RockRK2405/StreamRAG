@@ -1,0 +1,395 @@
+{
+  "cases": {
+    "1_no_meaningful_change": {
+      "case_id": "S17",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": false,
+        "answer_kind": null,
+        "changes": [
+          "NO_CHANGE"
+        ],
+        "diff": null,
+        "new_retrievals": 0,
+        "reused": 0,
+        "revalidated_claims": 0,
+        "turn_ms": 0.5926,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 0,
+        "answer_changed": false,
+        "answer_kind": null,
+        "changes": [
+          "NO_CHANGE"
+        ],
+        "diff": null,
+        "new_retrievals": 0,
+        "reused": 0,
+        "revalidated_claims": 0,
+        "turn_ms": 0.05699999746866524,
+        "unchanged_claims": 2
+      },
+      "turn": 2,
+      "utterances": [
+        "How are the wicks trimmed?",
+        "Okay."
+      ]
+    },
+    "2_new_constraint": {
+      "case_id": "S01",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "diff": {
+          "added": 2,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 6.9608,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 2,
+        "answer_changed": true,
+        "answer_kind": "refinement",
+        "changes": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "diff": {
+          "added": 0,
+          "kept": 1,
+          "modified": 1,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 5.3594,
+        "unchanged_claims": 1
+      },
+      "turn": 2,
+      "utterances": [
+        "What are the rules for ladders in the orchard?",
+        "Specifically overnight."
+      ]
+    },
+    "3_new_intent": {
+      "case_id": "S16",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 2,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I2"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 5.384,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 2,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I2"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 5.0947,
+        "unchanged_claims": 0
+      },
+      "turn": 2,
+      "utterances": [
+        "What does the keeper do during a storm?",
+        "And how are the wicks trimmed?"
+      ]
+    },
+    "4_entity_correction": {
+      "case_id": "S10",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "CORRECTION"
+        ],
+        "diff": {
+          "added": 4,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 4,
+        "turn_ms": 6.2203,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 2,
+        "answer_changed": true,
+        "answer_kind": "refinement",
+        "changes": [
+          "CORRECTION"
+        ],
+        "diff": {
+          "added": 4,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 2,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 4,
+        "turn_ms": 6.2516,
+        "unchanged_claims": 0
+      },
+      "turn": 2,
+      "utterances": [
+        "What are the rules for ladders in the orchard?",
+        "Sorry, I meant crates instead of ladders."
+      ]
+    },
+    "5_intent_refinement": {
+      "case_id": "S25",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "diff": {
+          "added": 2,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 6.1897,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 2,
+        "answer_changed": true,
+        "answer_kind": "refinement",
+        "changes": [
+          "CONSTRAINT_ADDITION"
+        ],
+        "diff": {
+          "added": 0,
+          "kept": 2,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 2,
+        "turn_ms": 6.4623,
+        "unchanged_claims": 2
+      },
+      "turn": 2,
+      "utterances": [
+        "What are the ladder rules?",
+        "In the orchard."
+      ]
+    },
+    "6_follow_up": {
+      "case_id": "S13",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 6,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I1",
+            "S-I2"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 2,
+        "reused": 0,
+        "revalidated_claims": 6,
+        "turn_ms": 8.983,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "refinement",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 4,
+          "kept": 2,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I2"
+          ],
+          "sections_unchanged": [
+            "S-I1"
+          ],
+          "uncertainty_introduced": []
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 4,
+        "turn_ms": 5.3382,
+        "unchanged_claims": 2
+      },
+      "turn": 2,
+      "utterances": [
+        "What are the rules for ladders in the orchard?",
+        "What about crates?"
+      ]
+    },
+    "7_evidence_contradiction": {
+      "case_id": "S28",
+      "full_restart": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 3,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I2"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": [
+            "I2:conflict"
+          ]
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 3,
+        "turn_ms": 5.9483,
+        "unchanged_claims": 0
+      },
+      "incremental": {
+        "affected_claims": 0,
+        "answer_changed": true,
+        "answer_kind": "initial",
+        "changes": [
+          "NEW_INTENT"
+        ],
+        "diff": {
+          "added": 3,
+          "kept": 0,
+          "modified": 0,
+          "retracted": 0,
+          "sections_regenerate": [
+            "S-I2"
+          ],
+          "sections_unchanged": [],
+          "uncertainty_introduced": [
+            "I2:conflict"
+          ]
+        },
+        "new_retrievals": 1,
+        "reused": 0,
+        "revalidated_claims": 3,
+        "turn_ms": 4.6198,
+        "unchanged_claims": 0
+      },
+      "turn": 2,
+      "utterances": [
+        "Who may visit the observatory?",
+        "And when is the dome opened?"
+      ]
+    }
+  },
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  }
+}

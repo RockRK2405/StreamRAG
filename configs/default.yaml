@@ -154,3 +154,16 @@ fusion:
   rerank: none                     # none | intent_ce | cross_intent_dense | cross_intent_ce
   rerank_k: 20
   conflict_check: true             # conservative typed-value check (numbers/units across documents)
+
+# --------------------------------------------------------------------------------------------------
+# Phase 6: session memory, late-arriving details, delta retrieval, claim/answer state (docs/session/).
+# Team engineering defaults (NOT official thresholds); see PHASE_6_ADAPTIVE_RAG_REPORT.md.
+session:
+  enabled: false                   # true (with multi_intent.enabled): versioned session state + delta planning
+  transcript_window: 6             # utterances kept verbatim; older ones survive only as structured state
+  redact_pii: true                 # e-mails, phone/card-like numbers and key-like tokens are never stored
+  delta_scope: corpus              # corpus | session_docs_first (spec §14 step 3; measured in research/phase6)
+  cache: true                      # semantic retrieval cache: key = analyzed term set + options + index hash
+  frame_overlap_min: 1             # a new need sharing >= this many topic terms stays in the current frame
+  claims_per_intent: 4             # extractive claims registered per intent version
+  claim_min_relevance: 0.2         # min share of the intent's query terms a claim sentence must contain

@@ -1,0 +1,68 @@
+{
+  "case_id": "X14",
+  "category": "constraint_removal",
+  "description": "'regardless of' retraction",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What does the keeper do during a storm, only when visibility is low?",
+      "chunks": [
+        "What does the keeper do",
+        "during a storm,",
+        "only when visibility is low?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm",
+              "visibility"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Regardless of visibility.",
+      "chunks": [
+        "Regardless of",
+        "visibility."
+      ],
+      "gold": {
+        "change_types": [
+          "CONSTRAINT_REMOVAL"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm"
+            ],
+            "forbidden": [
+              "visibility"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

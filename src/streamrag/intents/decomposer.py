@@ -90,6 +90,8 @@ class DraftIntent:
     replace_words: list[str] = field(default_factory=list)
     aspect_from: "DraftIntent | PriorIntent | None" = None   # correction of a bare topic keeps the target's aspect
     origin: str = "rule"              # rule | rule_fallback | llm (per-intent provenance)
+    aspect_reason: str = "correction_aspect"   # why aspect_from words are inherited
+    follow_up_of: str | None = None   # Phase 6: prior intent a parallel follow-up inherits its aspect from
 
     @property
     def from_llm(self) -> bool:
@@ -121,6 +123,28 @@ class DraftConstraint:
 
 
 @dataclass
+class CrossTurnOp:
+    """Phase 6 late detail aimed at intents of an earlier utterance (docs/session/03).
+
+    set     a constraint-only utterance ("Specifically for international applicants.") or an elliptical follow-up
+            that restricts the previous need ("what about visitors?" when the corpus talks about both)
+    retract "ignore / forget / never mind <constraint>"; the tracker resolves which active constraint is meant
+    """
+
+    op: str                           # set | retract
+    kind: str                         # focus | condition | restriction (set) / retraction
+    marker: str | None
+    text: str
+    start: int
+    end: int
+    terms: list[str] = field(default_factory=list)
+    targets: list[str] = field(default_factory=list)       # prior intent ids (set); resolved by the tracker (retract)
+    scope_reason: str = ""
+    scope_confidence: float = 1.0
+    cue: str = ""
+
+
+@dataclass
 class DraftRelation:
     type: str
     source: str
@@ -141,6 +165,8 @@ class Clause:
     kind: str | None = None           # constraint kind
     body: list[int] = field(default_factory=list)   # word token indices after link/head/marker
     implicit: bool = False            # elliptical request: a facet noun phrase without its request head
+    elliptical: bool = False          # Phase 6: "what about z?" follow-up head
+    late_detail: bool = False         # Phase 6: correction phrase introducing a constraint ("i mean for x")
 
 
 @dataclass
@@ -153,7 +179,7 @@ class PriorIntent:
     terms: list[str]
     topic: tuple[str, int, int, str] | None              # (text, start, end, utterance_id)
     aspect: str | None
-    aspect_span: tuple[int, int] | None = None
+    aspect_span: tuple[int, int] | tuple[int, int, str] | None = None   # (start, end[, utterance id])
     segments: list["Segment"] = field(default_factory=list)   # its resolved words, span-traceable
 
     @property
@@ -182,6 +208,8 @@ class Decomposition:
     confidence: float
     external_supersessions: list[tuple[str, str, str]] = field(default_factory=list)  # (prior_id, new_key, cue)
     ctx: DecompositionContext | None = None
+    cross_turn: list[CrossTurnOp] = field(default_factory=list)   # Phase 6 late details for earlier intents
+    follow_ups: list[dict] = field(default_factory=list)          # Phase 6 elliptical follow-up decisions
 
     @property
     def active(self) -> list[DraftIntent]:
@@ -193,12 +221,14 @@ class IntentDecomposer:
     def __init__(self, lex: IntentLexicon, stopwords: frozenset[str], terms_fn: Callable[[str], list[str]],
                  idf_fn: Callable[[str], float | None], anchor_norm: float, anchor_floor: float = 1.0,
                  corpus_pairs: frozenset[tuple[str, str]] = frozenset(), max_intents: int = 4,
-                 duplicate_jaccard: float = 0.8, carryover: bool = True) -> None:
+                 duplicate_jaccard: float = 0.8, carryover: bool = True,
+                 cooccur_fn: Callable[[list[str], list[str]], int] | None = None) -> None:
         self.lx, self.stop = lex, stopwords
         self.terms_fn, self.idf_fn = terms_fn, idf_fn
         self.anchor_norm, self.anchor_floor = anchor_norm or 1.0, anchor_floor
         self.corpus_pairs = corpus_pairs
         self.max_intents, self.dup_j, self.carryover = max_intents, duplicate_jaccard, carryover
+        self.cooccur_fn = cooccur_fn
         self.fallback_builder = QueryBuilder(lex.base)
         b = lex.base
         self._non_content = (stopwords | b.question_words | b.aux_questions | b.fillers | lex.generic_nouns
@@ -226,9 +256,27 @@ class IntentDecomposer:
             n_key[0] += 1
             return f"d{n_key[0]}"
 
+        cross: list[CrossTurnOp] = []
+        follow_ups: list[dict] = []
+        n_requests = sum(1 for c in clauses if c.role == "REQUEST")
         for c in clauses:
-            if c.role == "REQUEST":
+            named = self._named_prior(c, toks, lows, ctx) if (c.role == "REQUEST" and c.elliptical) else []
+            if c.role == "REQUEST" and c.elliptical and (ctx.recent or named) and n_requests == 1:
+                decision = self._classify_elliptical(c, toks, lows, transcript, ctx, named or None)
+                follow_ups.append(decision)
+                if decision["decision"] == "constraint":
+                    cross.append(decision["op"])
+                    continue
+                drafts = self._request_intents(c, toks, lows, utterance_id, transcript, constraints, new_key)
+                if decision["decision"] == "parallel":
+                    for d in drafts:
+                        d.aspect_from, d.aspect_reason = decision["prior"], "follow_up_ellipsis"
+                        d.follow_up_of = decision["prior"].intent_id
+                intents += drafts
+            elif c.role == "REQUEST":
                 intents += self._request_intents(c, toks, lows, utterance_id, transcript, constraints, new_key)
+            elif c.role == "RETRACTION" and any(self._is_content(lows[j]) for j in c.body):
+                cross.append(self._retraction(c, toks, lows, transcript))
             elif c.role == "CONSTRAINT" and any(self._is_content(lows[j]) for j in c.body):
                 # (a marker without content - "especially during" mid-stream - is not a constraint yet)
                 constraints.append(self._constraint(c, toks, lows, transcript, f"k{len(constraints) + 1}"))
@@ -238,7 +286,12 @@ class IntentDecomposer:
                     intents.append(d)
         source = "rule"
         pending_correction = any(c.role == "CORRECTION" for c in clauses)   # "actually I meant ..." (no content yet)
-        if not [i for i in intents if i.status == "ACTIVE"] and not pending_correction:
+        if not [i for i in intents if i.status == "ACTIVE"] and ctx.recent and constraints:
+            # Phase 6: a constraint-only utterance refines the previous request(s) instead of becoming a new query
+            cross += [self._cross_turn_constraint(k, ctx) for k in constraints]
+            constraints = []
+        pending_late = bool(cross) or any(c.role == "RETRACTION" for c in clauses)
+        if not [i for i in intents if i.status == "ACTIVE"] and not pending_correction and not pending_late:
             fb = self._fallback(transcript, toks, utterance_id, new_key)
             if fb is not None:
                 intents.append(fb)
@@ -263,7 +316,86 @@ class IntentDecomposer:
         scope_conf = min([k.scope_confidence for k in constraints if k.applies_to] or [1.0])
         conf = (sum(i.confidence for i in active) / len(active) * scope_conf) if active else 0.0
         return Decomposition(utterance_id, transcript, source, intents, constraints, relations, merged, dropped,
-                             clauses, round(conf, 3), ext_sup, ctx)
+                             clauses, round(conf, 3), ext_sup, ctx, cross, follow_ups)
+
+    # ------------------------------------------------------------------ Phase 6: late details across turns
+    def _cross_turn_constraint(self, k: DraftConstraint, ctx: DecompositionContext) -> CrossTurnOp:
+        """Scope of a late constraint over the previous request's needs: the one need it shares a term with, else
+        all of them (ambiguous when there are several: confidence 0.6, as within an utterance)."""
+        terms = list(dict.fromkeys(self.terms_fn(k.text)))
+        sharing = [p for p in ctx.recent if set(terms) & set(p.terms)]
+        if len(sharing) == 1 and len(ctx.recent) > 1:
+            targets, reason, conf = [sharing[0].intent_id], "late_detail_shares_term_with_one_need", 0.9
+        else:
+            targets = [p.intent_id for p in ctx.recent]
+            reason = "late_detail_applies_to_previous_request"
+            conf = 1.0 if len(ctx.recent) == 1 else 0.6
+        return CrossTurnOp("set", k.kind, k.marker, k.text, k.start, k.end, terms, targets, reason, conf,
+                           cue="constraint_only_utterance")
+
+    def _retraction(self, c: Clause, toks: list[Tok], lows: list[str], transcript: str) -> CrossTurnOp:
+        words = [j for j in c.body if not toks[j].punct]
+        start, end = toks[words[0]].start, toks[words[-1]].end
+        content = [lows[j] for j in words if self._is_content(lows[j]) and lows[j] not in self.lx.constraint_words]
+        terms = list(dict.fromkeys(self.terms_fn(" ".join(content))))
+        return CrossTurnOp("retract", "retraction", c.marker, transcript[start:end], start, end, terms, [],
+                           "retraction_marker", 1.0, cue=c.marker or "")
+
+    def _named_prior(self, c: Clause, toks: list[Tok], lows: list[str], ctx: DecompositionContext) -> list:
+        """Earlier needs whose topic the utterance names *outside* the elliptical clause ("Back to X, what about
+        Z?"): the follow-up refers to them, not to the most recent need. The needs sharing the most
+        topic terms with the rest of the utterance win (>= 1 shared term)."""
+        body = set(c.body)
+        outside = {t for j, tk in enumerate(toks) if j not in body and not tk.punct and self._is_content(lows[j])
+                   for t in self.terms_fn(tk.text)}
+        if not outside:
+            return []
+        scored: dict[str, tuple[int, PriorIntent]] = {}
+        for p in ctx.prior:
+            n = len(set(self.terms_fn(p.topic[0])) & outside) if p.topic else 0
+            if n:
+                scored[p.intent_id] = (n, p)
+        best = max((n for n, _ in scored.values()), default=0)
+        return [p for n, p in scored.values() if n == best] if best else []
+
+    def _classify_elliptical(self, c: Clause, toks: list[Tok], lows: list[str], transcript: str,
+                             ctx: DecompositionContext, pool: list | None = None) -> dict:
+        """'what about Z?' after a request: does Z *restrict* the previous need or *replace its topic*?
+
+        Not keyword-based: the indexed corpus decides. If some chunk contains Z's terms together with the previous
+        need's most specific topic term (max corpus IDF, ties included - the entity rather than a place name that
+        every chunk of the document mentions), the documents discuss Z within that topic -> constraint on that need.
+        Otherwise Z is a parallel question -> new need that inherits the previous need's aspect ("requirements").
+        A facet-only Z ("the application process") keeps the Phase 5 rule: new need inheriting the topic."""
+        words = [j for j in c.body if not toks[j].punct]
+        content = [j for j in words if self._is_content(lows[j])]
+        if not content:
+            return {"decision": "none", "reason": "no_content"}
+        if all(lows[j] in self.lx.aspect_nouns for j in content):
+            return {"decision": "intent", "reason": "facet_only_follow_up"}
+        start, end = toks[words[0]].start, toks[words[-1]].end
+        z_text = transcript[start:end]
+        z_terms = list(dict.fromkeys(self.terms_fn(z_text)))
+        cands = pool or ctx.recent
+        named = pool is not None
+        hits = []
+        for p in cands:
+            topic_terms = self.terms_fn(p.topic[0]) if p.topic else p.terms
+            w = {t: x for t in topic_terms if (x := self.idf_fn(t)) is not None}
+            anchors = [t for t in w if w[t] == max(w.values())] if w else []
+            n = self.cooccur_fn(z_terms, anchors) if (self.cooccur_fn and z_terms and anchors) else 0
+            hits.append((p, n))
+        rel = [p for p, n in hits if n > 0]
+        evidence = {p.intent_id: n for p, n in hits}
+        if rel:
+            conf = 1.0 if len(rel) == 1 else 0.6
+            op = CrossTurnOp("set", "restriction", c.head, z_text, start, end, z_terms, [p.intent_id for p in rel],
+                             "elliptical_follow_up_cooccurs_with_" + ("named_topic" if named else "topic"), conf,
+                             cue=c.head or "")
+            return {"decision": "constraint", "op": op, "cooccurrence": evidence, "reason": "corpus_cooccurrence",
+                    "topic_named": named}
+        return {"decision": "parallel", "prior": cands[-1], "cooccurrence": evidence, "topic_named": named,
+                "reason": "no_corpus_cooccurrence_with_previous_topic"}
 
     def decompose_with_extra_spans(self, transcript: str, utterance_id: str, spans: list[tuple[int, int]],
                                    base: Decomposition) -> Decomposition:
@@ -399,6 +531,8 @@ class IntentDecomposer:
             n_all = match_phrase(lows, i, lx.scope_all_phrases)
             n_add = match_phrase(lows, i, lx.addition_phrases)
             n_head = match_phrase(lows, i, b.request_heads)
+            if n_mark == 1 and lows[i] == "only":
+                n_mark = 0                    # "only" is a marker at a clause start only ("are ladders only ...")
             if n_corr:
                 cut, skip = "correction", n_corr
             elif n_mark and not self._embedded_condition(lows, i, prev_w):
@@ -477,6 +611,22 @@ class IntentDecomposer:
         n = match_phrase(lows, j0, lx.correction_phrases)
         has_replacement = any(match_phrase(lows, j, lx.correction_replacement_phrases) for j in rest) \
             or any(lows[j] in lx.correction_words for j in rest)
+        if n:                                                  # "I mean FOR international applicants" = late detail
+            after = rest[_advance(rest, 0, n):]
+            if after:
+                a0 = after[0]
+                nf = match_phrase(lows, a0, lx.focus_phrases) or match_phrase(lows, a0, lx.condition_phrases)
+                if nf or lows[a0] in lx.restriction_prepositions:
+                    kind = ("focus" if match_phrase(lows, a0, lx.focus_phrases) else "condition") if nf else "restriction"
+                    c.role, c.kind, c.late_detail = "CONSTRAINT", kind, True
+                    c.marker = " ".join(lows[j0:j0 + n] + (lows[a0:a0 + nf] if nf else []))
+                    c.body = after[_advance(after, 0, nf):] if nf else after
+                    return
+        nr = match_phrase(lows, j0, lx.retraction_phrases)
+        if nr:                                                 # "ignore the student restriction"
+            c.role, c.marker = "RETRACTION", " ".join(lows[j0:j0 + nr])
+            c.body = rest[_advance(rest, 0, nr):]
+            return
         if n or (has_replacement and c.opened_by in ("correction", "punct", "comma") and _prior_request(clauses, c)):
             c.role, c.marker = "CORRECTION", " ".join(lows[j0:j0 + n]) if n else "replacement"
             c.body = rest[_advance(rest, 0, n):] if n else rest
@@ -493,6 +643,7 @@ class IntentDecomposer:
         n = match_phrase(lows, j0, b.request_heads) or match_phrase(lows, j0, lx.follow_up_openers)
         if n and lows[j0] not in lx.coordinators:
             c.role, c.head = "REQUEST", " ".join(lows[j0:j0 + n])
+            c.elliptical = bool(match_phrase(lows, j0, lx.elliptical_heads))
             body = rest[_advance(rest, 0, n):]
             if body and lows[body[0]] in lx.topic_prepositions:      # "i need information ABOUT x"
                 body = body[1:]
@@ -879,11 +1030,14 @@ class IntentDecomposer:
                     span = (k, k + len(src.aspect)) if k >= 0 else None
                     ref, u = src.key, uid
                 else:
-                    span, ref, u = src.aspect_span, src.intent_id, src.utterance_id
+                    span, ref = src.aspect_span, src.intent_id
+                    u = span[2] if (span is not None and len(span) == 3) else src.utterance_id
                 if span is not None:
                     i.segments = [Segment(src.aspect, u, span[0], span[1], "inherited", ref,
-                                          "correction_aspect")] + i.segments
+                                          i.aspect_reason)] + i.segments
                     i.aspect = src.aspect
+            if i.follow_up_of is not None and i.status == "ACTIVE":
+                relations.append(DraftRelation("FOLLOW_UP", i.key, i.follow_up_of, "parallel follow-up (aspect)"))
             if i.status != "ACTIVE" or i.split == "correction":
                 continue
             antecedent = self._antecedent(intents[:n])
@@ -916,7 +1070,9 @@ class IntentDecomposer:
                     i.unresolved.append(w)
                     continue
                 new_segs.append(Segment(toks[j].text, uid, toks[j].start, toks[j].end))
-            i.segments = new_segs or i.segments
+            kept = [s for s in i.segments if s.source == "inherited" and s.reason == "follow_up_ellipsis"
+                    and s.replaces is None]                   # aspect inherited by a parallel follow-up
+            i.segments = kept + (new_segs or [s for s in i.segments if s not in kept])
             # ellipsis: an aspect-only need inherits the topic of the previous need
             content = [lows[j] for j in i.tok_idx if self._is_content(lows[j])]
             has_inherited = any(s.source == "inherited" for s in i.segments) or i.inherited

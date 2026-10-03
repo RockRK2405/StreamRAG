@@ -36,11 +36,15 @@ class QueryLedger:
     def create(self, utterance_id: str, query_text: str, transcript: str, spans: list[tuple[int, int]],
                terms: list[str], now_ms: float, trigger: str, trigger_chunk: int | None, tick: str,
                reason: str, intent_id: str | None = None, intent_version: int | None = None,
-               batch_id: str | None = None) -> tuple[QueryRecord, QueryRecord | None]:
-        prev = self.active(utterance_id, intent_id)
+               batch_id: str | None = None, parent_query_id: str | None = None,
+               derived_from_change_id: str | None = None, semantic_key: str | None = None,
+               status: str = "pending", reused_from: str | None = None) -> tuple[QueryRecord, QueryRecord | None]:
+        # Phase 6: an intent's lineage continues across utterances (a late detail in u2 refines I1 of u1)
+        prev = self.active_for_intent(intent_id) if intent_id is not None else self.active(utterance_id)
         qid = f"Q{len(self._order) + 1}"
-        version = sum(1 for r in self._records.values()
-                      if r.utterance_id == utterance_id and r.intent_id == intent_id) + 1
+        version = (sum(1 for r in self._records.values() if r.intent_id == intent_id) if intent_id is not None
+                   else sum(1 for r in self._records.values()
+                            if r.utterance_id == utterance_id and r.intent_id is None)) + 1
         relation, supersedes, root = "initial", None, qid
         if prev is not None:
             relation = "refines" if containment(set(prev.terms), set(terms)) >= self.REFINES_CONTAINMENT else "replaces"
@@ -51,7 +55,10 @@ class QueryLedger:
                           query_text=query_text, transcript_snapshot=transcript, source_spans=spans, terms=terms,
                           created_at_ms=now_ms, trigger=trigger, trigger_chunk=trigger_chunk, tick=tick,
                           decision_reason=reason, supersedes=supersedes, relation=relation, lineage_root=root,
-                          intent_id=intent_id, intent_version=intent_version, batch_id=batch_id)
+                          intent_id=intent_id, intent_version=intent_version, batch_id=batch_id,
+                          parent_query_id=parent_query_id if parent_query_id is not None else supersedes,
+                          derived_from_change_id=derived_from_change_id, semantic_key=semantic_key, status=status,
+                          reused_from=reused_from)
         self._records[qid] = rec
         self._order.append(qid)
         return rec, (self._records[prev.query_id] if prev is not None else None)
@@ -81,10 +88,17 @@ class QueryLedger:
                 return r
         return None
 
+    def active_for_intent(self, intent_id: str) -> QueryRecord | None:
+        """Latest non-cancelled query of an intent, in any utterance (Phase 6 cross-turn lineage)."""
+        for r in reversed(self.for_intent(intent_id)):
+            if r.status != "cancelled":
+                return r
+        return None
+
     def latest_completed(self, intent_id: str) -> QueryRecord | None:
         """Newest query of the intent whose retrieval completed with evidence (falls back across stale versions)."""
         for r in reversed(self.for_intent(intent_id)):
-            if r.status == "completed":
+            if r.status in ("completed", "reused"):
                 return r
         return None
 

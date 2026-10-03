@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "SessionSnapshot": {
+      "additionalProperties": false,
+      "description": "Compact, deterministic view (ids -> status) used by versions and replay.",
+      "properties": {
+        "answer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Answer Id"
+        },
+        "claims": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Claims",
+          "type": "object"
+        },
+        "constraints": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Constraints",
+          "type": "object"
+        },
+        "evidence": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Evidence",
+          "type": "object"
+        },
+        "frame_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frame Id"
+        },
+        "frames": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Frames",
+          "type": "object"
+        },
+        "intents": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Intents",
+          "type": "object"
+        },
+        "queries": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Queries",
+          "type": "object"
+        }
+      },
+      "title": "SessionSnapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "changes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "created_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
+    },
+    "parent_version": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Version"
+    },
+    "state_snapshot": {
+      "$ref": "#/$defs/SessionSnapshot"
+    },
+    "summary": {
+      "default": "",
+      "title": "Summary",
+      "type": "string"
+    },
+    "trigger": {
+      "enum": [
+        "interpretation",
+        "evidence",
+        "answer",
+        "reset",
+        "restore"
+      ],
+      "title": "Trigger",
+      "type": "string"
+    },
+    "utterance_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Utterance Id"
+    },
+    "version_id": {
+      "minimum": 1,
+      "title": "Version Id",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version_id",
+    "trigger",
+    "state_snapshot"
+  ],
+  "title": "SessionStateVersion",
+  "type": "object"
+}

@@ -1,0 +1,336 @@
+{
+  "$defs": {
+    "IntentQuery": {
+      "additionalProperties": false,
+      "description": "One retrieval query generated for one intent version (docs/multi_intent/04).",
+      "properties": {
+        "components": {
+          "items": {
+            "$ref": "#/$defs/QueryComponent"
+          },
+          "minItems": 1,
+          "title": "Components",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "intent_version": {
+          "minimum": 1,
+          "title": "Intent Version",
+          "type": "integer"
+        },
+        "terms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent_id",
+        "intent_version",
+        "utterance_id",
+        "text",
+        "components"
+      ],
+      "title": "IntentQuery",
+      "type": "object"
+    },
+    "QueryAction": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "retrieve",
+            "reuse_active",
+            "cache_hit"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "change_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Change Id"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "intent_version": {
+          "minimum": 1,
+          "title": "Intent Version",
+          "type": "integer"
+        },
+        "parent_query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Query Id"
+        },
+        "query": {
+          "$ref": "#/$defs/IntentQuery"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "reused_query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reused Query Id"
+        },
+        "scope": {
+          "default": "corpus",
+          "enum": [
+            "corpus",
+            "session_docs_first"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "semantic_key": {
+          "title": "Semantic Key",
+          "type": "string"
+        },
+        "supersedes_query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Query Id"
+        }
+      },
+      "required": [
+        "intent_id",
+        "intent_version",
+        "action",
+        "reason",
+        "query",
+        "semantic_key"
+      ],
+      "title": "QueryAction",
+      "type": "object"
+    },
+    "QueryComponent": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "source": {
+          "enum": [
+            "intent",
+            "inherited",
+            "constraint"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "source",
+        "span"
+      ],
+      "title": "QueryComponent",
+      "type": "object"
+    },
+    "SourceSpan": {
+      "additionalProperties": false,
+      "description": "Characters ``[start, end)`` of one utterance's transcript; ``text`` must equal that substring.",
+      "properties": {
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "utterance_id": {
+          "title": "Utterance Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "utterance_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SourceSpan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "affected_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Intents",
+      "type": "array"
+    },
+    "change_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Change Ids",
+      "type": "array"
+    },
+    "claims_to_revalidate": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Claims To Revalidate",
+      "type": "array"
+    },
+    "claims_unaffected": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Claims Unaffected",
+      "type": "array"
+    },
+    "evidence_to_discard": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence To Discard",
+      "type": "array"
+    },
+    "evidence_to_retain": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence To Retain",
+      "type": "array"
+    },
+    "evidence_to_revalidate": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence To Revalidate",
+      "type": "array"
+    },
+    "full_restart": {
+      "default": false,
+      "title": "Full Restart",
+      "type": "boolean"
+    },
+    "new_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "New Intents",
+      "type": "array"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "queries_to_create": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QueryAction"
+      },
+      "title": "Queries To Create",
+      "type": "array"
+    },
+    "queries_to_reuse": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QueryAction"
+      },
+      "title": "Queries To Reuse",
+      "type": "array"
+    },
+    "queries_to_supersede": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Queries To Supersede",
+      "type": "array"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan_id",
+    "utterance_id"
+  ],
+  "title": "DeltaPlan",
+  "type": "object"
+}

@@ -1,0 +1,69 @@
+{
+  "case_id": "S10",
+  "category": "correction",
+  "description": "entity replacement with explicit old entity",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard?",
+      "chunks": [
+        "What are the rules",
+        "for ladders",
+        "in the orchard?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "ladders"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Sorry, I meant crates instead of ladders.",
+      "chunks": [
+        "Sorry, I meant",
+        "crates instead of ladders."
+      ],
+      "gold": {
+        "change_types": [
+          "CORRECTION"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "crates"
+            ],
+            "forbidden": [
+              "ladders"
+            ]
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [
+          "Doc_07 \u00a73"
+        ],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

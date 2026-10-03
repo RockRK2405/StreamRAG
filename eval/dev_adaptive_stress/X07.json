@@ -1,0 +1,68 @@
+{
+  "case_id": "X07",
+  "category": "new_intent_independent",
+  "description": "'also' new question",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What does the keeper do during a storm?",
+      "chunks": [
+        "What does the keeper",
+        "do during a storm?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "storm"
+            ],
+            "forbidden": []
+          }
+        ],
+        "forbidden_new": [],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Also, how is the logbook kept?",
+      "chunks": [
+        "Also,",
+        "how is the logbook kept?"
+      ],
+      "gold": {
+        "change_types": [
+          "NEW_INTENT"
+        ],
+        "retrieval": "required",
+        "need_queries": [
+          {
+            "required": [
+              "logbook"
+            ],
+            "forbidden": [
+              "storm"
+            ]
+          }
+        ],
+        "forbidden_new": [
+          "storm"
+        ],
+        "gold_evidence": [],
+        "expect_revalidation": [],
+        "expect_conflict": false,
+        "ambiguous": false
+      }
+    }
+  ]
+}

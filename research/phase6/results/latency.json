@@ -1,0 +1,272 @@
+{
+  "all_turns": {
+    "full_restart": {
+      "answer_update": {
+        "max": 0.0635,
+        "mean": 0.0462,
+        "n": 64,
+        "p50": 0.0488,
+        "p95": 0.057
+      },
+      "change_detection": {
+        "max": 0.2257,
+        "mean": 0.0892,
+        "n": 64,
+        "p50": 0.0888,
+        "p95": 0.1364
+      },
+      "claim_revalidation": {
+        "max": 3.9683,
+        "mean": 1.6165,
+        "n": 64,
+        "p50": 1.51,
+        "p95": 2.5888
+      },
+      "delta_planning": {
+        "max": 0.1341,
+        "mean": 0.0692,
+        "n": 64,
+        "p50": 0.0616,
+        "p95": 0.1324
+      },
+      "evidence_update": {
+        "max": 0.0558,
+        "mean": 0.0297,
+        "n": 64,
+        "p50": 0.0316,
+        "p95": 0.0441
+      },
+      "interpretation": {
+        "max": 0.458,
+        "mean": 0.22,
+        "n": 64,
+        "p50": 0.2354,
+        "p95": 0.3349
+      },
+      "retrieval": {
+        "max": 8.5779,
+        "mean": 4.5653,
+        "n": 64,
+        "p50": 4.4958,
+        "p95": 6.8289
+      },
+      "sum_of_median_totals_ms": 372.972,
+      "total": {
+        "max": 10.7908,
+        "mean": 5.8277,
+        "n": 64,
+        "p50": 5.5814,
+        "p95": 8.7215
+      }
+    },
+    "incremental": {
+      "answer_update": {
+        "max": 0.0814,
+        "mean": 0.0491,
+        "n": 64,
+        "p50": 0.0501,
+        "p95": 0.0673
+      },
+      "change_detection": {
+        "max": 0.2197,
+        "mean": 0.0926,
+        "n": 64,
+        "p50": 0.09,
+        "p95": 0.1422
+      },
+      "claim_revalidation": {
+        "max": 4.446,
+        "mean": 1.635,
+        "n": 64,
+        "p50": 1.528,
+        "p95": 2.9049
+      },
+      "delta_planning": {
+        "max": 1.9567,
+        "mean": 0.4392,
+        "n": 64,
+        "p50": 0.0639,
+        "p95": 1.493
+      },
+      "evidence_update": {
+        "max": 0.1106,
+        "mean": 0.0373,
+        "n": 64,
+        "p50": 0.0324,
+        "p95": 0.073
+      },
+      "interpretation": {
+        "max": 0.4492,
+        "mean": 0.2261,
+        "n": 64,
+        "p50": 0.2427,
+        "p95": 0.3391
+      },
+      "retrieval": {
+        "max": 8.4213,
+        "mean": 4.3671,
+        "n": 64,
+        "p50": 4.5505,
+        "p95": 6.0751
+      },
+      "sum_of_median_totals_ms": 353.42,
+      "total": {
+        "max": 10.8438,
+        "mean": 5.5222,
+        "n": 64,
+        "p50": 5.6599,
+        "p95": 7.936
+      }
+    },
+    "latency_saving": 0.0524,
+    "per_turn_saving": {
+      "max": 0.9044,
+      "mean": 0.0809,
+      "n": 64,
+      "p50": -0.0041,
+      "p95": 0.809
+    }
+  },
+  "follow_up_turns_with_a_change": {
+    "full_restart": {
+      "answer_update": {
+        "max": 0.0612,
+        "mean": 0.0495,
+        "n": 32,
+        "p50": 0.05,
+        "p95": 0.0563
+      },
+      "change_detection": {
+        "max": 0.2257,
+        "mean": 0.1024,
+        "n": 32,
+        "p50": 0.0949,
+        "p95": 0.1562
+      },
+      "claim_revalidation": {
+        "max": 3.7917,
+        "mean": 1.8695,
+        "n": 32,
+        "p50": 1.7276,
+        "p95": 2.9093
+      },
+      "delta_planning": {
+        "max": 0.1341,
+        "mean": 0.0854,
+        "n": 32,
+        "p50": 0.0836,
+        "p95": 0.1333
+      },
+      "evidence_update": {
+        "max": 0.0527,
+        "mean": 0.0321,
+        "n": 32,
+        "p50": 0.0315,
+        "p95": 0.0459
+      },
+      "interpretation": {
+        "max": 0.3364,
+        "mean": 0.1951,
+        "n": 32,
+        "p50": 0.1893,
+        "p95": 0.3131
+      },
+      "retrieval": {
+        "max": 8.5779,
+        "mean": 5.0986,
+        "n": 32,
+        "p50": 4.8746,
+        "p95": 7.0321
+      },
+      "sum_of_median_totals_ms": 217.856,
+      "total": {
+        "max": 10.7908,
+        "mean": 6.808,
+        "n": 32,
+        "p50": 6.5891,
+        "p95": 8.8119
+      }
+    },
+    "incremental": {
+      "answer_update": {
+        "max": 0.0814,
+        "mean": 0.0565,
+        "n": 32,
+        "p50": 0.0554,
+        "p95": 0.0745
+      },
+      "change_detection": {
+        "max": 0.2197,
+        "mean": 0.1106,
+        "n": 32,
+        "p50": 0.1002,
+        "p95": 0.1599
+      },
+      "claim_revalidation": {
+        "max": 4.446,
+        "mean": 1.928,
+        "n": 32,
+        "p50": 1.899,
+        "p95": 3.1257
+      },
+      "delta_planning": {
+        "max": 1.9567,
+        "mean": 0.8267,
+        "n": 32,
+        "p50": 1.0255,
+        "p95": 1.6867
+      },
+      "evidence_update": {
+        "max": 0.1106,
+        "mean": 0.0477,
+        "n": 32,
+        "p50": 0.0493,
+        "p95": 0.0776
+      },
+      "interpretation": {
+        "max": 0.3759,
+        "mean": 0.2186,
+        "n": 32,
+        "p50": 0.2145,
+        "p95": 0.3317
+      },
+      "retrieval": {
+        "max": 8.4213,
+        "mean": 4.6524,
+        "n": 32,
+        "p50": 4.7569,
+        "p95": 6.1449
+      },
+      "sum_of_median_totals_ms": 199.58,
+      "total": {
+        "max": 10.8438,
+        "mean": 6.2369,
+        "n": 32,
+        "p50": 6.2798,
+        "p95": 8.0614
+      }
+    },
+    "latency_saving": 0.0839,
+    "per_turn_saving": {
+      "max": 0.79,
+      "mean": 0.0624,
+      "n": 32,
+      "p50": -0.0093,
+      "p95": 0.6479
+    }
+  },
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2"
+    },
+    "tokenizer_for_token_counts": "bge-small-en-v1.5 (proxy)",
+    "turns": 64
+  },
+  "reps": 7,
+  "statistic": "median over reps per turn, then p50/p95/mean over turns"
+}

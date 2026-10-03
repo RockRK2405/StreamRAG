@@ -1,0 +1,267 @@
+{
+  "$defs": {
+    "SemanticDiff": {
+      "additionalProperties": false,
+      "description": "Interpretation-level difference for one need: terms, topic, facet and constraints (not raw strings).",
+      "properties": {
+        "aspect_after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aspect After"
+        },
+        "aspect_before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aspect Before"
+        },
+        "constraints_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints Added",
+          "type": "array"
+        },
+        "constraints_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints Removed",
+          "type": "array"
+        },
+        "from_version": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Version"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "terms_added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms Added",
+          "type": "array"
+        },
+        "terms_removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms Removed",
+          "type": "array"
+        },
+        "to_version": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Version"
+        },
+        "topic_after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Topic After"
+        },
+        "topic_before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Topic Before"
+        }
+      },
+      "required": [
+        "intent_id"
+      ],
+      "title": "SemanticDiff",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "added_constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Added Constraints",
+      "type": "array"
+    },
+    "affected_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Intents",
+      "type": "array"
+    },
+    "affected_queries": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Queries",
+      "type": "array"
+    },
+    "at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "At Ms",
+      "type": "number"
+    },
+    "change_id": {
+      "title": "Change Id",
+      "type": "string"
+    },
+    "change_type": {
+      "enum": [
+        "NO_CHANGE",
+        "REFINEMENT",
+        "CONSTRAINT_ADDITION",
+        "CONSTRAINT_REMOVAL",
+        "NEW_INTENT",
+        "INTENT_REMOVAL",
+        "CORRECTION",
+        "ENTITY_CHANGE",
+        "QUESTION_CHANGE"
+      ],
+      "title": "Change Type",
+      "type": "string"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "confidence_signals": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Confidence Signals",
+      "type": "object"
+    },
+    "cue": {
+      "default": "",
+      "title": "Cue",
+      "type": "string"
+    },
+    "diffs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SemanticDiff"
+      },
+      "title": "Diffs",
+      "type": "array"
+    },
+    "frame_action": {
+      "default": "none",
+      "enum": [
+        "same",
+        "new_frame",
+        "reactivated",
+        "none"
+      ],
+      "title": "Frame Action",
+      "type": "string"
+    },
+    "new_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "New Intents",
+      "type": "array"
+    },
+    "relation": {
+      "default": "none",
+      "enum": [
+        "follow_up",
+        "independent",
+        "correction",
+        "same_need",
+        "none"
+      ],
+      "title": "Relation",
+      "type": "string"
+    },
+    "removed_constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Removed Constraints",
+      "type": "array"
+    },
+    "session_version_from": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Session Version From",
+      "type": "integer"
+    },
+    "superseded_intents": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Superseded Intents",
+      "type": "array"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "change_id",
+    "change_type",
+    "utterance_id",
+    "confidence"
+  ],
+  "title": "ContextChange",
+  "type": "object"
+}

@@ -8,10 +8,12 @@ build/
 dist/
 .env
 
-# large / generated artifacts (reproducible from corpus + config + pinned models)
-models/
-indexes/
-runs/
-corpus/
-!corpus/README.md
+# large / generated artifacts (reproducible from corpus + config + pinned models). Anchored to the repo root:
+# unanchored "models/" and "corpus/" also matched src/streamrag/models, src/streamrag/corpus and
+# tests/fixtures/corpus (source code and test fixtures that must be tracked).
+/models/
+/indexes/
+/runs/
+/corpus/*
+!/corpus/README.md
 .DS_Store
