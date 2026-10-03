@@ -15,6 +15,7 @@ generator falls back (extractive generation).
 
 from __future__ import annotations
 
+import contextvars
 import hashlib
 import json
 import time
@@ -22,6 +23,27 @@ import urllib.error
 import urllib.request
 from collections.abc import Callable
 from dataclasses import dataclass, field
+
+
+class GenerationCancelled(Exception):
+    """The runtime cancelled the call (cooperative cancellation, docs/runtime/05)."""
+
+
+@dataclass
+class CallContext:
+    """Per-call runtime context, set by the worker thread that runs the answer (contextvars are thread-local):
+    ``is_cancelled`` is polled per streamed chunk, ``deadline`` (time.monotonic seconds) caps the call timeout."""
+
+    is_cancelled: Callable[[], bool] = lambda: False
+    deadline: float | None = None
+
+    def timeout(self, default_s: float) -> float:
+        if self.deadline is None:
+            return default_s
+        return max(0.05, min(default_s, self.deadline - time.monotonic()))
+
+
+CALL_CONTEXT: contextvars.ContextVar[CallContext] = contextvars.ContextVar("streamrag_llm_call", default=CallContext())
 
 
 @dataclass
@@ -71,9 +93,14 @@ class OllamaBackend:
                                      headers={"Content-Type": "application/json"})
         t0 = time.perf_counter()
         first, parts, last = None, [], {}
+        ctx = CALL_CONTEXT.get()
+        if ctx.is_cancelled():
+            raise GenerationCancelled("cancelled before the call")
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout_s) as r:
+            with urllib.request.urlopen(req, timeout=ctx.timeout(self.timeout_s)) as r:
                 for line in r:
+                    if ctx.is_cancelled():             # closing the stream stops the server-side generation
+                        raise GenerationCancelled("cancelled during generation")
                     d = json.loads(line)
                     piece = d.get("message", {}).get("content", "")
                     if piece and first is None:

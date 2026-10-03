@@ -1,0 +1,332 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "question": "How high should the wicks be trimmed?",
+    "llm": "SimulatedLLM 200 ms (SYNTHETIC)",
+    "timeouts": {
+      "generation_ms": 1000,
+      "dense_ms": 800
+    }
+  },
+  "scenarios": {
+    "retrieval_timeout": {
+      "faults": [
+        {
+          "target": "dense",
+          "kind": "timeout",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 1.384,
+      "degraded_modes": [
+        "RETRIEVAL_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "degraded"
+      ],
+      "task_statuses": {
+        "submitted": 4,
+        "COMPLETED": 3,
+        "TIMED_OUT": 1,
+        "late_results_dropped": 1
+      },
+      "retries": {},
+      "errors": [
+        "continue_with_available_evidence"
+      ],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "dense:timeout": 1
+      }
+    },
+    "vector_db_failure": {
+      "faults": [
+        {
+          "target": "dense",
+          "kind": "error",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 0.529,
+      "degraded_modes": [
+        "RETRIEVAL_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "degraded"
+      ],
+      "task_statuses": {
+        "submitted": 5,
+        "COMPLETED": 4,
+        "FAILED": 1
+      },
+      "retries": {
+        "not_retryable": 1
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "dense:error": 1
+      }
+    },
+    "lexical_failure": {
+      "faults": [
+        {
+          "target": "lexical",
+          "kind": "error",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 0.53,
+      "degraded_modes": [
+        "RETRIEVAL_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "degraded"
+      ],
+      "task_statuses": {
+        "submitted": 5,
+        "FAILED": 1,
+        "COMPLETED": 4
+      },
+      "retries": {
+        "not_retryable": 1
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "lexical:error": 1
+      }
+    },
+    "network_failure_transient": {
+      "faults": [
+        {
+          "target": "network",
+          "kind": "transient",
+          "times": 2,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 2
+        }
+      ],
+      "wall_s": 0.53,
+      "degraded_modes": [],
+      "retrieval_statuses": [
+        "ok"
+      ],
+      "task_statuses": {
+        "submitted": 5,
+        "retries": 2,
+        "COMPLETED": 5
+      },
+      "retries": {
+        "retried": 2
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "network:transient": 2
+      }
+    },
+    "network_failure_persistent": {
+      "faults": [
+        {
+          "target": "network",
+          "kind": "error",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 2
+        }
+      ],
+      "wall_s": 0.414,
+      "degraded_modes": [
+        "RETRIEVAL_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "error"
+      ],
+      "task_statuses": {
+        "submitted": 3,
+        "FAILED": 2,
+        "COMPLETED": 1
+      },
+      "retries": {
+        "not_retryable": 2
+      },
+      "errors": [
+        "keep_previous_evidence"
+      ],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Not established: The retrieved documents do not contain an answer to \u201cHow high should the wicks be trimmed\u201d.",
+      "session_closed": true,
+      "injected_hits": {
+        "network:error": 2
+      }
+    },
+    "llm_timeout": {
+      "faults": [
+        {
+          "target": "llm",
+          "kind": "timeout",
+          "times": -1,
+          "delay_ms": 1500,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 1.325,
+      "degraded_modes": [
+        "GENERATION_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "ok"
+      ],
+      "task_statuses": {
+        "submitted": 6,
+        "COMPLETED": 5,
+        "TIMED_OUT": 1,
+        "late_results_dropped": 1
+      },
+      "retries": {
+        "retried": 1
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "extractive",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "llm:timeout": 1
+      }
+    },
+    "llm_error": {
+      "faults": [
+        {
+          "target": "llm",
+          "kind": "error",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 0.412,
+      "degraded_modes": [
+        "GENERATION_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "ok"
+      ],
+      "task_statuses": {
+        "submitted": 5,
+        "COMPLETED": 5
+      },
+      "retries": {
+        "not_retryable": 1
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "llm:error": 1
+      }
+    },
+    "llm_transient": {
+      "faults": [
+        {
+          "target": "llm",
+          "kind": "transient",
+          "times": 1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 1
+        }
+      ],
+      "wall_s": 0.579,
+      "degraded_modes": [],
+      "retrieval_statuses": [
+        "ok"
+      ],
+      "task_statuses": {
+        "submitted": 5,
+        "COMPLETED": 5
+      },
+      "retries": {
+        "retried": 1
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "full",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "llm:transient": 1
+      }
+    },
+    "validation_failure": {
+      "faults": [
+        {
+          "target": "verification",
+          "kind": "error",
+          "times": -1,
+          "delay_ms": 0.0,
+          "session_id": null,
+          "used": 2
+        }
+      ],
+      "wall_s": 0.547,
+      "degraded_modes": [
+        "VALIDATION_DEGRADED"
+      ],
+      "retrieval_statuses": [
+        "ok"
+      ],
+      "task_statuses": {
+        "submitted": 6,
+        "COMPLETED": 4,
+        "FAILED": 2
+      },
+      "retries": {
+        "not_retryable": 2
+      },
+      "errors": [],
+      "answer_status": "VALIDATED_FINAL",
+      "answer_mode": "rules",
+      "answer_text": "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]",
+      "session_closed": true,
+      "injected_hits": {
+        "verification:error": 2
+      }
+    }
+  }
+}

@@ -140,7 +140,9 @@ class ControllerConfig(_Cfg):
     reserve_final_retrieval: bool = True
     allow_parallel_retrieval: bool = True
     max_concurrent_retrievals: int = Field(2, ge=1)
-    cancel_superseded: Literal["never", "queued_only"] = "queued_only"
+    # queued_only: a superseded query is dropped while queued, a running one completes and is marked stale (Phase 4);
+    # cooperative: a running one is also signalled to stop at its next checkpoint (Phase 8 runtime, docs/runtime/05)
+    cancel_superseded: Literal["never", "queued_only", "cooperative"] = "queued_only"
     endpoint_timeout_ms: int = Field(3000, ge=1)
 
 
@@ -233,6 +235,88 @@ class GenerationConfig(_Cfg):
     draft_mode: Literal["off", "extractive"] = "extractive"   # streamed drafts before the turn ends
 
 
+class RuntimeTimeouts(_Cfg):
+    """Per-task deadlines (ms). A child task gets min(its own timeout, the remaining turn budget minus the time
+    reserved for the stages after it) - deadline propagation, docs/runtime/06."""
+    lexical: int = Field(2000, ge=1)
+    dense: int = Field(3000, ge=1)
+    assemble: int = Field(2000, ge=1)
+    generation: int = Field(60000, ge=1)
+    draft: int = Field(10000, ge=1)
+    validation_retrieval: int = Field(3000, ge=1)
+
+
+class RuntimeQueues(_Cfg):
+    """Capacities of the bounded queues (number of entries)."""
+    input: int = Field(64, ge=1)          # per session: transcript deltas / control inputs awaiting the session lane
+    retrieval: int = Field(64, ge=1)      # pending retrieval subtasks (all sessions)
+    llm: int = Field(8, ge=1)             # pending generation tasks
+    cpu: int = Field(32, ge=1)            # pending assembly / draft tasks
+    output: int = Field(4096, ge=16)      # per subscriber: user-visible events not yet consumed
+
+
+class RuntimeRetry(_Cfg):
+    max_retries: int = Field(2, ge=0)                 # attempts after the first, transient failures only
+    initial_delay_ms: float = Field(50.0, ge=0)
+    max_delay_ms: float = Field(1000.0, ge=0)
+    multiplier: float = Field(2.0, ge=1.0)
+    jitter: float = Field(0.2, ge=0, le=1)            # +- share of the delay, drawn from a seeded RNG (replayable)
+    seed: int = 7
+
+
+class RuntimePriorities(_Cfg):
+    """Lower value = served first. Aging: a pending task gains one level per ``aging_ms`` waited (no starvation)."""
+    final_answer: int = 0                 # CRITICAL: the current turn's validated answer
+    retrieval_final: int = 1              # HIGH: retrieval for a finalized utterance / a need without evidence yet
+    validation_retrieval: int = 1
+    retrieval_provisional: int = 2        # MEDIUM: early retrieval while the user speaks
+    draft: int = 2
+    analytics: int = 3                    # LOW: optional enrichment
+    aging_ms: float = Field(500.0, gt=0)
+
+
+class RuntimeBudget(_Cfg):
+    """Turn latency budget used for deadline propagation - a configuration value, not a measured or claimed target.
+    The reserves are the dev-machine Phase 7 p95 stage times (PHASE_7 report §19), so retrieval cannot consume the
+    time generation and validation still need."""
+    turn_ms: float = Field(30000.0, gt=0)
+    generation_reserve_ms: float = Field(4200.0, ge=0)
+    validation_reserve_ms: float = Field(400.0, ge=0)
+
+
+class RuntimeSimLatency(_Cfg):
+    """Virtual-clock execution model (deterministic replay / orchestration tests only; never reported as measured
+    latency). Values are ms of virtual time per task."""
+    lexical: float = 20.0
+    dense: float = 40.0
+    assemble: float = 2.0
+    generation: float = 2000.0
+    draft: float = 50.0
+    validation_retrieval: float = 30.0
+
+
+class RuntimeConfig(_Cfg):
+    """Phase 8 streaming runtime (docs/runtime/, ADR-018). Team engineering defaults, not official thresholds."""
+    max_concurrent_sessions: int = Field(8, ge=1)
+    max_concurrent_retrievals: int = Field(4, ge=1)   # retrieval worker threads (lexical / dense subtasks)
+    max_concurrent_llm_calls: int = Field(1, ge=1)    # the local Ollama server runs one request at a time
+    max_concurrent_cpu: int = Field(2, ge=1)          # assembly, drafts (NLI verification)
+    queues: RuntimeQueues = RuntimeQueues()
+    timeouts_ms: RuntimeTimeouts = RuntimeTimeouts()
+    retry: RuntimeRetry = RuntimeRetry()
+    priorities: RuntimePriorities = RuntimePriorities()
+    budget: RuntimeBudget = RuntimeBudget()
+    sim_latency_ms: RuntimeSimLatency = RuntimeSimLatency()
+    split_retrieval: bool = True                      # lexical and dense as concurrent subtasks (partial results)
+    coalescing_window_ms: float = Field(0.0, ge=0)    # 0: coalesce only what is already queued (adaptive batching)
+    cancel_running: bool = True                       # superseded running work is signalled (cooperative)
+    cancel_on_correction: bool = True                 # a correction cancels the previous turn's in-flight answer
+    output_max_hold_ms: float = Field(2000.0, ge=0)   # ordered output buffer: longest wait for a missing sequence
+    shutdown_grace_ms: float = Field(5000.0, ge=0)
+    max_chunk_chars: int = Field(4000, ge=1)          # input validation (resource exhaustion)
+    max_inputs_per_session: int = Field(20000, ge=1)
+
+
 class TelemetryConfig(_Cfg):
     log_level: str = "INFO"
     log_format: Literal["json", "text"] = "json"
@@ -257,6 +341,7 @@ class StreamRagConfig(_Cfg):
     fusion: FusionConfig = FusionConfig()
     session: SessionConfig = SessionConfig()
     generation: GenerationConfig = GenerationConfig()
+    runtime: RuntimeConfig = RuntimeConfig()
     telemetry: TelemetryConfig = TelemetryConfig()
 
     def resolve_paths(self, base: Path) -> "StreamRagConfig":

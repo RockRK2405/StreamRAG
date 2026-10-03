@@ -1,0 +1,9 @@
+{"event": "index_reused", "level": "INFO", "logger": "streamrag.index", "path": "/private/tmp/claude-501/-Users-rudrakhale-Desktop-SamsungHackathon/08d15dc5-ae92-484b-b99e-484969ff91ee/scratchpad/idx8/fixture/7220cb344762-fc02ac9714", "ts": "2026-10-03T13:42:40.690Z"}
+{"event": "index_reused", "level": "INFO", "logger": "streamrag.index", "path": "/private/tmp/claude-501/-Users-rudrakhale-Desktop-SamsungHackathon/08d15dc5-ae92-484b-b99e-484969ff91ee/scratchpad/idx8/grounding/9975da9f0909-fc02ac9714", "ts": "2026-10-03T13:42:41.145Z"}
+concurrency: 64.9s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/concurrency.json
+cancellation: 33.5s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/cancellation.json
+backpressure: 4.1s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/backpressure.json
+stale: 18.7s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/stale.json
+failures: 6.3s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/failures.json
+load: 64.6s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/load.json
+leaks: 2.3s -> /Users/rudrakhale/Desktop/SamsungHackathon/research/phase8/results/leaks.json

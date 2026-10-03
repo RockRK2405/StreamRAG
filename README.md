@@ -1,6 +1,6 @@
 # StreamRAG — Samsung PRISM GenAI Hackathon 2026–27, Theme 4: Streaming Live RAG
 
-**Current phase: Phase 7, grounded answer generation** (claim planning, local-LLM generation, entailment-based claim verification, citations, repair, validated and versioned answers), built on the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
+**Current phase: Phase 8, the streaming runtime** (asynchronous orchestration: concurrent workers, cancellation, timeouts, retries, backpressure, stale-result protection, degraded modes, replay), running the Phase 7 grounded answers, the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
 
 Implemented:
 - corpus ingestion with stable citation IDs;
@@ -72,6 +72,34 @@ Native document IDs (e.g. files named `Doc_12_….pdf`, or a front-matter `id:`)
 - `stream` prints controller decisions, query versions, retrievals and lead time. Add `--mode realtime` for the asyncio wall-clock mode, or `--policy end_only|every_chunk` for the ablation baselines.
 - `--multi-intent` (Phase 5) decomposes each utterance into intents, retrieves per intent (only new or changed intents while the user speaks) and prints the fused evidence.
 - `replay` re-runs the trace. A virtual trace must match exactly. A realtime trace must match in behavior (decisions, queries, retrieval outcomes), because its timestamps carry real jitter.
+
+## Streaming runtime (Phase 8)
+
+```bash
+.venv/bin/streamrag --set generation.enabled=true stream --session --runtime --interval-ms 300 --text "Tell me the eligibility requirements | and the application process | for the permit." --corpus tests/fixtures/corpus_grounding
+```
+
+- `--runtime` runs the turn through `streamrag.runtime.StreamingRuntime`: one actor per session on the event loop, lexical / dense retrieval subtasks in parallel on bounded worker pools, answers off the loop, cooperative cancellation of superseded work, bounded coalescing input queues (`runtime:` in `configs/default.yaml`, `docs/runtime/`, ADR-018).
+- In code: `rt = await StreamingRuntime(cfg, stack).start()`, `rt.start_session()`, `rt.push_transcript_delta(...)`, `async for ev in rt.get_events(sid)`, `await rt.shutdown()`.
+- Runtime traces replay exactly from the event log (`streamrag replay trace.jsonl`).
+
+```bash
+.venv/bin/python research/phase8/run_runtime_benchmarks.py --index-root /tmp/idx8
+```
+
+```bash
+.venv/bin/python research/phase8/compare_pipelines.py --index-root /tmp/idx8
+```
+
+```bash
+.venv/bin/python research/phase8/e2e_demo.py --index-root /tmp/idx8
+```
+
+```bash
+.venv/bin/python research/phase8/final_validation.py --index-root /tmp/idx8
+```
+
+The last three need `ollama serve` (real local model); `run_runtime_benchmarks.py` uses a simulated LLM (synthetic, labelled).
 
 ## Grounded answers (Phase 7)
 
@@ -183,6 +211,8 @@ src/streamrag/
   citations/       citation model, mapping from verification to the supporting span, validation, orphans
   validation/      unsupported-claim policy, repair, coverage, consistency, grounding metrics
   answer_state/    grounded answer engine (plan -> generate -> verify -> repair -> cite -> validate), renderer
+  runtime/         Phase 8: StreamingRuntime - event bus, task scheduler, worker pools, cancellation, timeouts,
+                   retries, backpressure, state coordinator, answer lane, streamer, replay, fault injection
   telemetry/       structured logging, JSONL event sink, timing
   tools/           build-time model download (the only network code)
 tests/             unit/integration tests; tests/fixtures = TEST FIXTURES only
@@ -195,6 +225,7 @@ docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 | Document | Contents |
 |---|---|
 | `PHASE_7_GROUNDED_GENERATION_REPORT.md` | Phase 7: grounded generation, claim verification, citations; benchmark, ablations, hallucination tests |
+| `PHASE_8_STREAMING_RUNTIME_REPORT.md` | Phase 8: streaming runtime - concurrency, cancellation, backpressure, race protection, degraded modes, replay; concurrency / cancellation / backpressure / failure / load benchmarks |
 | `PHASE_6_ADAPTIVE_RAG_REPORT.md` | Phase 6: adaptive session RAG; dev-suite, stress-set, full-restart, ablation and scaling results |
 | `PHASE_5_MULTI_INTENT_REPORT.md` | Phase 5: multi-intent decomposition, delta retrieval, fusion; dev-suite results |
 | `PHASE_4_STREAMING_REPORT.md` | Phase 4: streaming engine, controller, ledger; dev-suite results |

@@ -25,7 +25,9 @@ def _session_id(inputs: list) -> str:
     return inputs[0].session_id if inputs else "sim"
 
 
-def _schedule(sched, session: StreamingSession, inputs: list) -> None:
+def input_times(inputs: list) -> list[tuple[float, object]]:
+    """Arrival time (ms) of every input on the stream clock; a SessionEnd is appended if missing."""
+    out: list[tuple[float, object]] = []
     offsets: dict[str, float] = {}
     t_last = 0.0
     for ev in inputs:
@@ -40,9 +42,15 @@ def _schedule(sched, session: StreamingSession, inputs: list) -> None:
         else:
             t = t_last
         t_last = max(t_last, t)
-        sched.call_at(t, PRIORITY_INPUT, session.handle_input, ev)
+        out.append((t, ev))
     if not any(isinstance(e, SessionEnd) for e in inputs):
-        sched.call_at(t_last, PRIORITY_INPUT, session.handle_input, SessionEnd(session_id=_session_id(inputs)))
+        out.append((t_last, SessionEnd(session_id=_session_id(inputs))))
+    return out
+
+
+def _schedule(sched, session: StreamingSession, inputs: list) -> None:
+    for t, ev in input_times(inputs):
+        sched.call_at(t, PRIORITY_INPUT, session.handle_input, ev)
 
 
 def _meta(cfg: StreamRagConfig, index_hash: str | None) -> dict:

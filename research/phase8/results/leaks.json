@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "cycles": 5,
+    "workload": "runtime start, 2 sessions (one cancelled mid-run), shutdown"
+  },
+  "cycles": [
+    {
+      "cycle": 0,
+      "threads": 2,
+      "open_fds": 18,
+      "pending_asyncio_tasks": 0,
+      "live_cancellation_tokens": 0,
+      "zombie_workers": 0,
+      "python_heap_mb": 0.07
+    },
+    {
+      "cycle": 1,
+      "threads": 2,
+      "open_fds": 18,
+      "pending_asyncio_tasks": 0,
+      "live_cancellation_tokens": 0,
+      "zombie_workers": 0,
+      "python_heap_mb": 0.07
+    },
+    {
+      "cycle": 2,
+      "threads": 2,
+      "open_fds": 18,
+      "pending_asyncio_tasks": 0,
+      "live_cancellation_tokens": 0,
+      "zombie_workers": 0,
+      "python_heap_mb": 0.08
+    },
+    {
+      "cycle": 3,
+      "threads": 2,
+      "open_fds": 18,
+      "pending_asyncio_tasks": 0,
+      "live_cancellation_tokens": 0,
+      "zombie_workers": 0,
+      "python_heap_mb": 0.08
+    },
+    {
+      "cycle": 4,
+      "threads": 2,
+      "open_fds": 18,
+      "pending_asyncio_tasks": 0,
+      "live_cancellation_tokens": 0,
+      "zombie_workers": 0,
+      "python_heap_mb": 0.08
+    }
+  ],
+  "thread_growth_after_first_cycle": 0,
+  "fd_growth_after_first_cycle": 0
+}

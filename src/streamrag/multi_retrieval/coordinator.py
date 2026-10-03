@@ -52,6 +52,12 @@ CORRECTION_GATE_REASONS = frozenset({"not_retrieval_worthy", "not_yet_retrieval_
                                      "awaiting_stability"})
 
 
+def _critical_path(recs) -> float | None:
+    spans = [r.retrieval_completed_at_ms - r.retrieval_started_at_ms for r in recs
+             if r.retrieval_started_at_ms is not None and r.retrieval_completed_at_ms is not None]
+    return round(max(spans), 3) if spans else None
+
+
 def gate_open(decision) -> bool:
     if decision.decision == "RETRIEVE":
         return True
@@ -103,6 +109,7 @@ class MultiIntentCoordinator:
                                                 stack.query_builder, stack.index_hash, session.options,
                                                 emit=session.emit, config_hash=str(session.meta.get("config_hash", "")))
         self.grounding = None                           # Phase 7 GroundedAnswerEngine (generation.enabled)
+        self.answer_lane = None                         # Phase 8: runtime answer lane (async drafts / finals)
         self.grounded: dict[str, object] = {}           # utterance -> final GroundedAnswer of its turn
         self._n_vr = 0
         if self.engine is not None and session.cfg.generation.enabled and stack.grounding is not None:
@@ -199,12 +206,27 @@ class MultiIntentCoordinator:
 
     def _cancel_queued(self, intent_id: str, uid: str, reason: str) -> None:
         s = self.s
+        cooperative = s.cfg.controller.cancel_superseded == "cooperative" and hasattr(s.executor, "cancel_running")
         for r in s.ledger.for_intent(intent_id):
             if r.status == "queued" and s.executor.cancel_queued(r.query_id):
                 s.ledger.update(r.query_id, status="cancelled", retrieval_status="cancelled")
                 s.emit(E.RETRIEVAL_CANCELLED, "query_ledger", {"query_id": r.query_id, "reason": reason}, uid,
                        intent_id=intent_id)
                 self._batch_done(r.query_id)
+            elif cooperative and r.status == "in_flight":         # Phase 8: stop the running retrieval too
+                s.executor.cancel_running(r.query_id, f"{reason}_in_flight")
+
+    def _supersede(self, prev, new_qid: str, uid: str, intent_id: str) -> None:
+        """A newer query of the same need replaces ``prev`` (docs/streaming/06, docs/runtime/05)."""
+        s = self.s
+        mode = s.cfg.controller.cancel_superseded
+        if mode in ("queued_only", "cooperative") and prev.status == "queued" and s.executor.cancel_queued(prev.query_id):
+            s.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
+            s.emit(E.RETRIEVAL_CANCELLED, "query_ledger", {"query_id": prev.query_id, "reason": "superseded_before_start",
+                                                           "superseded_by": new_qid}, uid, intent_id=intent_id)
+            self._batch_done(prev.query_id)
+        elif mode == "cooperative" and prev.status == "in_flight" and hasattr(s.executor, "cancel_running"):
+            s.executor.cancel_running(prev.query_id, "superseded_in_flight")
 
     # ------------------------------------------------------------------ dispatch (delta retrieval)
     def _dispatch(self, uid, iset, tick, now, trigger_chunk, final) -> None:
@@ -261,14 +283,8 @@ class MultiIntentCoordinator:
                 "supersedes": rec.supersedes, "lineage_root": rec.lineage_root, "batch_id": bid,
                 "superseded_status": prev.status if prev else None}, uid, intent_id=it.intent_id,
                 query_id=rec.query_id)
-            if prev is not None and prev.status == "queued" and s.cfg.controller.cancel_superseded == "queued_only":
-                if s.executor.cancel_queued(prev.query_id):
-                    s.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
-                    s.emit(E.RETRIEVAL_CANCELLED, "query_ledger", {"query_id": prev.query_id,
-                                                                   "reason": "superseded_before_start",
-                                                                   "superseded_by": rec.query_id}, uid,
-                           intent_id=it.intent_id)
-                    self._batch_done(prev.query_id)
+            if prev is not None:
+                self._supersede(prev, rec.query_id, uid, it.intent_id)
             qids.append(rec.query_id)
         self.batches[bid] = _Batch(bid, uid, set(qids), qids, now)
         for q in qids:
@@ -355,14 +371,8 @@ class MultiIntentCoordinator:
                 "semantic_key": a.semantic_key, "action_reason": a.reason,
                 "superseded_status": prev.status if prev else None}, uid, intent_id=a.intent_id,
                 query_id=rec.query_id)
-            if prev is not None and prev.status == "queued" and s.cfg.controller.cancel_superseded == "queued_only":
-                if s.executor.cancel_queued(prev.query_id):
-                    s.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
-                    s.emit(E.RETRIEVAL_CANCELLED, "query_ledger", {"query_id": prev.query_id,
-                                                                   "reason": "superseded_before_start",
-                                                                   "superseded_by": rec.query_id}, uid,
-                           intent_id=a.intent_id)
-                    self._batch_done(prev.query_id)
+            if prev is not None:
+                self._supersede(prev, rec.query_id, uid, a.intent_id)
             qids.append(rec.query_id)
         self.batches[bid] = _Batch(bid, uid, set(qids), qids, now)
         for q in qids:
@@ -420,9 +430,7 @@ class MultiIntentCoordinator:
         s.emit(E.MULTI_QUERY_COMPLETED, "multi_query", {
             "batch_id": bid, "query_ids": b.query_ids, "statuses": {r.query_id: r.status for r in recs},
             "makespan_ms": round(max(ends) - min(starts), 3) if starts and ends else None,
-            "critical_path_ms": round(max((r.retrieval_completed_at_ms - r.retrieval_started_at_ms) for r in recs
-                                          if r.retrieval_started_at_ms is not None
-                                          and r.retrieval_completed_at_ms is not None), 3) if ends else None,
+            "critical_path_ms": _critical_path(recs),
             "wall": {"per_query_ms": b.wall_ms, "sum_ms": round(sum(b.wall_ms.values()), 3)}}, b.utterance_id)
         if not s.chunks.is_finalized(b.utterance_id):       # after finalization the final fusion follows
             self.fuse(b.utterance_id, final=False)
@@ -568,6 +576,9 @@ class MultiIntentCoordinator:
         pv = eng.answers.preview(uid, eng.memory.version, self.s.sched.logical_now_ms())
         if pv is None or not pv.sections or not any(sec.claim_ids for sec in pv.sections):
             return
+        if self.answer_lane is not None:                  # Phase 8: produced asynchronously, off the event loop
+            self.answer_lane.request(uid, pv, draft=True)
+            return
         self.grounding.answer(pv, self._grounding_context(uid), self.s.sched.logical_now_ms(), draft=True)
 
     def _session_turn_payload(self, uid: str) -> dict:
@@ -577,7 +588,12 @@ class MultiIntentCoordinator:
         if answer is not None:
             self.answers[uid] = answer
         grounded = None
-        if self.grounding is not None and answer is not None:
+        pending = None
+        if self.answer_lane is not None and answer is not None:     # Phase 8: the answer follows asynchronously
+            pending = self.answer_lane.request(uid, answer, draft=False)
+        elif self.answer_lane is not None:
+            grounded = self.answer_lane.last_final()
+        elif self.grounding is not None and answer is not None:
             grounded = self.grounding.answer(answer, self._grounding_context(uid), s.sched.logical_now_ms())
             self.grounded[uid] = grounded
         elif self.grounding is not None and eng.frames.active is not None:
@@ -612,7 +628,7 @@ class MultiIntentCoordinator:
                     else None),
                 "answer_changed": answer is not None,
                 "counters": dict(eng.counters)},
-            "answer": None if grounded is None else {
+            "answer": pending if pending is not None else None if grounded is None else {
                 "answer_id": grounded.answer_id, "version": grounded.version, "status": grounded.status,
                 "partial": grounded.partial, "changed": grounded.utterance_id == uid, "text": grounded.text,
                 "claims": [c.claim_id for c in grounded.claims], "citations": grounded.citations.keys(),

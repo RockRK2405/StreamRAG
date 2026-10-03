@@ -154,6 +154,25 @@ class EventType(str, Enum):
     SYNTHESIS_STARTED = "SYNTHESIS_STARTED"
     ANSWER_DELTA = "ANSWER_DELTA"
     LLM_CALL = "LLM_CALL"
+    # Phase 8: streaming runtime (docs/runtime/01)
+    RUNTIME_STARTED = "RUNTIME_STARTED"
+    TASK_SCHEDULED = "TASK_SCHEDULED"
+    TASK_STARTED = "TASK_STARTED"
+    TASK_COMPLETED = "TASK_COMPLETED"
+    TASK_FAILED = "TASK_FAILED"
+    TASK_CANCELLED = "TASK_CANCELLED"
+    TASK_TIMED_OUT = "TASK_TIMED_OUT"
+    TASK_RETRIED = "TASK_RETRIED"
+    TASK_REJECTED = "TASK_REJECTED"
+    RETRIEVAL_PARTIAL = "RETRIEVAL_PARTIAL"
+    STALE_RESULT_DISCARDED = "STALE_RESULT_DISCARDED"
+    TRANSCRIPT_COALESCED = "TRANSCRIPT_COALESCED"
+    BACKPRESSURE_APPLIED = "BACKPRESSURE_APPLIED"
+    DEGRADED_MODE_CHANGED = "DEGRADED_MODE_CHANGED"
+    SESSION_CANCELLED = "SESSION_CANCELLED"
+    SESSION_RESET = "SESSION_RESET"
+    RUNTIME_SHUTDOWN = "RUNTIME_SHUTDOWN"
+    SESSION_UPDATED = "SESSION_UPDATED"
     GROUNDING_CHECKED = "GROUNDING_CHECKED"
     ANSWER_COMMITTED = "ANSWER_COMMITTED"
     TURN_COMPLETED = "TURN_COMPLETED"
@@ -177,6 +196,12 @@ class TelemetryEvent(Contract):
     t_wall_ms: float = Field(ge=0)                           # monotonic wall clock since run start (non-deterministic)
     component: str
     payload: dict[str, Any] = {}
+    # Phase 8 runtime envelope (docs/runtime/01): trace relations and the session state version it was emitted at
+    correlation_id: str | None = None                        # the turn (utterance) the event belongs to
+    causation_id: str | None = None                          # event whose handling produced this one
+    parent_event_id: str | None = None                       # trace-tree parent (entity lineage)
+    state_version: int | None = Field(default=None, ge=0)
+    output_seq: int | None = Field(default=None, ge=0)       # order in the user-visible stream
 
     @model_validator(mode="after")
     def _deterministic_id(self) -> "TelemetryEvent":

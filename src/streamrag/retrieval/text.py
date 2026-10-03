@@ -6,6 +6,7 @@ lowercase + NFKC -> tokens (letters / numbers) -> spoken number words to digits 
 from __future__ import annotations
 
 import re
+import threading
 import unicodedata
 from functools import lru_cache
 from importlib import resources
@@ -53,7 +54,10 @@ class Analyzer:
         self.stemming = stemming
         self.stopwords = load_stopwords(stopwords)
         self.normalize_number_words = normalize_number_words
+        # Snowball stemmer objects keep per-call state: one per thread (the Phase 8 runtime analyses text on several
+        # worker threads at once - a shared instance raised IndexError under concurrency)
         self._stemmer = snowballstemmer.stemmer("english") if stemming == "snowball" else None
+        self._stemmers: dict[int, object] = {}
 
     def raw_tokens(self, text: str) -> list[str]:
         text = unicodedata.normalize("NFKC", text).lower()
@@ -62,7 +66,13 @@ class Analyzer:
 
     def tokens(self, text: str) -> list[str]:
         toks = [t for t in self.raw_tokens(text) if t not in self.stopwords]
-        return self._stemmer.stemWords(toks) if self._stemmer else toks
+        if self._stemmer is None:
+            return toks
+        tid = threading.get_ident()
+        st = self._stemmers.get(tid)
+        if st is None:
+            st = self._stemmers[tid] = snowballstemmer.stemmer("english")
+        return st.stemWords(toks)
 
     def config(self) -> dict:
         return {"stemming": self.stemming, "normalize_number_words": self.normalize_number_words,

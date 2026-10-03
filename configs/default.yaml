@@ -192,3 +192,27 @@ generation:
   max_validation_retrievals: 1     # retrieval fallback for unsupported critical claims, per answer version
   max_answer_revision_attempts: 2
   draft_mode: extractive           # off | extractive: verified extractive drafts while the user is still speaking
+
+# --------------------------------------------------------------------------------------------------
+# Phase 8: streaming runtime (docs/runtime/, ADR-018). Team engineering defaults (NOT official thresholds);
+# see PHASE_8_STREAMING_RUNTIME_REPORT.md. Only `streamrag.runtime.StreamingRuntime` reads this section.
+runtime:
+  max_concurrent_sessions: 8
+  max_concurrent_retrievals: 4     # retrieval worker threads (lexical / dense subtasks), shared by all sessions
+  max_concurrent_llm_calls: 1      # the local Ollama server runs one request at a time (OLLAMA_NUM_PARALLEL=1)
+  max_concurrent_cpu: 2            # assembly and drafts (NLI verification)
+  queues: {input: 64, retrieval: 64, llm: 8, cpu: 32, output: 4096}
+  timeouts_ms: {lexical: 2000, dense: 3000, assemble: 2000, generation: 60000, draft: 10000, validation_retrieval: 3000}
+  retry: {max_retries: 2, initial_delay_ms: 50, max_delay_ms: 1000, multiplier: 2.0, jitter: 0.2, seed: 7}
+  priorities: {final_answer: 0, retrieval_final: 1, validation_retrieval: 1, retrieval_provisional: 2, draft: 2,
+               analytics: 3, aging_ms: 500}
+  budget: {turn_ms: 30000, generation_reserve_ms: 4200, validation_reserve_ms: 400}   # reserves = Phase 7 p95
+  sim_latency_ms: {lexical: 20, dense: 40, assemble: 2, generation: 2000, draft: 50, validation_retrieval: 30}
+  split_retrieval: true            # lexical and dense run as concurrent subtasks (RETRIEVAL_PARTIAL)
+  coalescing_window_ms: 0          # 0: coalesce only deltas already queued (adaptive batching under load)
+  cancel_running: true             # superseded running work is signalled to stop (cooperative cancellation)
+  cancel_on_correction: true       # a correction cancels the previous turn's in-flight answer (spec §7.3 barge-in)
+  output_max_hold_ms: 2000
+  shutdown_grace_ms: 5000
+  max_chunk_chars: 4000
+  max_inputs_per_session: 20000

@@ -1,0 +1,168 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "scenario": "Q1 slow (1.2 s injected), correction Q2 completes first, Q1 completes last",
+    "llm": "SimulatedLLM 200 ms (SYNTHETIC)",
+    "reps": 10
+  },
+  "modes": {
+    "no_cancellation": {
+      "runs": [
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": true,
+          "stale_discarded": 1,
+          "q1_cancelled": false,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        }
+      ],
+      "overwrites": 0,
+      "races_reproduced": 10
+    },
+    "cancellation": {
+      "runs": [
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        },
+        {
+          "q1_completed_after_newer": false,
+          "stale_discarded": 0,
+          "q1_cancelled": true,
+          "final_mentions_ladders": false,
+          "final_mentions_crates": true
+        }
+      ],
+      "overwrites": 0,
+      "races_reproduced": 0
+    }
+  }
+}

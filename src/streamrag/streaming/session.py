@@ -47,6 +47,7 @@ class StreamingSession:
         self.started = False
         self.controller_wall_ms: list[float] = []
         self.chunk_wall_ms: list[float] = []
+        self.busy_hooks: list = []                # Phase 8: extra work (answer lane) that must finish before close
         self.options = RetrievalOptions(mode=cfg.streaming.retrieval_mode, top_k=cfg.streaming.top_k,
                                         rerank=cfg.streaming.rerank)
         self.mi = None
@@ -76,11 +77,13 @@ class StreamingSession:
         self.emit(E.ERROR, component, payload, uid)
 
     # ------------------------------------------------------------------ input dispatch
-    def handle_input(self, ev) -> None:
+    def handle_input(self, ev, decide: bool = True) -> None:
+        """``decide=False`` (Phase 8 batching): apply a transcript chunk without a controller tick - the runtime
+        applies a coalesced batch of deltas and runs one decision on the last."""
         if isinstance(ev, SessionStart):
             self._session_started(ev)
         elif isinstance(ev, TranscriptChunk):
-            self._on_chunk(ev)
+            self._on_chunk(ev, decide)
         elif isinstance(ev, UtteranceEnd):
             self._on_utterance_end(ev)
         elif isinstance(ev, SessionEnd):
@@ -95,7 +98,7 @@ class StreamingSession:
                    "session_mode": bool(self.mi is not None and self.mi.engine is not None), **self.meta}
         self.emit(E.SESSION_STARTED, "session", payload)
 
-    def _on_chunk(self, ev: TranscriptChunk) -> None:
+    def _on_chunk(self, ev: TranscriptChunk, decide: bool = True) -> None:
         t0 = time.perf_counter()
         self._session_started(None)
         uid, p = ev.utterance_id, ev.payload
@@ -115,7 +118,8 @@ class StreamingSession:
         self.emit(E.TRANSCRIPT_UPDATED, "chunk_manager",
                   {"transcript": res.transcript, "n_chunks": len(self.chunks.state(uid).chunks),
                    "has_gaps": bool(res.missing), "revisions": self.chunks.state(uid).revisions}, uid)
-        self.decide(uid, "chunk", trigger_chunk=p.chunk_index, has_gaps=bool(res.missing))
+        if decide:
+            self.decide(uid, "chunk", trigger_chunk=p.chunk_index, has_gaps=bool(res.missing))
         token = self.timer_token.get(uid, 0) + 1
         self.timer_token[uid] = token
         now = self.sched.logical_now_ms()
@@ -198,7 +202,8 @@ class StreamingSession:
         self._maybe_close()
 
     def _maybe_close(self) -> None:
-        if self.closing and not self.closed and not self.pending_turn and not self.executor.busy():
+        if self.closing and not self.closed and not self.pending_turn and not self.executor.busy() \
+                and not any(h() for h in self.busy_hooks):
             self.closed = True
             self.emit(E.SESSION_CLOSED, "session", {"input": getattr(self, "_session_end_payload", None),
                                                     "utterances": len(self.chunks.order),
@@ -241,13 +246,43 @@ class StreamingSession:
                    "trigger": rec.trigger, "trigger_chunk": trigger_chunk, "tick": tick,
                    "source_spans": [list(s) for s in rec.source_spans], "removed_tokens": query.removed,
                    "superseded_status": prev.status if prev else None}, uid)
-        if prev is not None and prev.status == "queued" and self.cfg.controller.cancel_superseded == "queued_only":
-            if self.executor.cancel_queued(prev.query_id):
-                self.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
-                self.emit(E.RETRIEVAL_CANCELLED, "query_ledger",
-                          {"query_id": prev.query_id, "reason": "superseded_before_start", "superseded_by": rec.query_id}, uid)
+        if prev is not None:
+            self.cancel_obsolete(prev, uid, superseded_by=rec.query_id)
         self.ledger.update(rec.query_id, status="queued", retrieval_queued_at_ms=self.sched.now_ms())   # wall: queue wait
         self.executor.submit(Job(rec.query_id, rec.query_text, self.options, self._on_start, self._on_done))
+
+    # ------------------------------------------------------------------ cancellation of obsolete retrieval
+    def cancel_obsolete(self, prev, uid: str, superseded_by: str | None = None, reason: str = "superseded",
+                        intent_id: str | None = None) -> None:
+        """A query that a newer one replaced. ``queued_only`` (Phase 4): dropped if still queued, a running one
+        completes and is marked stale. ``cooperative`` (Phase 8): a running one is also told to stop; the executor
+        reports it through ``on_cancelled``."""
+        mode = self.cfg.controller.cancel_superseded
+        if mode == "never":
+            return
+        if prev.status == "queued" and self.executor.cancel_queued(prev.query_id):
+            self.ledger.update(prev.query_id, status="cancelled", retrieval_status="cancelled")
+            payload = {"query_id": prev.query_id, "reason": "superseded_before_start"}
+            if superseded_by is not None:
+                payload["superseded_by"] = superseded_by
+            else:
+                payload["reason"] = reason
+            self.emit(E.RETRIEVAL_CANCELLED, "query_ledger", payload, uid, intent_id=intent_id)
+        elif mode == "cooperative" and prev.status == "in_flight" and hasattr(self.executor, "cancel_running"):
+            self.executor.cancel_running(prev.query_id, f"{reason}_in_flight")
+
+    def on_cancelled(self, qid: str, wall_ms: float, reason: str) -> None:
+        """Executor callback: a running retrieval stopped at a checkpoint after cooperative cancellation."""
+        started = self.ledger.get(qid).retrieval_started_at_ms is not None
+        rec = self.ledger.update(qid, status="cancelled", retrieval_status="cancelled_running" if started
+                                 else "cancelled", retrieval_completed_at_ms=self.sched.now_ms() if started else None)
+        self.emit(E.RETRIEVAL_CANCELLED, "async_retriever",
+                  {"query_id": qid, "reason": reason, "superseded_by": rec.superseded_by,
+                   "wall": {"wasted_ms": round(wall_ms, 3)}}, rec.utterance_id, intent_id=rec.intent_id)
+        if self.mi is not None:
+            self.mi.on_retrieval_done(qid, wall_ms)
+        self._maybe_complete(rec.utterance_id)
+        self._maybe_close()
 
     # ------------------------------------------------------------------ retrieval callbacks
     def _on_start(self, qid: str) -> None:

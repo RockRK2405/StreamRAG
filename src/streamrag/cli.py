@@ -144,17 +144,25 @@ def cmd_stream(args: argparse.Namespace) -> int:
             inputs += evs
             offset += evs[-1].payload.timestamp_s * 1000.0 + args.gap_ms
         inputs.append(SessionEnd(session_id=args.session_id))
-    runner = run_realtime if cfg.streaming.mode == "realtime" else run_virtual
-    run = runner(cfg, stack.service, stack.policy, inputs, Path(args.trace) if args.trace else None, stack.index_hash,
-                 stack.intent_stack if cfg.multi_intent.enabled else None)
+    if args.runtime:                                   # Phase 8: through the asynchronous streaming runtime
+        from streamrag.runtime.driver import run_inputs
+        rt, sid = run_inputs(cfg, stack, inputs, mode=cfg.streaming.mode)
+        events = rt.events(sid)
+        if args.trace:
+            Path(args.trace).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.trace).write_text("".join(e.canonical_json() + "\n" for e in events))
+    else:
+        runner = run_realtime if cfg.streaming.mode == "realtime" else run_virtual
+        events = runner(cfg, stack.service, stack.policy, inputs, Path(args.trace) if args.trace else None,
+                        stack.index_hash, stack.intent_stack if cfg.multi_intent.enabled else None).events
     if stack.bundle.manifest.is_test_fixture:
         print("NOTE: TEST FIXTURE index - behavior demo only, not a benchmark result.")
-    for ev in run.events:
+    for ev in events:
         line = format_event(ev)
         if line:
             print(line)
     if args.trace:
-        print(f"trace: {args.trace} ({len(run.events)} events)")
+        print(f"trace: {args.trace} ({len(events)} events)")
     return 0
 
 
@@ -169,8 +177,18 @@ def cmd_replay(args: argparse.Namespace) -> int:
         args.set = list(args.set) + ["multi_intent.enabled=true"]
     if adaptive:
         args.set = list(args.set) + ["session.enabled=true"]
+    runtime = any(e.type.value == "SESSION_STARTED" and e.payload.get("runtime") for e in trace)
+    generation = any(e.type.value == "LLM_CALL" for e in trace) or any(
+        e.type.value == "ANSWER_COMMITTED" for e in trace)
+    if generation:
+        args.set = list(args.set) + ["generation.enabled=true"]
     cfg = _cfg(args)
     stack = build_stack(cfg, Path(args.index) if args.index else None)
+    if runtime:                                # Phase 8 runtime trace: virtual-clock re-run from the event log
+        from streamrag.runtime.replay import replay_runtime
+        rep = replay_runtime(cfg, stack, trace)
+        print(json.dumps({k: v for k, v in rep.items() if k != "events"}, indent=2, default=str))
+        return 0 if rep["identical"] or rep["behaviour_identical"] else 1
     report = ReplayEngine(cfg, stack.service, stack.policy, stack.index_hash,
                           stack.intent_stack if mi else None).replay(trace)
     print(json.dumps(report.summary(), indent=2, default=str))
@@ -217,6 +235,8 @@ def build_parser() -> argparse.ArgumentParser:
                                               help="Phase 5: decompose intents, retrieve per intent, fuse evidence")
     s.add_argument("--session", action="store_true",
                    help="Phase 6: adaptive session (late details, delta retrieval, claims, answer versions)")
+    s.add_argument("--runtime", action="store_true",
+                   help="Phase 8: run through the asynchronous streaming runtime (concurrent workers, cancellation)")
     s.set_defaults(fn=cmd_stream)
     s = sub.add_parser("replay"); s.add_argument("trace"); s.add_argument("--corpus"); s.add_argument("--index")
     s.add_argument("--embedder"); s.set_defaults(fn=cmd_replay)

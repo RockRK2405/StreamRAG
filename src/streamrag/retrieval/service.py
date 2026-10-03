@@ -8,6 +8,7 @@ search the loaded index (no network, no document injection API).
 from __future__ import annotations
 
 import hashlib
+from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import TimeoutError as FutureTimeout
 from pathlib import Path
@@ -34,6 +35,22 @@ from streamrag.telemetry.timing import Stopwatch
 
 _METHOD = {("bm25", False): "bm25", ("dense", False): "dense", ("hybrid", False): "hybrid_rrf",
            ("bm25", True): "bm25_rerank", ("dense", True): "dense_rerank", ("hybrid", True): "hybrid_rrf_rerank"}
+
+
+@dataclass
+class RetrievalPlan:
+    request: RetrievalRequest
+    options: dict
+    digest: str
+    mask: np.ndarray | None
+    empty_filter: bool
+
+
+@dataclass
+class StagePart:
+    hits: list[tuple[int, float]]
+    timings_ms: dict[str, float]
+    warnings: list[str]
 
 
 class RetrievalService:
@@ -136,53 +153,81 @@ class RetrievalService:
                 "dedup": self.cfg.dedup.enabled if o.dedup is None else o.dedup,
                 "filters": o.filters.model_dump(mode="json") if o.filters else None}
 
-    def _retrieve(self, req: RetrievalRequest, qvec: np.ndarray | None, embed_share_ms: float) -> EvidenceSet:
+    # ---- retrieval stages (Phase 8: the runtime runs lexical and dense as concurrent subtasks; docs/runtime/04).
+    # ``_retrieve`` composes them in order; the composition is the Phase 3 behaviour, unchanged.
+    def plan(self, req: RetrievalRequest) -> RetrievalPlan:
         self._validate(req.query)
         o = self._resolve(req.options)
+        digest = hashlib.sha1(canonical_dumps({"q": req.query, "o": o, "i": self.bundle.manifest.content_hash})
+                              .encode()).hexdigest()[:16]
+        mask = self._mask(req.options.filters)
+        return RetrievalPlan(req, o, digest, mask, empty_filter=mask is not None and not mask.any())
+
+    def search_lexical(self, plan: RetrievalPlan) -> StagePart:
+        o, b = plan.options, self.bundle
+        if plan.empty_filter or o["mode"] not in ("bm25", "hybrid"):
+            return StagePart([], {}, [])
+        with Stopwatch() as sw:
+            k = max(o["lexical_k"], o["top_k"]) if o["mode"] == "bm25" else o["lexical_k"]
+            hits = b.bm25.search(plan.request.query, b.analyzer, k, plan.mask)
+        warnings = [] if b.bm25.query_terms(plan.request.query, b.analyzer) else ["no_lexical_terms_in_vocabulary"]
+        return StagePart(hits, {"lexical": sw.ms}, warnings)
+
+    def search_dense(self, plan: RetrievalPlan, qvec: np.ndarray | None = None, embed_share_ms: float = 0.0,
+                     checkpoint=None, inline: bool = False) -> StagePart:
+        """Raises ModelNotAvailableError / RetrieverTimeoutError; ``checkpoint()`` (cooperative cancellation) runs
+        between embedding and search. ``inline``: embed in the calling thread (the Phase 8 runtime's worker pool and
+        task deadlines replace the service's own 2-thread timeout executor, which would otherwise queue concurrent
+        embeddings and time them out)."""
+        o, b = plan.options, self.bundle
+        if plan.empty_filter or o["mode"] not in ("dense", "hybrid"):
+            return StagePart([], {}, [])
+        if b.dense is None or self.embedder is None:
+            raise ModelNotAvailableError("dense index or query embedder not available")
+        timings: dict[str, float] = {}
+        if qvec is None:
+            with Stopwatch() as sw:
+                if inline:
+                    qvec = self.embedder.embed([plan.request.query], "query")[0]
+                else:
+                    qvec = self._with_timeout(lambda: self.embedder.embed([plan.request.query], "query")[0],
+                                              self.cfg.retrieval.dense_timeout_ms, RetrieverTimeoutError)
+            timings["embed"] = sw.ms
+        else:
+            timings["embed"] = embed_share_ms
+        if checkpoint is not None:
+            checkpoint()
+        with Stopwatch() as sw:
+            k = max(o["dense_k"], o["top_k"]) if o["mode"] == "dense" else o["dense_k"]
+            hits = b.dense.search(qvec, k, plan.mask, self.cfg.retrieval.dense_min_similarity)
+        timings["dense"] = sw.ms
+        return StagePart(hits, timings, [])
+
+    def assemble(self, plan: RetrievalPlan, lexical: StagePart | None, dense: StagePart | None,
+                 dense_error: BaseException | None = None, stage_ms: float = 0.0) -> EvidenceSet:
+        """Fusion, dedup, rerank and evidence for the stage results. ``dense`` None with ``dense_error`` set: the
+        dense stage failed - lexical-only (``degraded``) unless the mode needs dense or the config says error."""
+        o, b, req = plan.options, self.bundle, plan.request
         mode = o["mode"]
-        b = self.bundle
-        digest = hashlib.sha1(canonical_dumps({"q": req.query, "o": o, "i": b.manifest.content_hash}).encode()).hexdigest()[:16]
-        request_id = req.request_id or f"rq-{digest}"
         warnings = list(self.init_warnings)
         status = "ok"
         timings: dict[str, float] = {}
-        lex: list[tuple[int, float]] = []
-        dense_hits: list[tuple[int, float]] = []
-        dense_ok = False
-        mask = self._mask(req.options.filters)
-
+        lex = lexical.hits if lexical is not None else []
+        dense_hits = dense.hits if dense is not None else []
+        dense_ok = dense is not None and mode in ("dense", "hybrid") and not plan.empty_filter
         with Stopwatch() as total:
-            if mask is not None and not mask.any():
+            if plan.empty_filter:
                 warnings.append("filters_matched_no_chunks")
-            else:
-                if mode in ("bm25", "hybrid"):
-                    with Stopwatch() as sw:
-                        k = max(o["lexical_k"], o["top_k"]) if mode == "bm25" else o["lexical_k"]
-                        lex = b.bm25.search(req.query, b.analyzer, k, mask)
-                    timings["lexical"] = sw.ms
-                    if not b.bm25.query_terms(req.query, b.analyzer):
-                        warnings.append("no_lexical_terms_in_vocabulary")
-                if mode in ("dense", "hybrid"):
-                    try:
-                        if b.dense is None or self.embedder is None:
-                            raise ModelNotAvailableError("dense index or query embedder not available")
-                        if qvec is None:
-                            with Stopwatch() as sw:
-                                qvec = self._with_timeout(lambda: self.embedder.embed([req.query], "query")[0],
-                                                          self.cfg.retrieval.dense_timeout_ms, RetrieverTimeoutError)
-                            timings["embed"] = sw.ms
-                        else:
-                            timings["embed"] = embed_share_ms
-                        with Stopwatch() as sw:
-                            k = max(o["dense_k"], o["top_k"]) if mode == "dense" else o["dense_k"]
-                            dense_hits = b.dense.search(qvec, k, mask, self.cfg.retrieval.dense_min_similarity)
-                        timings["dense"] = sw.ms
-                        dense_ok = True
-                    except (ModelNotAvailableError, RetrieverTimeoutError) as exc:
-                        if mode == "dense" or self.cfg.retrieval.on_dense_failure == "error":
-                            raise
-                        warnings.append(f"dense_failed_lexical_only: {exc.__class__.__name__}: {exc}")
-                        status = "degraded"
+            if lexical is not None:
+                timings.update(lexical.timings_ms)
+                warnings.extend(lexical.warnings)
+            if dense is not None:
+                timings.update(dense.timings_ms)
+            elif dense_error is not None and mode in ("dense", "hybrid") and not plan.empty_filter:
+                if mode == "dense" or self.cfg.retrieval.on_dense_failure == "error":
+                    raise dense_error
+                warnings.append(f"dense_failed_lexical_only: {dense_error.__class__.__name__}: {dense_error}")
+                status = "degraded"
 
             with Stopwatch() as sw:
                 if mode == "hybrid" and dense_ok:
@@ -223,17 +268,29 @@ class RetrievalService:
             effective = "bm25" if mode == "hybrid" and not dense_ok else mode   # degraded hybrid is lexical-only
             items = [self._evidence(c, rank, effective, reranked and c.rerank is not None)
                      for rank, c in enumerate(cands[: o["top_k"]], start=1)]
-        timings["total"] = total.ms
+        timings["total"] = total.ms + stage_ms
         if not items and status == "ok":
             status = "empty"
+        request_id = req.request_id or f"rq-{plan.digest}"
         trace = RetrievalTrace(request_id=request_id, mode=mode, status=status, rerank_applied=reranked,
                                candidates_lexical=len(lex), candidates_dense=len(dense_hits), candidates_fused=n_fused,
                                dedup_removed=removed,
                                timings_ms={k: round(v, 4) for k, v in timings.items()}, warnings=warnings,
                                index_version=b.manifest.index_version, corpus_hash=b.manifest.corpus_version,
                                index_config_hash=b.manifest.index_config_hash)
-        return EvidenceSet(evidence_set_id=f"es-{digest}", query=req.query, items=items,
+        return EvidenceSet(evidence_set_id=f"es-{plan.digest}", query=req.query, items=items,
                            token_count=sum(b.chunks[c.row].token_count for c in cands[: o["top_k"]]), trace=trace)
+
+    def _retrieve(self, req: RetrievalRequest, qvec: np.ndarray | None, embed_share_ms: float) -> EvidenceSet:
+        with Stopwatch() as sw:
+            plan = self.plan(req)
+            lexical = self.search_lexical(plan)
+            dense, dense_error = None, None
+            try:
+                dense = self.search_dense(plan, qvec, embed_share_ms)
+            except (ModelNotAvailableError, RetrieverTimeoutError) as exc:
+                dense_error = exc
+        return self.assemble(plan, lexical, dense, dense_error, stage_ms=sw.ms)
 
     def _evidence(self, c: Candidate, rank: int, mode: str, reranked: bool) -> Evidence:
         ch = self.bundle.chunks[c.row]

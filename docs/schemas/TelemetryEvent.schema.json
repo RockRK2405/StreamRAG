@@ -61,6 +61,24 @@
         "SYNTHESIS_STARTED",
         "ANSWER_DELTA",
         "LLM_CALL",
+        "RUNTIME_STARTED",
+        "TASK_SCHEDULED",
+        "TASK_STARTED",
+        "TASK_COMPLETED",
+        "TASK_FAILED",
+        "TASK_CANCELLED",
+        "TASK_TIMED_OUT",
+        "TASK_RETRIED",
+        "TASK_REJECTED",
+        "RETRIEVAL_PARTIAL",
+        "STALE_RESULT_DISCARDED",
+        "TRANSCRIPT_COALESCED",
+        "BACKPRESSURE_APPLIED",
+        "DEGRADED_MODE_CHANGED",
+        "SESSION_CANCELLED",
+        "SESSION_RESET",
+        "RUNTIME_SHUTDOWN",
+        "SESSION_UPDATED",
         "GROUNDING_CHECKED",
         "ANSWER_COMMITTED",
         "TURN_COMPLETED",
@@ -74,9 +92,33 @@
   "additionalProperties": false,
   "description": "Common envelope (spec §6.1). ``event_id`` is deterministic: ``<session_id>:<seq:06d>``.",
   "properties": {
+    "causation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Causation Id"
+    },
     "component": {
       "title": "Component",
       "type": "string"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Id"
     },
     "event_id": {
       "title": "Event Id",
@@ -93,6 +135,31 @@
       ],
       "default": null,
       "title": "Intent Id"
+    },
+    "output_seq": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Seq"
+    },
+    "parent_event_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Event Id"
     },
     "payload": {
       "additionalProperties": true,
@@ -125,6 +192,19 @@
     "session_id": {
       "title": "Session Id",
       "type": "string"
+    },
+    "state_version": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "State Version"
     },
     "t_session_ms": {
       "anyOf": [

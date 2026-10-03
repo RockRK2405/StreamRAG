@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "note": "1-5, 9-10: real local LLM; 6-8, 11-13: SimulatedLLM"
+  },
+  "passed": 13,
+  "total": 13,
+  "scenarios": {
+    "01_normal_streaming_question": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "early_retrieval": true,
+        "validated": true,
+        "answer_correct": true
+      },
+      "final_answers": [
+        "Wicks should be trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] Trimming a wick too short results in a dim beam. [fixture_lighthouse_manual \u00a71.1] Leaving a wick too long causes soot on the lens. [fixture_lighthouse_manual \u00a71.1]"
+      ],
+      "milestones_ms": {
+        "first_event": 0.0,
+        "first_evidence": 153.613,
+        "first_answer": 2678.955,
+        "validated_answer": 2678.959,
+        "utterance_end": 301.252,
+        "last_event": 2678.981
+      }
+    },
+    "02_multi_intent_question": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "two_sections": true,
+        "parallel_subtasks": true
+      },
+      "final_answers": [
+        "The eligibility requirements:\nApplicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71]\n\nThe application process for the permit:\nApplications are submitted online through the permit portal. [fixture_permit_handbook \u00a72] Each application is reviewed by a permit officer. [fixture_permit_handbook \u00a72] Applicants receive the decision by post. [fixture_permit_handbook \u00a72]"
+      ]
+    },
+    "03_late_constraint": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "constraint_detected": true,
+        "answered_twice": true,
+        "no_llm_call_for_refinement": true,
+        "overnight_rule_kept": true
+      },
+      "final_answers": [
+        "Ladders are permitted in the orchard only when a second worker holds the base of the ladder. [Doc_07 \u00a72.1] Ladders are not permitted in the orch: overnight. [Doc_07 \u00a72.2] Ladders must be returned to the tool shed. [Doc_07 \u00a72.2]",
+        "Ladders are not permitted in the orch: overnight. [Doc_07 \u00a72.2] Ladders must be returned to the tool shed. [Doc_07 \u00a72.2] Ladders are permitted in the orchard only when a second worker holds the base of the ladder. [Doc_07 \u00a72.1]"
+      ]
+    },
+    "04_entity_correction": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "correction_detected": true,
+        "final_about_crates": true,
+        "no_ladders_in_final": true
+      },
+      "final_answers": [
+        "A picker may fill at most 40 crates per shift. [Doc_07 \u00a73] Damaged fruit is placed in the compost bin, not in the crates. [Doc_07 \u00a73] The harvest supervisor checks the crate count at the end of every shift. [Doc_07 \u00a73] Crates are stacked no more than five high. [Doc_07 \u00a73]"
+      ]
+    },
+    "05_concurrent_retrieval": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "overlapping_subtasks": true,
+        "bounded": true
+      },
+      "final_answers": [
+        "What are the eligibility requirements:\nApplicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71]\n\nHow are applications for the permit submitted:\nApplications are submitted online through the permit portal. [fixture_permit_handbook \u00a72] Each application is reviewed by a permit officer. [fixture_permit_handbook \u00a72] Applicants receive the decision by post. [fixture_permit_handbook \u00a72]"
+      ]
+    },
+    "06_retrieval_failure": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "degraded_reported": true,
+        "still_answered": true
+      },
+      "final_answers": [
+        "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]"
+      ]
+    },
+    "07_retrieval_timeout": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "timed_out": true,
+        "lexical_only": true,
+        "still_answered": true,
+        "no_zombies": true
+      },
+      "final_answers": [
+        "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]"
+      ]
+    },
+    "08_llm_failure": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "generation_degraded": true,
+        "validated_without_model": true
+      },
+      "final_answers": [
+        "Wicks are trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] A wick trimmed too short produces a dim beam. [fixture_lighthouse_manual \u00a71.1] A wick left too long produces soot on the lens. [fixture_lighthouse_manual \u00a71.1]"
+      ]
+    },
+    "09_cancellation": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "generation_cancelled": true,
+        "only_corrected_turn_answered": true
+      },
+      "final_answers": [
+        "A picker may fill at most 40 crates per shift. [Doc_07 \u00a73] Damaged fruit is placed in the compost bin, not in the crates. [Doc_07 \u00a73] The harvest supervisor checks the crate count at the end of every shift. [Doc_07 \u00a73] Crates are stacked no more than five high. [Doc_07 \u00a73]"
+      ],
+      "cancel_reason": "correction"
+    },
+    "10_stale_result_race": {
+      "llm": "real",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "stale_discarded": true,
+        "final_not_overwritten": true
+      },
+      "final_answers": [
+        "A picker may fill at most 40 crates per shift. [Doc_07 \u00a73] Damaged fruit is placed in the compost bin, not in the crates. [Doc_07 \u00a73] The harvest supervisor checks the crate count at the end of every shift. [Doc_07 \u00a73] Crates are stacked no more than five high. [Doc_07 \u00a73]"
+      ]
+    },
+    "11_high_frequency_transcript": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "bounded_queue": true,
+        "coalesced": true,
+        "final_state_kept": true,
+        "answered": true
+      },
+      "final_answers": [
+        "Applicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71]"
+      ]
+    },
+    "12_multiple_concurrent_sessions": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "all_answered": true,
+        "isolated_tasks": true,
+        "isolated_events": true,
+        "distinct_answers": true
+      },
+      "final_answers": [
+        "Applicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71]"
+      ]
+    },
+    "13_graceful_shutdown": {
+      "llm": "simulated",
+      "passed": true,
+      "checks": {
+        "no_untraceable_events": true,
+        "session_terminated_cleanly": true,
+        "user_stream_ordered": true,
+        "work_was_active": true,
+        "session_cancelled_by_shutdown": true,
+        "no_zombies": true,
+        "no_live_tokens": true,
+        "no_pending_tasks": true,
+        "bounded_time": true,
+        "late_start_refused": true
+      },
+      "final_answers": [],
+      "shutdown_s": 0.208
+    }
+  }
+}

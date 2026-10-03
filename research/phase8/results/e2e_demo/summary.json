@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "llm": "qwen3:4b (REAL)",
+    "injected": "dense +1200 ms (SYNTHETIC)"
+  },
+  "runtime": {
+    "mode": "realtime",
+    "sessions": {
+      "demo": {
+        "session_id": "demo",
+        "events": 164,
+        "state_version": 9,
+        "epoch": 0,
+        "closed": true,
+        "cancelled": null,
+        "degraded": {},
+        "stale_discarded": {},
+        "rollbacks": 0,
+        "inputs": {
+          "accepted": 9,
+          "coalesced": 0
+        },
+        "max_input_depth": 2,
+        "lane": {
+          "drafts_requested": 0,
+          "drafts_coalesced": 0,
+          "drafts_superseded": 0,
+          "finals": 1,
+          "cancelled_by_correction": 0,
+          "degraded": 0,
+          "finals_superseded": 1
+        },
+        "milestones": {
+          "u1": {
+            "first_event": 0.128,
+            "first_evidence": 1.687,
+            "first_answer": null,
+            "validated_answer": null,
+            "utterance_end": 1051.903,
+            "last_event": 1658.698
+          },
+          "u2": {
+            "first_event": 0.265,
+            "first_evidence": 6.901,
+            "first_answer": 4242.716,
+            "validated_answer": 4242.721,
+            "utterance_end": 700.923,
+            "last_event": 4242.743
+          }
+        }
+      }
+    },
+    "scheduler": {
+      "tasks": 10,
+      "by_type": {
+        "assemble": {
+          "statuses": {
+            "COMPLETED": 1
+          },
+          "queue_wait_ms": {
+            "n": 1,
+            "p50": 0.025,
+            "p95": 0.025,
+            "max": 0.025,
+            "mean": 0.025
+          },
+          "exec_ms": {
+            "n": 1,
+            "p50": 0.295,
+            "p95": 0.295,
+            "max": 0.295,
+            "mean": 0.295
+          }
+        },
+        "dense": {
+          "statuses": {
+            "CANCELLED": 3,
+            "COMPLETED": 1
+          },
+          "queue_wait_ms": {
+            "n": 4,
+            "p50": 0.045,
+            "p95": 0.121,
+            "max": 0.131,
+            "mean": 0.062
+          },
+          "exec_ms": {
+            "n": 4,
+            "p50": 826.111,
+            "p95": 1171.524,
+            "max": 1210.748,
+            "mean": 890.361
+          }
+        },
+        "generation": {
+          "statuses": {
+            "COMPLETED": 1
+          },
+          "queue_wait_ms": {
+            "n": 1,
+            "p50": 0.03,
+            "p95": 0.03,
+            "max": 0.03,
+            "mean": 0.03
+          },
+          "exec_ms": {
+            "n": 1,
+            "p50": 2320.117,
+            "p95": 2320.117,
+            "max": 2320.117,
+            "mean": 2320.117
+          }
+        },
+        "lexical": {
+          "statuses": {
+            "COMPLETED": 4
+          },
+          "queue_wait_ms": {
+            "n": 4,
+            "p50": 0.044,
+            "p95": 0.06,
+            "max": 0.062,
+            "mean": 0.043
+          },
+          "exec_ms": {
+            "n": 4,
+            "p50": 0.94,
+            "p95": 2.187,
+            "max": 2.392,
+            "mean": 1.141
+          }
+        }
+      },
+      "cancellation_rate": 0.3,
+      "retry_rate": 0.0,
+      "failure_rate": 0.0,
+      "stats": {
+        "submitted": 10,
+        "COMPLETED": 7,
+        "CANCELLED": 3
+      },
+      "max_depth": {
+        "retrieval": {
+          "pending": 1,
+          "running": 3
+        },
+        "cpu": {
+          "pending": 1,
+          "running": 1
+        },
+        "llm": {
+          "pending": 1,
+          "running": 1
+        }
+      }
+    },
+    "retry": {},
+    "cancellation": {
+      "superseded_in_flight": 3
+    },
+    "counters": {},
+    "faults": {
+      "dense:delay": 4
+    },
+    "loop_lag_ms": {
+      "max": 6.188,
+      "p95": 0.734,
+      "samples": 1043
+    }
+  },
+  "final_answer": "Applicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71] Not established: The retrieved documents do not say how this applies for international applicants.",
+  "untraceable": [],
+  "replay": {
+    "identical": false,
+    "n_original": 165,
+    "n_replayed": 162,
+    "behaviour_identical": true
+  },
+  "behaviour": {
+    "u1": {
+      "transcript": "What are the eligibility requirements for the permit?",
+      "queries": [
+        [
+          "What are the eligibility",
+          "cancelled"
+        ],
+        [
+          "What are the eligibility requirements for the permit",
+          "cancelled"
+        ]
+      ]
+    },
+    "u2": {
+      "transcript": "For international applicants.",
+      "queries": [
+        [
+          "What are the eligibility requirements for the permit For international",
+          "cancelled"
+        ],
+        [
+          "What are the eligibility requirements for the permit For international applicants",
+          "completed"
+        ]
+      ],
+      "answer_claims": [
+        "AC-1e61086e04",
+        "AC-4e461636b0",
+        "AC-5e495a6243",
+        "AC-915560e242",
+        "AC-c0a8fe8ecc"
+      ]
+    }
+  }
+}

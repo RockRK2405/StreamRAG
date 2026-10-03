@@ -1,0 +1,520 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "workload": "N concurrent sessions x 2 multi-intent utterances (staggered 50 ms), 3 words / 150 ms",
+    "llm": "SimulatedLLM 800 ms (SYNTHETIC)",
+    "note": "synthetic load on one machine and a 6-document fixture corpus: not production scale"
+  },
+  "load": {
+    "llm_slots_1": {
+      "1": {
+        "sessions": 1,
+        "turns": 2,
+        "wall_s": 2.63,
+        "throughput_turns_per_s": 0.76,
+        "validated_answer_ms": {
+          "n": 2,
+          "p50": 1533.245,
+          "p95": 1583.084,
+          "max": 1588.622,
+          "mean": 1533.245
+        },
+        "first_evidence_ms": {
+          "n": 2,
+          "p50": 458.693,
+          "p95": 593.608,
+          "max": 608.598,
+          "mean": 458.693
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 1,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 12.667,
+          "p95": 0.761,
+          "samples": 451
+        },
+        "resources": {
+          "cpu_s": 0.526,
+          "wall_s": 2.63,
+          "cpu_utilisation": 0.2,
+          "peak_threads": 7,
+          "rss_peak_mb_process_lifetime": 1167.4
+        }
+      },
+      "2": {
+        "sessions": 2,
+        "turns": 4,
+        "wall_s": 4.054,
+        "throughput_turns_per_s": 0.987,
+        "validated_answer_ms": {
+          "n": 4,
+          "p50": 2239.023,
+          "p95": 2814.499,
+          "max": 2898.697,
+          "mean": 2207.743
+        },
+        "first_evidence_ms": {
+          "n": 4,
+          "p50": 457.599,
+          "p95": 609.024,
+          "max": 609.584,
+          "mean": 458.255
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 2,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 27.608,
+          "p95": 0.781,
+          "samples": 682
+        },
+        "resources": {
+          "cpu_s": 1.163,
+          "wall_s": 4.054,
+          "cpu_utilisation": 0.287,
+          "peak_threads": 8,
+          "rss_peak_mb_process_lifetime": 1178.2
+        }
+      },
+      "4": {
+        "sessions": 4,
+        "turns": 8,
+        "wall_s": 7.429,
+        "throughput_turns_per_s": 1.077,
+        "validated_answer_ms": {
+          "n": 8,
+          "p50": 3861.537,
+          "p95": 5912.123,
+          "max": 6175.063,
+          "mean": 3836.457
+        },
+        "first_evidence_ms": {
+          "n": 8,
+          "p50": 456.425,
+          "p95": 608.988,
+          "max": 610.094,
+          "mean": 456.599
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 4,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 22.578,
+          "p95": 0.768,
+          "samples": 1256
+        },
+        "resources": {
+          "cpu_s": 1.565,
+          "wall_s": 7.429,
+          "cpu_utilisation": 0.211,
+          "peak_threads": 8,
+          "rss_peak_mb_process_lifetime": 1185.6
+        }
+      },
+      "8": {
+        "sessions": 8,
+        "turns": 16,
+        "wall_s": 14.236,
+        "throughput_turns_per_s": 1.124,
+        "validated_answer_ms": {
+          "n": 16,
+          "p50": 7134.218,
+          "p95": 12212.946,
+          "max": 12779.741,
+          "mean": 7127.879
+        },
+        "first_evidence_ms": {
+          "n": 16,
+          "p50": 462.861,
+          "p95": 625.884,
+          "max": 630.415,
+          "mean": 460.746
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 4,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 8,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 25.781,
+          "p95": 0.779,
+          "samples": 2398
+        },
+        "resources": {
+          "cpu_s": 2.85,
+          "wall_s": 14.236,
+          "cpu_utilisation": 0.2,
+          "peak_threads": 8,
+          "rss_peak_mb_process_lifetime": 1200.7
+        }
+      },
+      "16": {
+        "sessions": 16,
+        "turns": 32,
+        "wall_s": 15.126,
+        "throughput_turns_per_s": 2.116,
+        "validated_answer_ms": {
+          "n": 32,
+          "p50": 2217.783,
+          "p95": 12369.781,
+          "max": 13674.709,
+          "mean": 4406.227
+        },
+        "first_evidence_ms": {
+          "n": 32,
+          "p50": 466.216,
+          "p95": 643.733,
+          "max": 668.613,
+          "mean": 462.929
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 15,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 4,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 2,
+            "running": 2
+          },
+          "llm": {
+            "pending": 8,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 55.05,
+          "p95": 2.403,
+          "samples": 2444
+        },
+        "resources": {
+          "cpu_s": 5.051,
+          "wall_s": 15.126,
+          "cpu_utilisation": 0.334,
+          "peak_threads": 8,
+          "rss_peak_mb_process_lifetime": 1230.4
+        }
+      }
+    },
+    "llm_slots_4": {
+      "1": {
+        "sessions": 1,
+        "turns": 2,
+        "wall_s": 2.631,
+        "throughput_turns_per_s": 0.76,
+        "validated_answer_ms": {
+          "n": 2,
+          "p50": 1531.742,
+          "p95": 1580.251,
+          "max": 1585.641,
+          "mean": 1531.742
+        },
+        "first_evidence_ms": {
+          "n": 2,
+          "p50": 460.293,
+          "p95": 596.385,
+          "max": 611.506,
+          "mean": 460.293
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 1,
+            "running": 1
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 18.019,
+          "p95": 0.743,
+          "samples": 448
+        },
+        "resources": {
+          "cpu_s": 0.526,
+          "wall_s": 2.631,
+          "cpu_utilisation": 0.2,
+          "peak_threads": 6,
+          "rss_peak_mb_process_lifetime": 1230.5
+        }
+      },
+      "2": {
+        "sessions": 2,
+        "turns": 4,
+        "wall_s": 2.648,
+        "throughput_turns_per_s": 1.51,
+        "validated_answer_ms": {
+          "n": 4,
+          "p50": 1520.621,
+          "p95": 1592.677,
+          "max": 1595.389,
+          "mean": 1521.702
+        },
+        "first_evidence_ms": {
+          "n": 4,
+          "p50": 456.796,
+          "p95": 606.609,
+          "max": 606.97,
+          "mean": 457.393
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 1,
+            "running": 2
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 24.211,
+          "p95": 2.546,
+          "samples": 433
+        },
+        "resources": {
+          "cpu_s": 0.839,
+          "wall_s": 2.648,
+          "cpu_utilisation": 0.317,
+          "peak_threads": 9,
+          "rss_peak_mb_process_lifetime": 1230.5
+        }
+      },
+      "4": {
+        "sessions": 4,
+        "turns": 8,
+        "wall_s": 2.748,
+        "throughput_turns_per_s": 2.912,
+        "validated_answer_ms": {
+          "n": 8,
+          "p50": 1528.476,
+          "p95": 1603.868,
+          "max": 1604.345,
+          "mean": 1527.688
+        },
+        "first_evidence_ms": {
+          "n": 8,
+          "p50": 471.074,
+          "p95": 616.124,
+          "max": 618.882,
+          "mean": 463.141
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 1,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 1,
+            "running": 4
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 32.13,
+          "p95": 6.048,
+          "samples": 429
+        },
+        "resources": {
+          "cpu_s": 1.45,
+          "wall_s": 2.748,
+          "cpu_utilisation": 0.528,
+          "peak_threads": 11,
+          "rss_peak_mb_process_lifetime": 1230.5
+        }
+      },
+      "8": {
+        "sessions": 8,
+        "turns": 16,
+        "wall_s": 4.188,
+        "throughput_turns_per_s": 3.821,
+        "validated_answer_ms": {
+          "n": 16,
+          "p50": 2146.441,
+          "p95": 2818.565,
+          "max": 2831.315,
+          "mean": 2152.461
+        },
+        "first_evidence_ms": {
+          "n": 16,
+          "p50": 475.024,
+          "p95": 631.308,
+          "max": 632.284,
+          "mean": 462.87
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 0,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 3,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 1,
+            "running": 2
+          },
+          "llm": {
+            "pending": 5,
+            "running": 4
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 29.261,
+          "p95": 9.413,
+          "samples": 636
+        },
+        "resources": {
+          "cpu_s": 2.499,
+          "wall_s": 4.188,
+          "cpu_utilisation": 0.597,
+          "peak_threads": 11,
+          "rss_peak_mb_process_lifetime": 1230.5
+        }
+      },
+      "16": {
+        "sessions": 16,
+        "turns": 32,
+        "wall_s": 5.881,
+        "throughput_turns_per_s": 5.441,
+        "validated_answer_ms": {
+          "n": 32,
+          "p50": 2221.374,
+          "p95": 4226.83,
+          "max": 4325.171,
+          "mean": 2265.051
+        },
+        "first_evidence_ms": {
+          "n": 32,
+          "p50": 470.942,
+          "p95": 634.817,
+          "max": 650.504,
+          "mean": 464.071
+        },
+        "unanswered_turns": 0,
+        "extractive_answers_overload": 9,
+        "error_events": 0,
+        "max_queue_depth": {
+          "retrieval": {
+            "pending": 4,
+            "running": 4
+          },
+          "cpu": {
+            "pending": 2,
+            "running": 2
+          },
+          "llm": {
+            "pending": 8,
+            "running": 4
+          }
+        },
+        "output_events_held_out_of_order": 0,
+        "loop_lag_ms": {
+          "max": 76.123,
+          "p95": 12.43,
+          "samples": 834
+        },
+        "resources": {
+          "cpu_s": 4.463,
+          "wall_s": 5.881,
+          "cpu_utilisation": 0.759,
+          "peak_threads": 11,
+          "rss_peak_mb_process_lifetime": 1232.5
+        }
+      }
+    }
+  }
+}

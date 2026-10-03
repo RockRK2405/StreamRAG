@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "workload": "2000 partial ASR hypotheses of one utterance, then the final: paced at ~1 kHz (the loop runs every 20 deltas) or as one instant burst (the loop cannot run)",
+    "llm": "SimulatedLLM 300 ms (SYNTHETIC)",
+    "note": "the unbounded baseline is a finite burst (no uncontrolled growth is allowed to run)"
+  },
+  "modes": {
+    "unbounded_no_coalescing_paced_1khz": {
+      "deltas": 2000,
+      "push_s": 0.982,
+      "drain_after_last_push_ms": 447.0,
+      "total_s": 1.429,
+      "python_heap_peak_mb": 20.86,
+      "max_input_queue_depth": 21,
+      "chunk_events_processed": 2001,
+      "coalesced": 0,
+      "rejected": 0,
+      "controller_decisions": 102,
+      "retrievals": 4,
+      "drafts_requested": 3,
+      "final_transcript_intact": true,
+      "events": 5390,
+      "loop_lag_ms": {
+        "max": 49.893,
+        "p95": 24.543,
+        "samples": 118
+      }
+    },
+    "bounded_coalescing_paced_1khz": {
+      "deltas": 2000,
+      "push_s": 0.854,
+      "drain_after_last_push_ms": 426.1,
+      "total_s": 1.28,
+      "python_heap_peak_mb": 13.51,
+      "max_input_queue_depth": 21,
+      "chunk_events_processed": 101,
+      "coalesced": 1900,
+      "rejected": 0,
+      "controller_decisions": 102,
+      "retrievals": 4,
+      "drafts_requested": 3,
+      "final_transcript_intact": true,
+      "events": 1671,
+      "loop_lag_ms": {
+        "max": 50.448,
+        "p95": 24.245,
+        "samples": 109
+      }
+    },
+    "unbounded_no_coalescing_instant_burst": {
+      "deltas": 2000,
+      "push_s": 0.114,
+      "drain_after_last_push_ms": 603.4,
+      "total_s": 0.717,
+      "python_heap_peak_mb": 13.45,
+      "max_input_queue_depth": 2001,
+      "chunk_events_processed": 2001,
+      "coalesced": 0,
+      "rejected": 0,
+      "controller_decisions": 2,
+      "retrievals": 2,
+      "drafts_requested": 0,
+      "final_transcript_intact": true,
+      "events": 4118,
+      "loop_lag_ms": {
+        "max": 154.854,
+        "p95": 12.957,
+        "samples": 59
+      }
+    },
+    "bounded_coalescing_instant_burst": {
+      "deltas": 2000,
+      "push_s": 0.035,
+      "drain_after_last_push_ms": 453.4,
+      "total_s": 0.488,
+      "python_heap_peak_mb": 0.95,
+      "max_input_queue_depth": 65,
+      "chunk_events_processed": 1,
+      "coalesced": 2000,
+      "rejected": 0,
+      "controller_decisions": 2,
+      "retrievals": 2,
+      "drafts_requested": 0,
+      "final_transcript_intact": true,
+      "events": 150,
+      "loop_lag_ms": {
+        "max": 13.335,
+        "p95": 12.056,
+        "samples": 62
+      }
+    }
+  }
+}

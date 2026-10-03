@@ -120,6 +120,23 @@ class GroundedAnswerEngine:
         self.llm_records: list[dict] = []
         self._uid: str | None = None
         self._version = 1
+        self.cancel_check = None                       # Phase 8: called between stages; raises when cancelled
+
+    # ------------------------------------------------------------------ Phase 8: runtime support
+    def checkpoint(self) -> tuple:
+        """The engine's own mutable state (answers are immutable models; containers are copied)."""
+        return (list(self.versions), dict(self.current), dict(self.drafts), list(self.llm_records), self._version,
+                self._uid)
+
+    def restore(self, cp: tuple) -> None:
+        """Undo an answer that was cancelled or discarded as stale (it never happened for the session)."""
+        versions, current, drafts, llm_records, version, uid = cp
+        self.versions, self.current, self.drafts = list(versions), dict(current), dict(drafts)
+        self.llm_records, self._version, self._uid = list(llm_records), version, uid
+
+    def _check(self) -> None:
+        if self.cancel_check is not None:
+            self.cancel_check()
 
     # ------------------------------------------------------------------ telemetry helpers
     def _on_llm_call(self, purpose: str, r: LLMResponse, attempt: int) -> None:
@@ -186,6 +203,7 @@ class GroundedAnswerEngine:
                         continue                              # its facts are no longer planned
                     if not c.fact_keys and s.regenerate:
                         continue
+                    self._check()
                     v = self.verifier.verify(cid, c.text, c.evidence_ids, pool, decompose=False)
                     if v.status != "SUPPORTED":
                         continue                              # evidence no longer usable / changed
@@ -210,6 +228,7 @@ class GroundedAnswerEngine:
             if s.section_id in regenerated:
                 need_facts[s.section_id] = [f.plan_claim_id for f in s.facts if fact_key(f) not in covered]
         T["claim_verification"] += (time.perf_counter() - t) * 1000.0
+        self._check()
         # 4 generation ------------------------------------------------------------------------------------------------
         gen_backend = None if draft else self.backend
         stats = {"llm_calls": 0, "prompt_tokens": 0, "output_tokens": 0, "ttft": None, "fallback": None,
@@ -225,6 +244,7 @@ class GroundedAnswerEngine:
                 "answer_id": aid, "version": version, "backend": stats["backend"], "sections": sorted(todo),
                 "facts": todo, "kept_sentences": {k: len(v) for k, v in kept_text.items() if v}}, ctx.utterance_id)
             extracted = self._generate(ap, todo, kept_text, None, gen_backend, stats, T)
+            self._check()
             emit(E.ANSWER_GENERATION_COMPLETED, "answer_generator", {
                 "answer_id": aid, "version": version, "backend": stats["backend"], "fallback": stats["fallback"],
                 "sentences": len(extracted), "llm_calls": stats["llm_calls"],
@@ -244,7 +264,9 @@ class GroundedAnswerEngine:
                 revisions += 1
                 avoid = {sid: removed_by_sec.get(sid, []) for sid in redo}
                 kept_now = {sid: [claims[c].text for c in sec_claims[sid] if claims[c].kind == "fact"] for sid in redo}
+                self._check()
                 extracted = self._generate(ap, redo, kept_now, avoid, gen_backend, stats, T)
+                self._check()
                 removed_by_sec = self._process(extracted, ap, pools, ctx, claims, verifs, sec_claims, rejected,
                                                repairs, raw_statuses, budget, T, aid, version)
             # final completion: planned critical facts (and, strict, every planned fact of a section that produced
@@ -256,6 +278,7 @@ class GroundedAnswerEngine:
                         or gen_backend is None]
                 for f in fill:
                     self._add_fact(f, sid, ap, pools, claims, verifs, sec_claims, "extractive", None, T)
+        self._check()
         # 9 consistency ---------------------------------------------------------------------------------------------
         t = time.perf_counter()
         consistency_pairs: list[tuple[str, str]] = []
@@ -413,6 +436,7 @@ class GroundedAnswerEngine:
             "answer_id": aid, "version": version, "claims": len([e for e in extracted if e.kind == "fact"]),
             "verifier": self.aligner.name}, self._uid)
         for ec in extracted:
+            self._check()                                  # cooperative cancellation: per claim
             if ec.kind == "connective":
                 continue
             s = sec_by[ec.section_id]
@@ -543,6 +567,7 @@ class GroundedAnswerEngine:
                                                          "fact_keys": list(dict.fromkeys(claims[cid].fact_keys +
                                                                                          [fact_key(f)]))})
             return True
+        self._check()
         t = time.perf_counter()
         v = self.verifier.verify(cid, f.text, f.evidence_ids, pools[sid], decompose=False)
         T["claim_verification"] += (time.perf_counter() - t) * 1000.0

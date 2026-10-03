@@ -1,0 +1,696 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - SYNTHETIC WORKLOAD - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "verifier": "nli-deberta-v3-xsmall",
+    "workload": "8 concurrent sessions x 2 multi-intent utterances (dev suite, grounding corpus), 3 words / 150 ms",
+    "llm": "SimulatedLLM 800 ms (SYNTHETIC)",
+    "note": "cancel_on_correction off: Phase 6 classifies some second questions of this workload as ENTITY_CHANGE, and barge-in would cancel the first answer - a semantics effect that differs by timing, measured separately in cancellation.json",
+    "injected": "40 ms remote-index latency per retrieval subtask (SYNTHETIC)",
+    "reps": 3
+  },
+  "configs": {
+    "A_sequential": {
+      "config": {
+        "max_concurrent_retrievals": 1,
+        "max_concurrent_cpu": 1,
+        "max_concurrent_llm_calls": 1,
+        "split_retrieval": false
+      },
+      "runs": [
+        {
+          "wall_s": 14.44,
+          "turns": 16,
+          "throughput_turns_per_s": 1.108,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 740.533,
+              "p95": 1303.204,
+              "max": 1380.774,
+              "mean": 765.775
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 7467.802,
+              "p95": 12682.457,
+              "max": 13433.268,
+              "mean": 7525.355
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 7467.809,
+              "p95": 12682.462,
+              "max": 13433.274,
+              "mean": 7525.361
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 7467.836,
+              "p95": 12682.493,
+              "max": 13433.304,
+              "mean": 7525.39
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 6.557,
+            "wall_s": 14.44,
+            "cpu_utilisation": 0.454,
+            "peak_threads": 5,
+            "rss_peak_mb_process_lifetime": 1196.6
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 16,
+              "running": 1
+            },
+            "cpu": {
+              "pending": 2,
+              "running": 1
+            },
+            "llm": {
+              "pending": 8,
+              "running": 1
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 19.562,
+            "p95": 0.775,
+            "samples": 2460
+          }
+        },
+        {
+          "wall_s": 14.288,
+          "turns": 16,
+          "throughput_turns_per_s": 1.12,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 837.616,
+              "p95": 1305.944,
+              "max": 1382.829,
+              "mean": 796.747
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 7022.101,
+              "p95": 12526.726,
+              "max": 13280.364,
+              "mean": 6549.457
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 7293.112,
+              "p95": 12526.732,
+              "max": 13280.37,
+              "mean": 7364.053
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 7293.144,
+              "p95": 12526.762,
+              "max": 13280.403,
+              "mean": 7364.083
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 3.567,
+            "wall_s": 14.288,
+            "cpu_utilisation": 0.25,
+            "peak_threads": 5,
+            "rss_peak_mb_process_lifetime": 1211.5
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 16,
+              "running": 1
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 1
+            },
+            "llm": {
+              "pending": 8,
+              "running": 1
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 28.604,
+            "p95": 0.773,
+            "samples": 2416
+          }
+        },
+        {
+          "wall_s": 14.263,
+          "turns": 16,
+          "throughput_turns_per_s": 1.122,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 830.795,
+              "p95": 1313.595,
+              "max": 1390.566,
+              "mean": 794.815
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 7282.166,
+              "p95": 12505.121,
+              "max": 13259.623,
+              "mean": 6955.764
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 7282.172,
+              "p95": 12505.128,
+              "max": 13259.63,
+              "mean": 7353.658
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 7282.203,
+              "p95": 12505.158,
+              "max": 13259.663,
+              "mean": 7353.689
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 3.554,
+            "wall_s": 14.263,
+            "cpu_utilisation": 0.249,
+            "peak_threads": 5,
+            "rss_peak_mb_process_lifetime": 1212.4
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 16,
+              "running": 1
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 1
+            },
+            "llm": {
+              "pending": 8,
+              "running": 1
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 18.29,
+            "p95": 0.783,
+            "samples": 2421
+          }
+        }
+      ],
+      "median_wall_s": 14.288,
+      "median_validated_p50_ms": 7293.112,
+      "median_validated_p95_ms": 12526.732,
+      "median_evidence_p50_ms": 830.795,
+      "median_peak_threads": 5,
+      "median_cpu_s": 3.567
+    },
+    "B_parallel_unbounded": {
+      "config": {
+        "max_concurrent_retrievals": 64,
+        "max_concurrent_cpu": 64,
+        "max_concurrent_llm_calls": 64,
+        "split_retrieval": true
+      },
+      "runs": [
+        {
+          "wall_s": 2.895,
+          "turns": 16,
+          "throughput_turns_per_s": 5.527,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 520.954,
+              "p95": 793.177,
+              "max": 828.858,
+              "mean": 545.382
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 780.231,
+              "p95": 1823.242,
+              "max": 1868.82,
+              "mean": 914.846
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 1690.354,
+              "p95": 1823.246,
+              "max": 1868.824,
+              "mean": 1700.891
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 1690.377,
+              "p95": 1823.267,
+              "max": 1868.845,
+              "mean": 1700.913
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 2.137,
+            "wall_s": 2.895,
+            "cpu_utilisation": 0.738,
+            "peak_threads": 54,
+            "rss_peak_mb_process_lifetime": 1226.7
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 1,
+              "running": 32
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 13
+            },
+            "llm": {
+              "pending": 1,
+              "running": 8
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 104.042,
+            "p95": 10.015,
+            "samples": 369
+          }
+        },
+        {
+          "wall_s": 2.928,
+          "turns": 16,
+          "throughput_turns_per_s": 5.464,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 525.639,
+              "p95": 824.771,
+              "max": 870.332,
+              "mean": 557.181
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 715.89,
+              "p95": 1865.75,
+              "max": 1893.524,
+              "mean": 928.367
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 1731.031,
+              "p95": 1865.755,
+              "max": 1893.528,
+              "mean": 1752.05
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 1731.052,
+              "p95": 1865.778,
+              "max": 1893.551,
+              "mean": 1752.071
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 2.238,
+            "wall_s": 2.928,
+            "cpu_utilisation": 0.764,
+            "peak_threads": 54,
+            "rss_peak_mb_process_lifetime": 1232.0
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 1,
+              "running": 32
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 9
+            },
+            "llm": {
+              "pending": 1,
+              "running": 8
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 108.107,
+            "p95": 14.345,
+            "samples": 375
+          }
+        },
+        {
+          "wall_s": 2.911,
+          "turns": 16,
+          "throughput_turns_per_s": 5.495,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 574.348,
+              "p95": 816.681,
+              "max": 830.746,
+              "mean": 566.44
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 710.582,
+              "p95": 1757.558,
+              "max": 1760.381,
+              "mean": 903.798
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 1691.62,
+              "p95": 1757.563,
+              "max": 1760.385,
+              "mean": 1679.868
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 1691.64,
+              "p95": 1757.583,
+              "max": 1760.405,
+              "mean": 1679.891
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 2.025,
+            "wall_s": 2.912,
+            "cpu_utilisation": 0.695,
+            "peak_threads": 56,
+            "rss_peak_mb_process_lifetime": 1233.3
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 1,
+              "running": 32
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 11
+            },
+            "llm": {
+              "pending": 1,
+              "running": 8
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 78.786,
+            "p95": 14.587,
+            "samples": 372
+          }
+        }
+      ],
+      "median_wall_s": 2.911,
+      "median_validated_p50_ms": 1691.62,
+      "median_validated_p95_ms": 1823.246,
+      "median_evidence_p50_ms": 525.639,
+      "median_peak_threads": 54,
+      "median_cpu_s": 2.137
+    },
+    "C_parallel_bounded": {
+      "config": {
+        "max_concurrent_retrievals": 4,
+        "max_concurrent_cpu": 2,
+        "max_concurrent_llm_calls": 4,
+        "split_retrieval": true
+      },
+      "runs": [
+        {
+          "wall_s": 4.198,
+          "turns": 16,
+          "throughput_turns_per_s": 3.811,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 616.957,
+              "p95": 852.841,
+              "max": 918.83,
+              "mean": 608.842
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 1892.642,
+              "p95": 3151.277,
+              "max": 3194.867,
+              "mean": 1691.666
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 2339.1,
+              "p95": 3151.282,
+              "max": 3194.872,
+              "mean": 2340.386
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 2339.128,
+              "p95": 3151.305,
+              "max": 3194.893,
+              "mean": 2340.41
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 3.0,
+            "wall_s": 4.198,
+            "cpu_utilisation": 0.715,
+            "peak_threads": 12,
+            "rss_peak_mb_process_lifetime": 1233.3
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 28,
+              "running": 4
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 2
+            },
+            "llm": {
+              "pending": 5,
+              "running": 4
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 59.344,
+            "p95": 6.686,
+            "samples": 638
+          }
+        },
+        {
+          "wall_s": 4.204,
+          "turns": 16,
+          "throughput_turns_per_s": 3.806,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 608.65,
+              "p95": 857.651,
+              "max": 925.873,
+              "mean": 606.389
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 1199.439,
+              "p95": 3199.196,
+              "max": 3199.94,
+              "mean": 1598.603
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 2344.769,
+              "p95": 3199.2,
+              "max": 3199.944,
+              "mean": 2342.652
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 2344.796,
+              "p95": 3199.22,
+              "max": 3199.963,
+              "mean": 2342.677
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 2.878,
+            "wall_s": 4.204,
+            "cpu_utilisation": 0.685,
+            "peak_threads": 12,
+            "rss_peak_mb_process_lifetime": 1233.3
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 28,
+              "running": 4
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 2
+            },
+            "llm": {
+              "pending": 5,
+              "running": 4
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 51.683,
+            "p95": 7.761,
+            "samples": 636
+          }
+        },
+        {
+          "wall_s": 4.254,
+          "turns": 16,
+          "throughput_turns_per_s": 3.761,
+          "latency_ms": {
+            "first_event": {
+              "n": 16,
+              "p50": 0.0,
+              "p95": 0.0,
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "first_evidence": {
+              "n": 16,
+              "p50": 614.437,
+              "p95": 849.849,
+              "max": 914.763,
+              "mean": 613.893
+            },
+            "first_answer": {
+              "n": 16,
+              "p50": 1902.878,
+              "p95": 3233.661,
+              "max": 3246.683,
+              "mean": 1712.941
+            },
+            "validated_answer": {
+              "n": 16,
+              "p50": 2349.655,
+              "p95": 3233.665,
+              "max": 3246.687,
+              "mean": 2369.57
+            },
+            "last_event": {
+              "n": 16,
+              "p50": 2349.681,
+              "p95": 3233.684,
+              "max": 3246.705,
+              "mean": 2369.592
+            }
+          },
+          "unanswered_turn_rate": 0.0,
+          "resources": {
+            "cpu_s": 2.877,
+            "wall_s": 4.254,
+            "cpu_utilisation": 0.676,
+            "peak_threads": 12,
+            "rss_peak_mb_process_lifetime": 1233.3
+          },
+          "scheduler": {
+            "retrieval": {
+              "pending": 28,
+              "running": 4
+            },
+            "cpu": {
+              "pending": 1,
+              "running": 2
+            },
+            "llm": {
+              "pending": 5,
+              "running": 4
+            }
+          },
+          "task_failures": 0.0,
+          "loop_lag_ms": {
+            "max": 69.02,
+            "p95": 5.012,
+            "samples": 648
+          }
+        }
+      ],
+      "median_wall_s": 4.204,
+      "median_validated_p50_ms": 2344.769,
+      "median_validated_p95_ms": 3199.2,
+      "median_evidence_p50_ms": 614.437,
+      "median_peak_threads": 12,
+      "median_cpu_s": 2.878
+    }
+  }
+}

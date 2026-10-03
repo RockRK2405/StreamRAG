@@ -34,6 +34,8 @@ def gap_sentence(g: IntentGap) -> str:
     if g.kind == "constraint_not_covered" and aspect and not aspect.lower().startswith(("for ", "to ", "when ",
                                                                                       "during ", "in ", "at ")):
         aspect = f"to {aspect}"
+    elif g.kind == "constraint_not_covered" and aspect[:1].isupper():
+        aspect = aspect[0].lower() + aspect[1:]          # "For international applicants" mid-sentence
     return _GAP_TEMPLATES[g.kind].format(aspect=aspect or "this point")
 
 

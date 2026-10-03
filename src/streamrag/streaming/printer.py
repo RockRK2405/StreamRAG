@@ -106,6 +106,22 @@ def format_event(ev: TelemetryEvent) -> str | None:
         return f"{head} VERIFY     {p['status']} -> {p['action']}: \"{p['text'][:70]}\""
     if t == "VALIDATION_RETRIEVAL":
         return f"{head} VERIFY     retrieval for {p['claim_id']}: {len(p['new_evidence'])} new -> {p['status_after']}"
+    # Phase 8: streaming runtime
+    if t in ("TASK_CANCELLED", "TASK_TIMED_OUT", "TASK_RETRIED", "TASK_FAILED", "TASK_REJECTED"):
+        return (f"{head} TASK       {p['task_id']} {p['task_type']} {t[5:]}"
+                + (f": {p.get('error')}" if p.get("error") else ""))
+    if t == "RETRIEVAL_PARTIAL":
+        return f"{head} PARTIAL    {p['query_id']} {p['kind']} hits={p['hits']} top={p['top']}"
+    if t == "STALE_RESULT_DISCARDED":
+        return (f"{head} STALE      {p['task_id']} {p['task_type']} discarded ({p['reason']}; v{p['task_state_version']}"
+                f" < v{p['current_state_version']})")
+    if t in ("TRANSCRIPT_COALESCED", "BACKPRESSURE_APPLIED"):
+        return f"{head} BACKPRESS  {t.lower()}: " + ", ".join(f"{k}={v}" for k, v in p.items()
+                                                            if k in ("dropped", "kept", "action", "reason", "depth"))
+    if t == "DEGRADED_MODE_CHANGED":
+        return f"{head} DEGRADED   {p['mode']}: {p['reason']}"
+    if t == "ANSWER_COMMITTED":
+        return f"{head} COMMITTED  {p['answer_id']} v{p['version']} {p['status']} ({p['mode']}, {p['backend']})"
     if t == "ANSWER_COMPLETED":
         tag = f"{head} GROUNDED   {p['answer_id']} v{p['version']} {p['status']}" + (" partial" if p["partial"] else "")
         if p["status"] == "DRAFT":
