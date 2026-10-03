@@ -1,0 +1,25 @@
+{
+  "case_id": "G08",
+  "category": "C_unsupported_claim",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How many visitors can the observatory dome hold at once?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "\\b\\d+\\s*(?:visitors|people|persons|guests)\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_numeric_value"
+        ]
+      }
+    }
+  ]
+}

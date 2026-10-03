@@ -75,10 +75,16 @@ def _phase4_models() -> dict:
     from streamrag.context.models import ContextChange, TopicFrame
     from streamrag.delta.models import DeltaPlan, EvidenceAssignment
     from streamrag.session.models import SessionArchive, SessionState, SessionStateVersion
+    from streamrag.answer_state.models import GroundedAnswer
+    from streamrag.citations.models import Citation as GroundedCitation
+    from streamrag.claims.models import ClaimPlan, ClaimVerification
     return {"RetrievalDecision": RetrievalDecision, "QueryRecord": QueryRecord, "UnifiedEvidenceSet": UnifiedEvidenceSet,
             # Phase 6
             "SessionState": SessionState, "SessionStateVersion": SessionStateVersion, "SessionArchive": SessionArchive,
             "ContextChange": ContextChange, "TopicFrame": TopicFrame, "DeltaPlan": DeltaPlan,
-            "EvidenceAssignment": EvidenceAssignment}
+            "EvidenceAssignment": EvidenceAssignment,
+            # Phase 7
+            "GroundedAnswer": GroundedAnswer, "GroundedCitation": GroundedCitation, "ClaimPlan": ClaimPlan,
+            "ClaimVerification": ClaimVerification}
 
 __all__ = [n for n in dir() if not n.startswith("_")]

@@ -1,0 +1,5 @@
+TEST FIXTURE ONLY. Synthetic text written for software tests; it is not part of any real corpus.
+
+Fixture Permit Office Notice (2025 edition)
+
+The application fee for a new permit is 55 euros. Proof of residence is optional for all applicants.

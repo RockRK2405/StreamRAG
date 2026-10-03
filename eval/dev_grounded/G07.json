@@ -1,0 +1,27 @@
+{
+  "case_id": "G07",
+  "category": "C_unsupported_claim",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How much does it cost to renew a permit?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "renew\\w*[^.]*\\b\\d+(?:[.,]\\d+)?\\s*(?:euros?|eur|dollars?|\u20ac)",
+          "\\b\\d+(?:[.,]\\d+)?\\s*(?:euros?|eur|dollars?|\u20ac)[^.]*renew"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_numeric_value",
+          "similar_but_not_supporting"
+        ]
+      }
+    }
+  ]
+}

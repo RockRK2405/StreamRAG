@@ -1,0 +1,26 @@
+{
+  "case_id": "G01",
+  "category": "A_fully_supported",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How high should the wicks be trimmed?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Wicks are trimmed to a height of 4 millimetres.",
+            "citation": "fixture_lighthouse_manual \u00a71.1"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    }
+  ]
+}

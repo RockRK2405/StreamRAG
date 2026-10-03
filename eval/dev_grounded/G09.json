@@ -1,0 +1,27 @@
+{
+  "case_id": "G09",
+  "category": "C_unsupported_claim",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the minimum age for fruit pickers in the orchard?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "\\b\\d+\\s*years?\\b",
+          "\\bminimum age\\b[^.]*\\d"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_eligibility_rule",
+          "missing_numeric_value"
+        ]
+      }
+    }
+  ]
+}

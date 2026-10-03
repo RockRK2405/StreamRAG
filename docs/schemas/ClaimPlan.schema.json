@@ -1,0 +1,279 @@
+{
+  "$defs": {
+    "ClaimSource": {
+      "additionalProperties": false,
+      "description": "Exact origin of an extractive claim: characters [char_start, char_end) of the evidence text.",
+      "properties": {
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "char_start",
+        "char_end"
+      ],
+      "title": "ClaimSource",
+      "type": "object"
+    },
+    "IntentGap": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect": {
+          "title": "Aspect",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "no_evidence",
+            "constraint_not_covered",
+            "conflict",
+            "unsupported_removed",
+            "value_not_stated"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent_id",
+        "kind",
+        "aspect"
+      ],
+      "title": "IntentGap",
+      "type": "object"
+    },
+    "IntentPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PlannedClaim"
+          },
+          "title": "Claims",
+          "type": "array"
+        },
+        "constraints": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "gaps": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/IntentGap"
+          },
+          "title": "Gaps",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "needs_regeneration": {
+          "default": true,
+          "title": "Needs Regeneration",
+          "type": "boolean"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent_id",
+        "section_id",
+        "title"
+      ],
+      "title": "IntentPlan",
+      "type": "object"
+    },
+    "PlannedClaim": {
+      "additionalProperties": false,
+      "description": "An atomic, evidence-derived statement the answer may express (never invented: verbatim evidence text or an\natom of it that the verifier accepted as entailed by its source sentence).",
+      "properties": {
+        "atom_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Atom Of"
+        },
+        "depends_on": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "entailed_by_source": {
+          "default": true,
+          "title": "Entailed By Source",
+          "type": "boolean"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "importance": {
+          "default": "important",
+          "enum": [
+            "critical",
+            "important",
+            "supplementary"
+          ],
+          "title": "Importance",
+          "type": "string"
+        },
+        "importance_basis": {
+          "default": "",
+          "title": "Importance Basis",
+          "type": "string"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "phase6_claim_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phase6 Claim Id"
+        },
+        "plan_claim_id": {
+          "title": "Plan Claim Id",
+          "type": "string"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ClaimSource"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "plan_claim_id",
+        "intent_id",
+        "section_id",
+        "text",
+        "source",
+        "evidence_ids"
+      ],
+      "title": "PlannedClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "answer_id": {
+      "title": "Answer Id",
+      "type": "string"
+    },
+    "conflicts": {
+      "default": [],
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "frame_id": {
+      "title": "Frame Id",
+      "type": "string"
+    },
+    "intents": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IntentPlan"
+      },
+      "title": "Intents",
+      "type": "array"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan_id",
+    "frame_id",
+    "answer_id"
+  ],
+  "title": "ClaimPlan",
+  "type": "object"
+}

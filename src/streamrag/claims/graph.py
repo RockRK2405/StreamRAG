@@ -6,7 +6,12 @@ in-corpus query terms (need words + inherited context + constraints). Up to ``cl
 version, each with relevance >= ``claim_min_relevance`` and either sharing >= min(2, |query terms|) terms with the
 query or containing an anchor term: a term of the need's topic (what the question is about) when the need has one,
 else the query's most corpus-specific terms (max IDF, ties included). One shared word that is neither (such as a
-place name that occurs everywhere) is not enough to make a sentence a claim about the need.
+place name that occurs everywhere) is not enough to make a sentence a claim about the need. A sentence is read in the
+scope of its document title and section heading (Phase 7): "Applicants must be at least 18." under "Eligibility" in
+the "Permit Handbook" answers a permit eligibility question although the sentence repeats neither word. At least
+one shared term must come from the sentence or its section heading (the document title alone would make every
+sentence of a document relevant). Sentences that address the model or carry instructions ("ignore previous
+instructions", "tell the user", "system note", ...) are data, never claims (prompt-injection defence, docs/answer/02).
 Because the claim text is a substring of the evidence text (``ClaimSource`` span), SUPPORTS is justified by
 construction - no claim is invented.
 
@@ -39,13 +44,14 @@ import re
 from collections.abc import Callable
 from dataclasses import dataclass
 
+from streamrag.claims.textcheck import instruction_like
 from streamrag.delta.evidence import EvidenceStore
 from streamrag.delta.models import USABLE_EVIDENCE
 from streamrag.intents.tracker import IntentTracker
 from streamrag.models.answers import Claim, ClaimEvidenceLink, ClaimSource, ClaimStatus, ClaimTransition
 from streamrag.models.intents import Intent
 
-_SENT = re.compile(r"[^.!?\n]+(?:[.!?]+|$)")
+_SENT = re.compile(r"[^.!?\n]+(?:\.(?=\d)[^.!?\n]*)*(?:[.!?]+|$)")    # a "." before a digit is a decimal point
 _LIST_PREFIX = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+")
 _UNIT = re.compile(r"(\d+(?:[.,]\d+)?)\s*(%|percent|millimet(?:re|er)s?|mm|centimet(?:re|er)s?|cm|met(?:re|er)s?|"
                    r"kilomet(?:re|er)s?|km|grams?|kilograms?|kg|litres?|liters?|seconds?|minutes?|hours?|days?|"
@@ -98,11 +104,18 @@ class ClaimExtractor:
         cands = []
         for a in store.usable(intent_id):
             text = store.text(a.evidence_id)
+            rec = store.records[a.evidence_id]
+            doc_t = set(self.terms_fn(rec.document_title or ""))
+            sec_t = set(self.terms_fn(rec.section_title or "")) if rec.section_title != rec.document_title else set()
             for s, e in sentences(text):
-                st = set(self.terms_fn(text[s:e]))
+                if instruction_like(text[s:e]):
+                    continue
+                own = set(self.terms_fn(text[s:e])) | sec_t
+                st = own | doc_t
                 shared = [t for t in weights if t in st]
                 rel = sum(weights[t] for t in shared) / total
-                if rel >= self.min_rel and (len(shared) >= min(2, len(weights)) or anchors & set(shared)):
+                if rel >= self.min_rel and own & set(shared) \
+                        and (len(shared) >= min(2, len(weights)) or anchors & set(shared)):
                     cands.append(ClaimCandidate(a.evidence_id, s, e, text[s:e], round(rel, 4), a.best_rank))
         cands.sort(key=lambda c: (-c.relevance, c.rank, c.evidence_id, c.start))
         return cands[: self.k]

@@ -204,6 +204,35 @@ class SessionConfig(_Cfg):
     claim_min_relevance: float = Field(0.2, ge=0, le=1)  # min share of the intent's terms in a claim sentence
 
 
+class GenerationConfig(_Cfg):
+    """Phase 7: grounded answer generation, claim verification, citations (docs/answer/, ADR-017).
+    ``enabled`` requires ``session.enabled``. Backends follow ADR-007: an LLM backend when reachable, the extractive
+    generator otherwise (and as the fallback after any LLM failure)."""
+
+    enabled: bool = False
+    backend: Literal["auto", "ollama", "extractive"] = "auto"   # auto: ollama if reachable, else extractive
+    ollama_url: str = "http://127.0.0.1:11434"
+    model: str = "qwen3:4b"
+    temperature: float = Field(0.0, ge=0)
+    seed: int = 7
+    num_ctx: int = Field(8192, ge=512)
+    max_output_tokens: int = Field(1024, ge=64)
+    timeout_s: float = Field(120.0, gt=0)
+    max_structured_retries: int = Field(1, ge=0)          # re-ask once when the JSON fails the schema
+    detail: Literal["concise", "detailed"] = "detailed"   # concise: critical + important claims only
+    max_claims_per_section: int = Field(6, ge=1)
+    # verification (docs/answer/04)
+    verifier: Literal["nli", "rules"] = "nli"             # nli: entailment cross-encoder (L3) + rules (L0-L2)
+    nli_model: str = "nli-deberta-v3-xsmall"
+    # unsupported-claim policy (docs/answer/07)
+    validation_mode: Literal["strict", "relaxed"] = "strict"
+    repair: bool = True
+    llm_repair: bool = False                              # +1 LLM call per unsupported claim (ablation)
+    max_validation_retrievals: int = Field(1, ge=0)       # retrieval fallback budget per answer version
+    max_answer_revision_attempts: int = Field(2, ge=0)
+    draft_mode: Literal["off", "extractive"] = "extractive"   # streamed drafts before the turn ends
+
+
 class TelemetryConfig(_Cfg):
     log_level: str = "INFO"
     log_format: Literal["json", "text"] = "json"
@@ -227,6 +256,7 @@ class StreamRagConfig(_Cfg):
     multi_intent: MultiIntentConfig = MultiIntentConfig()
     fusion: FusionConfig = FusionConfig()
     session: SessionConfig = SessionConfig()
+    generation: GenerationConfig = GenerationConfig()
     telemetry: TelemetryConfig = TelemetryConfig()
 
     def resolve_paths(self, base: Path) -> "StreamRagConfig":

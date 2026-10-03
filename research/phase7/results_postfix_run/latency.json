@@ -1,0 +1,105 @@
+{
+  "F_stages_ms": {
+    "citation_mapping": {
+      "max": 0.124,
+      "mean": 0.0321,
+      "n": 33,
+      "p50": 0.027,
+      "p95": 0.055
+    },
+    "claim_extraction": {
+      "max": 0.237,
+      "mean": 0.0707,
+      "n": 33,
+      "p50": 0.061,
+      "p95": 0.175
+    },
+    "claim_planning": {
+      "max": 14.231,
+      "mean": 1.1874,
+      "n": 33,
+      "p50": 0.309,
+      "p95": 6.0646
+    },
+    "claim_verification": {
+      "max": 653.634,
+      "mean": 121.676,
+      "n": 33,
+      "p50": 71.629,
+      "p95": 424.92
+    },
+    "generation": {
+      "max": 8448.273,
+      "mean": 2586.719,
+      "n": 33,
+      "p50": 2196.824,
+      "p95": 6077.2228
+    },
+    "repair": {
+      "max": 510.851,
+      "mean": 17.5379,
+      "n": 33,
+      "p50": 0.0,
+      "p95": 24.5836
+    },
+    "retrieval": {
+      "max": 0.0,
+      "mean": 0.0,
+      "n": 33,
+      "p50": 0.0,
+      "p95": 0.0
+    },
+    "total": {
+      "max": 8541.89,
+      "mean": 2712.6387,
+      "n": 33,
+      "p50": 2269.852,
+      "p95": 6341.3354
+    },
+    "validation": {
+      "max": 5.674,
+      "mean": 0.6983,
+      "n": 33,
+      "p50": 0.214,
+      "p95": 2.3564
+    }
+  },
+  "F_tokens": {
+    "output": 6471,
+    "prompt": 13493
+  },
+  "F_ttft_raw_ms": {
+    "max": 344.7314,
+    "mean": 123.1551,
+    "n": 31,
+    "p50": 103.0764,
+    "p95": 207.4612
+  },
+  "meta": {
+    "REPORTABLE": false,
+    "arms": {
+      "A": "plain LLM (no evidence)",
+      "B": "RAG (evidence, no citation requirement)",
+      "C": "RAG + citations (labels trusted)",
+      "D": "C + claim validation (unsupported removed)",
+      "E": "D + repair (supported atoms kept, retrieval fallback for material claims)",
+      "F": "full Phase 7: claim planning + validation + repair + incremental refinement",
+      "X": "extractive generator (no LLM), same validation"
+    },
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+      "grounding": "e088fc7375610cebd13ed93d4074f635e7993cdcd10f63ac5b8e5d8139b924b7",
+      "injection": "7ebdb6689c2bc33e8b2efc58d1b33f378a026e6e9e64e873f634ed77123be4c8"
+    },
+    "llm": "qwen3:4b",
+    "llm_backend": "ollama",
+    "note": "D and E reuse C's exact LLM output (cached by request hash); their generation latency is C's.",
+    "seed": 7,
+    "temperature": 0.0,
+    "verifier": "nli:nli-deberta-v3-xsmall+rules"
+  }
+}

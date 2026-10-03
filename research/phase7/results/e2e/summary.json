@@ -1,0 +1,166 @@
+[
+  {
+    "scenario": "01_simple_question",
+    "turns": 1,
+    "wall_ms": 3195.3,
+    "final_answers": 1,
+    "drafts": 1,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 6,
+    "citations_valid": 6,
+    "orphan_claims": 0,
+    "final_text": "Wicks should be trimmed to a height of 4 millimetres. [fixture_lighthouse_manual \u00a71.1] Trimming a wick too short results in a dim beam. [fixture_lighthouse_manual \u00a71.1] Leaving a wick too long causes soot on the lens. [fixture_lighthouse_manual \u00a71.1]"
+  },
+  {
+    "scenario": "02_multi_intent",
+    "turns": 1,
+    "wall_ms": 5113.0,
+    "final_answers": 1,
+    "drafts": 3,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 26,
+    "citations_valid": 26,
+    "orphan_claims": 0,
+    "final_text": "The eligibility requirements:\nApplicants must be at least 18 years old. [fixture_permit_handbook \u00a71] The sources differ: \u201cApplicants must provide proof of residence\u201d [fixture_permit_handbook \u00a71] / \u201cProof of residence is optional for all applicants\u201d [fixture_permit_notice_2025 \u00a71]. Applicants who hold a suspended permit cannot apply. [fixture_permit_handbook \u00a71]\n\nThe application process for the permit:\nApplications are submitted online through the permit portal. [fixture_permit_handbook \u00a72] Each application is reviewed by a permit officer. [fixture_permit_handbook \u00a72] Applicants receive the decision by post. [fixture_permit_handbook \u00a72]"
+  },
+  {
+    "scenario": "03_incomplete_streaming_question",
+    "turns": 1,
+    "wall_ms": 2516.9,
+    "final_answers": 1,
+    "drafts": 3,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 11,
+    "citations_valid": 11,
+    "orphan_claims": 0,
+    "final_text": "Ladders are permitted in the orchard only when a second worker holds the base of the ladder. [Doc_07 \u00a72.1] Ladders are not permitted in the orch: overnight. [Doc_07 \u00a72.2] Ladders must be returned to the tool shed. [Doc_07 \u00a72.2]"
+  },
+  {
+    "scenario": "04_late_constraint",
+    "turns": 2,
+    "wall_ms": 2146.3,
+    "final_answers": 2,
+    "drafts": 3,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL",
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 15,
+    "citations_valid": 15,
+    "orphan_claims": 0,
+    "final_text": "Ladders are not permitted in the orch: overnight. [Doc_07 \u00a72.2] Ladders must be returned to the tool shed. [Doc_07 \u00a72.2] Ladders are permitted in the orchard only when a second worker holds the base of the ladder. [Doc_07 \u00a72.1]"
+  },
+  {
+    "scenario": "05_entity_correction",
+    "turns": 2,
+    "wall_ms": 5368.8,
+    "final_answers": 2,
+    "drafts": 3,
+    "llm_calls": 2,
+    "statuses": [
+      "VALIDATED_FINAL",
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 17,
+    "citations_valid": 17,
+    "orphan_claims": 0,
+    "final_text": "A picker may fill at most 40 crates per shift. [Doc_07 \u00a73] Damaged fruit is placed in the compost bin, not in the crates. [Doc_07 \u00a73] The harvest supervisor checks the crate count at the end of every shift. [Doc_07 \u00a73] Crates are stacked no more than five high. [Doc_07 \u00a73]"
+  },
+  {
+    "scenario": "06_unsupported_fact",
+    "turns": 1,
+    "wall_ms": 1849.4,
+    "final_answers": 1,
+    "drafts": 1,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 4,
+    "citations_valid": 4,
+    "orphan_claims": 0,
+    "final_text": "Permits must be renewed every 2 years. [fixture_permit_handbook \u00a73] A renewal can be requested up to 30 days before the permit expires. [fixture_permit_handbook \u00a73] Not established: The retrieved documents do not state the value asked for in \u201cHow much does it cost to renew a permit\u201d."
+  },
+  {
+    "scenario": "07_contradictory_evidence",
+    "turns": 1,
+    "wall_ms": 2082.4,
+    "final_answers": 1,
+    "drafts": 2,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 8,
+    "citations_valid": 8,
+    "orphan_claims": 0,
+    "final_text": "The sources differ: \u201cThe application fee for a new permit is 40 euros\u201d [fixture_permit_notice_2023 \u00a71] / \u201cThe application fee for a new permit is 55 euros\u201d [fixture_permit_notice_2025 \u00a71]."
+  },
+  {
+    "scenario": "08_missing_evidence",
+    "turns": 1,
+    "wall_ms": 1099.4,
+    "final_answers": 1,
+    "drafts": 0,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 1,
+    "citations_valid": 1,
+    "orphan_claims": 0,
+    "final_text": "Each application is reviewed by a permit officer. [fixture_permit_handbook \u00a72]"
+  },
+  {
+    "scenario": "09_incremental_revision",
+    "turns": 3,
+    "wall_ms": 3252.9,
+    "final_answers": 3,
+    "drafts": 3,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL",
+      "VALIDATED_FINAL",
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 24,
+    "citations_valid": 24,
+    "orphan_claims": 0,
+    "final_text": "A picker may fill at most 40 crates per shift. [Doc_07 \u00a73] Damaged fruit is placed in the compost bin, not in the crates. [Doc_07 \u00a73] The harvest supervisor checks the crate count at the end of every shift. [Doc_07 \u00a73] Crates are stacked no more than five high. [Doc_07 \u00a73]"
+  },
+  {
+    "scenario": "10_citation_integrity",
+    "turns": 1,
+    "wall_ms": 1614.2,
+    "final_answers": 1,
+    "drafts": 1,
+    "llm_calls": 1,
+    "statuses": [
+      "VALIDATED_FINAL"
+    ],
+    "replay_identical": true,
+    "citations_checked": 3,
+    "citations_valid": 3,
+    "orphan_claims": 0,
+    "final_text": "The permit office is closed on public holidays. [fixture_permit_bulletin \u00a71]"
+  }
+]

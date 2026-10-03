@@ -43,11 +43,12 @@ class TurnResult:
     cache_hits: int = 0
     timings_ms: dict[str, float] = field(default_factory=dict)
     queries: dict[str, str] = field(default_factory=dict)       # intent id -> active query text after the turn
+    grounded: object = None                                     # Phase 7 GroundedAnswer (generation.enabled)
 
 
 class AdaptivePipeline:
     def __init__(self, stack, cfg=None, full_restart: bool = False, session_id: str = "sync",
-                 dispatch: str = "parallel") -> None:
+                 dispatch: str = "parallel", grounding=None) -> None:
         self.stack, self.cfg = stack, cfg or stack.cfg
         st = stack.intent_stack
         self.tracker = IntentTracker(session_id, st.decomposer, self.cfg.multi_intent)
@@ -64,6 +65,11 @@ class AdaptivePipeline:
         self.dispatch = dispatch
         self.evidence: dict[str, object] = {}
         self.results: list[TurnResult] = []
+        self.grounding = None                                    # Phase 7: grounded answers after every turn
+        if self.cfg.generation.enabled:
+            res = grounding if grounding is not None else stack.grounding
+            self.grounding = res.engine(self.cfg, self._emit)
+        self._n_vr = 0
 
     def close(self) -> None:
         self.retriever.close()
@@ -127,6 +133,10 @@ class AdaptivePipeline:
             self._execute(plan, uid, now, res)
             timings["retrieval"] = (time.perf_counter() - t1) * 1000.0
         res.answer = self.engine.commit_answer(uid, now)
+        if self.grounding is not None and res.answer is not None:
+            t_g = time.perf_counter()
+            res.grounded = self.grounding.answer(res.answer, self.grounding_context(uid, now), now)
+            timings["grounded_answer"] = (time.perf_counter() - t_g) * 1000.0
         for k, v in self.engine.timings.items():
             new = v[n_t.get(k, 0):]
             if new:
@@ -138,6 +148,25 @@ class AdaptivePipeline:
                        for i in self.tracker.active_session_intents()}
         self.results.append(res)
         return res
+
+    def grounding_context(self, uid: str, now: float):
+        from streamrag.answer_state.engine import GroundingContext
+        e = self.engine
+        return GroundingContext(e.graph, e.store, self.tracker, e.answers.conflicts, uid,
+                                lambda iid, q: self._validation_retrieve(iid, q, now))
+
+    def _validation_retrieve(self, intent_id: str, query: str, now: float) -> list[str]:
+        """Retrieval fallback for an unsupported claim (docs/answer/07): one bounded query with the claim text.
+        New evidence is assigned to the need (rule ``validation_retrieval``); the ledger is not touched (the
+        query is not a new version of the need's query) - the VALIDATION_RETRIEVAL event records it."""
+        it = self.tracker.intents.get(intent_id)
+        if it is None:
+            return []
+        self._n_vr += 1
+        before = {a.evidence_id for a in self.engine.store.usable(intent_id)}
+        es = self.stack.service.retrieve(query, self.options.model_copy(update={"top_k": 3}))
+        self.engine.store.add_results(intent_id, it.version, f"VR{self._n_vr}", es, now, "validation_retrieval")
+        return [e.evidence_id for e in es.items if e.evidence_id not in before]
 
     def _execute(self, plan: DeltaPlan, uid: str, now: float, res: TurnResult) -> None:
         for ch in (c for c in self.engine.changes if c.change_id in plan.change_ids):   # as the coordinator does
@@ -192,8 +221,9 @@ class AdaptivePipeline:
 class FullRestartPipeline:
     """Baseline: every turn = a fresh session over the whole conversation so far (no reuse of any kind)."""
 
-    def __init__(self, stack, cfg=None, session_id: str = "restart") -> None:
+    def __init__(self, stack, cfg=None, session_id: str = "restart", grounding=None) -> None:
         self.stack, self.cfg, self.session_id = stack, cfg or stack.cfg, session_id
+        self.grounding_resources = grounding
         self.turns: list[tuple[str, str, float]] = []
         self.last: AdaptivePipeline | None = None
 
@@ -206,7 +236,8 @@ class FullRestartPipeline:
         self.turns.append((uid, text, now))
         if self.last is not None:
             self.last.close()
-        p = AdaptivePipeline(self.stack, self.cfg, full_restart=True, session_id=self.session_id)
+        p = AdaptivePipeline(self.stack, self.cfg, full_restart=True, session_id=self.session_id,
+                             grounding=self.grounding_resources)
         for u, t, n in self.turns[:-1]:
             p.interpret_only(u, t, n)                 # full intent analysis of the whole conversation again
         res = p.process(uid, text, now)

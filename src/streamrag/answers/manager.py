@@ -77,6 +77,17 @@ class AnswerStateManager:
                 self.graph.claims[cid] = c.model_copy(update=upd)
         return cand
 
+    def preview(self, utterance_id: str, session_version: int, now_ms: float) -> AnswerVersion | None:
+        """Phase 7 drafts: the candidate state of the active frame *without* committing it (no version, no
+        bookkeeping); ``answer_id`` is suffixed ``-draft``."""
+        frame = self.frames.active
+        if frame is None:
+            return None
+        prev = self.get_current_answer_state(frame.frame_id)
+        sections = self._sections(frame, prev)
+        cand = self._version(frame, sections, prev, utterance_id, session_version, now_ms)
+        return cand.model_copy(update={"answer_id": cand.answer_id + "-draft"})
+
     def compare_answer_versions(self, a: AnswerVersion | None, b: AnswerVersion) -> AnswerDiff:
         prev_claims = {c: self._claim_sig(c, a) for c in (a.claim_ids if a else [])}
         new_claims = {c: self._claim_sig(c, b) for c in b.claim_ids}

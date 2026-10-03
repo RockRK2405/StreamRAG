@@ -1,0 +1,5 @@
+TEST FIXTURE ONLY.
+Synthetic, fictional documents written solely to test software behavior (parsing, chunking, IDs,
+indexing, retrieval plumbing). They are NOT the official Theme 4 corpus and MUST NOT be used for
+reported benchmark results, recall/groundedness claims, or demo claims. The presence of this file
+makes StreamRAG label any corpus/index/benchmark built from this directory as a TEST FIXTURE.

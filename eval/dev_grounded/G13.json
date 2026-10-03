@@ -1,0 +1,26 @@
+{
+  "case_id": "G13",
+  "category": "E_contradictory",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the application fee for a new permit?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [],
+        "conflict_values": [
+          "40 euros",
+          "55 euros"
+        ],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": [
+          "contradictory_documents"
+        ]
+      }
+    }
+  ]
+}

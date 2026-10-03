@@ -32,6 +32,7 @@ class FrameManager:
         self.overlap_min = overlap_min
         self.frames: list[TopicFrame] = []
         self._n = 0                                           # frame ids are never reused (pruned frames included)
+        self._placed: dict[str, str] = {}                     # intent id -> utterance in which it was placed
 
     @property
     def active(self) -> TopicFrame | None:
@@ -73,12 +74,18 @@ class FrameManager:
             return "none" if not (delta.modified or delta.removed or delta.superseded) else "same"
         act = self.active
         topic = {i: set(_topic_terms(tracker, i)) for i in new + corr_new}
+        for i in new + corr_new:
+            self._placed.setdefault(i, uid)
         if act is None:
             self._open(uid, new + corr_new, topic)
             return "new_frame"
         rel_targets = {r.target for i in new for r in _relations(tracker, uid) if r.source == i}
         corrects_frame = any(s.old in act.intent_ids for s in delta.superseded)
-        related = bool(corr_new) or corrects_frame or bool(rel_targets & set(act.intent_ids)) or bool(delta.cross_turn) \
+        # needs of one utterance share its frame: streaming adds them one chunk at a time ("eligibility requirements |
+        # and the application process"), the synchronous path sees them together - both must give one frame
+        same_utterance = any(self._placed.get(i) == uid for i in act.intent_ids)
+        related = same_utterance or bool(corr_new) or corrects_frame or bool(rel_targets & set(act.intent_ids)) \
+            or bool(delta.cross_turn) \
             or any(f.get("decision") in ("parallel", "constraint") for f in d.follow_ups) \
             or any(len(t & set(act.topic_terms)) >= max(1, self.overlap_min) for t in topic.values())
         if related:

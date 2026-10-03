@@ -1,0 +1,1289 @@
+{
+  "$defs": {
+    "AnswerClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citation Ids",
+          "type": "array"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "conflict_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Group"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "fact_keys": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Fact Keys",
+          "type": "array"
+        },
+        "facts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "importance": {
+          "default": "important",
+          "enum": [
+            "critical",
+            "important",
+            "supplementary"
+          ],
+          "title": "Importance",
+          "type": "string"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "introduced_in": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Introduced In",
+          "type": "integer"
+        },
+        "kind": {
+          "default": "fact",
+          "enum": [
+            "fact",
+            "uncertainty",
+            "conflict",
+            "connective"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "origin": {
+          "default": "llm",
+          "enum": [
+            "llm",
+            "extractive",
+            "repair",
+            "template",
+            "kept",
+            "retrieval"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "repaired_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Repaired From"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "DRAFT",
+          "enum": [
+            "DRAFT",
+            "SUPPORTED",
+            "PARTIALLY_SUPPORTED",
+            "UNSUPPORTED",
+            "CONTRADICTED",
+            "UNCERTAINTY"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "section_id",
+        "intent_id",
+        "text"
+      ],
+      "title": "AnswerClaim",
+      "type": "object"
+    },
+    "AnswerClaimDiff": {
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Added",
+          "type": "array"
+        },
+        "modified": {
+          "default": [],
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Modified",
+          "type": "array"
+        },
+        "removed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Removed",
+          "type": "array"
+        },
+        "sections_regenerated": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Regenerated",
+          "type": "array"
+        },
+        "sections_reused": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections Reused",
+          "type": "array"
+        },
+        "unchanged": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unchanged",
+          "type": "array"
+        }
+      },
+      "title": "AnswerClaimDiff",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "citation_id": {
+          "title": "Citation Id",
+          "type": "string"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "display_metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Display Metadata",
+          "type": "object"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/$defs/CitationLocation"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "valid",
+          "enum": [
+            "valid",
+            "invalid"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "strength": {
+          "enum": [
+            "STRONG",
+            "MODERATE",
+            "WEAK",
+            "NONE",
+            "CONTRADICTORY"
+          ],
+          "title": "Strength",
+          "type": "string"
+        }
+      },
+      "required": [
+        "citation_id",
+        "claim_id",
+        "evidence_id",
+        "source_id",
+        "chunk_id",
+        "location",
+        "strength"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "CitationIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Citation Id"
+        },
+        "claim_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Claim Id"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "kind": {
+          "enum": [
+            "missing_evidence",
+            "unknown_chunk",
+            "unknown_document",
+            "text_mismatch",
+            "not_supporting",
+            "wrong_claim",
+            "fabricated_page",
+            "bad_span",
+            "orphan_citation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "CitationIssue",
+      "type": "object"
+    },
+    "CitationLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "chunk_char_end": {
+          "minimum": 0,
+          "title": "Chunk Char End",
+          "type": "integer"
+        },
+        "chunk_char_start": {
+          "minimum": 0,
+          "title": "Chunk Char Start",
+          "type": "integer"
+        },
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "page_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page End"
+        },
+        "page_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Start"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "section_id",
+        "chunk_id",
+        "source_path",
+        "char_start",
+        "char_end",
+        "chunk_char_start",
+        "chunk_char_end"
+      ],
+      "title": "CitationLocation",
+      "type": "object"
+    },
+    "CitationMap": {
+      "additionalProperties": false,
+      "properties": {
+        "answer_id": {
+          "title": "Answer Id",
+          "type": "string"
+        },
+        "citations": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "claim_to_citations": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "default": {},
+          "title": "Claim To Citations",
+          "type": "object"
+        }
+      },
+      "required": [
+        "answer_id"
+      ],
+      "title": "CitationMap",
+      "type": "object"
+    },
+    "CitationReport": {
+      "additionalProperties": false,
+      "properties": {
+        "checked": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Checked",
+          "type": "integer"
+        },
+        "issues": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CitationIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "orphan_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Orphan Citations",
+          "type": "array"
+        },
+        "orphan_claims": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Orphan Claims",
+          "type": "array"
+        },
+        "unused_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unused Evidence",
+          "type": "array"
+        },
+        "valid": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Valid",
+          "type": "integer"
+        }
+      },
+      "title": "CitationReport",
+      "type": "object"
+    },
+    "ClaimVerification": {
+      "additionalProperties": false,
+      "properties": {
+        "alignments": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceAlignment"
+          },
+          "title": "Alignments",
+          "type": "array"
+        },
+        "atom_texts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Atom Texts",
+          "type": "array"
+        },
+        "atoms": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ClaimVerification"
+          },
+          "title": "Atoms",
+          "type": "array"
+        },
+        "cited_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Cited Evidence",
+          "type": "array"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "contradicting_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Contradicting Evidence",
+          "type": "array"
+        },
+        "entailed": {
+          "default": false,
+          "title": "Entailed",
+          "type": "boolean"
+        },
+        "invalid_labels": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Invalid Labels",
+          "type": "array"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "SUPPORTED",
+            "PARTIALLY_SUPPORTED",
+            "UNSUPPORTED",
+            "CONTRADICTED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "sufficient": {
+          "default": false,
+          "title": "Sufficient",
+          "type": "boolean"
+        },
+        "support_outside_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Support Outside Citations",
+          "type": "array"
+        },
+        "supported": {
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "supporting_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Evidence",
+          "type": "array"
+        },
+        "verifier": {
+          "default": "nli+rules",
+          "title": "Verifier",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "status",
+        "supported"
+      ],
+      "title": "ClaimVerification",
+      "type": "object"
+    },
+    "CoverageReport": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_to_evidence": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "default": {},
+          "title": "Claim To Evidence",
+          "type": "object"
+        },
+        "covered": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Covered",
+          "type": "array"
+        },
+        "critical_facts_missing": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Critical Facts Missing",
+          "type": "object"
+        },
+        "fact_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fact Coverage"
+        },
+        "failures": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Failures",
+          "type": "array"
+        },
+        "intent_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent Coverage"
+        },
+        "intent_to_claims": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "default": {},
+          "title": "Intent To Claims",
+          "type": "object"
+        },
+        "intents": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Intents",
+          "type": "array"
+        },
+        "section_to_intent": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Section To Intent",
+          "type": "object"
+        },
+        "uncertain_only": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertain Only",
+          "type": "array"
+        }
+      },
+      "title": "CoverageReport",
+      "type": "object"
+    },
+    "EvidenceAlignment": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "premise": {
+          "default": "none",
+          "enum": [
+            "sentence",
+            "window",
+            "chunk",
+            "none"
+          ],
+          "title": "Premise",
+          "type": "string"
+        },
+        "premise_span": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Premise Span"
+        },
+        "signals": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "default": {},
+          "title": "Signals",
+          "type": "object"
+        },
+        "strength": {
+          "enum": [
+            "STRONG",
+            "MODERATE",
+            "WEAK",
+            "NONE",
+            "CONTRADICTORY"
+          ],
+          "title": "Strength",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "evidence_id",
+        "strength",
+        "basis"
+      ],
+      "title": "EvidenceAlignment",
+      "type": "object"
+    },
+    "GroundedSection": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "order": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "regenerated": {
+          "default": true,
+          "title": "Regenerated",
+          "type": "boolean"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "new",
+          "enum": [
+            "new",
+            "changed",
+            "unchanged"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "uncertainty": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/IntentGap"
+          },
+          "title": "Uncertainty",
+          "type": "array"
+        }
+      },
+      "required": [
+        "section_id",
+        "intent_id",
+        "title"
+      ],
+      "title": "GroundedSection",
+      "type": "object"
+    },
+    "IntentGap": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect": {
+          "title": "Aspect",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "intent_id": {
+          "title": "Intent Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "no_evidence",
+            "constraint_not_covered",
+            "conflict",
+            "unsupported_removed",
+            "value_not_stated"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent_id",
+        "kind",
+        "aspect"
+      ],
+      "title": "IntentGap",
+      "type": "object"
+    },
+    "RejectedClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "importance": {
+          "default": "important",
+          "enum": [
+            "critical",
+            "important",
+            "supplementary"
+          ],
+          "title": "Importance",
+          "type": "string"
+        },
+        "origin": {
+          "default": "llm",
+          "title": "Origin",
+          "type": "string"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "section_id",
+        "text",
+        "status",
+        "action"
+      ],
+      "title": "RejectedClaim",
+      "type": "object"
+    },
+    "RepairRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "from_text": {
+          "title": "From Text",
+          "type": "string"
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "to_texts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "To Texts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "claim_id",
+        "action",
+        "from_text"
+      ],
+      "title": "RepairRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "answer_id": {
+      "title": "Answer Id",
+      "type": "string"
+    },
+    "backend": {
+      "default": "extractive",
+      "title": "Backend",
+      "type": "string"
+    },
+    "blocked_reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked Reasons",
+      "type": "array"
+    },
+    "citation_report": {
+      "$ref": "#/$defs/CitationReport",
+      "default": {
+        "checked": 0,
+        "issues": [],
+        "orphan_citations": [],
+        "orphan_claims": [],
+        "unused_evidence": [],
+        "valid": 0
+      }
+    },
+    "citations": {
+      "$ref": "#/$defs/CitationMap"
+    },
+    "claims": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AnswerClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "consistency_conflicts": {
+      "default": [],
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Consistency Conflicts",
+      "type": "array"
+    },
+    "coverage": {
+      "$ref": "#/$defs/CoverageReport",
+      "default": {
+        "claim_to_evidence": {},
+        "covered": [],
+        "critical_facts_missing": {},
+        "fact_coverage": null,
+        "failures": [],
+        "intent_coverage": null,
+        "intent_to_claims": {},
+        "intents": [],
+        "section_to_intent": {},
+        "uncertain_only": []
+      }
+    },
+    "created_at_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Created At Ms",
+      "type": "number"
+    },
+    "diff": {
+      "$ref": "#/$defs/AnswerClaimDiff",
+      "default": {
+        "added": [],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [],
+        "sections_reused": [],
+        "unchanged": []
+      }
+    },
+    "fallback": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fallback"
+    },
+    "frame_id": {
+      "title": "Frame Id",
+      "type": "string"
+    },
+    "llm_calls": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Llm Calls",
+      "type": "integer"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "default": {},
+      "title": "Metrics",
+      "type": "object"
+    },
+    "mode": {
+      "default": "strict",
+      "enum": [
+        "strict",
+        "relaxed"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model"
+    },
+    "output_tokens": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Output Tokens",
+      "type": "integer"
+    },
+    "parent_answer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Answer Id"
+    },
+    "partial": {
+      "default": false,
+      "title": "Partial",
+      "type": "boolean"
+    },
+    "phase6_answer_id": {
+      "title": "Phase6 Answer Id",
+      "type": "string"
+    },
+    "prompt_tokens": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Prompt Tokens",
+      "type": "integer"
+    },
+    "rejected": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RejectedClaim"
+      },
+      "title": "Rejected",
+      "type": "array"
+    },
+    "repairs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RepairRecord"
+      },
+      "title": "Repairs",
+      "type": "array"
+    },
+    "revision_attempts": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Revision Attempts",
+      "type": "integer"
+    },
+    "sections": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/GroundedSection"
+      },
+      "title": "Sections",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "VALIDATED_FINAL",
+        "BLOCKED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "text": {
+      "default": "",
+      "title": "Text",
+      "type": "string"
+    },
+    "timings_ms": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Timings Ms",
+      "type": "object"
+    },
+    "ttft_raw_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ttft Raw Ms"
+    },
+    "utterance_id": {
+      "title": "Utterance Id",
+      "type": "string"
+    },
+    "validation_retrievals": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Validation Retrievals",
+      "type": "integer"
+    },
+    "verifications": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ClaimVerification"
+      },
+      "default": {},
+      "title": "Verifications",
+      "type": "object"
+    },
+    "verifier": {
+      "default": "",
+      "title": "Verifier",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "answer_id",
+    "version",
+    "frame_id",
+    "phase6_answer_id",
+    "utterance_id",
+    "status",
+    "citations"
+  ],
+  "title": "GroundedAnswer",
+  "type": "object"
+}

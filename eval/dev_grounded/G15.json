@@ -1,0 +1,26 @@
+{
+  "case_id": "G15",
+  "category": "E_contradictory",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "conflict",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "When does the observatory open its dome?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [],
+        "conflict_values": [
+          "25 kilometres",
+          "30 kilometres"
+        ],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": [
+          "contradictory_documents"
+        ]
+      }
+    }
+  ]
+}

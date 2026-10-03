@@ -18,6 +18,17 @@ class StreamingStack:
     service: RetrievalService
     policy: object
     _intent_stack: object = None
+    _grounding: object = None
+
+    @property
+    def grounding(self):
+        """Phase 7: index catalog + entailment model + LLM backend (built lazily, shared by every pipeline)."""
+        if self._grounding is None:
+            from streamrag.answer_state.resources import GroundingResources
+            an = self.bundle.analyzer
+            self._grounding = GroundingResources.build(self.cfg, self.bundle,
+                                                       lambda t: list(dict.fromkeys(an.tokens(t))))
+        return self._grounding
 
     @property
     def intent_stack(self):
@@ -31,7 +42,8 @@ class StreamingStack:
             self._intent_stack = IntentStack(make_decomposer(self.cfg, self.bundle),
                                              IntentQueryBuilder(lambda t: list(dict.fromkeys(an.tokens(t)))),
                                              make_fusion_engine(self.cfg, self.bundle, self.service),
-                                             index_hash=self.index_hash)
+                                             index_hash=self.index_hash,
+                                             grounding=self.grounding if self.cfg.generation.enabled else None)
         return self._intent_stack
 
     def with_config(self, cfg: StreamRagConfig) -> "StreamingStack":

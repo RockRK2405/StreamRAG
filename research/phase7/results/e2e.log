@@ -1,0 +1,13 @@
+{"event": "index_reused", "level": "INFO", "logger": "streamrag.index", "path": "/private/tmp/claude-501/-Users-rudrakhale-Desktop-SamsungHackathon/08d15dc5-ae92-484b-b99e-484969ff91ee/scratchpad/idx7/fixture/7220cb344762-fc02ac9714", "ts": "2026-10-03T09:39:42.127Z"}
+{"event": "index_reused", "level": "INFO", "logger": "streamrag.index", "path": "/private/tmp/claude-501/-Users-rudrakhale-Desktop-SamsungHackathon/08d15dc5-ae92-484b-b99e-484969ff91ee/scratchpad/idx7/grounding/9975da9f0909-fc02ac9714", "ts": "2026-10-03T09:39:42.260Z"}
+{"event": "index_reused", "level": "INFO", "logger": "streamrag.index", "path": "/private/tmp/claude-501/-Users-rudrakhale-Desktop-SamsungHackathon/08d15dc5-ae92-484b-b99e-484969ff91ee/scratchpad/idx7/injection/8f89fc600093-fc02ac9714", "ts": "2026-10-03T09:39:42.364Z"}
+01_simple_question ['VALIDATED_FINAL'] llm 1 replay True
+02_multi_intent ['VALIDATED_FINAL'] llm 1 replay True
+03_incomplete_streaming_question ['VALIDATED_FINAL'] llm 1 replay True
+04_late_constraint ['VALIDATED_FINAL', 'VALIDATED_FINAL'] llm 1 replay True
+05_entity_correction ['VALIDATED_FINAL', 'VALIDATED_FINAL'] llm 2 replay True
+06_unsupported_fact ['VALIDATED_FINAL'] llm 1 replay True
+07_contradictory_evidence ['VALIDATED_FINAL'] llm 1 replay True
+08_missing_evidence ['VALIDATED_FINAL'] llm 1 replay True
+09_incremental_revision ['VALIDATED_FINAL', 'VALIDATED_FINAL', 'VALIDATED_FINAL'] llm 1 replay True
+10_citation_integrity ['VALIDATED_FINAL'] llm 1 replay True

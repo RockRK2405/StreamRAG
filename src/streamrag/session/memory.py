@@ -63,7 +63,7 @@ class SessionMemory:
         """Clear all active state (every layer); the components keep working for a fresh conversation."""
         self.tracker.__init__(self.tracker.session_id, self.tracker.dec, self.tracker.cfg)
         self.ledger.__init__(self.ledger.session_id)
-        self.frames.frames, self.frames._n = [], 0
+        self.frames.frames, self.frames._n, self.frames._placed = [], 0, {}
         self.store.__init__()
         self.cache.invalidate("session_reset")
         self.graph.__init__()
@@ -226,7 +226,7 @@ class SessionMemory:
         self.counters.clear()
         self.counters.update(d["counters"])
         self.frames.frames = [TopicFrame.model_validate(f) for f in d["frames"]]
-        self.frames._n = int(d["frames_n"])
+        self.frames._n, self.frames._placed = int(d["frames_n"]), {}       # placements matter within an utterance only
         self.tracker.import_state(d["tracker"])
         self.ledger._records = {r["query_id"]: QueryRecord.model_validate(r) for r in d["ledger"]}
         self.ledger._order = [r["query_id"] for r in d["ledger"]]

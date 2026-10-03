@@ -1,0 +1,38 @@
+{
+  "case_id": "G26",
+  "category": "J_long_answer",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Tell me about lamp maintenance, wick trimming, lens polishing and the storm procedure at the lighthouse.",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "The lamp of the fixture lighthouse must be cleaned every evening before sunset.",
+            "citation": "fixture_lighthouse_manual \u00a71"
+          },
+          {
+            "text": "Wicks are trimmed to a height of 4 millimetres.",
+            "citation": "fixture_lighthouse_manual \u00a71.1"
+          },
+          {
+            "text": "The keeper polishes the lens with a dry chamois cloth.",
+            "citation": "fixture_lighthouse_manual \u00a71.2"
+          },
+          {
+            "text": "During a storm the keeper stays in the lantern room.",
+            "citation": "fixture_lighthouse_manual \u00a73"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 4,
+        "tempt": []
+      }
+    }
+  ]
+}

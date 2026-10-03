@@ -30,6 +30,8 @@ class EvidenceRecord(Contract):
     section_id: str
     citation: str
     text: str
+    section_title: str | None = None              # heading that scopes the chunk's sentences (Phase 7)
+    document_title: str | None = None
     first_seen_query: str
     first_seen_ms: float = Field(0.0, ge=0)
 

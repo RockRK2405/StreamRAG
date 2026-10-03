@@ -246,7 +246,8 @@ class RetrievalService:
         chunks = self.bundle.chunks
         return Evidence(
             evidence_id=ch.chunk_id, document_id=ch.document_id, section_id=ch.section_id, chunk_id=ch.chunk_id,
-            citation=ch.citation, section_title=ch.section_title, section_path=ch.section_path, text=ch.text,
+            citation=ch.citation, section_title=ch.section_title, section_path=ch.section_path,
+            document_title=ch.title, text=ch.text,
             source_path=ch.source_path, char_start=ch.char_start, char_end=ch.char_end, page_start=ch.page_start,
             page_end=ch.page_end, rank=rank, score=float(score), retrieval_method=_METHOD[(mode, reranked)],
             bm25_score=c.lex_score, bm25_rank=c.lex_rank, dense_score=c.dense_score, dense_rank=c.dense_rank,

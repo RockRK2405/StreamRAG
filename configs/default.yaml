@@ -167,3 +167,28 @@ session:
   frame_overlap_min: 1             # a new need sharing >= this many topic terms stays in the current frame
   claims_per_intent: 4             # extractive claims registered per intent version
   claim_min_relevance: 0.2         # min share of the intent's query terms a claim sentence must contain
+
+# --------------------------------------------------------------------------------------------------
+# Phase 7: grounded answer generation + claim verification + citations (docs/answer/, ADR-017).
+# Team engineering defaults (NOT official thresholds); see PHASE_7_GROUNDED_GENERATION_REPORT.md.
+generation:
+  enabled: false                   # true (with session.enabled): grounded answers at the end of every turn
+  backend: auto                    # auto | ollama | extractive  (auto: ollama if reachable, else extractive)
+  ollama_url: http://127.0.0.1:11434
+  model: qwen3:4b                  # local small instruct model (ADR-007 local adapter)
+  temperature: 0.0
+  seed: 7
+  num_ctx: 8192
+  max_output_tokens: 1024
+  timeout_s: 120
+  max_structured_retries: 1        # schema-invalid JSON is re-asked at most this often, then extractive fallback
+  detail: detailed                 # concise | detailed
+  max_claims_per_section: 6
+  verifier: nli                    # nli (entailment cross-encoder + rules) | rules (L0-L2 only)
+  nli_model: nli-deberta-v3-xsmall # configs/models.yaml (fetched with `streamrag fetch-models`)
+  validation_mode: strict          # strict: any unsupported factual claim blocks finalization; relaxed: critical only
+  repair: true                     # relabel / keep supported atoms / qualify as "not established"
+  llm_repair: false                # rewrite unsupported claims with one extra LLM call (ablation)
+  max_validation_retrievals: 1     # retrieval fallback for unsupported critical claims, per answer version
+  max_answer_revision_attempts: 2
+  draft_mode: extractive           # off | extractive: verified extractive drafts while the user is still speaking

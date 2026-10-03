@@ -64,7 +64,8 @@ class EvidenceStore:
             if e.evidence_id not in self.records:
                 self.records[e.evidence_id] = EvidenceRecord(
                     evidence_id=e.evidence_id, document_id=e.document_id, section_id=e.section_id, citation=e.citation,
-                    text=e.text, first_seen_query=query_id, first_seen_ms=now_ms)
+                    text=e.text, section_title=e.section_title, document_title=e.document_title,
+                    first_seen_query=query_id, first_seen_ms=now_ms)
             key = (e.evidence_id, intent_id)
             a = self.assign.get(key)
             if a is None:

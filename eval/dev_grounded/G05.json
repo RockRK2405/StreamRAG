@@ -1,0 +1,36 @@
+{
+  "case_id": "G05",
+  "category": "B_partially_supported",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the eligibility requirements for the permit and how long does processing take?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Applicants must be at least 18 years old.",
+            "citation": "fixture_permit_handbook \u00a71"
+          },
+          {
+            "text": "Applicants must provide proof of residence.",
+            "citation": "fixture_permit_handbook \u00a71"
+          }
+        ],
+        "forbidden": [
+          "process\\w*[^.]*\\b\\d+\\s*(?:working\\s+|business\\s+)?(?:days?|weeks?|months?|hours?)\\b",
+          "\\b\\d+\\s*(?:working\\s+|business\\s+)?(?:days?|weeks?|months?|hours?)\\b[^.]*process"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 2,
+        "tempt": [
+          "incomplete_evidence",
+          "missing_numeric_value"
+        ]
+      }
+    }
+  ]
+}

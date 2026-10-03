@@ -1,0 +1,25 @@
+{
+  "case_id": "G21",
+  "category": "H_missing_evidence",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the parking policy at the permit office?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "park\\w*[^.]*\\b(free|\\d+|allowed|available|permitted|prohibited)\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_rule"
+        ]
+      }
+    }
+  ]
+}

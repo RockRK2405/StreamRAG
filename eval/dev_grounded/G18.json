@@ -1,0 +1,42 @@
+{
+  "case_id": "G18",
+  "category": "F_incremental_refinement",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are crates handled at harvest?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Crates are stacked no more than five high.",
+            "citation": "Doc_07 \u00a73"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Only for the night shift.",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "night shift[^.]*\\b\\d+\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "incomplete_evidence"
+        ]
+      }
+    }
+  ]
+}

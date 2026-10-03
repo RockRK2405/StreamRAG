@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "CitationLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "chunk_char_end": {
+          "minimum": 0,
+          "title": "Chunk Char End",
+          "type": "integer"
+        },
+        "chunk_char_start": {
+          "minimum": 0,
+          "title": "Chunk Char Start",
+          "type": "integer"
+        },
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "page_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page End"
+        },
+        "page_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Start"
+        },
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "section_id",
+        "chunk_id",
+        "source_path",
+        "char_start",
+        "char_end",
+        "chunk_char_start",
+        "chunk_char_end"
+      ],
+      "title": "CitationLocation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "chunk_id": {
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "citation_id": {
+      "title": "Citation Id",
+      "type": "string"
+    },
+    "claim_id": {
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "display_metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Display Metadata",
+      "type": "object"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "location": {
+      "$ref": "#/$defs/CitationLocation"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "default": "valid",
+      "enum": [
+        "valid",
+        "invalid"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "strength": {
+      "enum": [
+        "STRONG",
+        "MODERATE",
+        "WEAK",
+        "NONE",
+        "CONTRADICTORY"
+      ],
+      "title": "Strength",
+      "type": "string"
+    }
+  },
+  "required": [
+    "citation_id",
+    "claim_id",
+    "evidence_id",
+    "source_id",
+    "chunk_id",
+    "location",
+    "strength"
+  ],
+  "title": "Citation",
+  "type": "object"
+}

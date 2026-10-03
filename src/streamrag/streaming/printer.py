@@ -98,6 +98,19 @@ def format_event(ev: TelemetryEvent) -> str | None:
                 f"claims={p['claim_ids']} re-render={regen} | {p['change_summary']}")
     if t in ("SESSION_VERSION_CREATED", "QUERY_SUPERSEDED"):
         return None
+    # Phase 7: grounded answers (other ANSWER_* / CLAIM_* / CITATION_* events are telemetry only)
+    if t == "LLM_CALL":
+        return (f"{head} LLM        {p['model']} {p['purpose']} ok={p['ok']} tokens {p['prompt_tokens']}->"
+                f"{p['output_tokens']} total={round(p['wall']['total_ms'])}ms")
+    if t == "CLAIM_REJECTED":
+        return f"{head} VERIFY     {p['status']} -> {p['action']}: \"{p['text'][:70]}\""
+    if t == "VALIDATION_RETRIEVAL":
+        return f"{head} VERIFY     retrieval for {p['claim_id']}: {len(p['new_evidence'])} new -> {p['status_after']}"
+    if t == "ANSWER_COMPLETED":
+        tag = f"{head} GROUNDED   {p['answer_id']} v{p['version']} {p['status']}" + (" partial" if p["partial"] else "")
+        if p["status"] == "DRAFT":
+            return f"{tag}: \"{' '.join(p['text'].split())[:90]}\""
+        return tag + "\n" + "\n".join(("               " + ln) if ln else "" for ln in p["text"].splitlines())
     if t == "TURN_COMPLETED" and "session" in p:
         s = p["session"]
         return (f"{head} TURN       net={s['net_change_types']} turn_needs={s['turn_intents']} "

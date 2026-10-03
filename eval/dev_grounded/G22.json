@@ -1,0 +1,26 @@
+{
+  "case_id": "G22",
+  "category": "H_missing_evidence",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the dress code for lighthouse keepers?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "\\b(must|should) wear\\b",
+          "\\buniform\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_rule"
+        ]
+      }
+    }
+  ]
+}

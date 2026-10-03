@@ -68,6 +68,7 @@ class IntentStack:
     query_builder: IntentQueryBuilder
     fusion: EvidenceFusionEngine
     index_hash: str = ""                                    # Phase 6 semantic cache key component
+    grounding: object = None                                # Phase 7 GroundingResources (generation.enabled)
 
 
 @dataclass
@@ -101,6 +102,11 @@ class MultiIntentCoordinator:
             self.engine = AdaptiveSessionEngine(session.session_id, session.cfg, self.tracker, session.ledger,
                                                 stack.query_builder, stack.index_hash, session.options,
                                                 emit=session.emit, config_hash=str(session.meta.get("config_hash", "")))
+        self.grounding = None                           # Phase 7 GroundedAnswerEngine (generation.enabled)
+        self.grounded: dict[str, object] = {}           # utterance -> final GroundedAnswer of its turn
+        self._n_vr = 0
+        if self.engine is not None and session.cfg.generation.enabled and stack.grounding is not None:
+            self.grounding = stack.grounding.engine(session.cfg, session.emit)
         self.deferred: dict[str, object] = {}           # intent -> guarded QueryAction awaiting dispatch
         self.turn_intents: dict[str, list[str]] = {}    # utterance -> needs the turn created or changed
         self.planned: set[str] = set()                  # utterances with an engine plan
@@ -420,6 +426,7 @@ class MultiIntentCoordinator:
             "wall": {"per_query_ms": b.wall_ms, "sum_ms": round(sum(b.wall_ms.values()), 3)}}, b.utterance_id)
         if not s.chunks.is_finalized(b.utterance_id):       # after finalization the final fusion follows
             self.fuse(b.utterance_id, final=False)
+            self._draft(b.utterance_id)
 
     # ------------------------------------------------------------------ fusion
     def _turn_needs(self, uid: str):
@@ -530,12 +537,51 @@ class MultiIntentCoordinator:
                      "decompose_ms_total": round(sum(self.decompose_wall_ms), 4)},
         }
 
+    # ------------------------------------------------------------------ Phase 7: grounded answers
+    def _grounding_context(self, uid: str):
+        from streamrag.answer_state.engine import GroundingContext
+        e = self.engine
+        return GroundingContext(e.graph, e.store, self.tracker, e.answers.conflicts, uid,
+                                lambda iid, q: self._validation_retrieve(iid, q))
+
+    def _validation_retrieve(self, intent_id: str, query: str) -> list[str]:
+        """Retrieval fallback for an unsupported claim (docs/answer/07): synchronous, bounded, not a ledger version
+        of the need's query (recorded by VALIDATION_RETRIEVAL)."""
+        it = self.tracker.intents.get(intent_id)
+        if it is None:
+            return []
+        self._n_vr += 1
+        before = {a.evidence_id for a in self.engine.store.usable(intent_id)}
+        try:                                                  # the session's retrieval backend (Phase 3 service)
+            es = self.s.executor.backend.retrieve(query, self.s.options.model_copy(update={"top_k": 3}))
+        except Exception:                                     # noqa: BLE001 - fallback retrieval is best effort
+            return []
+        self.engine.store.add_results(intent_id, it.version, f"VR{self._n_vr}", es, self.s.sched.logical_now_ms(),
+                                      "validation_retrieval")
+        return [e.evidence_id for e in es.items if e.evidence_id not in before]
+
+    def _draft(self, uid: str) -> None:
+        """Verified extractive draft while the user is still speaking (generation.draft_mode = extractive)."""
+        if self.grounding is None or self.s.cfg.generation.draft_mode == "off":
+            return
+        eng = self.engine
+        pv = eng.answers.preview(uid, eng.memory.version, self.s.sched.logical_now_ms())
+        if pv is None or not pv.sections or not any(sec.claim_ids for sec in pv.sections):
+            return
+        self.grounding.answer(pv, self._grounding_context(uid), self.s.sched.logical_now_ms(), draft=True)
+
     def _session_turn_payload(self, uid: str) -> dict:
         s, eng = self.s, self.engine
         ues = self.fuse(uid, final=True)
         answer = eng.commit_answer(uid, s.sched.logical_now_ms())     # ANSWER_VERSION_* precede TURN_COMPLETED
         if answer is not None:
             self.answers[uid] = answer
+        grounded = None
+        if self.grounding is not None and answer is not None:
+            grounded = self.grounding.answer(answer, self._grounding_context(uid), s.sched.logical_now_ms())
+            self.grounded[uid] = grounded
+        elif self.grounding is not None and eng.frames.active is not None:
+            grounded = self.grounding.current.get(eng.frames.active.frame_id)
         iset = self.tracker.current(uid)
         needs = self._turn_needs(uid)
         active = {it.intent_id: s.ledger.active_for_intent(it.intent_id) for it in needs}
@@ -566,6 +612,11 @@ class MultiIntentCoordinator:
                     else None),
                 "answer_changed": answer is not None,
                 "counters": dict(eng.counters)},
+            "answer": None if grounded is None else {
+                "answer_id": grounded.answer_id, "version": grounded.version, "status": grounded.status,
+                "partial": grounded.partial, "changed": grounded.utterance_id == uid, "text": grounded.text,
+                "claims": [c.claim_id for c in grounded.claims], "citations": grounded.citations.keys(),
+                "backend": grounded.backend, "metrics": grounded.metrics},
             "wall": {"fusion_timings_ms": ues.timings_ms if ues is not None else None,
                      "decompose_ms_total": round(sum(self.decompose_wall_ms), 4)},
         }

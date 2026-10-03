@@ -1,0 +1,34 @@
+{
+  "case_id": "G27",
+  "category": "J_long_answer",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are all the harvest rules for crates and damaged fruit in the orchard?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "A picker may fill at most 40 crates per shift.",
+            "citation": "Doc_07 \u00a73"
+          },
+          {
+            "text": "Damaged fruit is placed in the compost bin, not in the crates.",
+            "citation": "Doc_07 \u00a73"
+          },
+          {
+            "text": "Crates are stacked no more than five high.",
+            "citation": "Doc_07 \u00a73"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    }
+  ]
+}

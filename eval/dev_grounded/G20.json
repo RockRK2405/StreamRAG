@@ -1,0 +1,45 @@
+{
+  "case_id": "G20",
+  "category": "G_entity_correction",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How is the lens polished?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "The keeper polishes the lens with a dry chamois cloth.",
+            "citation": "fixture_lighthouse_manual \u00a71.2"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Actually, I meant the wick.",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Wicks are trimmed to a height of 4 millimetres.",
+            "citation": "fixture_lighthouse_manual \u00a71.1"
+          }
+        ],
+        "forbidden": [
+          "\\bchamois\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    }
+  ]
+}

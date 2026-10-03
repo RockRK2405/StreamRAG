@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "arms": {
+      "A": "plain LLM (no evidence)",
+      "B": "RAG (evidence, no citation requirement)",
+      "C": "RAG + citations (labels trusted)",
+      "D": "C + claim validation (unsupported removed)",
+      "E": "D + repair (supported atoms kept, retrieval fallback for material claims)",
+      "F": "full Phase 7: claim planning + validation + repair + incremental refinement",
+      "X": "extractive generator (no LLM), same validation"
+    },
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+      "grounding": "e088fc7375610cebd13ed93d4074f635e7993cdcd10f63ac5b8e5d8139b924b7",
+      "injection": "7ebdb6689c2bc33e8b2efc58d1b33f378a026e6e9e64e873f634ed77123be4c8"
+    },
+    "llm": "qwen3:4b",
+    "llm_backend": "ollama",
+    "note": "D and E reuse C's exact LLM output (cached by request hash); their generation latency is C's.",
+    "seed": 7,
+    "temperature": 0.0,
+    "verifier": "nli:nli-deberta-v3-xsmall+rules"
+  },
+  "nli": {
+    "accuracy": 0.896,
+    "by_kind": {
+      "modality_or_negation_changed": {
+        "accepted_as_supported": 4,
+        "n": 15
+      },
+      "negation_inserted": {
+        "accepted_as_supported": 1,
+        "n": 16
+      },
+      "number_changed": {
+        "accepted_as_supported": 0,
+        "n": 10
+      },
+      "original": {
+        "accepted_as_supported": 40,
+        "n": 42
+      },
+      "unsupported_conjunct": {
+        "accepted_as_supported": 6,
+        "n": 42
+      }
+    },
+    "fn": 2,
+    "fp": 11,
+    "items": 125,
+    "ms_per_claim": 86.923,
+    "support_precision": 0.7843,
+    "support_recall": 0.9524,
+    "tn": 72,
+    "tp": 40,
+    "unsupported_detection_recall": 0.8675
+  },
+  "note": "labels by construction: original sentence = supported by its own chunk; a changed number, modality / negation change or an appended unrelated clause = not supported. Caveat: a few modality swaps can remain true (e.g. 'may' for 'must'); counted as not supported.",
+  "rules": {
+    "accuracy": 0.88,
+    "by_kind": {
+      "modality_or_negation_changed": {
+        "accepted_as_supported": 0,
+        "n": 15
+      },
+      "negation_inserted": {
+        "accepted_as_supported": 10,
+        "n": 16
+      },
+      "number_changed": {
+        "accepted_as_supported": 0,
+        "n": 10
+      },
+      "original": {
+        "accepted_as_supported": 42,
+        "n": 42
+      },
+      "unsupported_conjunct": {
+        "accepted_as_supported": 5,
+        "n": 42
+      }
+    },
+    "fn": 0,
+    "fp": 15,
+    "items": 125,
+    "ms_per_claim": 5.172,
+    "support_precision": 0.7368,
+    "support_recall": 1.0,
+    "tn": 68,
+    "tp": 42,
+    "unsupported_detection_recall": 0.8193
+  }
+}

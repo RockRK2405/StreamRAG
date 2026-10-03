@@ -1,0 +1,27 @@
+# Phase 7 claim decomposition lexicon (docs/answer/03). Domain-neutral English grammar words only: no corpus
+# vocabulary. A coordinated part that starts with (or contains within its first tokens) one of these is treated as a
+# new clause sharing the subject of the previous clause.
+auxiliaries: [is, are, was, were, be, been, being, am, has, have, had, do, does, did]
+modals: [must, may, might, can, cannot, could, should, shall, will, would, need, needs, ought]
+# Frequent finite verbs that begin a predicate after a coordinator ("... and takes 30 days").
+clause_verbs: [takes, take, took, requires, require, required, needs, includes, include, included, allows, allow,
+               allowed, costs, cost, lasts, last, opens, open, closes, close, starts, start, ends, end, runs, run,
+               applies, apply, covers, cover, contains, contain, uses, use, used, goes, go, comes, come, gets, get,
+               happens, happen, occurs, occur, sounds, sound, stays, stay, holds, hold, checks, check, confirms,
+               confirm, records, record, receives, receive, provides, provide, offers, offer, means, mean, depends,
+               depend, makes, make, keeps, keep, becomes, become, remains, remain, gives, give, sets, set, lets, let,
+               produces, produce, follows, follow, says, say, states, state, specifies, specify, lists, list]
+coordinators: [and, but, while, whereas, yet]
+# A list after one of these is a single unit ("between the third and fifth week", "both A and B").
+pair_openers: [between, both, either, neither, from, among]
+# A need phrased with one of these asks for a value of a kind (amount, duration, count, frequency, date/time, age,
+# measure). If no planned fact about the asked subject states a value of that kind, the answer reports that the value
+# is not stated (claims/planner.py, claims/textcheck.py).
+value_questions:
+  duration: ["how long", "how soon", "by when", deadline, duration]
+  amount: ["how much", fee, cost, price]
+  count: ["how many"]
+  frequency: ["how often"]
+  time: [when, "what time", "what date", "which date", "which day", "what day"]
+  age: ["how old", "minimum age", "maximum age", "age limit", "what age", "which age"]
+  measure: ["how far", "how high", "how big", "how heavy", "how tall", "how deep", "how wide"]

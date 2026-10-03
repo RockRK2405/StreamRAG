@@ -1,0 +1,26 @@
+{
+  "case_id": "G23",
+  "category": "H_missing_evidence",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "On which calendar date does the orchard planting season start?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "\\b(january|february|march|april|may|june|july|august|september|october|november|december)\\b",
+          "\\b\\d{1,2}(st|nd|rd|th)?\\s+of\\s+\\w+"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_date"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{"case_id": "G01", "turn": 1, "claim": "Wicks are trimmed to a height of.4 millimetres.", "label": "NOT_SUPPORTED", "note": "'.4 millimetres' is a different value from the source's 4 millimetres", "labelled_on": "post-fix run sheet L001"}
+{"case_id": "G01", "turn": 1, "claim": "Wicks are trimmed to a height of 4 millimetres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L002"}
+{"case_id": "G01", "turn": 1, "claim": "Wicks should be trimmed to a height of 4 millimetres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L003"}
+{"case_id": "G01", "turn": 1, "claim": "Trimming a wick too short results in a dim beam.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L004"}
+{"case_id": "G01", "turn": 1, "claim": "Leaving a wick too long causes soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L005"}
+{"case_id": "G02", "turn": 1, "claim": "The keeper polishes the lens with a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L006"}
+{"case_id": "G02", "turn": 1, "claim": "Abrasive powders are not permitted on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L007"}
+{"case_id": "G02", "turn": 1, "claim": "The keeper polishes the lens using a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L008"}
+{"case_id": "G02", "turn": 1, "claim": "Abrasive powders are prohibited on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L009"}
+{"case_id": "G03", "turn": 1, "claim": "Applications are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L010"}
+{"case_id": "G03", "turn": 1, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L011"}
+{"case_id": "G03", "turn": 1, "claim": "Applicants receive the decision by post.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L012"}
+{"case_id": "G03", "turn": 1, "claim": "Applications for the permit are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L013"}
+{"case_id": "G03", "turn": 1, "claim": "Applicants must be at least 18 years old.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L014"}
+{"case_id": "G04", "turn": 1, "claim": "The main telescope is recalibrated on the first night of every month.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L015"}
+{"case_id": "G05", "turn": 1, "claim": "Applicants must be at least 18 years old.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L016"}
+{"case_id": "G05", "turn": 1, "claim": "Applicants must provide proof of residence.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L017"}
+{"case_id": "G05", "turn": 1, "claim": "Applicants who hold a suspended permit cannot apply.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L018"}
+{"case_id": "G05", "turn": 1, "claim": "Permits must be renewed every 2 years.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L019"}
+{"case_id": "G05", "turn": 1, "claim": "A renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L020"}
+{"case_id": "G05", "turn": 1, "claim": "TEST FIXTURE ONLY.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L021"}
+{"case_id": "G05", "turn": 1, "claim": "Synthetic text written for software tests; it is not part of any real corpus.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L022"}
+{"case_id": "G05", "turn": 1, "claim": "Fixture Permit Office Notice (2023 edition) The application fee for a new permit is 40 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L023"}
+{"case_id": "G05", "turn": 1, "claim": "Proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L024"}
+{"case_id": "G05", "turn": 1, "claim": "Applications are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L025"}
+{"case_id": "G05", "turn": 1, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L026"}
+{"case_id": "G05", "turn": 1, "claim": "Applicants receive the decision by post.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L027"}
+{"case_id": "G05", "turn": 1, "claim": "Fixture Permit Office Notice (2025 edition) The application fee for a new permit is 55 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L028"}
+{"case_id": "G05", "turn": 1, "claim": "Proof of residence is optional for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L029"}
+{"case_id": "G05", "turn": 1, "claim": "Applicants must be at least 18 years old and provide proof of residence.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L030"}
+{"case_id": "G05", "turn": 1, "claim": "Permits must be renewed every 2 years, and a renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L031"}
+{"case_id": "G05", "turn": 1, "claim": "The application fee for a new permit is 40 euros, and proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L032"}
+{"case_id": "G05", "turn": 1, "claim": "Applications are submitted online through the permit portal, and each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L033"}
+{"case_id": "G05", "turn": 1, "claim": "The application fee for a new permit is 55 euros, and proof of residence is optional for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L034"}
+{"case_id": "G06", "turn": 1, "claim": "During a storm the keeper stays in the lantern room.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L035"}
+{"case_id": "G06", "turn": 1, "claim": "The fog signal sounds every 3:00 seconds while visibility is below 2 kilometres.", "label": "NOT_SUPPORTED", "note": "'every 3:00 seconds' is not the source's 30 seconds", "labelled_on": "post-fix run sheet L036"}
+{"case_id": "G06", "turn": 1, "claim": "During a storm, the keeper stays in the lantern room.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L037"}
+{"case_id": "G06", "turn": 1, "claim": "The fog signal sounds every 30 seconds while visibility is below 2 kilometres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L038"}
+{"case_id": "G07", "turn": 1, "claim": "Permits must be renewed every 2 years.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L039"}
+{"case_id": "G07", "turn": 1, "claim": "A renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L040"}
+{"case_id": "G07", "turn": 1, "claim": "The application fee for a new permit is 55 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L041"}
+{"case_id": "G07", "turn": 1, "claim": "The application fee for a new permit is 40 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L042"}
+{"case_id": "G08", "turn": 1, "claim": "The fixture observatory opens its dome only when the wind speed is below 2:5 kilometres per hour.", "label": "NOT_SUPPORTED", "note": "'2:5 kilometres per hour' is not the source's 25", "labelled_on": "post-fix run sheet L043"}
+{"case_id": "G08", "turn": 1, "claim": "The observatory dome can hold visitors on Fridays.", "label": "NOT_SUPPORTED", "note": "the source says visitors are welcome on Fridays; nothing about the dome holding visitors", "labelled_on": "post-fix run sheet L044"}
+{"case_id": "G08", "turn": 1, "claim": "The observatory dome opens only when wind speed is below 25 km/h.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L045"}
+{"case_id": "G08", "turn": 1, "claim": "Observers log the dome status hourly.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L046"}
+{"case_id": "G08", "turn": 1, "claim": "Visitors are permitted on Fridays.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L047"}
+{"case_id": "G08", "turn": 1, "claim": "Visitors are prohibited from touching telescope controls.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L048"}
+{"case_id": "G09", "turn": 1, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L049"}
+{"case_id": "G09", "turn": 1, "claim": "Damaged fruit is placed in the compost bin, not in the crates.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L050"}
+{"case_id": "G09", "turn": 1, "claim": "The harvest supervisor checks the crate count at the end of every shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L051"}
+{"case_id": "G09", "turn": 1, "claim": "Crates are stacked no more than five high.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L052"}
+{"case_id": "G09", "turn": 1, "claim": "Stacks taller than five crates must be split before the.", "label": "UNCLEAR", "note": "truncated sentence ('before the.')", "labelled_on": "post-fix run sheet L053"}
+{"case_id": "G09", "turn": 1, "claim": "The cart driver confirms the stack height before moving.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L054"}
+{"case_id": "G09", "turn": 1, "claim": "Fruit picked after sunset is recorded separately.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L055"}
+{"case_id": "G09", "turn": 1, "claim": "Late fruit is stored in the cool room until the next morning.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L056"}
+{"case_id": "G09", "turn": 1, "claim": "The minimum age for fruit pickers in the orchard is not established in the provided facts.", "label": "UNCLEAR", "note": "meta-statement about the evidence, not a factual claim", "labelled_on": "post-fix run sheet L057"}
+{"case_id": "G10", "turn": 1, "claim": "Applicants must be at least 18 years old.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L058"}
+{"case_id": "G10", "turn": 1, "claim": "Applicants must provide proof of residence.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L059"}
+{"case_id": "G10", "turn": 1, "claim": "Applicants who hold a suspended permit cannot apply.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L060"}
+{"case_id": "G10", "turn": 1, "claim": "Permits must be renewed every 2 years.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L061"}
+{"case_id": "G10", "turn": 1, "claim": "A renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L062"}
+{"case_id": "G10", "turn": 1, "claim": "TEST FIXTURE ONLY.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L063"}
+{"case_id": "G10", "turn": 1, "claim": "Synthetic text written for software tests; it is not part of any real corpus.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L064"}
+{"case_id": "G10", "turn": 1, "claim": "Fixture Permit Office Notice (2.023 edition) The application fee for a new permit is 40 euros.", "label": "NOT_SUPPORTED", "note": "'2.023 edition' is not stated (the source says 2023 edition)", "labelled_on": "post-fix run sheet L065"}
+{"case_id": "G10", "turn": 1, "claim": "Proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L066"}
+{"case_id": "G10", "turn": 1, "claim": "Applications are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L067"}
+{"case_id": "G10", "turn": 1, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L068"}
+{"case_id": "G10", "turn": 1, "claim": "Applicants receive the decision by post.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L069"}
+{"case_id": "G10", "turn": 1, "claim": "Fixture Permit Office Notice (2025 edition) The application fee for a new permit is 55 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L070"}
+{"case_id": "G10", "turn": 1, "claim": "Proof of residence is optional for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L071"}
+{"case_id": "G10", "turn": 1, "claim": "Applicants must be at least 18 years old and provide proof of residence.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L072"}
+{"case_id": "G10", "turn": 1, "claim": "Permits must be renewed every 2 years, and a renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L073"}
+{"case_id": "G10", "turn": 1, "claim": "The application fee for a new permit is 40 euros, and proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L074"}
+{"case_id": "G10", "turn": 1, "claim": "Applications are submitted online through the permit portal, and each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L075"}
+{"case_id": "G10", "turn": 1, "claim": "The application fee for a new permit is 55 euros, and proof of residence is optional for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L076"}
+{"case_id": "G11", "turn": 1, "claim": "Wicks are trimmed to a height of 4 millimetres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L077"}
+{"case_id": "G11", "turn": 1, "claim": "A wick trimmed too short produces a dim beam; a wick left too long produces soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L078"}
+{"case_id": "G11", "turn": 1, "claim": "The keeper polishes the lens with a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L079"}
+{"case_id": "G11", "turn": 1, "claim": "Abrasive powders are not permitted on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L080"}
+{"case_id": "G11", "turn": 1, "claim": "A wick trimmed too short produces a dim beam.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L081"}
+{"case_id": "G11", "turn": 1, "claim": "A wick left too long produces soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L082"}
+{"case_id": "G12", "turn": 1, "claim": "Saplings in the fixture orchard are planted between the third and fifth week of the planting season.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L083"}
+{"case_id": "G12", "turn": 1, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L084"}
+{"case_id": "G12", "turn": 1, "claim": "The main telescope is recalibrated on the first night of every month.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L085"}
+{"case_id": "G12", "turn": 1, "claim": "Saplings are planted between the third and fifth week of the planting season", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L086"}
+{"case_id": "G12", "turn": 1, "claim": "A picker may fill at most 40 crates per shift", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L087"}
+{"case_id": "G12", "turn": 1, "claim": "The main telescope is recalibrated on the first night of every month", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L088"}
+{"case_id": "G13", "turn": 1, "claim": "The application fee for a new permit is 40 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L089"}
+{"case_id": "G13", "turn": 1, "claim": "Proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L090"}
+{"case_id": "G13", "turn": 1, "claim": "The application fee for a new permit is 55 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L091"}
+{"case_id": "G14", "turn": 1, "claim": "Proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L092"}
+{"case_id": "G14", "turn": 1, "claim": "Proof of residence is mandatory for permit applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L093"}
+{"case_id": "G15", "turn": 1, "claim": "The fixture observatory opens its dome only when the wind speed is below 30 kilometres per hour.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L094"}
+{"case_id": "G15", "turn": 1, "claim": "Visitors are welcome on Fridays and may not touch the telescope controls.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L095"}
+{"case_id": "G15", "turn": 1, "claim": "The fixture observatory opens its dome only when the wind speed is below 25 kilometres per hour.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L096"}
+{"case_id": "G15", "turn": 1, "claim": "Observers log the dome status every hour.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L097"}
+{"case_id": "G16", "turn": 1, "claim": "Ladders are permitted in the orchard only when a second worker holds the base of the ladder.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L098"}
+{"case_id": "G16", "turn": 1, "claim": "Ladders are not permitted in the orch: overnight and must be returned to the tool shed.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L099"}
+{"case_id": "G16", "turn": 1, "claim": "Ladders are not permitted in the orchard overnight and must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L100"}
+{"case_id": "G16", "turn": 1, "claim": "Ladders are not permitted in the orch: overnight.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L101"}
+{"case_id": "G16", "turn": 1, "claim": "Ladders must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L102"}
+{"case_id": "G16", "turn": 2, "claim": "Ladders are permitted in the orchard only when a second worker holds the base of the ladder.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L103"}
+{"case_id": "G16", "turn": 2, "claim": "Ladders are not permitted in the orch: overnight and must be returned to the tool shed.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L104"}
+{"case_id": "G16", "turn": 2, "claim": "Ladders are not permitted in the orchard overnight and must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L105"}
+{"case_id": "G16", "turn": 2, "claim": "Ladders are not permitted in the orch: overnight.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L106"}
+{"case_id": "G16", "turn": 2, "claim": "Ladders must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L107"}
+{"case_id": "G17", "turn": 1, "claim": "Applicants must be at least 18 years old.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L108"}
+{"case_id": "G17", "turn": 1, "claim": "Applicants must provide proof of residence.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L109"}
+{"case_id": "G17", "turn": 1, "claim": "Applicants who hold a suspended permit cannot apply.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L110"}
+{"case_id": "G17", "turn": 2, "claim": "Applications are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L111"}
+{"case_id": "G17", "turn": 2, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L112"}
+{"case_id": "G17", "turn": 2, "claim": "Applicants receive the decision by post.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L113"}
+{"case_id": "G18", "turn": 1, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L114"}
+{"case_id": "G18", "turn": 1, "claim": "Damaged fruit is placed in the compost bin, not in the crates.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L115"}
+{"case_id": "G18", "turn": 1, "claim": "The harvest supervisor checks the crate count at the end of every shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L116"}
+{"case_id": "G18", "turn": 1, "claim": "Crates are stacked no more than five high.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L117"}
+{"case_id": "G18", "turn": 1, "claim": "Stacks taller than five crates must be split before the cart leaves the row.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L118"}
+{"case_id": "G18", "turn": 1, "claim": "The cart driver confirms the stack height before moving.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L119"}
+{"case_id": "G18", "turn": 1, "claim": "Fruit picked after sunset is recorded separately.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L120"}
+{"case_id": "G18", "turn": 1, "claim": "Late fruit is stored in the cool room until the next morning.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L121"}
+{"case_id": "G18", "turn": 1, "claim": "Stacks taller than five crates must be split before the.", "label": "UNCLEAR", "note": "truncated sentence ('before the.')", "labelled_on": "post-fix run sheet L122"}
+{"case_id": "G18", "turn": 2, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L123"}
+{"case_id": "G18", "turn": 2, "claim": "Damaged fruit is placed in the compost bin, not in the crates.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L124"}
+{"case_id": "G18", "turn": 2, "claim": "The harvest supervisor checks the crate count at the end of every shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L125"}
+{"case_id": "G18", "turn": 2, "claim": "Crates are stacked no more than five high.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L126"}
+{"case_id": "G18", "turn": 2, "claim": "Stacks taller than five crates must be split before the cart leaves the row.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L127"}
+{"case_id": "G18", "turn": 2, "claim": "The cart driver confirms the stack height before moving.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L128"}
+{"case_id": "G18", "turn": 2, "claim": "Fruit picked after sunset is recorded separately.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L129"}
+{"case_id": "G18", "turn": 2, "claim": "Late fruit is stored in the cool room until the next morning.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L130"}
+{"case_id": "G19", "turn": 1, "claim": "Ladders are permitted in the orchard only when a second worker holds the base of the ladder.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L131"}
+{"case_id": "G19", "turn": 1, "claim": "Ladders are not permitted in the orch: overnight and must be returned to the tool shed.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L132"}
+{"case_id": "G19", "turn": 1, "claim": "Ladders are not permitted in the orchard overnight and must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L133"}
+{"case_id": "G19", "turn": 1, "claim": "Ladders are not permitted in the orch: overnight.", "label": "UNCLEAR", "note": "garbled token 'orch:'", "labelled_on": "post-fix run sheet L134"}
+{"case_id": "G19", "turn": 1, "claim": "Ladders must be returned to the tool shed.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L135"}
+{"case_id": "G19", "turn": 2, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L136"}
+{"case_id": "G19", "turn": 2, "claim": "Damaged fruit is placed in the compost bin, not in the crates.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L137"}
+{"case_id": "G19", "turn": 2, "claim": "The harvest supervisor checks the crate count at the end of every shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L138"}
+{"case_id": "G19", "turn": 2, "claim": "Crates are stacked no more than five high.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L139"}
+{"case_id": "G19", "turn": 2, "claim": "Stacks taller than five crates must be split before the: The cart driver confirms the stack height before moving.", "label": "UNCLEAR", "note": "two sentences garbled together ('before the: The cart ...')", "labelled_on": "post-fix run sheet L140"}
+{"case_id": "G19", "turn": 2, "claim": "Fruit picked after sunset is recorded separately.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L141"}
+{"case_id": "G19", "turn": 2, "claim": "Late fruit is stored in the cool room until the next morning.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L142"}
+{"case_id": "G19", "turn": 2, "claim": "Stacks taller than five crates must be split before the cart leaves the row.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L143"}
+{"case_id": "G19", "turn": 2, "claim": "The cart driver confirms the stack height before moving.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L144"}
+{"case_id": "G20", "turn": 1, "claim": "The keeper polishes the lens with a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L145"}
+{"case_id": "G20", "turn": 2, "claim": "Wicks are trimmed to a height of 4 millimetres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L146"}
+{"case_id": "G20", "turn": 2, "claim": "A wick trimmed too short produces a dim beam; a wick left too long produces soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L147"}
+{"case_id": "G20", "turn": 2, "claim": "Wicks are trimmed to a height of...", "label": "UNCLEAR", "note": "truncated sentence ('height of...')", "labelled_on": "post-fix run sheet L148"}
+{"case_id": "G21", "turn": 1, "claim": "The application fee for a new permit is 55 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L149"}
+{"case_id": "G21", "turn": 1, "claim": "Proof of residence is optional for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L150"}
+{"case_id": "G21", "turn": 1, "claim": "The application fee for a new permit is 40 euros.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L151"}
+{"case_id": "G21", "turn": 1, "claim": "Proof of residence is mandatory for all applicants.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L152"}
+{"case_id": "G21", "turn": 1, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L153"}
+{"case_id": "G22", "turn": 1, "claim": "The lamp of the fixture lighthouse must be cleaned every evening before sunset.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L154"}
+{"case_id": "G22", "turn": 1, "claim": "Keepers record each cleaning in the lamp register.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L155"}
+{"case_id": "G22", "turn": 1, "claim": "The keeper polishes the lens with a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L156"}
+{"case_id": "G22", "turn": 1, "claim": "Abrasive powders are not permitted on the user.", "label": "NOT_SUPPORTED", "note": "the source says not permitted on the lens, not on the user", "labelled_on": "post-fix run sheet L157"}
+{"case_id": "G22", "turn": 1, "claim": "Every watch must be logged with: - the time the watch started - the weather observed - any vessel sighted Entries are written in permanent ink and are never erased.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L158"}
+{"case_id": "G22", "turn": 1, "claim": "During a storm the keeper stays in the lantern room.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L159"}
+{"case_id": "G22", "turn": 1, "claim": "The fog signal sounds every 30 seconds while visibility is below 2 kilometres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L160"}
+{"case_id": "G22", "turn": 1, "claim": "TEST FIXTURE ONLY.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L161"}
+{"case_id": "G22", "turn": 1, "claim": "Synthetic text written for software tests; it is not part of any real corpus.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L162"}
+{"case_id": "G22", "turn": 1, "claim": "Abrasive powders are not permitted on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L163"}
+{"case_id": "G22", "turn": 1, "claim": "Every watch must be logged with: the time the watch started, the weather observed, any vessel sighted.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L164"}
+{"case_id": "G22", "turn": 1, "claim": "Entries are written in permanent ink and are never erased.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L165"}
+{"case_id": "G22", "turn": 1, "claim": "Keepers document each cleaning activity in the lamp register.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L166"}
+{"case_id": "G22", "turn": 1, "claim": "The keeper polishes the lens using a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L167"}
+{"case_id": "G22", "turn": 1, "claim": "During storms, the keeper remains in the lantern room.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L168"}
+{"case_id": "G23", "turn": 1, "claim": "Saplings in the fixture orchard are planted between the third and fifth week of the planting season.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L169"}
+{"case_id": "G23", "turn": 1, "claim": "The orchard planting season starts on the third week of the planting season.", "label": "NOT_SUPPORTED", "note": "the source says saplings are planted in weeks 3-5 of the season; it does not say the season starts in week 3", "labelled_on": "post-fix run sheet L170"}
+{"case_id": "G23", "turn": 1, "claim": "The orchard planting season starts on the calendar date corresponding to the third week of the planting season.", "label": "NOT_SUPPORTED", "note": "no calendar date is stated; the sentence implies one exists", "labelled_on": "post-fix run sheet L171"}
+{"case_id": "G24", "turn": 1, "claim": "The permit office is closed on public holidays.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L172"}
+{"case_id": "G25", "turn": 1, "claim": "Permits must be renewed every 2 years.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L173"}
+{"case_id": "G25", "turn": 1, "claim": "A renewal can be requested up to:30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L174"}
+{"case_id": "G25", "turn": 1, "claim": "A renewal can be requested up to 30 days before the permit expires.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L175"}
+{"case_id": "G26", "turn": 1, "claim": "The lamp of the fixture lighthouse must be cleaned every evening before sunset.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L176"}
+{"case_id": "G26", "turn": 1, "claim": "Keepers record each cleaning in the lamp register.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L177"}
+{"case_id": "G26", "turn": 1, "claim": "The keeper polishes the lens with a dry chamois cloth.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L178"}
+{"case_id": "G26", "turn": 1, "claim": "Abrasive powders are not permitted on the user.", "label": "NOT_SUPPORTED", "note": "the source says not permitted on the lens, not on the user", "labelled_on": "post-fix run sheet L179"}
+{"case_id": "G26", "turn": 1, "claim": "Wicks are trimmed to a height of 4 millimetres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L180"}
+{"case_id": "G26", "turn": 1, "claim": "A wick trimmed too short produces a dim beam; a wick left too long produces soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L181"}
+{"case_id": "G26", "turn": 1, "claim": "During a storm the keeper stays in the lantern room.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L182"}
+{"case_id": "G26", "turn": 1, "claim": "The fog signal sounds every 30 seconds while visibility is below 2 kilometres.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L183"}
+{"case_id": "G26", "turn": 1, "claim": "A wick trimmed too short produces a dim beam.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L184"}
+{"case_id": "G26", "turn": 1, "claim": "A wick left too long produces soot on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L185"}
+{"case_id": "G26", "turn": 1, "claim": "Abrasive powders are not permitted on the lens.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L186"}
+{"case_id": "G27", "turn": 1, "claim": "A picker may fill at most 40 crates per shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L187"}
+{"case_id": "G27", "turn": 1, "claim": "Damaged fruit is placed in the compost bin, not in the crates.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L188"}
+{"case_id": "G27", "turn": 1, "claim": "The harvest supervisor checks the crate count at the end of every shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L189"}
+{"case_id": "G27", "turn": 1, "claim": "Crates are stacked no more than five high.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L190"}
+{"case_id": "G27", "turn": 1, "claim": "Stacks taller than five crates must be split before the: The cart driver confirms the stack height before moving.", "label": "UNCLEAR", "note": "two sentences garbled together ('before the: The cart ...')", "labelled_on": "post-fix run sheet L191"}
+{"case_id": "G27", "turn": 1, "claim": "Fruit picked after sunset is recorded separately.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L192"}
+{"case_id": "G27", "turn": 1, "claim": "Late fruit is stored in the cool room until the next morning.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L193"}
+{"case_id": "G27", "turn": 1, "claim": "Stacks taller than five crates must be split before the cart leaves the row.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L194"}
+{"case_id": "G27", "turn": 1, "claim": "The cart driver confirms the stack height before moving.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L195"}
+{"case_id": "G27", "turn": 1, "claim": "Damaged fruit is not placed in crates but in the compost bin.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L196"}
+{"case_id": "G27", "turn": 1, "claim": "The harvest supervisor checks the crate count at the end of each shift.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L197"}
+{"case_id": "G28", "turn": 1, "claim": "Applications are submitted online through the permit portal.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L198"}
+{"case_id": "G28", "turn": 1, "claim": "Each application is reviewed by a permit officer.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L199"}
+{"case_id": "G28", "turn": 1, "claim": "Applicants receive the decision by post.", "label": "SUPPORTED", "note": "", "labelled_on": "post-fix run sheet L200"}

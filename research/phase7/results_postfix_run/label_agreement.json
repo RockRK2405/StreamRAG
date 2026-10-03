@@ -1,0 +1,130 @@
+{
+  "REPORTABLE": false,
+  "annotator": "Claude (implementer), blind to verifier verdicts, single annotator",
+  "items": 200,
+  "labelled": 200,
+  "unclear": [
+    "L053",
+    "L057",
+    "L099",
+    "L101",
+    "L104",
+    "L106",
+    "L122",
+    "L132",
+    "L134",
+    "L140",
+    "L148",
+    "L191"
+  ],
+  "missing": [],
+  "pooled": {
+    "n": 188,
+    "tp": 179,
+    "fp": 6,
+    "fn": 0,
+    "tn": 3,
+    "accuracy": 0.9681,
+    "support_precision": 0.9676,
+    "support_recall": 1.0,
+    "unsupported_detection_recall": 0.3333
+  },
+  "by_source": {
+    "B": {
+      "n": 129,
+      "tp": 123,
+      "fp": 3,
+      "fn": 0,
+      "tn": 3,
+      "accuracy": 0.9767,
+      "support_precision": 0.9762,
+      "support_recall": 1.0,
+      "unsupported_detection_recall": 0.5
+    },
+    "C": {
+      "n": 105,
+      "tp": 103,
+      "fp": 2,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 0.981,
+      "support_precision": 0.981,
+      "support_recall": 1.0,
+      "unsupported_detection_recall": 0.0
+    },
+    "F_released": {
+      "n": 88,
+      "tp": 87,
+      "fp": 1,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 0.9886,
+      "support_precision": 0.9886,
+      "support_recall": 1.0,
+      "unsupported_detection_recall": 0.0
+    }
+  },
+  "released_claim_precision_vs_labels": 0.9886,
+  "disagreements": [
+    {
+      "item": "L001",
+      "claim": "Wicks are trimmed to a height of.4 millimetres.",
+      "sources": [
+        "B"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "'.4 millimetres' is a different value from the source's 4 millimetres"
+    },
+    {
+      "item": "L044",
+      "claim": "The observatory dome can hold visitors on Fridays.",
+      "sources": [
+        "C"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "the source says visitors are welcome on Fridays; nothing about the dome holding visitors"
+    },
+    {
+      "item": "L157",
+      "claim": "Abrasive powders are not permitted on the user.",
+      "sources": [
+        "B"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "the source says not permitted on the lens, not on the user"
+    },
+    {
+      "item": "L170",
+      "claim": "The orchard planting season starts on the third week of the planting season.",
+      "sources": [
+        "C"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "the source says saplings are planted in weeks 3-5 of the season; it does not say the season starts in week 3"
+    },
+    {
+      "item": "L171",
+      "claim": "The orchard planting season starts on the calendar date corresponding to the third week of the planting season.",
+      "sources": [
+        "F_released"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "no calendar date is stated; the sentence implies one exists"
+    },
+    {
+      "item": "L179",
+      "claim": "Abrasive powders are not permitted on the user.",
+      "sources": [
+        "B"
+      ],
+      "verifier_supported": true,
+      "label_supported": false,
+      "note": "the source says not permitted on the lens, not on the user"
+    }
+  ]
+}

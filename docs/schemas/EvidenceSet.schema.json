@@ -81,6 +81,18 @@
           "title": "Document Id",
           "type": "string"
         },
+        "document_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Title"
+        },
         "evidence_id": {
           "title": "Evidence Id",
           "type": "string"

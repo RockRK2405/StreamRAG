@@ -1,0 +1,43 @@
+{
+  "case_id": "G17",
+  "category": "F_incremental_refinement",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the eligibility requirements for the permit?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Applicants must be at least 18 years old.",
+            "citation": "fixture_permit_handbook \u00a71"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "And how is an application submitted?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Applications are submitted online through the permit portal.",
+            "citation": "fixture_permit_handbook \u00a72"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    }
+  ]
+}

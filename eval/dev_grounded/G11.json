@@ -1,0 +1,30 @@
+{
+  "case_id": "G11",
+  "category": "D_multi_intent",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are the wicks trimmed and how is the lens polished?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Wicks are trimmed to a height of 4 millimetres.",
+            "citation": "fixture_lighthouse_manual \u00a71.1"
+          },
+          {
+            "text": "The keeper polishes the lens with a dry chamois cloth.",
+            "citation": "fixture_lighthouse_manual \u00a71.2"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 2,
+        "tempt": []
+      }
+    }
+  ]
+}

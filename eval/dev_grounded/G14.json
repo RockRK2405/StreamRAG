@@ -1,0 +1,27 @@
+{
+  "case_id": "G14",
+  "category": "E_contradictory",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Is proof of residence mandatory for permit applicants?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [],
+        "conflict_values": [
+          "mandatory",
+          "optional"
+        ],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": [
+          "contradictory_documents",
+          "ambiguous_evidence"
+        ]
+      }
+    }
+  ]
+}

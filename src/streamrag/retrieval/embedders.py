@@ -39,7 +39,7 @@ def load_registry(path: Path) -> dict[str, dict]:
         raise ConfigError(f"model registry not found: {path}")
     raw = yaml.safe_load(path.read_text()) or {}
     reg = {}
-    for kind in ("embedders", "rerankers"):
+    for kind in ("embedders", "rerankers", "nli"):
         for name, spec in (raw.get(kind) or {}).items():
             reg[name] = {**spec, "kind": kind}
     return reg

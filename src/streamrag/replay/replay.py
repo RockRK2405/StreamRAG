@@ -16,6 +16,9 @@ Phase 6 session traces: virtual replay is exact for the session events too (cont
 claim transitions, session versions, answer versions all derive from logical time). The behaviour signature adds, per
 utterance in order, the context changes and the committed answer version (claims compared by text + status, since
 claim ids follow result arrival order), and, order-free, the delta plans and the final evidence / claim lifecycle.
+
+Phase 7 traces: LLM outputs are part of the trace (LLM_CALL: request hash + output). Replay feeds them back through a
+``RecordedBackend`` instead of calling the model, so a session that used an LLM replays exactly as well.
 """
 
 from __future__ import annotations
@@ -138,8 +141,16 @@ class ReplayEngine:
         self.intent_stack = intent_stack
 
     def replay(self, original: list[TelemetryEvent], max_diffs: int = 20) -> ReplayReport:
+        stack = self.intent_stack
+        llm = [e.payload for e in original if e.type.value == "LLM_CALL"]
+        if llm and stack is not None and getattr(stack, "grounding", None) is not None:
+            # Phase 7: the LLM is not re-run; its recorded outputs are replayed (keyed by request hash)
+            from dataclasses import replace
+
+            from streamrag.generation.llm import RecordedBackend
+            stack = replace(stack, grounding=stack.grounding.with_backend(RecordedBackend(llm)))
         run = run_virtual(self.cfg, self.backend, self.policy, inputs_from_trace(original), index_hash=self.index_hash,
-                          intent_stack=self.intent_stack)
+                          intent_stack=stack)
         a = [canonical_for_replay(e) for e in original]
         b = [canonical_for_replay(e) for e in run.events]
         diffs = []

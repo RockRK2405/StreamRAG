@@ -1,0 +1,199 @@
+{
+  "$defs": {
+    "ClaimVerification": {
+      "additionalProperties": false,
+      "properties": {
+        "alignments": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceAlignment"
+          },
+          "title": "Alignments",
+          "type": "array"
+        },
+        "atom_texts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Atom Texts",
+          "type": "array"
+        },
+        "atoms": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ClaimVerification"
+          },
+          "title": "Atoms",
+          "type": "array"
+        },
+        "cited_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Cited Evidence",
+          "type": "array"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "contradicting_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Contradicting Evidence",
+          "type": "array"
+        },
+        "entailed": {
+          "default": false,
+          "title": "Entailed",
+          "type": "boolean"
+        },
+        "invalid_labels": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Invalid Labels",
+          "type": "array"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "SUPPORTED",
+            "PARTIALLY_SUPPORTED",
+            "UNSUPPORTED",
+            "CONTRADICTED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "sufficient": {
+          "default": false,
+          "title": "Sufficient",
+          "type": "boolean"
+        },
+        "support_outside_citations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Support Outside Citations",
+          "type": "array"
+        },
+        "supported": {
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "supporting_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Evidence",
+          "type": "array"
+        },
+        "verifier": {
+          "default": "nli+rules",
+          "title": "Verifier",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "status",
+        "supported"
+      ],
+      "title": "ClaimVerification",
+      "type": "object"
+    },
+    "EvidenceAlignment": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "premise": {
+          "default": "none",
+          "enum": [
+            "sentence",
+            "window",
+            "chunk",
+            "none"
+          ],
+          "title": "Premise",
+          "type": "string"
+        },
+        "premise_span": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Premise Span"
+        },
+        "signals": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "default": {},
+          "title": "Signals",
+          "type": "object"
+        },
+        "strength": {
+          "enum": [
+            "STRONG",
+            "MODERATE",
+            "WEAK",
+            "NONE",
+            "CONTRADICTORY"
+          ],
+          "title": "Strength",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "evidence_id",
+        "strength",
+        "basis"
+      ],
+      "title": "EvidenceAlignment",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/ClaimVerification"
+}

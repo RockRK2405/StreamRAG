@@ -1,0 +1,625 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "arms": {
+      "A": "plain LLM (no evidence)",
+      "B": "RAG (evidence, no citation requirement)",
+      "C": "RAG + citations (labels trusted)",
+      "D": "C + claim validation (unsupported removed)",
+      "E": "D + repair (supported atoms kept, retrieval fallback for material claims)",
+      "F": "full Phase 7: claim planning + validation + repair + incremental refinement",
+      "X": "extractive generator (no LLM), same validation"
+    },
+    "banner": "DEV SUITE ON TEST FIXTURE DOMAIN - NOT AN OFFICIAL BENCHMARK RESULT - NOT HELD-OUT",
+    "cases": 28,
+    "embedder": "bge-small-en-v1.5",
+    "index_content_hash": {
+      "conflict": "abbed251bb36789f83c5874c035807b2b61d77edd6918577ee6aa032090669d5",
+      "fixture": "77237b12beeee04f04303250e2e2d7ff6a1a46dc46edff765c8de38df1d15ba2",
+      "grounding": "e088fc7375610cebd13ed93d4074f635e7993cdcd10f63ac5b8e5d8139b924b7",
+      "injection": "7ebdb6689c2bc33e8b2efc58d1b33f378a026e6e9e64e873f634ed77123be4c8"
+    },
+    "llm": "qwen3:4b",
+    "llm_backend": "ollama",
+    "note": "D and E reuse C's exact LLM output (cached by request hash); their generation latency is C's.",
+    "seed": 7,
+    "temperature": 0.0,
+    "verifier": "nli:nli-deberta-v3-xsmall+rules"
+  },
+  "rows": [
+    {
+      "case_id": "G16",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-e209ed1150",
+          "AC-b506ebff00",
+          "AC-c14f6f24d3"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2197.41
+    },
+    {
+      "case_id": "G16",
+      "claims": 3,
+      "diff": {
+        "added": [],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": [
+          "AC-b506ebff00",
+          "AC-c14f6f24d3",
+          "AC-e209ed1150"
+        ]
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 3,
+      "llm_calls": 0,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 3,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 15.7
+    },
+    {
+      "case_id": "G16",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-e209ed1150",
+          "AC-b506ebff00",
+          "AC-c14f6f24d3"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2239.64
+    },
+    {
+      "case_id": "G16",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-077da9aafa",
+          "AC-c14f6f24d3",
+          "AC-e209ed1150"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 2,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 3,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 2266.61
+    },
+    {
+      "case_id": "G17",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-4e461636b0",
+          "AC-5e495a6243",
+          "AC-915560e242",
+          "AC-1e61086e04"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2141.43
+    },
+    {
+      "case_id": "G17",
+      "claims": 1,
+      "diff": {
+        "added": [
+          "AC-4949cf477d"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I2"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 4,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 969.18
+    },
+    {
+      "case_id": "G17",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-4e461636b0",
+          "AC-5e495a6243",
+          "AC-915560e242",
+          "AC-1e61086e04"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2142.26
+    },
+    {
+      "case_id": "G17",
+      "claims": 1,
+      "diff": {
+        "added": [
+          "AC-4949cf477d"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I2"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 4,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 1027.48
+    },
+    {
+      "case_id": "G18",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-53e2b597d3",
+          "AC-be6568ec9f",
+          "AC-9d540f7751",
+          "AC-57b550caae"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2869.65
+    },
+    {
+      "case_id": "G18",
+      "claims": 5,
+      "diff": {
+        "added": [],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": [
+          "AC-53e2b597d3",
+          "AC-9d540f7751",
+          "AC-be6568ec9f",
+          "AC-57b550caae"
+        ]
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 4,
+      "llm_calls": 0,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 4,
+      "required_found": 0,
+      "required_total": 0,
+      "turn": 2,
+      "wall_ms": 29.26
+    },
+    {
+      "case_id": "G18",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-53e2b597d3",
+          "AC-be6568ec9f",
+          "AC-9d540f7751",
+          "AC-57b550caae"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2792.13
+    },
+    {
+      "case_id": "G18",
+      "claims": 5,
+      "diff": {
+        "added": [
+          "AC-53e2b597d3",
+          "AC-9d540f7751",
+          "AC-be6568ec9f",
+          "AC-57b550caae"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 4,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 4,
+      "required_found": 0,
+      "required_total": 0,
+      "turn": 2,
+      "wall_ms": 3087.31
+    },
+    {
+      "case_id": "G19",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-e209ed1150",
+          "AC-b506ebff00",
+          "AC-c14f6f24d3"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2226.43
+    },
+    {
+      "case_id": "G19",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-53e2b597d3",
+          "AC-be6568ec9f",
+          "AC-9d540f7751",
+          "AC-57b550caae"
+        ],
+        "modified": [],
+        "removed": [
+          "AC-e209ed1150",
+          "AC-b506ebff00",
+          "AC-c14f6f24d3"
+        ],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 3,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 2806.57
+    },
+    {
+      "case_id": "G19",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-e209ed1150",
+          "AC-b506ebff00",
+          "AC-c14f6f24d3"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 2201.21
+    },
+    {
+      "case_id": "G19",
+      "claims": 4,
+      "diff": {
+        "added": [
+          "AC-53e2b597d3",
+          "AC-be6568ec9f",
+          "AC-9d540f7751",
+          "AC-57b550caae"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 3,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 2799.22
+    },
+    {
+      "case_id": "G20",
+      "claims": 1,
+      "diff": {
+        "added": [
+          "AC-55ff6563f8"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 1110.74
+    },
+    {
+      "case_id": "G20",
+      "claims": 1,
+      "diff": {
+        "added": [
+          "AC-b13814ac8a"
+        ],
+        "modified": [],
+        "removed": [
+          "AC-55ff6563f8"
+        ],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "incremental",
+      "new_version": true,
+      "previous_claims": 1,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 1118.36
+    },
+    {
+      "case_id": "G20",
+      "claims": 1,
+      "diff": {
+        "added": [
+          "AC-55ff6563f8"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 0,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 1,
+      "wall_ms": 1097.02
+    },
+    {
+      "case_id": "G20",
+      "claims": 3,
+      "diff": {
+        "added": [
+          "AC-3536a0dccb",
+          "AC-dc3096deff",
+          "AC-9cf4c9943e"
+        ],
+        "modified": [],
+        "removed": [],
+        "sections_regenerated": [
+          "S-I1"
+        ],
+        "sections_reused": [],
+        "unchanged": []
+      },
+      "forbidden_hits": [],
+      "kept_from_previous": 0,
+      "llm_calls": 1,
+      "mode": "full_restart",
+      "new_version": true,
+      "previous_claims": 1,
+      "required_found": 1,
+      "required_total": 1,
+      "turn": 2,
+      "wall_ms": 2416.83
+    }
+  ],
+  "summary": {
+    "full_restart": {
+      "claims_kept_from_previous_version": 0.4,
+      "forbidden_after_revision": 0,
+      "later_turns": 5,
+      "llm_calls": 5,
+      "revision_accuracy_required_recall": 1.0,
+      "wall_ms": {
+        "max": 3087.31,
+        "mean": 2319.49,
+        "n": 5,
+        "p50": 2416.83,
+        "p95": 3029.692
+      }
+    },
+    "incremental": {
+      "claims_kept_from_previous_version": 0.4667,
+      "forbidden_after_revision": 0,
+      "later_turns": 5,
+      "llm_calls": 3,
+      "revision_accuracy_required_recall": 1.0,
+      "wall_ms": {
+        "max": 2806.57,
+        "mean": 987.814,
+        "n": 5,
+        "p50": 969.18,
+        "p95": 2468.928
+      }
+    }
+  }
+}

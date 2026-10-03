@@ -1,6 +1,6 @@
 # StreamRAG — Samsung PRISM GenAI Hackathon 2026–27, Theme 4: Streaming Live RAG
 
-**Current phase: Phase 6, adaptive session RAG** (session memory, late-arriving details, delta retrieval, evidence and claim lifecycles, versioned answer state), built on Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
+**Current phase: Phase 7, grounded answer generation** (claim planning, local-LLM generation, entailment-based claim verification, citations, repair, validated and versioned answers), built on the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
 
 Implemented:
 - corpus ingestion with stable citation IDs;
@@ -12,7 +12,7 @@ Implemented:
 - **multi-intent decomposition** (rule-first, validated), versioned intent sets with **delta retrieval** while the user speaks, parallel per-intent retrieval and **intent-aware evidence fusion** into a `UnifiedEvidenceSet`;
 - **adaptive sessions** (`session.enabled: true`): late details, retractions and corrections across turns become typed context changes; a delta planner re-queries only the affected needs (or reuses earlier evidence); evidence and claims carry lifecycles; the answer is a versioned, claim-level state with diffs and minimal-regeneration markers (`docs/session/`, ADR-016, `PHASE_6_ADAPTIVE_RAG_REPORT.md`).
 
-Not implemented yet: answer generation and grounding (Phase 7). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
+- **grounded answers** (`generation.enabled: true`): evidence-derived claim plans, generation by a local LLM (Ollama, structured JSON, extractive fallback), entailment verification of every claim, citations to the supporting sentence of the indexed chunk, repair / bounded retrieval fallback for unsupported claims, drafts while the user speaks and validated finals per turn (`docs/answer/`, ADR-017, `PHASE_7_GROUNDED_GENERATION_REPORT.md`). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
 
 > **Official corpus status: NOT_AVAILABLE.** No Theme 4 corpus has been supplied yet. Everything under `tests/fixtures/` is a **TEST FIXTURE** (synthetic, fictional) used only to test software. No retrieval-quality results exist yet. Check the status with `streamrag corpus-status`.
 
@@ -73,6 +73,27 @@ Native document IDs (e.g. files named `Doc_12_….pdf`, or a front-matter `id:`)
 - `--multi-intent` (Phase 5) decomposes each utterance into intents, retrieves per intent (only new or changed intents while the user speaks) and prints the fused evidence.
 - `replay` re-runs the trace. A virtual trace must match exactly. A realtime trace must match in behavior (decisions, queries, retrieval outcomes), because its timestamps carry real jitter.
 
+## Grounded answers (Phase 7)
+
+```bash
+ollama pull qwen3:4b
+```
+
+```bash
+.venv/bin/streamrag fetch-models nli-deberta-v3-xsmall
+```
+
+```bash
+.venv/bin/streamrag build-index --corpus tests/fixtures/corpus_grounding
+```
+
+```bash
+.venv/bin/streamrag --set generation.enabled=true stream --session --interval-ms 300 --text "Tell me the eligibility requirements | and the application process | for the permit." --corpus tests/fixtures/corpus_grounding
+```
+
+- With the Ollama server running and the model pulled, answers are written by the local LLM; otherwise by the extractive generator (same verification).
+- The LLM URL must be a loopback address. Every claim is verified against the evidence before it is released, cited from the verification.
+
 ## Adaptive sessions (Phase 6)
 
 ```bash
@@ -95,6 +116,22 @@ Dev-suite benchmarks (fixture domain; NOT official results):
 
 ```bash
 .venv/bin/python research/phase6/run_adaptive_benchmarks.py --index-root /tmp/idx6 --reps 7
+```
+
+```bash
+.venv/bin/python research/phase7/run_grounded_benchmarks.py --index-root /tmp/idx7
+```
+
+```bash
+.venv/bin/python research/phase7/e2e_streaming.py --index-root /tmp/idx7
+```
+
+```bash
+.venv/bin/python research/phase7/label_agreement.py
+```
+
+```bash
+.venv/bin/python research/phase7/report_tables.py
 ```
 
 ## Trying it on the test fixture
@@ -138,12 +175,18 @@ src/streamrag/
                    synchronous incremental + full-restart pipelines, PII redaction
   context/         change detection + taxonomy, topic frames, late-detail gate, relevant-context selection/compression
   delta/           delta planner, delta queries, semantic cache, evidence store + lifecycle rules
-  claims/          extractive claims, claim-evidence graph, targeted revalidation, numeric contradiction flags
+  claims/          extractive claims, claim-evidence graph, targeted revalidation (Phase 6); claim planning,
+                   decomposition, entailment alignment and verification (Phase 7)
   answers/         versioned, sectioned answer state, answer diffs, minimal-regeneration markers
+  generation/      Phase 7: LLM gateway (local Ollama, scripted, recorded), prompts, answer planner, generators,
+                   claim extraction from generated output
+  citations/       citation model, mapping from verification to the supporting span, validation, orphans
+  validation/      unsupported-claim policy, repair, coverage, consistency, grounding metrics
+  answer_state/    grounded answer engine (plan -> generate -> verify -> repair -> cite -> validate), renderer
   telemetry/       structured logging, JSONL event sink, timing
   tools/           build-time model download (the only network code)
 tests/             unit/integration tests; tests/fixtures = TEST FIXTURES only
-research/          phase1–6 measurements and reports
+research/          phase1–7 measurements and reports
 docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 ```
 
@@ -151,12 +194,13 @@ docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 
 | Document | Contents |
 |---|---|
+| `PHASE_7_GROUNDED_GENERATION_REPORT.md` | Phase 7: grounded generation, claim verification, citations; benchmark, ablations, hallucination tests |
 | `PHASE_6_ADAPTIVE_RAG_REPORT.md` | Phase 6: adaptive session RAG; dev-suite, stress-set, full-restart, ablation and scaling results |
 | `PHASE_5_MULTI_INTENT_REPORT.md` | Phase 5: multi-intent decomposition, delta retrieval, fusion; dev-suite results |
 | `PHASE_4_STREAMING_REPORT.md` | Phase 4: streaming engine, controller, ledger; dev-suite results |
 | `PHASE_3_RETRIEVAL_REPORT.md` | Phase 3: what was built, what was measured, what is blocked |
 | `PHASE_2_SYSTEM_SPECIFICATION.md` | Full system specification |
 | `PHASE_1_RESEARCH_DOSSIER.md` | Research dossier |
-| `docs/retrieval/`, `docs/streaming/`, `docs/multi_intent/`, `docs/session/` | Component docs (Phases 3, 4, 5, 6) |
+| `docs/retrieval/`, `docs/streaming/`, `docs/multi_intent/`, `docs/session/`, `docs/answer/` | Component docs (Phases 3–7) |
 | `docs/decisions/` | ADRs |
 | `research/phase3/` | Chunking, embedding, profiling and comparison reports |

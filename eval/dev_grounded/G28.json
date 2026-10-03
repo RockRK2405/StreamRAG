@@ -1,0 +1,27 @@
+{
+  "case_id": "G28",
+  "category": "C_unsupported_claim",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "grounding",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How many days does a permit officer need to review an application?",
+      "gold": {
+        "required_facts": [],
+        "forbidden": [
+          "review\\w*[^.]*\\b\\d+\\s*(?:working\\s+|business\\s+)?(?:days?|weeks?|months?|hours?)\\b",
+          "\\b\\d+\\s*(?:working\\s+|business\\s+)?(?:days?|weeks?|months?|hours?)\\b[^.]*review"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": true,
+        "intents": 1,
+        "tempt": [
+          "missing_numeric_value",
+          "similar_but_not_supporting"
+        ]
+      }
+    }
+  ]
+}

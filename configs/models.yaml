@@ -56,3 +56,13 @@ rerankers:
     onnx_file: onnx/model_qint8_arm64.onnx
     files: [onnx/model_qint8_arm64.onnx, tokenizer.json, config.json]
     max_length: 512
+
+# Phase 7: claim verification level L3 (ADR-008, docs/answer/04). Entailment cross-encoder, labels from config.json.
+nli:
+  nli-deberta-v3-xsmall:
+    repo: cross-encoder/nli-deberta-v3-xsmall
+    revision: a150876415327c80daeff35ca6f68f5ed8cf5c24
+    license: Apache-2.0
+    onnx_file: onnx/model.onnx
+    files: [onnx/model.onnx, tokenizer.json, config.json]
+    max_length: 512

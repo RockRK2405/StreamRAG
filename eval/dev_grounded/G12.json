@@ -1,0 +1,34 @@
+{
+  "case_id": "G12",
+  "category": "D_multi_intent",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "When are saplings planted, how many crates may a picker fill, and when is the telescope recalibrated?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Saplings are planted between the third and fifth week of the planting season.",
+            "citation": "Doc_07 \u00a71"
+          },
+          {
+            "text": "A picker may fill at most 40 crates per shift.",
+            "citation": "Doc_07 \u00a73"
+          },
+          {
+            "text": "The main telescope is recalibrated on the first night of every month.",
+            "citation": "fixture_observatory_notes \u00a71"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 3,
+        "tempt": []
+      }
+    }
+  ]
+}

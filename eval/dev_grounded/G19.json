@@ -1,0 +1,45 @@
+{
+  "case_id": "G19",
+  "category": "G_entity_correction",
+  "is_fixture": true,
+  "held_out": false,
+  "corpus": "fixture",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the rules for ladders in the orchard?",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "Ladders are not permitted in the orchard overnight.",
+            "citation": "Doc_07 \u00a72.2"
+          }
+        ],
+        "forbidden": [],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Sorry, I meant crates instead of ladders.",
+      "gold": {
+        "required_facts": [
+          {
+            "text": "A picker may fill at most 40 crates per shift.",
+            "citation": "Doc_07 \u00a73"
+          }
+        ],
+        "forbidden": [
+          "\\bladders?\\b"
+        ],
+        "conflict_values": [],
+        "expect_uncertainty": false,
+        "intents": 1,
+        "tempt": []
+      }
+    }
+  ]
+}

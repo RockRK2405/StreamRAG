@@ -24,9 +24,9 @@ def _sha256(path: Path) -> str:
 def load_registry(path: Path) -> dict[str, dict]:
     raw = yaml.safe_load(path.read_text())
     out: dict[str, dict] = {}
-    for kind in ("embedders", "rerankers"):
+    for kind in ("embedders", "rerankers", "nli"):
         for name, spec in (raw.get(kind) or {}).items():
-            out[name] = {**spec, "kind": kind[:-1]}
+            out[name] = {**spec, "kind": kind[:-1] if kind.endswith("s") else kind}
     return out
 
 

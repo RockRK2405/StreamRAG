@@ -176,9 +176,9 @@ class StreamingSession:
                 "retrieval_events": [{"timestamp_s": r["start_s"], "query": r["query"], "trigger": r["trigger"],
                                       "query_id": r["query_id"], "intent_id": r.get("intent_id")}
                                      for r in stats.get("retrievals", []) if r["start_s"] is not None],
-                **mi_payload,
+                **{k: v for k, v in mi_payload.items() if k != "answer"},
                 "metrics": {k: v for k, v in stats.items() if k not in ("retrievals", "decisions_list")},
-                "answer": None,
+                "answer": mi_payload.get("answer"),
             }, uid)
             self._maybe_close()
             return

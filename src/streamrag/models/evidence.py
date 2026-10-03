@@ -24,6 +24,7 @@ class Evidence(Contract):
     citation: str                       # rendered key, e.g. "Doc_07 §3"
     section_title: str | None = None
     section_path: list[str] = []
+    document_title: str | None = None   # Phase 7: scopes the chunk's sentences (claim selection)
     text: str
     source_path: str                    # relative to the corpus root
     char_start: int = Field(ge=0)       # span in the normalized document text
