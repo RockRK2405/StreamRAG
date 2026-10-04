@@ -36,6 +36,7 @@ class _Sentence(BaseModel):
 class _Section(BaseModel):
     section_id: str
     sentences: list[_Sentence]
+    answers_need: bool | None = None          # the model's answerability judgement (None: not stated)
 
 
 class _Output(BaseModel):
@@ -64,8 +65,9 @@ class ExtractiveGenerator:
 
 class GroundedAnswerGenerator:
     def __init__(self, backend, max_structured_retries: int = 1,
-                 on_call: Callable[[str, LLMResponse, int], None] | None = None) -> None:
+                 on_call: Callable[[str, LLMResponse, int], None] | None = None, answerability: bool = True) -> None:
         self.backend = backend
+        self.answerability = answerability
         self.retries = max_structured_retries
         self.extractive = ExtractiveGenerator()
         self.on_call = on_call or (lambda *_: None)
@@ -74,7 +76,10 @@ class GroundedAnswerGenerator:
         responses, err = [], None
         msgs = messages
         for attempt in range(self.retries + 1):
-            r = self.backend.complete(msgs, prompts.SCHEMA)
+            # the answerability field exists only for grounded generation with the switch on; the free baselines
+            # (generate_<mode>) keep the Phase 10 schema
+            r = self.backend.complete(msgs, prompts.SCHEMA if (purpose == "generate" and self.answerability)
+                                      else prompts.SCHEMA_NO_ANSWERABILITY)
             responses.append(r)
             self.on_call(purpose, r, attempt)
             if not r.ok:
@@ -101,7 +106,8 @@ class GroundedAnswerGenerator:
             return self.extractive.generate(sub)
         label_of = {e: lab for lab, e in plan.labels.items()}
         t0 = time.perf_counter()
-        out, responses, err = self._call("generate", prompts.facts_messages(todo, label_of, kept, avoid))
+        out, responses, err = self._call("generate", prompts.facts_messages(todo, label_of, kept, avoid,
+                                                                            self.answerability))
         gen_ms = (time.perf_counter() - t0) * 1000.0
         stats = dict(llm_calls=len(responses), prompt_tokens=sum(r.prompt_tokens or 0 for r in responses),
                      output_tokens=sum(r.output_tokens or 0 for r in responses),
@@ -111,18 +117,22 @@ class GroundedAnswerGenerator:
             ans = self.extractive.generate(plan.model_copy(update={"sections": todo}))
             return ans.model_copy(update={"backend": "extractive", "structured_ok": False, "fallback": err, **stats})
         by_id = {s.section_id: s for s in todo}
-        sents = []
+        sents, unanswered = [], []
         for sec in out.sections:
             ps = by_id.get(sec.section_id)
             if ps is None:
                 continue                                  # a section that was not asked for: ignored
+            if sec.answers_need is False and self.answerability:
+                unanswered.append(ps.section_id)          # the facts are related but do not answer the need
+                continue
             for x in sec.sentences:
                 if not x.text.strip():
                     continue
                 sents.append(CandidateSentence(sentence_id="", section_id=ps.section_id, intent_id=ps.intent_id,
                                                text=" ".join(x.text.split()), facts=list(x.facts),
                                                labels=list(x.evidence), origin="llm"))
-        return CandidateAnswer(sentences=sents, backend=self.backend.name, structured_ok=True, **stats)
+        return CandidateAnswer(sentences=sents, backend=self.backend.name, structured_ok=True,
+                               unanswered_sections=unanswered, **stats)
 
     def generate_free(self, question: str, evidence: list[tuple[str, str, str]], mode: str) -> CandidateAnswer:
         """Ablation arms A-C (research/phase7): plain / RAG / RAG+labels generation into one section "S1"."""

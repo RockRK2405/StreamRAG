@@ -109,3 +109,49 @@ def test_runtime_superseded_adaptive_work_is_cancelled(rt_ad_stack):
     assert [e.payload["reason"] for e in of(evs, "RETRIEVAL_CANCELLED")] == ["superseded_in_flight"]
     assert [e.query_id for e in of(evs, "RETRIEVAL_STOPPED")] == ["Q2"]      # Q1's buffered events never emitted
     assert of(evs, "TURN_COMPLETED")
+
+
+def test_final_query_drops_evidence_only_partial_transcripts_retrieved(tmp_path_factory):
+    """Early commitment (Phase 10 error analysis): "What is the application fee for a residence permit" retrieves the
+    current fee while the user is still speaking; "... in 2024" arrives last. The refined query retrieves the 2024
+    edition, and the current-fee evidence retrieved only from the partial transcript must not reach the answer."""
+    from grounding_helpers import grounding_stack
+    from runtime_helpers import of
+    from streamrag.runtime import StreamingRuntime
+    st = grounding_stack(tmp_path_factory, "corpus_adaptive", overrides=ADAPTIVE, verifier="rules")
+    rt = StreamingRuntime(st.cfg, st, mode="virtual")
+    sid = rt.start_session("s1")
+    rt.push_transcript_delta(sid, "u1", "What was the application fee for a residence permit", at_ms=0)
+    rt.push_transcript_delta(sid, "u1", "in 2024?", at_ms=900)
+    rt.end_utterance(sid, "u1", at_ms=1500)
+    rt.end_session(sid, at_ms=8000)
+    rt.run()
+    evs = rt.events(sid)
+    stale = [e for e in of(evs, "EVIDENCE_INVALIDATED") if e.payload.get("rule") == "not_confirmed_by_refined_query"]
+    final = [e for e in of(evs, "ANSWER_COMMITTED")][-1].payload
+    assert "40 euros" in final["text"] and "55 euros" not in final["text"]
+    assert all(c.startswith("ELIG-2024") for c in final["citations"] if c.startswith("ELIG-"))
+    assert stale or not any("ELIG-2026" in str(e.payload) for e in of(evs, "EVIDENCE_FUSED"))
+
+
+def test_need_keeps_its_evidence_when_the_query_budget_is_exhausted(tmp_path_factory):
+    """Phase 11 (demo finding): an ASR revision plus one more word refines the need a 4th time in one utterance; the
+    per-need query budget is used up, so the need must be re-validated against its latest completed query instead of
+    ending with no facts ("not established") although the right evidence had been retrieved."""
+    from grounding_helpers import grounding_stack
+    from runtime_helpers import of
+    from streamrag.runtime import StreamingRuntime
+    st = grounding_stack(tmp_path_factory, "corpus_adaptive", overrides=ADAPTIVE, verifier="rules")
+    rt = StreamingRuntime(st.cfg, st, mode="virtual")
+    sid = rt.start_session("s1")
+    rt.push_transcript_delta(sid, "u1", "How long does processing take", at_ms=0)
+    rt.push_transcript_delta(sid, "u1", "for domestic", at_ms=450)
+    rt.push_transcript_delta(sid, "u1", "for international", replaces=1, at_ms=900)
+    rt.push_transcript_delta(sid, "u1", "applicants?", at_ms=1350)
+    rt.end_utterance(sid, "u1", at_ms=1800)
+    rt.end_session(sid, at_ms=9000)
+    rt.run()
+    evs = rt.events(sid)
+    final = [e for e in of(evs, "ANSWER_COMMITTED")][-1].payload
+    assert "30 working days" in final["text"] and "INTL-2026 §" in " ".join(final["citations"])
+    assert "10 working days" not in final["text"]

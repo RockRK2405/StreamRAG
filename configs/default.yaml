@@ -194,6 +194,7 @@ generation:
   validation_mode: strict          # strict: any unsupported factual claim blocks finalization; relaxed: critical only
   repair: true                     # relabel / keep supported atoms / qualify as "not established"
   llm_repair: false                # rewrite unsupported claims with one extra LLM call (ablation)
+  answerability: false             # LLM answerability flag (Phase 11 ablation; off - see FINAL_BENCHMARK_RESULTS)
   max_validation_retrievals: 1     # retrieval fallback for unsupported critical claims, per answer version
   max_answer_revision_attempts: 2
   draft_mode: extractive           # off | extractive: verified extractive drafts while the user is still speaking

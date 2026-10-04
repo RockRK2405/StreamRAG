@@ -197,6 +197,16 @@ class ClaimDecomposer:
         if len(items) < 2 or any(e - s > self.max_item for s, e in items) \
                 or any(self.lx.predicate(x) for s, e in items for x in low[s:e]):
             return [clause]
+        # not a list of parallel noun phrases (Phase 11 fix - these produced garbled atoms such as "a grade average of
+        # 3.0 of residency in the region"): an "of"-complement attaches to the noun right before it and is never
+        # shared by all items ("3.0 and [proof of residency]"), and an item that starts with a participle is a verb
+        # phrase ("to 2.80 euros and [extended the validity]"). Not splitting is safe: the whole statement is
+        # verified instead.
+        if last_end < len(toks) and low[last_end] == "of":
+            return [clause]
+        if any(low[s].endswith("ed") and low[s] not in ("need", "red", "bed", "seed", "feed", "speed")
+               for s, _ in items[1:]):
+            return [clause]
         prefix = clause[:toks[items[0][0]][1]].rstrip()
         suffix = clause[toks[last_end][1]:].strip() if last_end < len(toks) else ""
         out = []

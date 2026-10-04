@@ -76,9 +76,13 @@ def main() -> None:
     ap.add_argument("--rerun", action="store_true")
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--model", default="qwen3:4b")
+    ap.add_argument("--dataset", default="streamrag_eval_v1", help="experiments/datasets/<name>")
+    ap.add_argument("--results-dir", type=Path, default=REPO / "experiments" / "results")
+    ap.add_argument("--experiments-file", type=Path, default=CONF / "experiments.yaml")
+    ap.add_argument("--systems-file", type=Path, default=CONF / "systems.yaml")
     a = ap.parse_args()
-    systems = yaml.safe_load((CONF / "systems.yaml").read_text())
-    exps = yaml.safe_load((CONF / "experiments.yaml").read_text())
+    systems = yaml.safe_load(a.systems_file.read_text())
+    exps = yaml.safe_load(a.experiments_file.read_text())
     url = "http://127.0.0.1:11434"
     llm, info = None, None
     if not a.no_llm:
@@ -88,14 +92,15 @@ def main() -> None:
             llm.complete([{"role": "user", "content": "Reply with {}"}], {"type": "object"})      # load the model
             info = llm_info(url, a.model)
     stacks = Stacks(REPO, CORPORA, a.index_root, llm=llm)
-    runner = ExperimentRunner(REPO, systems, stacks, instrument_factory(stacks), llm=llm, llm_info=info)
+    runner = ExperimentRunner(REPO, systems, stacks, instrument_factory(stacks), llm=llm, llm_info=info,
+                              results_dir=a.results_dir, dataset=a.dataset)
     only = a.only.split(",") if a.only else list(exps)
     summary = {}
     for exp_id in only:
         cfg = dict(exps[exp_id], experiment_id=exp_id)
         needs_llm = any(systems[s].get("generation") == "llm" for s in cfg["systems"])
         if needs_llm and llm is None:
-            d = REPO / "experiments" / "results" / exp_id
+            d = a.results_dir / exp_id
             d.mkdir(parents=True, exist_ok=True)
             res = {"experiment_id": exp_id, "status": "NOT RUN", "reason": "LLM variants need `ollama serve`"}
             (d / "results.json").write_text(json.dumps(res, indent=2))

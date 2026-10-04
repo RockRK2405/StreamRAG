@@ -1,0 +1,17 @@
+# frozen 2026-10-04T15:38:51+0530 before any Phase 11 system change (sha256, first 16 hex)
+d318bf77d5dd40fc experiments/datasets/streamrag_eval_v2/test.jsonl
+01f80a62fd07e76c tests/fixtures/corpus_eval_utility/TEST_FIXTURE_ONLY
+4e695113c8287600 tests/fixtures/corpus_eval_utility/bulky_waste.md
+e3da6a910528a494 tests/fixtures/corpus_eval_utility/collection.md
+74ba2082b6faa42a tests/fixtures/corpus_eval_utility/customer_centre.md
+d60eb8479d7c108e tests/fixtures/corpus_eval_utility/districts.md
+6cbfc1627d07e46e tests/fixtures/corpus_eval_utility/hardship_relief.md
+c067a63f94f0925c tests/fixtures/corpus_eval_utility/holiday_collection.md
+32b49b9177ebc96d tests/fixtures/corpus_eval_utility/late_payment.md
+df48fcdade29539d tests/fixtures/corpus_eval_utility/meter_disputes.md
+e4e7c430d40e6087 tests/fixtures/corpus_eval_utility/new_connection.md
+0ade36cd68245fbc tests/fixtures/corpus_eval_utility/outage_notice_a.md
+d0d77bfa5b4f7b85 tests/fixtures/corpus_eval_utility/outage_notice_b.md
+632579d1cfd21f2b tests/fixtures/corpus_eval_utility/pensioner_relief.md
+6f98f7a6873f3138 tests/fixtures/corpus_eval_utility/tariff_2025.md
+e0a2c339c7b76050 tests/fixtures/corpus_eval_utility/tariff_2026.md

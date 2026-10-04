@@ -1,0 +1,40 @@
+{
+  "version": "streamrag_eval_v2",
+  "files": {
+    "test": {
+      "path": "test.jsonl",
+      "sha256_16": "d318bf77d5dd40fc",
+      "samples": 81,
+      "sessions": 67,
+      "by_type": {
+        "AMBIGUOUS": 4,
+        "CONTEXTUAL_FOLLOWUP": 5,
+        "CONTRADICTORY": 4,
+        "ENTITY_CORRECTION": 5,
+        "EXACT_TERM": 7,
+        "INSUFFICIENT_EVIDENCE": 4,
+        "MULTI_CONSTRAINT": 8,
+        "MULTI_HOP": 7,
+        "MULTI_INTENT": 4,
+        "REPEATED_QUERY": 4,
+        "SEMANTIC": 5,
+        "SIMPLE": 15,
+        "STREAMING_CORRECTION": 4,
+        "TEMPORAL": 5
+      },
+      "by_difficulty": {
+        "EASY": 27,
+        "HARD": 21,
+        "MEDIUM": 33
+      },
+      "by_corpus": {
+        "utility": 81
+      }
+    }
+  },
+  "construction": "experiments/datasets/build_dataset_v2.py",
+  "labels": "implementer-written from the fixture corpus text; no independent annotation",
+  "test_corpus": "tests/fixtures/corpus_eval_utility (new in Phase 11; written and frozen before any Phase 11 system change; never used in development)",
+  "frozen": "2026-10-04, before Phase 11 fixes",
+  "reportable": false
+}

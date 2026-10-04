@@ -1,0 +1,12 @@
+# whitelist: only what the image needs
+*
+!requirements.lock
+!pyproject.toml
+!README.md
+!src/
+!configs/
+!demo/
+!models/bge-small-en-v1.5/
+!models/nli-deberta-v3-xsmall/
+**/__pycache__
+**/*.pyc

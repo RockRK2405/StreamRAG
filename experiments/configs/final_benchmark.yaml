@@ -1,0 +1,39 @@
+# Phase 11 FINAL BENCHMARK (brief §21-23). Results: FINAL_BENCHMARK_RESULTS/ (Phase 10 results are not overwritten).
+#
+# HELDOUT_V2  - the primary evaluation: streamrag_eval_v2 (Lakeside utility corpus), written and frozen before any
+#               Phase 11 change (experiments/datasets/streamrag_eval_v2/FROZEN.sha256), run ONCE on the final system
+#               and the baselines. Run with --dataset streamrag_eval_v2.
+# REGRESSION_V1 - the Phase 10 test split (streamrag_eval_v1), now development data (inspected in the Phase 10 error
+#               analysis and used to develop the Phase 11 fixes): final system vs the stored Phase 10 runs.
+#               Run with --dataset streamrag_eval_v1. Improvements here are optimistic by construction.
+HELDOUT_V2:
+  title: Final held-out evaluation (v2, new domain)
+  question: How does the final system compare with the baselines on a held-out set written before Phase 11?
+  splits: [test]
+  systems: [naive_rag, hybrid_rag, hybrid_rerank, streaming_fixed, adaptive_rag, full_system, full_system_batch,
+            full_system_answerability, topk_5, adaptive_x, cache_none, delta_full_restart]
+  comparisons: [[naive_rag, full_system], [hybrid_rag, full_system], [hybrid_rerank, full_system],
+                [streaming_fixed, full_system], [full_system_batch, full_system], [hybrid_rerank, adaptive_rag],
+                [full_system, full_system_answerability], [topk_5, adaptive_x], [cache_none, adaptive_x],
+                [delta_full_restart, adaptive_x]]
+  metrics: [retrieval.recall@5, retrieval.mrr, evidence.evidence_precision, generation.answer_correct,
+            generation.completeness, generation.forbidden_hit, generation.insufficiency_ok,
+            claims.claim_support_rate, hallucination.hallucinated_claim_rate, citation.citation_precision,
+            latency.ttva_after_end, latency.ttfa, efficiency.retrieval_calls, efficiency.embeddings,
+            efficiency.llm_calls]
+HELDOUT_V2_CANCELLATION:
+  title: Cancellation on overlapping corrections (v2)
+  question: Does cancellation reduce work for the same corrected inputs on the held-out set?
+  splits: [test]
+  systems: [cancel_off, cancel_on]
+  comparisons: [[cancel_off, cancel_on]]
+  metrics: [latency.ttva, latency.total, efficiency.retrieval_calls, efficiency.llm_calls, generation.answer_correct]
+REGRESSION_V1:
+  title: Regression check on the Phase 10 test split (development data)
+  question: Did the final system regress anywhere relative to Phase 10?
+  splits: [test]
+  systems: [full_system, adaptive_rag, full_system_batch]
+  comparisons: [[full_system_batch, full_system]]
+  metrics: [retrieval.recall@5, generation.answer_correct, generation.forbidden_hit, claims.claim_support_rate,
+            hallucination.hallucinated_claim_rate, citation.citation_precision, latency.ttva_after_end,
+            efficiency.retrieval_calls, efficiency.llm_calls]

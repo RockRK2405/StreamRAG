@@ -52,6 +52,7 @@ class CandidateAnswer(Contract):
     model: str | None = None
     structured_ok: bool = True
     fallback: str | None = None                     # why the extractive generator was used, if it was
+    unanswered_sections: list[str] = []             # sections whose facts the model judged not to answer the need
     llm_calls: int = Field(0, ge=0)
     prompt_tokens: int = Field(0, ge=0)
     output_tokens: int = Field(0, ge=0)

@@ -20,7 +20,7 @@ class GroundingResources:
         from streamrag.claims.nli import NliModel
         from streamrag.generation.llm import check_loopback, make_backend
         g = cfg.generation
-        check_loopback(g.ollama_url)
+        check_loopback(g.ollama_url, g.allowed_llm_hosts)
         nli = NliModel.load(cfg.paths.models_dir, g.nli_model) if g.verifier == "nli" else None
         llm = make_backend(g) if backend == "auto" else backend
         return cls(ChunkCatalog.from_bundle(bundle), nli, llm, terms_fn)

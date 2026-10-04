@@ -222,6 +222,9 @@ class GenerationConfig(_Cfg):
     backend: Literal["auto", "ollama", "extractive"] = "auto"   # auto: ollama if reachable, else extractive
     ollama_url: str = "http://127.0.0.1:11434"
     model: str = "qwen3:4b"
+    # Hosts besides loopback the LLM backend may live on (explicit opt-in, e.g. the compose sidecar "ollama").
+    # Empty by default: the LLM is local by design (ADR-017); docs/security/README.md.
+    allowed_llm_hosts: list[str] = []
     temperature: float = Field(0.0, ge=0)
     seed: int = 7
     num_ctx: int = Field(8192, ge=512)
@@ -237,6 +240,9 @@ class GenerationConfig(_Cfg):
     validation_mode: Literal["strict", "relaxed"] = "strict"
     repair: bool = True
     llm_repair: bool = False                              # +1 LLM call per unsupported claim (ablation)
+    answerability: bool = False                           # the model may mark a section's facts as not answering the
+                                                          # need -> explicit uncertainty instead (Phase 11; off: on
+                                                          # dev data it cost 3 correct answers for 2 abstentions)
     max_validation_retrievals: int = Field(1, ge=0)       # retrieval fallback budget per answer version
     max_answer_revision_attempts: int = Field(2, ge=0)
     draft_mode: Literal["off", "extractive"] = "extractive"   # streamed drafts before the turn ends
@@ -450,9 +456,34 @@ def _set_dotted(d: dict, dotted: str, value: Any) -> None:
     cur[keys[-1]] = value
 
 
+# Environment variable -> config key (applied after the YAML file, before explicit overrides). Only deployment
+# settings are configurable this way; secrets are never needed (the LLM is local and keyless).
+ENV_OVERRIDES = {
+    "STREAMRAG_CORPUS": "paths.corpus",
+    "STREAMRAG_INDEX_ROOT": "paths.index_root",
+    "STREAMRAG_MODELS_DIR": "paths.models_dir",
+    "STREAMRAG_LLM_BACKEND": "generation.backend",
+    "STREAMRAG_LLM_URL": "generation.ollama_url",
+    "STREAMRAG_LLM_MODEL": "generation.model",
+    "STREAMRAG_ALLOWED_LLM_HOSTS": "generation.allowed_llm_hosts",
+    "STREAMRAG_LOG_LEVEL": "telemetry.log_level",
+}
+_ENV_LISTS = {"generation.allowed_llm_hosts"}
+
+
+def env_overrides() -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for var, key in ENV_OVERRIDES.items():
+        val = os.environ.get(var)
+        if val:
+            out[key] = [h.strip() for h in val.split(",") if h.strip()] if key in _ENV_LISTS else val
+    return out
+
+
 def load_config(path: str | Path | None = None, overrides: dict[str, Any] | None = None,
                 base_dir: str | Path | None = None) -> StreamRagConfig:
-    """Load YAML config, apply dotted-key overrides and STREAMRAG_CORPUS, validate, resolve paths.
+    """Load YAML config, apply STREAMRAG_* environment settings (ENV_OVERRIDES) and dotted-key overrides, validate,
+    resolve paths.
 
     ``base_dir`` (default: the YAML file's parent's parent, i.e. the repo root for configs/default.yaml)
     anchors relative paths so results do not depend on the current working directory.
@@ -466,9 +497,8 @@ def load_config(path: str | Path | None = None, overrides: dict[str, Any] | None
         if not isinstance(loaded, dict):
             raise ConfigError(f"config root must be a mapping: {cfg_path}")
         raw = loaded
-    env_corpus = os.environ.get("STREAMRAG_CORPUS")
-    if env_corpus:
-        _set_dotted(raw, "paths.corpus", env_corpus)
+    for key, val in env_overrides().items():             # deployment settings from the environment (.env.example)
+        _set_dotted(raw, key, val)
     for key, value in (overrides or {}).items():
         _set_dotted(raw, key, value)
     try:
@@ -478,3 +508,21 @@ def load_config(path: str | Path | None = None, overrides: dict[str, Any] | None
     if base_dir is None:
         base_dir = cfg_path.resolve().parent.parent if cfg_path else Path.cwd()
     return cfg.resolve_paths(Path(base_dir))
+
+
+FINAL_PROFILE = Path("configs/profiles/final.yaml")
+
+
+def load_final_config(repo: str | Path, overrides: dict[str, Any] | None = None,
+                      profile: str | Path | None = None) -> StreamRagConfig:
+    """configs/default.yaml + the frozen final-pipeline profile (configs/profiles/final.yaml, flat dotted keys) +
+    STREAMRAG_* environment settings + ``overrides`` (highest priority)."""
+    repo = Path(repo)
+    prof = Path(profile) if profile else repo / FINAL_PROFILE
+    data = yaml.safe_load(prof.read_text()) or {}
+    if not isinstance(data, dict) or not all(isinstance(k, str) for k in data):
+        raise ConfigError(f"profile must be a flat mapping of dotted keys: {prof}")
+    # precedence: default.yaml < profile < environment < explicit overrides
+    return load_config(repo / "configs" / "default.yaml", {**data, **env_overrides(), **(overrides or {})},
+                       base_dir=repo)
+

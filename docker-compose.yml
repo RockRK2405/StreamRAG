@@ -1,0 +1,27 @@
+# StreamRAG one-command launch (spec K2 / REQ-DEP-001).
+#   docker compose up --build                 app only: verified extractive answers, works offline, no keys
+#   docker compose --profile llm up --build   app + local Ollama sidecar (first run: pull the model, see README)
+# Settings come from the environment / an optional .env file (see .env.example); there are no secrets.
+services:
+  app:
+    build: .
+    image: streamrag:1.0.0
+    ports:
+      - "${STREAMRAG_PUBLISH_PORT:-8080}:8080"
+    environment:
+      STREAMRAG_LLM_BACKEND: ${STREAMRAG_LLM_BACKEND:-auto}
+      STREAMRAG_LLM_URL: ${STREAMRAG_LLM_URL:-http://ollama:11434}
+      STREAMRAG_LLM_MODEL: ${STREAMRAG_LLM_MODEL:-qwen3:4b}
+      STREAMRAG_ALLOWED_LLM_HOSTS: ${STREAMRAG_ALLOWED_LLM_HOSTS:-ollama}
+      STREAMRAG_LOG_LEVEL: ${STREAMRAG_LOG_LEVEL:-INFO}
+    restart: unless-stopped
+
+  ollama:
+    image: ${OLLAMA_IMAGE:-ollama/ollama:latest}
+    profiles: ["llm"]
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama: {}

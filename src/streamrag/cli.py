@@ -9,12 +9,17 @@
   streamrag stream --text "a | b | c"       Phase 4 debug stream (controller decisions, retrievals, timings)
   streamrag replay TRACE.jsonl              re-run a saved trace and verify identical events
                                             (virtual: exact; realtime: identical decisions/queries/outcomes)
+  streamrag serve [--port 8080] [--no-llm]  Phase 11: the frozen final pipeline as a live demo (web UI, HTTP API,
+                                            /health, /ready); demo corpus by default
+  streamrag demo-check [--no-llm]           run every demo scenario headlessly, check its expectations, write a
+                                            JSON report (exit 1 on any failure)
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -210,8 +215,38 @@ def cmd_fetch_models(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_serve(args: argparse.Namespace) -> int:
+    import asyncio
+
+    from streamrag.server import DemoApp, serve
+    root = Path(args.root).resolve()
+    corpus = Path(args.corpus) if args.corpus else (None if os.environ.get("STREAMRAG_CORPUS") else root / "demo/corpus")
+    app = DemoApp(root, corpus=corpus, llm="off" if args.no_llm else "auto",
+                  profile=Path(args.profile) if args.profile else None,
+                  scenarios=Path(args.scenarios) if args.scenarios else None)
+    try:
+        asyncio.run(serve(app, args.host, args.port))
+    except KeyboardInterrupt:
+        pass
+    return 0
+
+
+def cmd_demo_check(args: argparse.Namespace) -> int:
+    import asyncio
+
+    from streamrag.server import DemoApp
+    from streamrag.server.democheck import demo_check
+    root = Path(args.root).resolve()
+    corpus = Path(args.corpus) if args.corpus else (None if os.environ.get("STREAMRAG_CORPUS") else root / "demo/corpus")
+    app = DemoApp(root, corpus=corpus, llm="off" if args.no_llm else "auto",
+                  scenarios=Path(args.scenarios) if args.scenarios else None)
+    report = asyncio.run(demo_check(app, Path(args.out) if args.out else None,
+                                    args.only.split(",") if args.only else None))
+    return 0 if report["summary"]["passed"] == report["summary"]["total"] else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="streamrag", description="StreamRAG retrieval foundation (Phase 3)")
+    p = argparse.ArgumentParser(prog="streamrag", description="StreamRAG - streaming live RAG (Samsung PRISM Theme 4)")
     p.add_argument("--config", default="configs/default.yaml")
     p.add_argument("--set", action="append", default=[], metavar="KEY=VALUE", help="dotted config override")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -241,6 +276,20 @@ def build_parser() -> argparse.ArgumentParser:
     s = sub.add_parser("replay"); s.add_argument("trace"); s.add_argument("--corpus"); s.add_argument("--index")
     s.add_argument("--embedder"); s.set_defaults(fn=cmd_replay)
     s = sub.add_parser("fetch-models"); s.add_argument("names", nargs="+"); s.set_defaults(fn=cmd_fetch_models)
+    s = sub.add_parser("serve", help="Phase 11 live demo: web UI + HTTP API on the frozen final pipeline")
+    s.add_argument("--host", default=os.environ.get("STREAMRAG_HOST", "127.0.0.1"))
+    s.add_argument("--port", type=int, default=int(os.environ.get("STREAMRAG_PORT", "8080")))
+    s.add_argument("--root", default=os.environ.get("STREAMRAG_ROOT", "."), help="repository root (configs/, demo/)")
+    s.add_argument("--corpus", help="corpus directory (default: STREAMRAG_CORPUS or demo/corpus)")
+    s.add_argument("--profile", help="pipeline profile (default: configs/profiles/final.yaml)")
+    s.add_argument("--scenarios", help="demo scenarios YAML (default: demo/scenarios.yaml)")
+    s.add_argument("--no-llm", action="store_true", help="verified extractive answers only (no LLM)")
+    s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("demo-check", help="run every demo scenario headlessly and check its expectations")
+    s.add_argument("--root", default=os.environ.get("STREAMRAG_ROOT", "."))
+    s.add_argument("--corpus"); s.add_argument("--scenarios"); s.add_argument("--only", help="comma-separated ids")
+    s.add_argument("--out", default="runs/demo_check.json"); s.add_argument("--no-llm", action="store_true")
+    s.set_defaults(fn=cmd_demo_check)
     return p
 
 

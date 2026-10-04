@@ -61,12 +61,13 @@ class Logger:
 
 class ExperimentRunner:
     def __init__(self, repo: Path, systems: dict[str, dict], stacks, instrument_factory, llm=None,
-                 results_dir: Path | None = None, llm_info: dict | None = None) -> None:
+                 results_dir: Path | None = None, llm_info: dict | None = None,
+                 dataset: str = "streamrag_eval_v1") -> None:
         self.repo, self.systems, self.stacks = repo, systems, stacks
         self.instrument_factory = instrument_factory      # corpus -> AnswerInstrument
         self.llm, self.llm_info = llm, llm_info or {}
         self.results = results_dir or repo / "experiments" / "results"
-        self.dataset_dir = repo / "experiments" / "datasets" / "streamrag_eval_v1"
+        self.dataset_dir = repo / "experiments" / "datasets" / dataset
         self._sessions: dict[str, dict[str, str]] = {}
 
     # ------------------------------------------------------------------ data

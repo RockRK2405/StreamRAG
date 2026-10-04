@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StreamRAG Live Demo</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"></span>
+    <div>
+      <h1>StreamRAG</h1>
+      <p class="sub">Streaming Live RAG &middot; Samsung PRISM GenAI Hackathon, Theme 4</p>
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge warn" id="b-data" title="The demo corpus is fictional and synthetic">Demo data</span>
+    <span class="badge" id="b-llm">LLM: checking&hellip;</span>
+    <span class="badge" id="b-ready">Readiness: checking&hellip;</span>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="side">
+    <section class="card">
+      <h2>Ask</h2>
+      <p class="hint">Typed text is streamed like speech, a few words at a time. Keep talking in the same
+        conversation to add details or correct yourself.</p>
+      <form id="ask">
+        <label for="q" class="sr">Question</label>
+        <textarea id="q" rows="3" maxlength="600" placeholder="e.g. What are the eligibility requirements?"></textarea>
+        <div class="row">
+          <button type="submit" class="primary" id="send">Stream it</button>
+          <button type="button" id="newconv" class="ghost">New conversation</button>
+        </div>
+      </form>
+    </section>
+    <section class="card">
+      <h2>Demo scenarios</h2>
+      <div id="scenarios" class="scenarios" aria-live="polite"></div>
+    </section>
+  </aside>
+
+  <section class="conv" aria-live="polite">
+    <div id="notices"></div>
+    <div id="turns">
+      <div class="empty" id="empty">
+        <p>Pick a scenario or type a question.</p>
+        <p class="hint">The answer starts while the question is still arriving, and every statement is checked against
+          the sources before it is marked <strong>Verified</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="side right">
+    <section class="card" id="source-card">
+      <h2>Source</h2>
+      <div id="source" class="source"><p class="hint">Click a citation to see the exact section it comes from.</p></div>
+    </section>
+    <section class="card">
+      <h2>Activity</h2>
+      <ol id="log" class="log"></ol>
+    </section>
+  </aside>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

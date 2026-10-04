@@ -99,3 +99,19 @@ cache_session:         {family: pipeline, generation: extractive,
                         label: "query / session caches (no evidence or validated-claim reuse)"}
 delta_full_restart:    {family: pipeline, generation: extractive, full_restart_pipeline: true,
                         overrides: {adaptive_retrieval.enabled: true}, label: "full re-retrieval each turn"}
+# ---------------------------------------------------------------- Phase 11 (answerability flag)
+# Development iteration (FINAL_BENCHMARK_RESULTS/dev_iterations): at that time the flag defaulted to ON, so there
+# "adaptive_rag" / "full_system" = ON and the *_noansw variants = OFF. After that iteration the flag defaults to OFF
+# (configs/profiles/final.yaml); the final benchmark measures ON as the explicit ablation variants below.
+adaptive_rag_noansw:    {family: pipeline, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, generation.answerability: false},
+                         label: "S_batch, LLM answerability flag off (dev iteration)"}
+full_system_noansw:     {family: runtime, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, generation.answerability: false},
+                         label: "S, LLM answerability flag off (dev iteration)"}
+adaptive_rag_answerability: {family: pipeline, generation: llm,
+                             overrides: {adaptive_retrieval.enabled: true, generation.answerability: true},
+                             label: "S_batch + LLM answerability flag"}
+full_system_answerability:  {family: runtime, generation: llm,
+                             overrides: {adaptive_retrieval.enabled: true, generation.answerability: true},
+                             label: "S + LLM answerability flag"}

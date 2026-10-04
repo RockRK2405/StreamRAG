@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "streamrag"
-version = "0.3.0"
-description = "Samsung PRISM Theme 4 - Streaming Live RAG (Phase 3: corpus & retrieval foundation)"
+version = "1.0.0"
+description = "Samsung PRISM Theme 4 - Streaming Live RAG (StreamRAG, final Phase 11 system)"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Proprietary - hackathon submission" }
@@ -33,7 +33,7 @@ streamrag = "streamrag.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-streamrag = ["resources/*.txt"]
+streamrag = ["resources/*.txt", "server/static/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

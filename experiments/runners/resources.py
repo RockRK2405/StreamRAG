@@ -55,6 +55,7 @@ def timed(fn, n: int) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--index-root", type=Path, required=True)
+    ap.add_argument("--out", type=Path, default=REPO / "experiments" / "results" / "RESOURCES")
     a = ap.parse_args()
     out: dict = {"meta": {"note": "measured on this machine; process = the evaluation process (not the LLM server)"},
                  "memory_peak_rss_mb": {"python + imports": None}}
@@ -103,7 +104,7 @@ def main() -> None:
     except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
         out["llm_server"] = {"status": "NOT MEASURED", "error": repr(exc)}
     out["gpu_memory"] = "NOT MEASURED (no discrete GPU; Ollama uses Apple Metal unified memory, see ollama_ps)"
-    d = REPO / "experiments" / "results" / "RESOURCES"
+    d = a.out
     d.mkdir(parents=True, exist_ok=True)
     (d / "results.json").write_text(json.dumps(out, indent=2))
     print(json.dumps(out, indent=2))

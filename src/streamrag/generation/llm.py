@@ -171,12 +171,14 @@ class RecordedBackend:
 LOOPBACK = {"127.0.0.1", "localhost", "::1"}
 
 
-def check_loopback(url: str) -> None:
-    """The LLM backend is local by design (ADR-017): any non-loopback URL is refused."""
+def check_loopback(url: str, allowed_hosts: list[str] | tuple[str, ...] = ()) -> None:
+    """The LLM backend is local by design (ADR-017): any non-loopback URL is refused, except hosts explicitly listed
+    in ``generation.allowed_llm_hosts`` (opt-in, e.g. the docker compose sidecar ``ollama`` on the private network)."""
     from urllib.parse import urlparse
-    if urlparse(url).hostname not in LOOPBACK:
-        raise ValueError(f"generation.ollama_url must be a loopback address (got {url}): the LLM backend is local by "
-                         "design (ADR-017); no other network access is allowed")
+    host = urlparse(url).hostname
+    if host not in LOOPBACK and host not in set(allowed_hosts):
+        raise ValueError(f"generation.ollama_url must be a loopback address or a host listed in "
+                         f"generation.allowed_llm_hosts (got {url}): the LLM backend is local by design (ADR-017)")
 
 
 def make_backend(gcfg):

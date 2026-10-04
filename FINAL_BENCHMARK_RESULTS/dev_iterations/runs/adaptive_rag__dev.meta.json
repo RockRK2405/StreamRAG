@@ -1,0 +1,17 @@
+{
+  "system": "adaptive_rag",
+  "split": "dev",
+  "spec": {
+    "family": "pipeline",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": true
+    },
+    "label": "Adaptive RAG (batch session pipeline + adaptive retrieval + grounded answers)",
+    "id": "adaptive_rag"
+  },
+  "samples": 129,
+  "failed": 0,
+  "wall_s": 255.9,
+  "finished": "2026-10-04T16:05:26.038387"
+}

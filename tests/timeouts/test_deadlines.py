@@ -54,3 +54,20 @@ def test_generation_timeout_falls_back_to_extractive(stack):
     final = commits(evs)[-1]
     assert final.payload["status"] == "VALIDATED_FINAL" and final.payload["mode"] == "extractive"
     assert rt.scheduler.zombies() == 0                            # the timed-out worker returned and freed its slot
+
+
+@requires_nli
+def test_extractive_fallback_survives_an_exhausted_turn_budget(stack):
+    """A hung LLM uses up the whole turn budget; the extractive redo must still get time to answer (Phase 10 §25)."""
+    st = with_runtime(stack, **{"budget.turn_ms": 1500.0})
+    rt, evs = realtime(st, [["How high should the wicks be trimmed?"]], llm=SimulatedLLM(latency_ms=50),
+                       faults=FaultInjector([Fault("llm", "timeout", times=-1)]))
+    # the outcome is what matters: the turn must commit a validated answer. Timing decides the path: when a
+    # generation was attempted it hits the hung LLM, and then the degraded extractive redo must answer; under load
+    # the final can also reuse the verified draft entirely and need no LLM call at all
+    final = commits(evs)[-1]
+    assert final.payload["status"] == "VALIDATED_FINAL"
+    gen_failed = [e for e in of(evs, "TASK_TIMED_OUT", "TASK_FAILED") if e.payload.get("task_type") == "generation"]
+    if gen_failed:
+        assert final.payload["mode"] == "extractive"
+        assert "GENERATION_DEGRADED" in [e.payload["mode"] for e in of(evs, "DEGRADED_MODE_CHANGED")]

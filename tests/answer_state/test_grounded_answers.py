@@ -1,9 +1,10 @@
 """End-to-end grounded answers on the TEST FIXTURE corpora (brief §43-50, §34, §25-26, §60). The generator is a
 scripted fake LLM (grounding_helpers) so each test controls exactly what the "model" says."""
 
+import json
 import pytest
 
-from grounding_helpers import echo, grounding_stack, requires_nli, run_answer, scripted
+from grounding_helpers import echo, grounding_stack, requested_sections, requires_nli, run_answer, scripted
 
 pytestmark = requires_nli
 
@@ -195,3 +196,58 @@ def test_prompt_injection_in_corpus_cannot_become_a_fact(tmp_path_factory):
     assert "closed on public holidays" in g.text
     prompt = p.grounding.backend.requests[0][1]["content"]
     assert "SYSTEM NOTE" not in prompt                         # injected sentences never reach the facts block
+
+
+def test_section_the_model_judges_unanswered_becomes_an_uncertainty_statement(stack):
+    """Answerability (Phase 11, brief §16): when the model says the planned facts do not contain what the need asks
+    for, the facts are withdrawn and the deterministic 'not in the retrieved documents' statement is shown instead -
+    no adjacent fact is presented as the answer, and no repair call re-inserts it."""
+    from streamrag.generation.llm import ScriptedBackend
+    calls = []
+
+    def respond(messages, schema):
+        calls.append(1)
+        secs = requested_sections(messages)
+        return json.dumps({"sections": [{"section_id": sid, "answers_need": False, "sentences": []} for sid in secs]})
+    _, (r,) = run_answer(stack, ["How are applications for the fixture permit submitted?"], ScriptedBackend(respond),
+                         answerability=True)
+    g = r.grounded
+    assert g.status == "VALIDATED_FINAL" and not facts_of(g)
+    assert "do not contain an answer" in g.text
+    assert len(calls) == 1                                    # no revision / repair call for the unanswered section
+    assert any(x.status == "NOT_ANSWERING" for x in g.rejected) or not g.rejected
+
+
+def test_answerability_flag_is_ignored_when_switched_off(stack):
+    from streamrag.generation.llm import ScriptedBackend
+
+    def respond(messages, schema):
+        assert "answers_need" not in json.dumps(schema)            # the off-arm sends the Phase 10 schema
+        secs = requested_sections(messages)
+        return json.dumps({"sections": [{"section_id": sid, "sentences": [
+            {"text": t, "facts": [f], "evidence": labs} for f, labs, t in facts]} for sid, facts in secs.items()]})
+    _, (r,) = run_answer(stack, ["How are applications for the fixture permit submitted?"], ScriptedBackend(respond),
+                         answerability=False)
+    assert facts_of(r.grounded)
+
+
+def test_section_the_model_judges_answered_is_unchanged(stack):
+    def answered(secs):
+        return {sid: [(t, [f], labs) for f, labs, t in facts] for sid, facts in secs.items()}
+    _, (r,) = run_answer(stack, ["How are applications for the fixture permit submitted?"], scripted(answered))
+    assert facts_of(r.grounded) and "do not contain an answer" not in r.grounded.text
+
+
+def test_version_conflict_is_labelled_current_and_superseded():
+    from types import SimpleNamespace as NS
+    from streamrag.answer_state.render import render_answer
+    new = NS(kind="conflict", conflict_group="K1", text="The fee is 55 euros.", citation_ids=["c1"], evidence_ids=["n"])
+    old = NS(kind="conflict", conflict_group="K1", text="The fee was 40 euros.", citation_ids=["c2"], evidence_ids=["o"])
+    sec = NS(claim_ids=["a", "b"], title="fee", model_copy=lambda update: update)
+    cmap = NS(citations=[NS(citation_id="c1", status="valid", display_metadata={"key": "NEW §1"}),
+                         NS(citation_id="c2", status="valid", display_metadata={"key": "OLD §1"})])
+    info = {id(new): ("NEW", "current", ["OLD"]), id(old): ("OLD", "superseded", [])}
+    _, text = render_answer([sec], {"a": new, "b": old}, cmap, lambda c: info[id(c)])
+    assert text == "Current version: “The fee is 55 euros” [NEW §1]. Earlier, superseded version: “The fee was 40 euros” [OLD §1]."
+    _, plain = render_answer([sec], {"a": new, "b": old}, cmap)            # no metadata: unchanged Phase 7 rendering
+    assert plain.startswith("The sources differ:")

@@ -49,8 +49,14 @@ class RuleActClassifier:
         anchors = any(self.is_anchor(w) for w in lows if w not in self.stop)
         if find_phrases(lows, lx.more_info_phrases):
             return ActResult("INFO_REQUEST", 0.75, ["asks_for_more_information"], anchors)
-        if find_phrases(lows, lx.meta_phrases):
-            return ActResult("META", 0.85, ["about_the_conversation"], anchors)
+        meta_hits = find_phrases(lows, lx.meta_phrases)
+        if meta_hits:
+            # "which documents did you use" is about the conversation; "which documents do seniors need" asks about
+            # corpus content (the meta phrase is followed by corpus-anchored words) and stays an information request
+            in_meta = {k for i, j, _ in meta_hits for k in range(i, j)}
+            topical = [w for k, w in enumerate(lows) if k not in in_meta and w not in self.stop and self.is_anchor(w)]
+            if not topical:
+                return ActResult("META", 0.85, ["about_the_conversation"], anchors)
         pres_hits = find_phrases(lows, lx.presentation_phrases)
         if pres_hits or any(w in lx.presentation_verbs for w in lows):
             in_phrase = {k for i, j, _ in pres_hits for k in range(i, j)}

@@ -1,0 +1,14 @@
+# Frozen final pipeline (Phase 11, FINAL architecture). Dotted overrides applied on top of configs/default.yaml by
+# `streamrag serve`, the Docker image and the final benchmark (streamrag.config.load_final_config):
+#   stream ingestion -> query / intent analysis -> session state -> claim requirements -> adaptive retrieval ->
+#   evidence fusion -> evidence validation -> grounded generation -> claim verification -> citation validation ->
+#   streaming response -> session update
+# Every component below was measured in Phase 10 / 11 (PHASE_10_EVALUATION_REPORT.md, FINAL_BENCHMARK_RESULTS/).
+multi_intent.enabled: true          # Phase 5: multi-intent decomposition, parallel retrieval, evidence fusion
+session.enabled: true               # Phase 6: session memory, late details, delta retrieval, incremental answers
+generation.enabled: true            # Phase 7: grounded generation, claim verification, citations
+adaptive_retrieval.enabled: true    # Phase 9: adaptive retrieval policy (fast path ... multi-hop), claim requirements
+generation.answerability: false     # Phase 11 LLM answerability flag: OFF - on development data it removed 3
+                                    # correct answers for 2 extra correct abstentions (FINAL_BENCHMARK_RESULTS/README.md)
+streaming.rerank: false             # reranker off: no quality gain measured, +34-56 ms per search (Phase 10 §18)
+streaming.mode: realtime

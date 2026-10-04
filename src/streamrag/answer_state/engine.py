@@ -65,6 +65,7 @@ from streamrag.validation.policy import decide
 from streamrag.validation.repair import ClaimRepairer, gap_sentence
 
 LEXICON = Path(__file__).resolve().parents[3] / "configs" / "claim_lexicon.yaml"
+SCOPE_FIELDS = ("applicant_type", "country", "region", "product", "language")   # = adaptive_retrieval.filter_fields
 _STAGES = ("claim_planning", "generation", "claim_extraction", "claim_verification", "repair", "retrieval",
            "citation_mapping", "validation", "total")
 
@@ -102,10 +103,12 @@ class GroundedAnswerEngine:
         self.aligner = ClaimEvidenceAligner(terms_fn, nli if mode == "nli" else None, mode)
         self.decomposer = ClaimDecomposer(ClaimLexicon.load(lexicon_path))
         self.verifier = ClaimVerifier(self.aligner, self.decomposer)
+        self.catalog = catalog
         self.claim_planner = ClaimPlanner(self.decomposer, self.aligner, catalog.is_boilerplate)
         self.answer_planner = AnswerPlanner(gcfg.detail, gcfg.max_claims_per_section)
         self.backend = backend
-        self.generator = GroundedAnswerGenerator(backend, gcfg.max_structured_retries, on_call=self._on_llm_call)
+        self.generator = GroundedAnswerGenerator(backend, gcfg.max_structured_retries, on_call=self._on_llm_call,
+                                                 answerability=gcfg.answerability)
         self.extractor = GeneratedClaimExtractor(terms_fn)
         self.repairer = ClaimRepairer(backend if gcfg.llm_repair else None)
         self.mapper = CitationMapper(catalog)
@@ -234,6 +237,7 @@ class GroundedAnswerEngine:
         stats = {"llm_calls": 0, "prompt_tokens": 0, "output_tokens": 0, "ttft": None, "fallback": None,
                  "backend": "extractive" if gen_backend is None else self.backend.name}
         todo = {k: v for k, v in need_facts.items() if v}
+        s_by_id = {x.section_id: x for x in ap.sections}
         raw_statuses: list[str] = []
         rejected: list[RejectedClaim] = []
         repairs: list[RepairRecord] = []
@@ -255,9 +259,9 @@ class GroundedAnswerEngine:
             # 8 revision (strict: unsupported content; both: missing critical facts) ---------------------------------
             while gen_backend is not None and self.cfg.repair and revisions < self.cfg.max_answer_revision_attempts:
                 missing = self._missing_facts(ap, claims, sec_claims)
-                redo = {sid: missing.get(sid, []) for sid in todo
-                        if (self.cfg.validation_mode == "strict" and removed_by_sec.get(sid))
-                        or any(f.importance == "critical" for f in self._facts(ap, sid, missing.get(sid, [])))}
+                redo = {sid: missing.get(sid, []) for sid in todo if sid not in stats.get("unanswered", ())
+                        and ((self.cfg.validation_mode == "strict" and removed_by_sec.get(sid))
+                        or any(f.importance == "critical" for f in self._facts(ap, sid, missing.get(sid, []))))}
                 redo = {k: v for k, v in redo.items() if v}
                 if not redo:
                     break
@@ -272,6 +276,9 @@ class GroundedAnswerEngine:
             # final completion: planned critical facts (and, strict, every planned fact of a section that produced
             # unsupported content) that are still missing are added verbatim
             missing = self._missing_facts(ap, claims, sec_claims) if (self.cfg.repair or gen_backend is None) else {}
+            for sid in sorted(stats.get("unanswered", ())):
+                missing.pop(sid, None)
+                self._drop_unanswered(sid, s_by_id.get(sid), claims, sec_claims, rejected, aid, version, ctx)
             for sid, fids in missing.items():
                 strict_fill = self.cfg.validation_mode == "strict" and any(r.section_id == sid for r in rejected)
                 fill = [f for f in self._facts(ap, sid, fids) if f.importance == "critical" or strict_fill
@@ -349,7 +356,9 @@ class GroundedAnswerEngine:
                                             order=s.order, claim_ids=ids, regenerated=s.section_id in regenerated,
                                             uncertainty=s.uncertainties))
         final_claims = {c: claims[c] for s in sections for c in s.claim_ids}
-        critical = {s.section_id: [f.plan_claim_id for f in s.facts if f.importance == "critical"] for s in ap.sections}
+        unanswered = stats.get("unanswered", set())          # handled by an explicit uncertainty statement instead
+        critical = {s.section_id: [] if s.section_id in unanswered else
+                    [f.plan_claim_id for f in s.facts if f.importance == "critical"] for s in ap.sections}
         expressed = {s.section_id: {f for c in s.claim_ids for f in final_claims[c].facts} for s in sections}
         cov = self.coverage.validate(sections, final_claims, critical, expressed)
         blocked = [f"intent_not_handled:{i}" for i in cov.failures]
@@ -359,7 +368,7 @@ class GroundedAnswerEngine:
         partial = bool(cov.uncertain_only) or any(c.kind == "uncertainty" for c in final_claims.values())
         T["validation"] += (time.perf_counter() - t) * 1000.0
         # render, diff, version ---------------------------------------------------------------------------------
-        sections, text = render_answer(sections, final_claims, cmap)
+        sections, text = render_answer(sections, final_claims, cmap, self._doc_info)
         diff = self._diff(prev, sections, final_claims, regenerated, reused_sections)
         prev_ids = {x.section_id: set(x.claim_ids) for x in prev.sections} if prev else {}
         sections = [s.model_copy(update={"status": "new" if s.section_id not in prev_ids else
@@ -393,6 +402,19 @@ class GroundedAnswerEngine:
         sec = next(s for s in ap.sections if s.section_id == sid)
         return [f for f in sec.facts if ids is None or f.plan_claim_id in ids]
 
+    def _drop_unanswered(self, sid, sec, claims, sec_claims, rejected, aid, version, ctx) -> None:
+        """The model judged that the section's facts do not answer the user's need (answerability, Phase 11): its
+        fact claims - including ones kept from a draft - are withdrawn, so the section ends with the deterministic
+        'not in the retrieved documents' statement instead of adjacent facts presented as the answer."""
+        for cid in [c for c in sec_claims[sid] if claims[c].kind in ("fact", "conflict")]:
+            sec_claims[sid].remove(cid)
+            rejected.append(RejectedClaim(claim_id=cid, section_id=sid, text=claims[cid].text, status="NOT_ANSWERING",
+                                          action="remove", reasons=["facts_do_not_answer_the_need"],
+                                          importance=claims[cid].importance, origin=claims[cid].origin))
+            self.emit(E.CLAIM_REJECTED, "answer_validator", {"answer_id": aid, "version": version, "claim_id": cid,
+                                                           "reason": "facts_do_not_answer_the_need"},
+                      ctx.utterance_id, intent_id=sec.intent_id if sec else None)
+
     def _missing_facts(self, ap, claims, sec_claims) -> dict[str, list[str]]:
         out = {}
         for s in ap.sections:
@@ -419,6 +441,7 @@ class GroundedAnswerEngine:
             if cand.fallback:
                 stats["fallback"] = cand.fallback
                 stats["backend"] = f"{self.backend.name}->extractive"
+            stats.setdefault("unanswered", set()).update(cand.unanswered_sections)
         T["generation"] += (time.perf_counter() - t) * 1000.0
         t = time.perf_counter()
         ex = self.extractor.extract(cand, ap)
@@ -592,6 +615,10 @@ class GroundedAnswerEngine:
             cb = [c for c in live if b in claims[c].facts]
             if ca and cb:
                 self._edges.append((ca[0], cb[0]))
+        # documents scoped to different groups (applicant type, country, ...) apply to different people and cannot
+        # contradict each other: "domestic: 3.0" vs "international: 3.3" is not a conflict (Phase 11)
+        self._edges = [(a, b) for a, b in self._edges
+                       if a not in claims or b not in claims or not self._different_scope(claims[a], claims[b])]
         parent: dict[str, str] = {}
 
         def find(x: str) -> str:
@@ -617,6 +644,32 @@ class GroundedAnswerEngine:
             if claims[c].kind == "conflict" and not any(c in m for m in groups.values() if len(m) > 1):
                 claims[c] = claims[c].model_copy(update={"kind": "fact", "conflict_group": None,
                                                          "status": "SUPPORTED"})
+
+    def _doc_info(self, claim: AnswerClaim) -> tuple[str, str, list[str]] | None:
+        docs = {self.catalog.get(e).document_id for e in claim.evidence_ids if self.catalog.get(e) is not None}
+        if len(docs) != 1:
+            return None
+        d = self.catalog.documents.get(next(iter(docs)))
+        if d is None:
+            return None
+        m = d.metadata or {}
+        sup = [x.strip() for x in str(m.get("supersedes", "") or "").split(",") if x.strip()]
+        return d.document_id, str(m.get("status", "current") or "current").lower(), sup
+
+    def _scope(self, claim: AnswerClaim) -> dict[str, set[str]]:
+        out: dict[str, set[str]] = {}
+        for eid in claim.evidence_ids:
+            ch = self.catalog.get(eid)
+            doc = self.catalog.documents.get(ch.document_id) if ch is not None else None
+            for f in SCOPE_FIELDS:
+                v = str((doc.metadata if doc is not None else {}).get(f, "") or "").lower()
+                if v and v != "all":
+                    out.setdefault(f, set()).add(v)
+        return out
+
+    def _different_scope(self, a: AnswerClaim, b: AnswerClaim) -> bool:
+        sa, sb = self._scope(a), self._scope(b)
+        return any(f in sb and not (sa[f] & sb[f]) for f in sa)
 
     @staticmethod
     def _rank(c: AnswerClaim, s) -> int:

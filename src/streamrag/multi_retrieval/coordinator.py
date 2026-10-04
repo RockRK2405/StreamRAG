@@ -348,6 +348,8 @@ class MultiIntentCoordinator:
                                                             "query_text": a.query.text, "deferred": True,
                                                             "ledger_ref": last.query_id if last else None,
                                                             "tick": tick}, uid, intent_id=a.intent_id)
+                if reason != "intent_cooldown":
+                    self._reuse_latest(a, uid, now)
                 continue
             go.append(a)
         if not go:
@@ -387,6 +389,21 @@ class MultiIntentCoordinator:
             rec = s.ledger.get(q)
             s.ledger.update(q, status="queued", retrieval_queued_at_ms=s.sched.now_ms())
             s.executor.submit(Job(q, rec.query_text, s.options, s._on_start, s._on_done))
+
+    def _reuse_latest(self, a, uid: str, now: float) -> None:
+        """The refined need cannot be retrieved again (query budget used up): re-validate it against the evidence of
+        its latest completed query of this utterance, so its claims are re-extracted for the refined version instead
+        of staying PENDING_VALIDATION with no result ever arriving (the turn then answered "not established" although
+        the right evidence had been retrieved - found in the Phase 11 demo, ASR revision + one more word)."""
+        s = self.s
+        done = [r for r in s.ledger.for_intent(a.intent_id) if r.utterance_id == uid and r.status == "completed"
+                and s.evidence.get(r.query_id) is not None]
+        if not done:
+            return
+        src = done[-1]
+        reuse = a.model_copy(update={"action": "reuse_active", "reason": "budget_exhausted_reuse_latest",
+                                     "reused_query_id": src.query_id})
+        self.engine.query_reused(reuse, uid, now, None, s.evidence.get(src.query_id))
 
     def _ledger_hit(self, terms: list[str], uid: str):
         """A completed query of an *earlier* utterance with term-Jaccard >= duplicate_jaccard (Phase 2 §9.5)."""

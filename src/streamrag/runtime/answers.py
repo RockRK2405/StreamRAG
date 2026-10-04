@@ -22,6 +22,7 @@ to the lane), matching the Phase 2 statechart: one answering turn at a time, com
 from __future__ import annotations
 
 import copy
+import math
 import time
 from collections import deque
 from dataclasses import dataclass, field
@@ -140,8 +141,12 @@ class AnswerLane:
         ttype = TaskType.DRAFT if req.draft else TaskType.ANSWER_EXTRACTIVE if no_model else TaskType.GENERATION
         prio = rs.rcfg.priorities.draft if req.draft else rs.rcfg.priorities.final_answer
         meta = {"answer_kind": "draft" if req.draft else "final", "mode": req.mode, "request": f"AR{req.n}"}
-        task = rs.new_task(ttype, prio, req.uid, rs.bus.last_event_id, meta=meta,
-                           deadline_parent=rs.turn_deadline(req.uid))
+        # a degraded redo (after a failed or timed-out final) is a recovery task: it gets its own task timeout
+        # instead of the turn budget, which the failed attempt may have used up (otherwise the extractive fallback
+        # would time out at once and the turn would end without any answer - Phase 10 robustness, LLM timeout)
+        recovery = not req.draft and req.mode != "full"
+        task = rs.new_task(ttype, prio, req.uid, rs.bus.last_event_id, meta={**meta, "recovery": recovery},
+                           deadline_parent=math.inf if recovery else rs.turn_deadline(req.uid))
         req.task_id = task.task_id
         rs.scheduler.submit(task, self._work(req, ctx, cp, task.deadline_ms),
                             lambda r: self._done(req, cp, r))

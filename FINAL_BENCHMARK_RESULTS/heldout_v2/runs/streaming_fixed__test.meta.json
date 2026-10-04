@@ -1,0 +1,17 @@
+{
+  "system": "streaming_fixed",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": false
+    },
+    "label": "D Streaming RAG without adaptive retrieval (Phase 8 runtime, fixed hybrid)",
+    "id": "streaming_fixed"
+  },
+  "samples": 81,
+  "failed": 0,
+  "wall_s": 281.0,
+  "finished": "2026-10-04T16:41:49.016728"
+}

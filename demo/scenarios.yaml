@@ -1,0 +1,99 @@
+# Scripted demo scenarios over demo/corpus (DEMO DATA - fictional). The server streams each turn as transcript chunks,
+# one chunk every `interval_ms`, then ends the utterance; `gap_ms` is the pause before the next turn (a short gap
+# makes the next turn overlap the previous answer, which is what triggers cancellation). A chunk {replaces: n, text}
+# is an ASR revision of chunk n. Live typing in the UI uses the same API.
+#
+# `expect` is checked by `streamrag demo-check` (the automated demo / end-to-end test, docs/deployment/README.md).
+# Checked for every scenario in addition: every turn ends with a VALIDATED_FINAL answer, every citation names an
+# existing corpus section, no ERROR event. Keys: plans_any / plans_none (retrieval strategies of a turn), changes_any
+# (context change types), cancelled (outdated work dropped), cites_all / cites_none, text_all / text_none
+# (case-insensitive substrings of the final answer), needs_min (detected needs), uncertainty (a "not in the documents"
+# statement). Per turn: a list aligned with `turns` (null = no extra check).
+- id: normal
+  title: "A. Normal question"
+  shows: "Streaming input, first evidence while the user is still speaking, a verified answer with citations."
+  turns:
+    - chunks: ["How much is tuition", "per semester for", "international students?"]
+  expect:
+    - {cites_all: ["FEES §1"], text_all: ["4,800 euros"]}
+
+- id: multi_intent
+  title: "B. Several questions at once"
+  shows: "Three needs detected, retrieved in parallel, fused into one grounded answer with one section per need."
+  turns:
+    - chunks: ["What are the eligibility requirements", "for international students,", "which documents do they submit,",
+               "and how long does processing take", "for international applications?"]
+  expect:
+    - {needs_min: 3, cites_all: ["SCH-INTL §1", "SCH-INTL §2", "SCH-INTL §3"], text_all: ["6.5", "passport",
+                                                                                         "25 working days"]}
+
+- id: adaptive_simple
+  title: "C1. Adaptive retrieval: simple"
+  shows: "An exact form code takes the cheap keyword fast path: one keyword search, no embedding, small k."
+  turns:
+    - chunks: ["What is Form ISO-7", "used for?"]
+  expect:
+    - {plans_any: ["LEXICAL"], plans_none: ["SEMANTIC", "HYBRID", "ITERATIVE", "MULTI_HOP"], cites_all: ["VISA §1"]}
+
+- id: adaptive_complex
+  title: "C2. Adaptive retrieval: constrained"
+  shows: "A question about one applicant group gets a different plan: hybrid search filtered by document metadata."
+  turns:
+    - chunks: ["How long does processing", "take for international", "students?"]
+  expect:
+    - {plans_any: ["FILTERED"], cites_all: ["SCH-INTL §3"], text_all: ["25 working days"],
+       text_none: ["10 working days"]}
+
+- id: live_correction
+  title: "D. Late correction"
+  shows: "The user narrows the question while the first answer is still being written: outdated work is dropped,
+    reusable evidence is kept, only the changed need is retrieved again, and the answer is updated with citations."
+  turns:
+    - chunks: ["What are the eligibility", "requirements for the", "Merit Scholarship?"]
+      gap_ms: 700
+    - chunks: ["Sorry, I mean", "for international students."]
+  expect:
+    - null
+    - {changes_any: ["CONSTRAINT_ADDITION", "CORRECTION", "REFINEMENT", "ENTITY_CHANGE"], plans_any: ["FILTERED"],
+       cites_all: ["SCH-INTL §1"], cites_none: ["SCH-DOM §1"], text_all: ["6.5"]}
+
+- id: asr_revision
+  title: "D2. Speech-recognition revision"
+  shows: "A word the recogniser got wrong is replaced mid-utterance; the search built on the wrong word is superseded."
+  turns:
+    - chunks: ["How long does processing take", "for domestic", {replaces: 1, text: "for international"},
+               "students?"]
+  expect:
+    - {cancelled: true, text_all: ["25 working days"], text_none: ["10 working days"]}
+
+- id: evidence
+  title: "E. Evidence and citations"
+  shows: "Every statement carries a citation; click it to see the exact source section."
+  turns:
+    - chunks: ["Which documents do domestic", "applicants submit for", "the scholarship?"]
+  expect:
+    - {cites_all: ["SCH-DOM §2"], text_all: ["residency certificate"]}
+
+- id: contradiction
+  title: "F1. Conflicting sources"
+  shows: "Two notices disagree; both are reported instead of picking one silently."
+  turns:
+    - chunks: ["When does move-in start", "for the international", "student residence?"]
+  expect:
+    - {text_all: ["25 August", "1 September"], cites_all: ["HOUSING-A §1", "HOUSING-B §1"]}
+
+- id: temporal
+  title: "F2. Versioned documents"
+  shows: "A superseded 2025 policy is used only when the question asks about 2025."
+  turns:
+    - chunks: ["Which IELTS score did", "international students need", "in 2025?"]
+  expect:
+    - {plans_any: ["FILTERED"], cites_all: ["SCH-INTL-2025 §1"], text_all: ["7.0"]}
+
+- id: uncertainty
+  title: "F3. Not in the sources"
+  shows: "Part of the question is not covered by any source: the system says so instead of guessing."
+  turns:
+    - chunks: ["Does the Merit Scholarship", "also cover health insurance?"]
+  expect:
+    - {uncertainty: true, text_none: ["insurance is covered", "covers health insurance"]}

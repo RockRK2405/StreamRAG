@@ -128,6 +128,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--index-root", type=Path, required=True)
     ap.add_argument("--model", default="qwen3:4b")
+    ap.add_argument("--out", type=Path, default=REPO / "experiments" / "results" / "ROBUSTNESS")
     a = ap.parse_args()
     from streamrag.generation.llm import OllamaBackend
     url = "http://127.0.0.1:11434"
@@ -151,7 +152,7 @@ def main() -> None:
         except Exception as exc:     # noqa: BLE001
             rows.append({"scenario": "propagation", "sample_id": q, "propagated": 1.0, "crash": repr(exc)})
     summary = {sc: ROB.aggregate([r for r in rows if r["scenario"] == sc]) for sc in list(SCENARIOS) + ["propagation"]}
-    out = REPO / "experiments" / "results" / "ROBUSTNESS"
+    out = a.out
     out.mkdir(parents=True, exist_ok=True)
     (out / "results.json").write_text(json.dumps({"meta": {"system": "full_system (runtime + adaptive + qwen3:4b)",
                                                            "faults": "SYNTHETIC (FaultInjector)", "reportable": False,

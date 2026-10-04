@@ -1,0 +1,19 @@
+# Phase 11 development checks of the fixes (NOT the held-out evaluation). Data: the Phase 10 test split (v1, now
+# development data - it was inspected in the Phase 10 error analysis) and the dev split. Results:
+# FINAL_BENCHMARK_RESULTS/dev_iterations/. "Before" for v1 = the Phase 10 runs in experiments/results/runs/.
+DEV_ANSWERABILITY_BATCH:
+  title: Answerability check (batch pipeline), development data
+  question: Does the answerability check handle unanswerable questions without costing answerable ones?
+  splits: [test, dev]
+  systems: [adaptive_rag_noansw, adaptive_rag]
+  comparisons: [[adaptive_rag_noansw, adaptive_rag]]
+  metrics: [generation.answer_correct, generation.completeness, generation.insufficiency_ok, generation.forbidden_hit,
+            generation.abstained, claims.claim_support_rate, latency.ttva_after_end, efficiency.llm_calls]
+DEV_FIXES_RUNTIME:
+  title: Phase 11 fixes in the streaming runtime, development data
+  question: Do the fixes remove the Phase 10 streaming failures, and what does the answerability check add?
+  splits: [test]
+  systems: [full_system_noansw, full_system]
+  comparisons: [[full_system_noansw, full_system]]
+  metrics: [generation.answer_correct, generation.completeness, generation.insufficiency_ok, generation.forbidden_hit,
+            retrieval.recall@5, latency.ttva_after_end, latency.ttfa, efficiency.retrieval_calls, efficiency.llm_calls]

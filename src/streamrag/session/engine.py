@@ -251,6 +251,8 @@ class AdaptiveSessionEngine:
         for a in confirms:
             if a.to_status != a.from_status:
                 self.emit(E.EVIDENCE_REVALIDATED, "evidence_validity", a.model_dump(mode="json"), uid, intent_id=intent_id)
+        if not reused:
+            self._drop_unconfirmed_partial_evidence(intent_id, query_id, es, now, uid)
         q = self.last_query.get(intent_id)
         if q is not None and not reused:
             self.cache.put(self.cache.key(q.terms), query_id, [e.evidence_id for e in es.items])
@@ -289,6 +291,43 @@ class AdaptiveSessionEngine:
             self.emit(kind, "claim_revalidator", t.model_dump(mode="json"), uid, intent_id=intent_id)
         self.timings["claim_revalidation"].append((time.perf_counter() - t1) * 1000.0)
         self._version("evidence", now, uid, [], f"evidence for {intent_id} via {query_id}")
+
+    def _drop_unconfirmed_partial_evidence(self, intent_id: str, query_id: str, es: EvidenceSet, now: float,
+                                           uid: str | None) -> None:
+        """Streaming: when the need's current query returns, evidence that only *superseded* queries of the same
+        utterance retrieved for the need (queries built on an earlier, partial transcript) and that the current
+        query did not return again is not confirmed by what the user finally said -> STALE
+        (not_confirmed_by_refined_query). Without this, "What did a single ride cost" (current fare) followed by
+        "... in 2025" kept the current-fare evidence and its claim next to the 2025 one (Phase 10 error analysis,
+        early commitment). Evidence from earlier utterances keeps its Phase 6 lifecycle (RETAINED across
+        refinements); batch processing issues one query per need and utterance and is unaffected."""
+        if uid is None or self.ledger is None:
+            return
+        try:
+            rec = self.ledger.get(query_id)
+        except KeyError:
+            return
+        if rec.utterance_id != uid or rec.stale:
+            return
+        returned = {e.evidence_id for e in es.items}
+        for a in self.store.usable(intent_id):
+            if a.evidence_id in returned or not a.query_ids:
+                continue
+            srcs = []
+            for q in a.query_ids:
+                try:
+                    srcs.append(self.ledger.get(q))
+                except KeyError:
+                    srcs.append(None)
+            if all(r is not None and r.utterance_id == uid and r.stale and r.query_id != query_id for r in srcs):
+                before = a.status
+                if self.store.transition(a.evidence_id, intent_id, "STALE", "not_confirmed_by_refined_query", None,
+                                         now, query_id) is not None:
+                    self._bump("evidence_superseded")
+                    self.emit(E.EVIDENCE_INVALIDATED, "evidence_validity", EvidenceAction(
+                        evidence_id=a.evidence_id, intent_id=intent_id, decision="SUPERSEDE", from_status=before,
+                        to_status="STALE", rule="not_confirmed_by_refined_query").model_dump(mode="json"), uid,
+                        intent_id=intent_id)
 
     # ------------------------------------------------------------------ answer
     def commit_answer(self, uid: str, now: float) -> AnswerVersion | None:

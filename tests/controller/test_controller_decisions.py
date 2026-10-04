@@ -51,6 +51,14 @@ def test_case3_suppression_and_casual_statements_skip(policy, text, reason):
     assert d.decision == "SKIP" and d.reason == reason and d.skip_kind in {"suppressed", "not_worthy"}
 
 
+def test_meta_phrase_about_corpus_content_is_a_request(policy):
+    """'which documents ...' asks about the conversation only when no corpus topic follows (Phase 10 error analysis)."""
+    d = decide(policy, "which documents are needed to keep ladders in the orchard overnight", tick="utterance_end")
+    assert d.decision == "RETRIEVE"
+    d = decide(policy, "which documents did you rely on", tick="utterance_end")
+    assert d.decision == "SKIP" and d.reason == "meta_conversation"
+
+
 def test_transform_verb_on_corpus_topic_is_a_request(policy):
     assert decide(policy, "summarize the ladder storage rule", tick="utterance_end").decision == "RETRIEVE"
 

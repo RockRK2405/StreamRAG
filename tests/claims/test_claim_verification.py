@@ -57,6 +57,21 @@ def test_decomposition_keeps_units_and_disjunctions(lx):
         "The signal sounds every 30 seconds while visibility is low."]   # 'while' subordinates a condition
 
 
+def test_decomposition_never_garbles_noun_complements_or_verb_phrases(lx):
+    """Phase 11 regression: list distribution produced atoms that are not in the sentence."""
+    d = ClaimDecomposer(lx)
+    for t in ["Domestic students need a minimum grade average of 3.0 and proof of residency in the region.",
+              "International students need a minimum grade average of 3.3 and an IELTS score of at least 6.5.",
+              "The fare table raised the single ride fare from 2.40 euros to 2.80 euros and extended single ride "
+              "validity from 90 to 120 minutes."]:
+        atoms = d.decompose(t)
+        assert atoms == [t] or all(" of residency" not in a.replace("proof of residency", "") for a in atoms)
+        assert not any("of at least 6.5" in a and "IELTS" not in a for a in atoms)
+        assert not any("to extended" in a or "euros from 90" in a for a in atoms)
+    assert d.decompose("Applicants must hold a valid passport and a registered address.") == [
+        "Applicants must hold a valid passport.", "Applicants must hold a registered address."]
+
+
 def test_text_checks():
     assert numbers("Wicks are trimmed to 4 millimetres on the first night, five times.") == {"4", "1", "5"}
     assert has_value_of("A renewal can be requested up to 30 days before expiry.", "duration")

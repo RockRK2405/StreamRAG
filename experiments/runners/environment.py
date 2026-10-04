@@ -30,8 +30,12 @@ def sh(cmd: list[str]) -> str | None:
 
 
 def main() -> None:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=REPO / "experiments" / "results" / "environment.json")
+    a = ap.parse_args()
     from run_experiments import llm_info
-    from streamrag.config import load_config
+    from streamrag.config import load_config, load_final_config
     from streamrag.config.settings import config_hash
     from streamrag.evaluation.runner import git_commit
     pk = {}
@@ -62,11 +66,15 @@ def main() -> None:
                      "model": sh(["sysctl", "-n", "hw.model"])},
         "os": {"platform": platform.platform(), "release": platform.release()},
         "configuration": {"file": "configs/default.yaml", "config_hash": config_hash(cfg),
-                          "experiments": "experiments/configs/{systems,experiments}.yaml"},
+                          "final_profile": "configs/profiles/final.yaml",
+                          "final_config_hash": config_hash(load_final_config(REPO)),
+                          "experiments": "experiments/configs/{systems,experiments,final_benchmark}.yaml"},
         "git": git_commit(REPO),
-        "dataset": json.loads((REPO / "experiments" / "datasets" / "streamrag_eval_v1" / "manifest.json").read_text()),
+        "dataset": {d: json.loads((REPO / "experiments" / "datasets" / d / "manifest.json").read_text())
+                    for d in ("streamrag_eval_v1", "streamrag_eval_v2")},
+        "docker": sh(["docker", "--version"]),
     }
-    out = REPO / "experiments" / "results" / "environment.json"
+    out = a.out
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(env, indent=2, default=str))
     print(json.dumps({k: env[k] for k in ("python", "hardware", "os", "git")}, indent=2))
