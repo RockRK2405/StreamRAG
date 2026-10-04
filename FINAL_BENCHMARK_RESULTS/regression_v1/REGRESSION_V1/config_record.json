@@ -1,6 +1,6 @@
 {
   "experiment_id": "REGRESSION_V1",
-  "timestamp": "2026-10-04T16:57:43",
+  "timestamp": "2026-10-04T20:24:33",
   "title": "Regression check on the Phase 10 test split (development data)",
   "question": "Did the final system regress anywhere relative to Phase 10?",
   "config": {
@@ -228,7 +228,7 @@
     }
   },
   "git": {
-    "commit": "29e4e35e464473e72dac34ab907911000ca5664c",
+    "commit": "d130ad0136b0b3d23ec363c45a0c0769450b8dbd",
     "dirty": true
   },
   "python": "3.12.0",

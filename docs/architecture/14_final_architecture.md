@@ -17,7 +17,7 @@ SESSION STATE              needs, frames, context changes (refine / correct / ex
       ↓
 CLAIM REQUIREMENTS         what each need must establish (claim slots)                    adaptive/requirements.py
       ↓
-ADAPTIVE RETRIEVAL         per-need plan: fast path ... filtered ... iterative / multi-hop adaptive/ (policy, router, controller)
+ADAPTIVE RETRIEVAL         per-need plan: fast path ... filtered ... iterative / multi-hop adaptive/ (analyzer, policy, controller, stopping)
       ↓
 EVIDENCE FUSION            intent-aware fusion, dedup, cross-intent sharing               fusion/
       ↓
@@ -109,5 +109,6 @@ These are bug fixes, found in the Phase 10 error analysis and the demo. Each has
 | a need is re-validated against its latest query when the per-need query budget is used up | `multi_retrieval/coordinator.py` | `tests/streaming_integration/...::test_need_keeps_its_evidence_when_the_query_budget_is_exhausted` |
 | the claim decomposer no longer garbles "A and B of C" lists | `claims/decomposer.py` | `tests/claims/...::test_decomposition_never_garbles_noun_complements_or_verb_phrases` |
 | documents scoped to different groups are not reported as conflicting; version conflicts are labelled current / superseded | `answer_state/engine.py`, `answer_state/render.py` | `tests/answer_state/...::test_version_conflict_is_labelled_current_and_superseded` |
+| codes and acronyms the LLM mangled only in punctuation ("IEL:TS") get the evidence spelling (after the v2 runs; no stored answer affected) | `claims/textcheck.py`, `generation/extraction.py` | `tests/claims/test_claim_verification.py::test_mangled_codes_get_the_evidence_spelling` |
 | LLM answerability flag (switch, **off** by default after the development check) | `generation/`, `answer_state/engine.py` | `tests/answer_state/...::test_section_the_model_judges_unanswered_*` |
 | deployment: HTTP API, UI, `/health`, `/ready`, Docker, environment settings, LLM host allowlist | `server/`, `config/settings.py`, `Dockerfile` | `tests/server/`, `tests/test_config.py` |

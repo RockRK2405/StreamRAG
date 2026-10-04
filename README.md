@@ -1,217 +1,205 @@
-# StreamRAG — Samsung PRISM GenAI Hackathon 2026–27, Theme 4: Streaming Live RAG
+# StreamRAG: Streaming Live RAG
 
-**Current phase: Phase 9, adaptive retrieval intelligence** (per-need query analysis, claim-driven evidence requirements, routing among nine retrieval strategies, adaptive top-k, bounded iterative / multi-hop retrieval, contradiction-aware retrieval, validity-checked caches; off by default), on top of the Phase 8 streaming runtime, the Phase 7 grounded answers, the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
+**Samsung PRISM GenAI Hackathon 2026–27, Theme 4.**
 
-Implemented:
-- corpus ingestion with stable citation IDs;
-- BM25 + dense hybrid retrieval with RRF fusion, deduplication and an optional reranker;
-- **incremental transcript streaming** with a WAIT / RETRIEVE / SKIP **retrieval controller**;
-- a versioned **query ledger**, with stale-query handling;
-- async retrieval;
-- structured telemetry and deterministic **replay**;
-- **multi-intent decomposition** (rule-first, validated), versioned intent sets with **delta retrieval** while the user speaks, parallel per-intent retrieval and **intent-aware evidence fusion** into a `UnifiedEvidenceSet`;
-- **adaptive sessions** (`session.enabled: true`): late details, retractions and corrections across turns become typed context changes; a delta planner re-queries only the affected needs (or reuses earlier evidence); evidence and claims carry lifecycles; the answer is a versioned, claim-level state with diffs and minimal-regeneration markers (`docs/session/`, ADR-016, `PHASE_6_ADAPTIVE_RAG_REPORT.md`).
+StreamRAG answers spoken, multi-part questions from trusted documents while the user is still talking. It verifies
+every statement against the section it cites, and it updates only what changed when the user adds a detail or
+corrects themselves.
 
-- **grounded answers** (`generation.enabled: true`): evidence-derived claim plans, generation by a local LLM (Ollama, structured JSON, extractive fallback), entailment verification of every claim, citations to the supporting sentence of the indexed chunk, repair / bounded retrieval fallback for unsupported claims, drafts while the user speaks and validated finals per turn (`docs/answer/`, ADR-017, `PHASE_7_GROUNDED_GENERATION_REPORT.md`). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
-- **adaptive retrieval** (`adaptive_retrieval.enabled: true`, off by default): per need, an explainable complexity analysis and claim slots choose the retrieval strategy (lexical fast path, filtered by user-stated metadata / validity, semantic, multi-hop, iterative, cache / session reuse) and a bounded retrieve-assess loop stops on sufficient evidence, contradiction, budget or no expected gain (`docs/retrieval/01_query_analysis.md` …, ADR-019, `PHASE_9_ADAPTIVE_RETRIEVAL_REPORT.md`).
+> **Status: Phase 11, final.** The architecture is frozen (`docs/architecture/14_final_architecture.md`).
+> **Official Theme 4 corpus: NOT AVAILABLE.** Every number in this repository comes from fictional fixture corpora
+> with implementer-written labels: **TEST FIXTURE ONLY, NOT REPORTABLE** as official results.
+> **No Samsung hardware, SDK, model or service is used.**
 
-> **Official corpus status: NOT_AVAILABLE.** No Theme 4 corpus has been supplied yet. Everything under `tests/fixtures/` is a **TEST FIXTURE** (synthetic, fictional) used only to test software. No retrieval-quality results exist yet. Check the status with `streamrag corpus-status`.
+## Submission (Samsung PRISM GenAI Hackathon Y2026, Theme 4)
 
-## Setup (Python ≥ 3.11, CPU only)
+| item | where |
+|---|---|
+| source code | this repository (`src/streamrag/`), tag `PRISM_GENAI_HACKATHON_Y2026` |
+| requirements | `requirements.txt` (pinned: `requirements.lock`) |
+| presentation | `FINAL_PRESENTATION.md` (18 slides); PPT file: see the `presentation/` folder |
+| demo video | _link to be added_ |
+| AI disclosure | `AI_DISCLOSURE.md` (draft of the official form) |
+| results | `FINAL_BENCHMARK_RESULTS/README.md` |
+| checklist | `HACKATHON_FINAL_CHECKLIST.md` |
+
+## What it does
+
+```mermaid
+flowchart LR
+    I["Live input"] --> S["Streaming"] --> N["Intent"] --> A["Adaptive retrieval"] --> E["Evidence"] --> G["Grounded generation"] --> V["Verification"] --> R["Streamed answer"]
+    MEM(("Session memory")) -.- N
+    MEM -.- A
+    C(("Cache")) -.- A
+    T(("Telemetry")) -.- S
+    T -.- V
+```
+
+1. **Retrieves while the user speaks.** A rule-based controller decides, chunk by chunk, whether to retrieve, wait or
+   skip.
+2. **Splits the request into needs.** Each need gets claim requirements: what it must establish, such as an amount, a
+   duration or a form.
+3. **Adaptive retrieval per need.** Keyword fast path, filtered, semantic, hybrid, iterative or multi-hop, with a
+   bounded stop rule. There is no LLM in this loop.
+4. **Evidence lifecycle and delta retrieval.** A late detail or correction re-retrieves only the affected need. Stale
+   or superseded evidence is dropped, and obsolete work is cancelled.
+5. **Verified streaming answer.**
+   * Drafts appear while the user speaks.
+   * Every claim is checked against its cited section by an NLI model, and citations are rebuilt from that check.
+   * Conflicting sources are reported side by side, and superseded versions are labelled.
+6. **Asynchronous runtime.** Prioritised, deadline-bounded tasks with backpressure and retries. Degraded modes
+   (extractive, lexical-only) are always declared.
+
+## Quickstart
+
+### A. Docker (one command, offline, no keys)
 
 ```bash
-python3 -m venv .venv
+docker compose up --build
+```
+
+Open http://127.0.0.1:8080. This path serves verified **extractive** answers with no LLM.
+
+To add the local LLM, run it as a compose sidecar:
+
+```bash
+docker compose --profile llm up --build
+```
+
+The first time, pull the model:
+
+```bash
+docker compose exec ollama ollama pull qwen3:4b
+```
+
+On a Mac, the host's Ollama (Metal GPU) is faster. See `docs/deployment/README.md` §2.
+
+### B. Local (Python 3.11 or newer)
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock && .venv/bin/pip install -e . --no-deps
 ```
 
 ```bash
-.venv/bin/pip install -r requirements.lock && .venv/bin/pip install -e . --no-deps
+.venv/bin/streamrag fetch-models bge-small-en-v1.5 nli-deberta-v3-xsmall
 ```
 
-```bash
-.venv/bin/streamrag fetch-models bge-small-en-v1.5 ms-marco-minilm-l6-v2
-```
-
-`fetch-models` downloads the pinned ONNX models into `./models/` at build time; this is the only step that uses the network. The revisions are in `configs/models.yaml`.
-
-## Using the official corpus (no code changes)
-
-Put the corpus documents (`.txt`, `.md`, `.pdf`) in `./corpus/`, or point `STREAMRAG_CORPUS` or `--corpus` at their directory. Then:
-
-```bash
-.venv/bin/streamrag corpus-status
-```
-
-```bash
-.venv/bin/streamrag build-index
-```
-
-```bash
-.venv/bin/streamrag search "your question" --mode hybrid
-```
-
-```bash
-.venv/bin/streamrag bench --eval eval/<labels> --modes bm25 dense hybrid hybrid_rerank
-```
-
-- `corpus-status` prints `OFFICIAL_CORPUS_STATUS = AVAILABLE`.
-- `build-index` writes `indexes/<corpus_hash>-<config_hash>/` with its manifest.
-- `search` takes `--rerank` and `--json`.
-- `bench` writes `runs/<run_id>/` (metrics.json, per_query.jsonl/csv, run_manifest.json).
-
-Native document IDs (e.g. files named `Doc_12_….pdf`, or a front-matter `id:`) and native section numbers (`§4`, `2.1`) are preserved automatically. Citations render as `Doc_ID §Section`.
-
-## Streaming (Phase 4)
-
-```bash
-.venv/bin/streamrag stream --text "I need | information | about the fog signal | during a storm" --interval-ms 300 --trace trace.jsonl
-```
-
-```bash
-.venv/bin/streamrag replay trace.jsonl
-```
-
-- `stream` prints controller decisions, query versions, retrievals and lead time. Add `--mode realtime` for the asyncio wall-clock mode, or `--policy end_only|every_chunk` for the ablation baselines.
-- `--multi-intent` (Phase 5) decomposes each utterance into intents, retrieves per intent (only new or changed intents while the user speaks) and prints the fused evidence.
-- `replay` re-runs the trace. A virtual trace must match exactly. A realtime trace must match in behavior (decisions, queries, retrieval outcomes), because its timestamps carry real jitter.
-
-## Adaptive retrieval (Phase 9)
-
-```bash
-.venv/bin/streamrag --set adaptive_retrieval.enabled=true --set generation.enabled=true --set generation.backend=extractive stream --session --runtime --interval-ms 300 --text "What documents does | an applicant from | Zemland need?" --corpus tests/fixtures/corpus_adaptive
-```
-
-- `adaptive_retrieval.enabled` replaces the fixed per-need retrieval with `streamrag.adaptive.AdaptiveRetrievalController`: explainable complexity analysis, claim slots, a logged strategy choice (`strategy_reason`), a bounded retrieve-assess loop with explicit stop reasons, hops, contradiction search and validity-checked caches (`adaptive_retrieval:` in `configs/default.yaml`, `configs/retrieval_lexicon.yaml`, `docs/retrieval/01_query_analysis.md` … `11_budget_management.md`, `docs/architecture/13_adaptive_retrieval.md`, ADR-019). Off by default: fixture results only.
-
-```bash
-.venv/bin/python research/phase9/calibrate_routing.py --index-root /tmp/idx9
-```
-
-```bash
-.venv/bin/python research/phase9/run_benchmarks.py --index-root /tmp/idx9
-```
-
-```bash
-.venv/bin/python research/phase9/run_experiments.py --index-root /tmp/idx9 --reps 5
-```
-
-```bash
-.venv/bin/python research/phase9/runtime_h5.py --index-root /tmp/idx9
-```
-
-```bash
-.venv/bin/python research/phase9/llm_quality.py --index-root /tmp/idx9
-```
-
-```bash
-.venv/bin/python research/phase9/e2e_final.py --index-root /tmp/idx9
-```
-
-```bash
-.venv/bin/python research/phase9/make_tables.py
-```
-
-`llm_quality.py` and `e2e_final.py` need `ollama serve`; `make_tables.py` renders `research/phase9/results/tables.md`.
-
-## Streaming runtime (Phase 8)
-
-```bash
-.venv/bin/streamrag --set generation.enabled=true stream --session --runtime --interval-ms 300 --text "Tell me the eligibility requirements | and the application process | for the permit." --corpus tests/fixtures/corpus_grounding
-```
-
-- `--runtime` runs the turn through `streamrag.runtime.StreamingRuntime`: one actor per session on the event loop, lexical / dense retrieval subtasks in parallel on bounded worker pools, answers off the loop, cooperative cancellation of superseded work, bounded coalescing input queues (`runtime:` in `configs/default.yaml`, `docs/runtime/`, ADR-018).
-- In code: `rt = await StreamingRuntime(cfg, stack).start()`, `rt.start_session()`, `rt.push_transcript_delta(...)`, `async for ev in rt.get_events(sid)`, `await rt.shutdown()`.
-- Runtime traces replay exactly from the event log (`streamrag replay trace.jsonl`).
-
-```bash
-.venv/bin/python research/phase8/run_runtime_benchmarks.py --index-root /tmp/idx8
-```
-
-```bash
-.venv/bin/python research/phase8/compare_pipelines.py --index-root /tmp/idx8
-```
-
-```bash
-.venv/bin/python research/phase8/e2e_demo.py --index-root /tmp/idx8
-```
-
-```bash
-.venv/bin/python research/phase8/final_validation.py --index-root /tmp/idx8
-```
-
-The last three need `ollama serve` (real local model); `run_runtime_benchmarks.py` uses a simulated LLM (synthetic, labelled).
-
-## Grounded answers (Phase 7)
+Optional, for LLM-written answers:
 
 ```bash
 ollama pull qwen3:4b
 ```
 
 ```bash
-.venv/bin/streamrag fetch-models nli-deberta-v3-xsmall
+ollama serve
 ```
+
+Launch the demo:
 
 ```bash
-.venv/bin/streamrag build-index --corpus tests/fixtures/corpus_grounding
+.venv/bin/streamrag serve
 ```
+
+Open http://127.0.0.1:8080.
+* The header shows **Ready**, the LLM state and **Demo data**.
+* Without Ollama, the server runs in verified extractive mode and says so. You can force this with `--no-llm`.
+
+## Demo
+
+The demo corpus (`demo/corpus/`) holds fictional Riverbank University scholarship rules. The ten scripted scenarios
+(`demo/scenarios.yaml`) stream word by word, as speech would arrive:
+
+| scenario | what it shows |
+|---|---|
+| A. Normal question | stages Query → Retrieval → Evidence while the question is still arriving; verified answer with citation; timing line |
+| B. Multi-intent | three needs, one answer with a cited section per need |
+| C1 / C2. Adaptive simple / complex | keyword fast path vs filtered search; the plan is shown per need |
+| D. Late correction | "Sorry, I mean for international students": new condition, outdated search dropped, answer updated |
+| D2. ASR revision | a recognised word revised mid-sentence; the answer follows the revision |
+| E. Evidence | click a citation to see the exact section text |
+| F1. Contradiction | two notices disagree: both reported |
+| F2. Temporal | the current rule is used, and the superseded one is labelled |
+| F3. Uncertainty | "The retrieved documents do not contain an answer to …" instead of a guess |
+
+You can also type or paste your own question. The six-minute script is in `DEMO_SCRIPT.md`.
+
+**Automated check.** This runs every scenario headlessly and checks its declared expectations. The exit code is 1 on
+any failure.
 
 ```bash
-.venv/bin/streamrag --set generation.enabled=true stream --session --interval-ms 300 --text "Tell me the eligibility requirements | and the application process | for the permit." --corpus tests/fixtures/corpus_grounding
+.venv/bin/streamrag demo-check
 ```
 
-- With the Ollama server running and the model pulled, answers are written by the local LLM; otherwise by the extractive generator (same verification).
-- The LLM URL must be a loopback address. Every claim is verified against the evidence before it is released, cited from the verification.
+## Evaluation
 
-## Adaptive sessions (Phase 6)
+The final benchmark is described in `FINAL_BENCHMARK_RESULTS/README.md`:
+* a held-out set written and hash-frozen **before** any Phase 11 change (`streamrag_eval_v2`, 81 turns, new domain);
+* eleven baselines and variants, paired statistics, and a regression check against Phase 10.
+
+Reproduce it as follows (needs `ollama serve` with `qwen3:4b`; about 30 minutes on an M5 Pro). First run the
+benchmark:
 
 ```bash
-.venv/bin/streamrag stream --session --interval-ms 300 --text "What are the rules | for ladders | in the orchard?" --text "Specifically | overnight." --text "Okay." --text "Actually, ignore | the overnight restriction." --trace trace.jsonl
+.venv/bin/python experiments/runners/run_experiments.py --index-root /tmp/streamrag_idx --dataset streamrag_eval_v2 --results-dir runs/final_benchmark --experiments-file experiments/configs/final_benchmark.yaml --only HELDOUT_V2
 ```
 
-- `--session` turns on multi-intent mode plus the adaptive session (`session.enabled`).
-- It prints context changes, delta plans, query reuse, evidence and claim transitions, answer versions with diffs, and a per-turn summary. `replay` detects session traces and replays them exactly.
-- The synchronous drivers for experiments are `streamrag.session.AdaptivePipeline` and `FullRestartPipeline`.
-
-Dev-suite benchmarks (fixture domain; NOT official results):
+Then rebuild the tables from the stored results:
 
 ```bash
-.venv/bin/python research/phase4/run_streaming_benchmarks.py --index-root /tmp/idx
+.venv/bin/python experiments/runners/final_tables.py
 ```
 
-```bash
-.venv/bin/python research/phase5/run_multi_intent_benchmarks.py --index-root /tmp/idx5
-```
+**Headline results** (held-out v2; p50 latency on one laptop with a local 4B model):
 
-```bash
-.venv/bin/python research/phase6/run_adaptive_benchmarks.py --index-root /tmp/idx6 --reps 7
-```
+| | full system | naive RAG | hybrid + rerank | same pipeline, batch |
+|---|---|---|---|---|
+| time to first evidence | **0.26 s** | n/a (after end) | n/a | 0.77 s |
+| time to first answer content | **0.27 s** | n/a | n/a | 2.48 s |
+| verified answer, after the user stops | 1.64 s | **1.41 s** | 1.49 s | 1.66 s |
+| stale values asserted | **0 / 13** | 3 / 13 | 2 / 13 | 0 / 13 |
+| hallucinated-value claim rate | **0.000** | 0.070 | 0.062 | 0.000 |
+| evidence precision | **0.55** | 0.25 | 0.24 | 0.55 |
+| answer correctness | 0.72 | 0.76 | **0.80** | 0.73 |
+| Recall@5 | 0.88 | **0.99** | 0.96 | 0.94 |
 
-```bash
-.venv/bin/python research/phase7/run_grounded_benchmarks.py --index-root /tmp/idx7
-```
+Answer correctness differences are **not significant**. The full system is not more accurate than the baselines; its
+gains are early evidence, no stale or hallucinated values, and precise, verified citations. Weaknesses are listed in
+`LIMITATIONS.md`.
 
-```bash
-.venv/bin/python research/phase7/e2e_streaming.py --index-root /tmp/idx7
-```
+## Configuration
 
-```bash
-.venv/bin/python research/phase7/label_agreement.py
-```
+* **Configuration layers.** The frozen pipeline is `configs/default.yaml` + `configs/profiles/final.yaml`.
+  * Environment variables (`STREAMRAG_*`, see `.env.example`) override the profile.
+  * `--set key=value` overrides everything.
+* **No secrets.** The system needs no API keys.
+* **The only network call** goes to the LLM endpoint. It must be loopback unless allowlisted in
+  `STREAMRAG_ALLOWED_LLM_HOSTS`.
+* **Your own corpus.** Point `STREAMRAG_CORPUS` (or `--corpus`) at a directory of `.md`, `.txt` or `.pdf` files. The
+  index is built at start-up.
 
-```bash
-.venv/bin/python research/phase7/report_tables.py
-```
+| variable | default | purpose |
+|---|---|---|
+| `STREAMRAG_HOST` / `STREAMRAG_PORT` | `127.0.0.1` / `8080` | server bind address |
+| `STREAMRAG_CORPUS` | `demo/corpus` (serve) | corpus directory |
+| `STREAMRAG_LLM_BACKEND` | `auto` | `auto` (LLM if reachable), `ollama`, `extractive` |
+| `STREAMRAG_LLM_URL` / `STREAMRAG_LLM_MODEL` | `http://127.0.0.1:11434` / `qwen3:4b` | local LLM |
+| `STREAMRAG_ALLOWED_LLM_HOSTS` | empty | non-loopback LLM hosts allowed (comma-separated) |
+| `STREAMRAG_LOG_LEVEL` | `INFO` | structured JSON logs on stderr; no transcript or answer text |
 
-## Trying it on the test fixture
+## HTTP API
 
-```bash
-.venv/bin/streamrag build-index --corpus tests/fixtures/corpus
-```
-
-```bash
-.venv/bin/streamrag search "how high are wicks trimmed" --corpus tests/fixtures/corpus
-```
-
-Any fixture-based index or benchmark is labeled `TEST FIXTURE … NOT A BENCHMARK RESULT`.
+| method and path | purpose |
+|---|---|
+| `GET /health` | liveness |
+| `GET /ready` | readiness: index, models and LLM state; `degraded: true` without the LLM |
+| `GET /api/info`, `GET /api/scenarios` | pipeline info and demo scenarios |
+| `POST /api/sessions` | start a session |
+| `POST /api/sessions/{id}/chunks` | push transcript chunks (with revisions) |
+| `POST /api/sessions/{id}/end` | end the utterance |
+| `POST /api/sessions/{id}/scenario` | run a demo scenario |
+| `GET /api/sessions/{id}/events` | Server-Sent Events: stages, plans, evidence, changes, draft and final answers, metrics |
+| `DELETE /api/sessions/{id}` | close a session |
+| `GET /api/sources/{citation}` | the section text behind a citation |
 
 ## Tests
 
@@ -221,59 +209,30 @@ Any fixture-based index or benchmark is labeled `TEST FIXTURE … NOT A BENCHMAR
 
 Tests that need the downloaded models skip automatically if `./models` is absent.
 
-## Layout
+## Repository layout
 
 ```
-configs/           default.yaml (all tunables), models.yaml (pinned model registry)
-src/streamrag/
-  config/          typed config loading + hashes
-  models/          data contracts (pydantic) -> docs/schemas/*.schema.json
-  corpus/          source, loaders, normalization, sections, IDs, chunker, manifest
-  retrieval/       analyzer, BM25, embedders (ONNX), dense index, RRF, dedup, rerank, index store, service API
-  bench/           evaluation datasets, metrics, retrieval + streaming harnesses
-  streaming/       chunk manager, simulator, schedulers, async executor, session, metrics, CLI printer
-  controller/      act classifier, signals, query builder, WAIT/RETRIEVE/SKIP policies (+ ablation baselines)
-  ledger/          query versions, lineage, stale evidence
-  replay/          deterministic trace replay
-  intents/         intent decomposition, tracker (versions/deltas), per-intent queries, validation, optional LLM check
-  multi_retrieval/ per-intent retrieval (sequential/parallel/batched) + streaming multi-intent coordinator
-  fusion/          cross-intent dedup, fusion strategies, intent-aware rerank, conflicts -> UnifiedEvidenceSet
-  session/         Phase 6: session memory (4 layers, versions, snapshot/restore/reset/archive), adaptive engine,
-                   synchronous incremental + full-restart pipelines, PII redaction
-  context/         change detection + taxonomy, topic frames, late-detail gate, relevant-context selection/compression
-  delta/           delta planner, delta queries, semantic cache, evidence store + lifecycle rules
-  claims/          extractive claims, claim-evidence graph, targeted revalidation (Phase 6); claim planning,
-                   decomposition, entailment alignment and verification (Phase 7)
-  answers/         versioned, sectioned answer state, answer diffs, minimal-regeneration markers
-  generation/      Phase 7: LLM gateway (local Ollama, scripted, recorded), prompts, answer planner, generators,
-                   claim extraction from generated output
-  citations/       citation model, mapping from verification to the supporting span, validation, orphans
-  validation/      unsupported-claim policy, repair, coverage, consistency, grounding metrics
-  answer_state/    grounded answer engine (plan -> generate -> verify -> repair -> cite -> validate), renderer
-  runtime/         Phase 8: StreamingRuntime - event bus, task scheduler, worker pools, cancellation, timeouts,
-                   retries, backpressure, state coordinator, answer lane, streamer, replay, fault injection
-  adaptive/        Phase 9: query analysis, rewriting, claim requirements, sufficiency gate, routing policy,
-                   stopping, caches, adaptive retrieval controller, session / runtime integration
-  telemetry/       structured logging, JSONL event sink, timing
-  tools/           build-time model download (the only network code)
-tests/             unit/integration tests; tests/fixtures = TEST FIXTURES only
-research/          phase1–9 measurements and reports
-docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
+src/streamrag/     the system (27 subpackages); server/ = HTTP API + demo UI; cli.py = `streamrag`
+configs/           default.yaml, profiles/final.yaml (frozen pipeline), lexicons, models.yaml (pinned models)
+demo/              demo corpus (fictional) and scenarios
+experiments/       evaluation package: datasets (v1, v2 frozen), configs, runners, Phase 10 results
+FINAL_BENCHMARK_RESULTS/  Phase 11 final benchmark, regression, robustness, demo check, resources
+research/          research write-up (problem … conclusion) and per-phase benchmark scripts (phase1–9)
+docs/              architecture, ADRs, component docs, deployment, security, evaluation, CLI reference
+tests/             tests; tests/fixtures = TEST FIXTURES only
 ```
 
-## Key documents
+## Documents
 
-| Document | Contents |
+| document | contents |
 |---|---|
-| `PHASE_7_GROUNDED_GENERATION_REPORT.md` | Phase 7: grounded generation, claim verification, citations; benchmark, ablations, hallucination tests |
-| `PHASE_9_ADAPTIVE_RETRIEVAL_REPORT.md` | Phase 9: adaptive retrieval - routing, claim-driven sufficiency, iterative / multi-hop / contradiction-aware retrieval, caches; baselines, ablations, hypotheses H1-H5, latency, operation counts |
-| `PHASE_8_STREAMING_RUNTIME_REPORT.md` | Phase 8: streaming runtime - concurrency, cancellation, backpressure, race protection, degraded modes, replay; concurrency / cancellation / backpressure / failure / load benchmarks |
-| `PHASE_6_ADAPTIVE_RAG_REPORT.md` | Phase 6: adaptive session RAG; dev-suite, stress-set, full-restart, ablation and scaling results |
-| `PHASE_5_MULTI_INTENT_REPORT.md` | Phase 5: multi-intent decomposition, delta retrieval, fusion; dev-suite results |
-| `PHASE_4_STREAMING_REPORT.md` | Phase 4: streaming engine, controller, ledger; dev-suite results |
-| `PHASE_3_RETRIEVAL_REPORT.md` | Phase 3: what was built, what was measured, what is blocked |
-| `PHASE_2_SYSTEM_SPECIFICATION.md` | Full system specification |
-| `PHASE_1_RESEARCH_DOSSIER.md` | Research dossier |
-| `docs/retrieval/`, `docs/streaming/`, `docs/multi_intent/`, `docs/session/`, `docs/answer/` | Component docs (Phases 3–7) |
-| `docs/decisions/` | ADRs |
-| `research/phase3/` | Chunking, embedding, profiling and comparison reports |
+| `FINAL_SOLUTION.md` | the solution in one sentence, three sentences, 30 s, 2 min and 5 min |
+| `FINAL_PROBLEM_STATEMENT.md`, `NOVELTY.md`, `LIMITATIONS.md` | problem, what is new (and what is not), weaknesses |
+| `FINAL_TECHNICAL_EXPLANATION.md` | how every stage works, with module pointers |
+| `FINAL_BENCHMARK_RESULTS/README.md` | final benchmark, regression, ablations, robustness, demo check |
+| `FINAL_RESEARCH_CONCLUSION.md`, `research/` | research questions, findings, conclusion |
+| `DEMO_SCRIPT.md`, `JUDGE_QA.md`, `FINAL_PRESENTATION.md` | demo, judge questions, 18-slide deck |
+| `HACKATHON_FINAL_CHECKLIST.md`, `FINAL_PROJECT_AUDIT.md` | submission checklist and audit |
+| `docs/architecture/14_final_architecture.md` | frozen architecture and diagrams |
+| `docs/deployment/`, `docs/security/`, `docs/memory/`, `docs/cli_reference.md` | deployment, security and privacy, session memory, component CLI |
+| `PHASE_1_RESEARCH_DOSSIER.md` … `PHASE_10_EVALUATION_REPORT.md` | per-phase research, specification and reports |

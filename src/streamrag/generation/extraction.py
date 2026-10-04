@@ -6,6 +6,8 @@ packs several sentences is split; its facts and labels apply to each part). Per 
 
 * inline markers the model wrote into the text ("... per shift. (E1)") are removed from the claim and treated as
   cited labels (a marker is a citation, never part of the statement)
+* codes / acronyms the model mangled only in punctuation or case ("IEL:TS") get the spelling of the planned facts
+  ("IELTS"; Phase 11, ``textcheck.canonical_codes``) - letters and digits never change
 * kind: ``connective`` when it has no content term and <= 4 words ("In addition:"), else ``fact``
 * facts: the planned-fact ids it lists that exist in its section (unknown ids are dropped and recorded)
 * cited evidence: the evidence of its valid labels plus the evidence of its valid facts; unknown labels are
@@ -25,7 +27,7 @@ from pydantic import Field
 
 from streamrag.claims.graph import sentences
 from streamrag.claims.models import Importance
-from streamrag.claims.textcheck import strip_markers
+from streamrag.claims.textcheck import canonical_codes, strip_markers
 from streamrag.generation.models import AnswerPlan, CandidateAnswer
 from streamrag.models.base import Contract
 from streamrag.validation.policy import material
@@ -54,8 +56,10 @@ class GeneratedClaimExtractor:
 
     def extract(self, cand: CandidateAnswer, plan: AnswerPlan) -> list[ExtractedClaim]:
         out = []
+        reference = [f.text for ps in plan.sections for f in ps.facts]
         for n, s in enumerate(cand.sentences):
             text, markers = strip_markers(s.text)
+            text = canonical_codes(text, reference)
             parts = [text[a:b] for a, b in sentences(text)] or ([text] if text else [])
             for k, part in enumerate(parts):
                 key = f"{s.section_id}#{n}" + (f".{k}" if len(parts) > 1 else "")

@@ -116,3 +116,41 @@ def strip_markers(text: str) -> tuple[str, list[str]]:
 def negated(text: str) -> bool:
     low = text.lower()
     return bool(NEGATION & set(_TOK.findall(low))) or "n't" in low
+
+
+# codes, acronyms and identifiers ("IELTS", "UT-200", "ISO-7"); "-", ":" and "/" join the parts of one token
+_CODE = re.compile(r"(?<![\w:/-])[A-Za-z0-9]+(?:[-:/][A-Za-z0-9]+)*(?![\w])")
+_ORDINAL = re.compile(r"\d+(st|nd|rd|th)", re.I)
+
+
+def _is_code(tok: str) -> bool:
+    letters = sum(c.isalpha() for c in tok)
+    if _ORDINAL.fullmatch(tok):
+        return False
+    return (sum(c.isupper() for c in tok) >= 2 and letters >= 2) or (letters > 0 and any(c.isdigit() for c in tok))
+
+
+def _skeleton(tok: str) -> str:
+    return re.sub(r"[^0-9a-z]", "", tok.lower())
+
+
+def canonical_codes(text: str, reference: list[str]) -> str:
+    """Rewrite a code / acronym of generated text to its spelling in the reference (evidence) text when the two differ
+    only in punctuation ("IEL:TS" -> "IELTS", "UT200" -> "UT-200"). The letters and digits never change, so the
+    statement is the same; anything else (an unknown or different code) is left for verification to judge."""
+    spell: dict[str, str] = {}
+    for r in reference:
+        for m in _CODE.finditer(r):
+            if _is_code(m.group(0)):
+                spell.setdefault(_skeleton(m.group(0)), m.group(0))
+    if not spell:
+        return text
+    known = {v.lower() for v in spell.values()}
+
+    def fix(m: re.Match) -> str:
+        tok = m.group(0)
+        if not _is_code(tok) or tok.lower() in known:
+            return tok
+        return spell.get(_skeleton(tok), tok)
+
+    return _CODE.sub(fix, text)

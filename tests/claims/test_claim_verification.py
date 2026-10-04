@@ -9,7 +9,8 @@ from streamrag.claims.aligner import ClaimEvidenceAligner
 from streamrag.claims.decomposer import ClaimDecomposer, ClaimLexicon
 from streamrag.claims.graph import sentences
 from streamrag.claims.nli import NliModel
-from streamrag.claims.textcheck import counts_noun, has_value_of, instruction_like, numbers, strip_markers
+from streamrag.claims.textcheck import (canonical_codes, counts_noun, has_value_of, instruction_like, numbers,
+                                        strip_markers)
 from streamrag.claims.verifier import ClaimVerifier
 
 
@@ -89,6 +90,17 @@ def test_text_checks():
     assert not counts_noun("Permits must be renewed every 2 years.", {"renewal"}, terms)
     text = "Wicks are trimmed to 4.5 mm. The lens is polished."
     assert [text[a:b] for a, b in sentences(text)] == ["Wicks are trimmed to 4.5 mm.", "The lens is polished."]
+
+
+
+def test_mangled_codes_get_the_evidence_spelling():
+    # Phase 11: qwen3:4b wrote "IEL:TS" for "IELTS" (demo scenario B); only punctuation / case may change
+    ref = ["International students need an IELTS score of at least 6.5.", "Use Form UT-200 to apply."]
+    assert canonical_codes("an IEL:TS score of 6.5 and form ut-200", ref) == "an IELTS score of 6.5 and form ut-200"
+    assert canonical_codes("Use Form UT200 or UT-201.", ref) == "Use Form UT-200 or UT-201."   # 201: different code
+    assert canonical_codes("The TOEFL score is 90.", ref) == "The TOEFL score is 90."           # unknown code kept
+    assert canonical_codes("Apply on the 1st at 9:00.", ref) == "Apply on the 1st at 9:00."     # not codes
+    assert canonical_codes("an IEL:TS score", []) == "an IEL:TS score"
 
 
 def test_value_questions(lx):

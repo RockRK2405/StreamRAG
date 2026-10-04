@@ -1,0 +1,230 @@
+{
+  "full_system": [
+    {
+      "metric": "retrieval.recall@5",
+      "baseline": 0.9085,
+      "current": 0.9329,
+      "delta": 0.0244,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "retrieval.mrr",
+      "baseline": 0.8913,
+      "current": 0.9157,
+      "delta": 0.0244,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "evidence.evidence_precision",
+      "baseline": 0.6688,
+      "current": 0.7161,
+      "delta": 0.0473,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "generation.answer_correct",
+      "baseline": 0.7297,
+      "current": 0.7973,
+      "delta": 0.0676,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "generation.completeness",
+      "baseline": 0.8041,
+      "current": 0.8311,
+      "delta": 0.027,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "generation.forbidden_hit",
+      "baseline": 0.2308,
+      "current": 0.0,
+      "delta": -0.2308,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "claims.claim_support_rate",
+      "baseline": 1.0,
+      "current": 1.0,
+      "delta": 0.0,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "hallucination.hallucinated_claim_rate",
+      "baseline": 0.0144,
+      "current": 0.01,
+      "delta": -0.0044,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "citation.citation_precision",
+      "baseline": 1.0,
+      "current": 1.0,
+      "delta": 0.0,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "latency.ttva_after_end",
+      "baseline": 2052.264,
+      "current": 1743.622,
+      "delta": -308.642,
+      "tolerance": 513.066,
+      "status": "ok"
+    },
+    {
+      "metric": "latency.ttva_after_end.p95",
+      "baseline": 4833.228,
+      "current": 3530.515,
+      "delta": -1302.713,
+      "tolerance": 1208.307,
+      "status": "improvement"
+    },
+    {
+      "metric": "efficiency.retrieval_calls",
+      "baseline": 1.3908,
+      "current": 1.4138,
+      "delta": 0.023,
+      "tolerance": 0.0,
+      "status": "regression"
+    },
+    {
+      "metric": "efficiency.llm_calls",
+      "baseline": 1.2759,
+      "current": 1.2529,
+      "delta": -0.023,
+      "tolerance": 0.0,
+      "status": "improvement"
+    },
+    {
+      "metric": "failure_rate",
+      "baseline": 0.0,
+      "current": 0.0,
+      "delta": 0.0,
+      "tolerance": 0.0,
+      "status": "ok"
+    }
+  ],
+  "adaptive_rag": [
+    {
+      "metric": "retrieval.recall@5",
+      "baseline": 0.9146,
+      "current": 0.939,
+      "delta": 0.0244,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "retrieval.mrr",
+      "baseline": 0.9004,
+      "current": 0.9248,
+      "delta": 0.0244,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "evidence.evidence_precision",
+      "baseline": 0.6981,
+      "current": 0.7098,
+      "delta": 0.0117,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "generation.answer_correct",
+      "baseline": 0.7973,
+      "current": 0.8243,
+      "delta": 0.027,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "generation.completeness",
+      "baseline": 0.8243,
+      "current": 0.8514,
+      "delta": 0.0271,
+      "tolerance": 0.025,
+      "status": "improvement"
+    },
+    {
+      "metric": "generation.forbidden_hit",
+      "baseline": 0.0,
+      "current": 0.0,
+      "delta": 0.0,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "claims.claim_support_rate",
+      "baseline": 1.0,
+      "current": 1.0,
+      "delta": 0.0,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "hallucination.hallucinated_claim_rate",
+      "baseline": 0.0123,
+      "current": 0.008,
+      "delta": -0.0043,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "citation.citation_precision",
+      "baseline": 1.0,
+      "current": 1.0,
+      "delta": 0.0,
+      "tolerance": 0.025,
+      "status": "ok"
+    },
+    {
+      "metric": "latency.ttva_after_end",
+      "baseline": 2137.883,
+      "current": 1733.701,
+      "delta": -404.182,
+      "tolerance": 534.47075,
+      "status": "ok"
+    },
+    {
+      "metric": "latency.ttva_after_end.p95",
+      "baseline": 5762.764,
+      "current": 4089.736,
+      "delta": -1673.028,
+      "tolerance": 1440.691,
+      "status": "improvement"
+    },
+    {
+      "metric": "efficiency.retrieval_calls",
+      "baseline": 1.1149,
+      "current": 1.1379,
+      "delta": 0.023,
+      "tolerance": 0.0,
+      "status": "regression"
+    },
+    {
+      "metric": "efficiency.llm_calls",
+      "baseline": 1.2874,
+      "current": 1.2759,
+      "delta": -0.0115,
+      "tolerance": 0.0,
+      "status": "improvement"
+    },
+    {
+      "metric": "failure_rate",
+      "baseline": 0.0,
+      "current": 0.0,
+      "delta": 0.0,
+      "tolerance": 0.0,
+      "status": "ok"
+    }
+  ]
+}

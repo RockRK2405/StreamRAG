@@ -1,0 +1,895 @@
+{
+  "heldout_v2": {
+    "naive_rag": {
+      "Recall@5": 0.9935,
+      "MRR": 0.845,
+      "evidence precision": 0.2468,
+      "answer correct": 0.7606,
+      "forbidden (stale) value asserted": 0.2308,
+      "insufficiency handled": 0.5,
+      "claim support (verifier)": 0.8345,
+      "hallucinated claim rate": 0.0696,
+      "citation precision (verifier)": 0.8232,
+      "retrieval calls / turn": 1.0,
+      "embeddings / turn": 1.0,
+      "LLM calls / turn": 1.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 1411.0,
+      "ttva_after_end_p95": 3190.7,
+      "failed": 0,
+      "turns": 81
+    },
+    "hybrid_rag": {
+      "Recall@5": 0.974,
+      "MRR": 0.8532,
+      "evidence precision": 0.2442,
+      "answer correct": 0.7465,
+      "forbidden (stale) value asserted": 0.3077,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 0.7902,
+      "hallucinated claim rate": 0.0931,
+      "citation precision (verifier)": 0.7947,
+      "retrieval calls / turn": 1.0,
+      "embeddings / turn": 1.0,
+      "LLM calls / turn": 1.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 1439.7,
+      "ttva_after_end_p95": 3850.6,
+      "failed": 0,
+      "turns": 81
+    },
+    "hybrid_rerank": {
+      "Recall@5": 0.961,
+      "MRR": 0.8835,
+      "evidence precision": 0.2416,
+      "answer correct": 0.8028,
+      "forbidden (stale) value asserted": 0.1538,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 0.8246,
+      "hallucinated claim rate": 0.0618,
+      "citation precision (verifier)": 0.8293,
+      "retrieval calls / turn": 1.0,
+      "embeddings / turn": 1.0,
+      "LLM calls / turn": 1.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 1488.7,
+      "ttva_after_end_p95": 4198.0,
+      "failed": 0,
+      "turns": 81
+    },
+    "streaming_fixed": {
+      "Recall@5": 0.9805,
+      "MRR": 0.8777,
+      "evidence precision": 0.2417,
+      "answer correct": 0.6197,
+      "forbidden (stale) value asserted": 0.5385,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.7654,
+      "embeddings / turn": 1.7654,
+      "LLM calls / turn": 1.3704,
+      "ttfe_p50": 255.9,
+      "ttfa_p50": 285.2,
+      "ttva_after_end_p50": 2275.2,
+      "ttva_after_end_p95": 3874.1,
+      "failed": 0,
+      "turns": 81
+    },
+    "adaptive_rag": {
+      "Recall@5": 0.9351,
+      "MRR": 0.9004,
+      "evidence precision": 0.551,
+      "answer correct": 0.7324,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.3457,
+      "embeddings / turn": 0.8272,
+      "LLM calls / turn": 1.284,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 1693.4,
+      "ttva_after_end_p95": 4188.7,
+      "failed": 0,
+      "turns": 81
+    },
+    "full_system": {
+      "Recall@5": 0.8831,
+      "MRR": 0.8615,
+      "evidence precision": 0.5523,
+      "answer correct": 0.7183,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.8642,
+      "embeddings / turn": 1.0617,
+      "LLM calls / turn": 1.2716,
+      "ttfe_p50": 263.7,
+      "ttfa_p50": 270.7,
+      "ttva_after_end_p50": 1642.5,
+      "ttva_after_end_p95": 3988.8,
+      "failed": 0,
+      "turns": 81
+    },
+    "full_system_batch": {
+      "Recall@5": 0.9351,
+      "MRR": 0.9004,
+      "evidence precision": 0.5512,
+      "answer correct": 0.7324,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.3457,
+      "embeddings / turn": 0.8272,
+      "LLM calls / turn": 1.284,
+      "ttfe_p50": 767.3,
+      "ttfa_p50": 2477.5,
+      "ttva_after_end_p50": 1659.0,
+      "ttva_after_end_p95": 3826.7,
+      "failed": 0,
+      "turns": 81
+    },
+    "full_system_answerability": {
+      "Recall@5": 0.8831,
+      "MRR": 0.8615,
+      "evidence precision": 0.5523,
+      "answer correct": 0.662,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.5,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.8642,
+      "embeddings / turn": 1.0617,
+      "LLM calls / turn": 1.3951,
+      "ttfe_p50": 263.7,
+      "ttfa_p50": 270.8,
+      "ttva_after_end_p50": 1648.0,
+      "ttva_after_end_p95": 3613.9,
+      "failed": 0,
+      "turns": 81
+    },
+    "topk_5": {
+      "Recall@5": 0.9805,
+      "MRR": 0.8788,
+      "evidence precision": 0.2405,
+      "answer correct": 0.662,
+      "forbidden (stale) value asserted": 0.5385,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.0617,
+      "embeddings / turn": 1.0617,
+      "LLM calls / turn": 0.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 15.7,
+      "ttva_after_end_p95": 27.8,
+      "failed": 0,
+      "turns": 81
+    },
+    "adaptive_x": {
+      "Recall@5": 0.9351,
+      "MRR": 0.9004,
+      "evidence precision": 0.551,
+      "answer correct": 0.7183,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.3457,
+      "embeddings / turn": 0.8272,
+      "LLM calls / turn": 0.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 11.7,
+      "ttva_after_end_p95": 33.2,
+      "failed": 0,
+      "turns": 81
+    },
+    "cache_none": {
+      "Recall@5": 0.9351,
+      "MRR": 0.9069,
+      "evidence precision": 0.5488,
+      "answer correct": 0.7183,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.4198,
+      "embeddings / turn": 0.8519,
+      "LLM calls / turn": 0.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 12.0,
+      "ttva_after_end_p95": 30.9,
+      "failed": 0,
+      "turns": 81
+    },
+    "delta_full_restart": {
+      "Recall@5": 0.9351,
+      "MRR": 0.9069,
+      "evidence precision": 0.5488,
+      "answer correct": 0.7183,
+      "forbidden (stale) value asserted": 0.0,
+      "insufficiency handled": 0.25,
+      "claim support (verifier)": 1.0,
+      "hallucinated claim rate": 0.0,
+      "citation precision (verifier)": 1.0,
+      "retrieval calls / turn": 1.4938,
+      "embeddings / turn": 0.8642,
+      "LLM calls / turn": 0.0,
+      "ttfe_p50": null,
+      "ttfa_p50": null,
+      "ttva_after_end_p50": 18.6,
+      "ttva_after_end_p95": 39.8,
+      "failed": 0,
+      "turns": 81
+    }
+  },
+  "error_categories_full_system": {
+    "RETRIEVAL_FAILURE": 6,
+    "GENERATION_FAILURE": 17,
+    "QUERY_ANALYSIS_FAILURE": 13,
+    "EVIDENCE_FAILURE": 2,
+    "ENTITY_FAILURE": 4,
+    "MEMORY_FAILURE": 2
+  },
+  "cancellation_v2": {
+    "cancel_off": {
+      "total_worker_ms": 21755.1,
+      "wasted_ms": 171.2,
+      "useful_ms": 21583.9,
+      "wasted_gen_ms": 0,
+      "llm_calls": 15,
+      "cancelled_tasks": 0,
+      "stale_discarded": 0,
+      "final_turns": 9,
+      "final_ac": 0.5555555555555556,
+      "final_ttva_p50": 1655.9,
+      "final_ttva_max": 2817.861,
+      "superseded": 5,
+      "superseded_answered": 5
+    },
+    "cancel_on": {
+      "total_worker_ms": 15972.3,
+      "wasted_ms": 3149.6,
+      "useful_ms": 12822.7,
+      "wasted_gen_ms": 2982.9,
+      "llm_calls": 9,
+      "cancelled_tasks": 5,
+      "stale_discarded": 0,
+      "final_turns": 9,
+      "final_ac": 0.5555555555555556,
+      "final_ttva_p50": 1508.6,
+      "final_ttva_max": 2165.108,
+      "superseded": 5,
+      "superseded_answered": 0
+    }
+  },
+  "gates_v2": {
+    "G2": {
+      "eligible": 77,
+      "early": 76,
+      "early_rate": 0.987012987012987,
+      "early_final_reused": 39
+    },
+    "G3": {
+      "intent_count_match": 4,
+      "n": 4,
+      "answer_correct": 1.0
+    },
+    "G4": {
+      "claim_support": 1.0,
+      "unresolvable_citations": 0,
+      "citations": 173
+    },
+    "G5": {
+      "runtime": 0.6111111111111112,
+      "batch": 0.7222222222222222,
+      "n": 18
+    },
+    "G6": {
+      "event_completeness": 1.0,
+      "events": 10562,
+      "utterances_completed": 81,
+      "utterances": 81
+    }
+  },
+  "regression_v1": {
+    "full_system": {
+      "retrieval.recall@5": [
+        0.9085,
+        0.9329,
+        "ok"
+      ],
+      "retrieval.mrr": [
+        0.8913,
+        0.9157,
+        "ok"
+      ],
+      "evidence.evidence_precision": [
+        0.6688,
+        0.7161,
+        "improvement"
+      ],
+      "generation.answer_correct": [
+        0.7297,
+        0.7973,
+        "improvement"
+      ],
+      "generation.completeness": [
+        0.8041,
+        0.8311,
+        "improvement"
+      ],
+      "generation.forbidden_hit": [
+        0.2308,
+        0.0,
+        "improvement"
+      ],
+      "claims.claim_support_rate": [
+        1.0,
+        1.0,
+        "ok"
+      ],
+      "hallucination.hallucinated_claim_rate": [
+        0.0144,
+        0.01,
+        "ok"
+      ],
+      "citation.citation_precision": [
+        1.0,
+        1.0,
+        "ok"
+      ],
+      "latency.ttva_after_end": [
+        2052.264,
+        1743.622,
+        "ok"
+      ],
+      "latency.ttva_after_end.p95": [
+        4833.228,
+        3530.515,
+        "improvement"
+      ],
+      "efficiency.retrieval_calls": [
+        1.3908,
+        1.4138,
+        "regression"
+      ],
+      "efficiency.llm_calls": [
+        1.2759,
+        1.2529,
+        "improvement"
+      ],
+      "failure_rate": [
+        0.0,
+        0.0,
+        "ok"
+      ]
+    },
+    "adaptive_rag": {
+      "retrieval.recall@5": [
+        0.9146,
+        0.939,
+        "ok"
+      ],
+      "retrieval.mrr": [
+        0.9004,
+        0.9248,
+        "ok"
+      ],
+      "evidence.evidence_precision": [
+        0.6981,
+        0.7098,
+        "ok"
+      ],
+      "generation.answer_correct": [
+        0.7973,
+        0.8243,
+        "improvement"
+      ],
+      "generation.completeness": [
+        0.8243,
+        0.8514,
+        "improvement"
+      ],
+      "generation.forbidden_hit": [
+        0.0,
+        0.0,
+        "ok"
+      ],
+      "claims.claim_support_rate": [
+        1.0,
+        1.0,
+        "ok"
+      ],
+      "hallucination.hallucinated_claim_rate": [
+        0.0123,
+        0.008,
+        "ok"
+      ],
+      "citation.citation_precision": [
+        1.0,
+        1.0,
+        "ok"
+      ],
+      "latency.ttva_after_end": [
+        2137.883,
+        1733.701,
+        "ok"
+      ],
+      "latency.ttva_after_end.p95": [
+        5762.764,
+        4089.736,
+        "improvement"
+      ],
+      "efficiency.retrieval_calls": [
+        1.1149,
+        1.1379,
+        "regression"
+      ],
+      "efficiency.llm_calls": [
+        1.2874,
+        1.2759,
+        "improvement"
+      ],
+      "failure_rate": [
+        0.0,
+        0.0,
+        "ok"
+      ]
+    }
+  },
+  "robustness": {
+    "retrieval_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "vector_db_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "network_transient": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "llm_timeout": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "llm_error": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "verifier_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "malformed_query": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "rapid_updates": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "propagation": {
+      "runs": 5,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": null,
+      "incorrect_answer_rate": null,
+      "failure_propagation_rate": 0.0
+    }
+  },
+  "resources": {
+    "meta": {
+      "note": "measured on this machine; process = the evaluation process (not the LLM server)"
+    },
+    "memory_peak_rss_mb": {
+      "python + imports": 38.4,
+      "+ index, BM25, bge-small embedder, NLI (stack)": 1020.4,
+      "+ cross-encoder reranker (second stack)": 1279.4,
+      "+ verification instrument": 1366.4
+    },
+    "cpu_per_call": {
+      "dense top-5": {
+        "n": 30,
+        "cpu_ms_median": 21.84,
+        "cpu_ms_p90": 27.3,
+        "wall_ms_median": 3.22,
+        "wall_ms_p90": 3.57
+      },
+      "hybrid top-5": {
+        "n": 30,
+        "cpu_ms_median": 24.66,
+        "cpu_ms_p90": 28.39,
+        "wall_ms_median": 3.56,
+        "wall_ms_p90": 3.81
+      },
+      "hybrid top-5 + rerank": {
+        "n": 30,
+        "cpu_ms_median": 261.56,
+        "cpu_ms_p90": 279.07,
+        "wall_ms_median": 28.99,
+        "wall_ms_p90": 31.25
+      },
+      "verify 1 claim vs 5 sections": {
+        "n": 30,
+        "cpu_ms_median": 76.63,
+        "cpu_ms_p90": 234.45,
+        "wall_ms_median": 19.32,
+        "wall_ms_p90": 57.7
+      }
+    },
+    "disk_mb": {
+      "index (transit)": 0.13,
+      "model all-minilm-l6-v2": 86.67,
+      "model all-minilm-l6-v2-qint8-arm64": 22.41,
+      "model bge-small-en-v1.5": 127.61,
+      "model ms-marco-minilm-l6-v2": 87.48,
+      "model ms-marco-minilm-l6-v2-qint8-arm64": 22.81,
+      "model nli-deberta-v3-xsmall": 279.29
+    },
+    "llm_server": {
+      "ollama_ps": "NAME        ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3:4b    359d7dd4bcda    3.9 GB    100% GPU     8192       4 minutes from now",
+      "process_rss_mb": {
+        "30645": 35.4
+      },
+      "runner_rss_mb": {}
+    },
+    "gpu_memory": "NOT MEASURED (no discrete GPU; Ollama uses Apple Metal unified memory, see ollama_ps)"
+  },
+  "demo_check": {
+    "passed": 10,
+    "total": 10,
+    "llm": {
+      "ok": true,
+      "backend": "ollama",
+      "model": "qwen3:4b",
+      "note": null
+    }
+  },
+  "demo_check_no_llm": {
+    "passed": 10,
+    "total": 10,
+    "llm": {
+      "ok": false,
+      "backend": "extractive",
+      "model": null,
+      "note": "extractive fallback answers (verified, no LLM)"
+    }
+  },
+  "stage_profile_v2": {
+    "controller: chunk received -> retrieve / wait / skip decision": [
+      241,
+      0.91,
+      1.28,
+      1.42
+    ],
+    "task execution: draft": [
+      95,
+      3.68,
+      12.48,
+      21.37
+    ],
+    "task execution: generation": [
+      81,
+      1636.98,
+      2970.4,
+      3964.72
+    ],
+    "task execution: retrieval": [
+      143,
+      9.47,
+      17.02,
+      20.25
+    ],
+    "queue wait: draft": [
+      95,
+      0.03,
+      0.04,
+      0.05
+    ],
+    "queue wait: generation": [
+      81,
+      0.04,
+      0.06,
+      0.07
+    ],
+    "queue wait: retrieval": [
+      143,
+      0.05,
+      0.07,
+      0.12
+    ],
+    "generation (extractive)": [
+      90,
+      0.03,
+      0.04,
+      0.04
+    ],
+    "generation (ollama)": [
+      78,
+      1491.4,
+      2276.75,
+      2974.38
+    ]
+  },
+  "environment": {
+    "python": {
+      "version": "3.12.0",
+      "implementation": "CPython",
+      "executable": "/Users/rudrakhale/Desktop/SamsungHackathon/.venv/bin/python"
+    },
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "onnxruntime": "1.30.0",
+      "tokenizers": "0.23.2",
+      "pydantic": "2.13.5",
+      "pyyaml": "6.0.3",
+      "snowballstemmer": "3.1.1",
+      "pypdf": "6.19.0",
+      "pytest": "9.1.1",
+      "huggingface-hub": "1.33.0"
+    },
+    "models": {
+      "all-minilm-l6-v2": {
+        "kind": "embedder",
+        "license": "Apache-2.0",
+        "name": "all-minilm-l6-v2",
+        "repo": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "weights_sha256": {
+          "onnx/model.onnx": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452"
+        }
+      },
+      "all-minilm-l6-v2-qint8-arm64": {
+        "kind": "embedder",
+        "license": "Apache-2.0",
+        "name": "all-minilm-l6-v2-qint8-arm64",
+        "repo": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "weights_sha256": {
+          "onnx/model_qint8_arm64.onnx": "4278337fd0ff3c68bfb6291042cad8ab363e1d9fbc43dcb499fe91c871902474"
+        }
+      },
+      "bge-small-en-v1.5": {
+        "kind": "embedder",
+        "license": "MIT",
+        "name": "bge-small-en-v1.5",
+        "repo": "BAAI/bge-small-en-v1.5",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "weights_sha256": {
+          "onnx/model.onnx": "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35"
+        }
+      },
+      "ms-marco-minilm-l6-v2": {
+        "kind": "reranker",
+        "license": "Apache-2.0",
+        "name": "ms-marco-minilm-l6-v2",
+        "repo": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "weights_sha256": {
+          "onnx/model.onnx": "5d3e70fd0c9ff14b9b5169a51e957b7a9c74897afd0a35ce4bd318150c1d4d4a"
+        }
+      },
+      "ms-marco-minilm-l6-v2-qint8-arm64": {
+        "kind": "reranker",
+        "license": "Apache-2.0",
+        "name": "ms-marco-minilm-l6-v2-qint8-arm64",
+        "repo": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "weights_sha256": {
+          "onnx/model_qint8_arm64.onnx": "3573b6b9593cb2f75987a31815d409ca3dd8808629118fd20451bb1a5d90cec7"
+        }
+      },
+      "nli-deberta-v3-xsmall": {
+        "kind": "nli",
+        "license": "Apache-2.0",
+        "name": "nli-deberta-v3-xsmall",
+        "repo": "cross-encoder/nli-deberta-v3-xsmall",
+        "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+        "weights_sha256": {
+          "onnx/model.onnx": "7105da41f625c42eca24e9465ec99150d02a80e644659d7a1daa93a6357155d4"
+        }
+      }
+    },
+    "llm": {
+      "name": "qwen3:4b",
+      "backend": "ollama (local)",
+      "url": "http://127.0.0.1:11434",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "modified_at": "2026-10-03T13:20:18.768567751+05:30",
+      "ollama_version": "0.35.1",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+    },
+    "database": "none - in-process BM25 (scipy sparse) and exact dense search (numpy) over the index files",
+    "hardware": {
+      "machine": "arm64",
+      "cpu": "Apple M5 Pro",
+      "cpu_count": 15,
+      "memory_bytes": "25769803776",
+      "model": "Mac17,9"
+    },
+    "os": {
+      "platform": "macOS-26.5.1-arm64-arm-64bit",
+      "release": "25.5.0"
+    },
+    "configuration": {
+      "file": "configs/default.yaml",
+      "config_hash": "923956a8d55351167242446771fa6d6f545b1a1cd8239f7af0bca897ad8fe28e",
+      "final_profile": "configs/profiles/final.yaml",
+      "final_config_hash": "9c54adb19e36adbf6a48b6f162073991af979fe286a81f78cb2f0bdf9d283a8d",
+      "experiments": "experiments/configs/{systems,experiments,final_benchmark}.yaml"
+    },
+    "git": {
+      "commit": "d130ad0136b0b3d23ec363c45a0c0769450b8dbd",
+      "dirty": true
+    },
+    "dataset": {
+      "streamrag_eval_v1": {
+        "version": "streamrag_eval_v1",
+        "files": {
+          "test": {
+            "path": "test.jsonl",
+            "sha256_16": "18e51582e184efd2",
+            "samples": 87,
+            "sessions": 70,
+            "by_type": {
+              "AMBIGUOUS": 5,
+              "CONTEXTUAL_FOLLOWUP": 5,
+              "CONTRADICTORY": 5,
+              "ENTITY_CORRECTION": 5,
+              "EXACT_TERM": 6,
+              "INSUFFICIENT_EVIDENCE": 5,
+              "MULTI_CONSTRAINT": 8,
+              "MULTI_HOP": 7,
+              "MULTI_INTENT": 5,
+              "REPEATED_QUERY": 5,
+              "SEMANTIC": 5,
+              "SIMPLE": 15,
+              "STREAMING_CORRECTION": 5,
+              "TEMPORAL": 6
+            },
+            "by_difficulty": {
+              "EASY": 27,
+              "HARD": 18,
+              "MEDIUM": 42
+            },
+            "by_corpus": {
+              "transit": 87
+            }
+          },
+          "dev": {
+            "path": "dev.jsonl",
+            "sha256_16": "17638ae166a734d5",
+            "samples": 129,
+            "sessions": 112,
+            "by_type": {
+              "AMBIGUOUS": 2,
+              "CONTEXTUAL_FOLLOWUP": 9,
+              "CONTRADICTORY": 8,
+              "ENTITY_CORRECTION": 2,
+              "EXACT_TERM": 7,
+              "INSUFFICIENT_EVIDENCE": 14,
+              "MULTI_CONSTRAINT": 8,
+              "MULTI_HOP": 5,
+              "MULTI_INTENT": 9,
+              "REPEATED_QUERY": 5,
+              "SEMANTIC": 7,
+              "SIMPLE": 46,
+              "TEMPORAL": 7
+            },
+            "by_difficulty": {
+              "EASY": 77,
+              "HARD": 6,
+              "MEDIUM": 46
+            },
+            "by_corpus": {
+              "adaptive": 83,
+              "conflict": 2,
+              "fixture": 27,
+              "grounding": 13,
+              "injection": 4
+            }
+          }
+        },
+        "construction": "experiments/datasets/build_dataset.py",
+        "labels": "implementer-written from the fixture corpus text; no independent annotation",
+        "test_corpus": "tests/fixtures/corpus_eval_transit (new in Phase 10; never used in development)",
+        "reportable": false
+      },
+      "streamrag_eval_v2": {
+        "version": "streamrag_eval_v2",
+        "files": {
+          "test": {
+            "path": "test.jsonl",
+            "sha256_16": "d318bf77d5dd40fc",
+            "samples": 81,
+            "sessions": 67,
+            "by_type": {
+              "AMBIGUOUS": 4,
+              "CONTEXTUAL_FOLLOWUP": 5,
+              "CONTRADICTORY": 4,
+              "ENTITY_CORRECTION": 5,
+              "EXACT_TERM": 7,
+              "INSUFFICIENT_EVIDENCE": 4,
+              "MULTI_CONSTRAINT": 8,
+              "MULTI_HOP": 7,
+              "MULTI_INTENT": 4,
+              "REPEATED_QUERY": 4,
+              "SEMANTIC": 5,
+              "SIMPLE": 15,
+              "STREAMING_CORRECTION": 4,
+              "TEMPORAL": 5
+            },
+            "by_difficulty": {
+              "EASY": 27,
+              "HARD": 21,
+              "MEDIUM": 33
+            },
+            "by_corpus": {
+              "utility": 81
+            }
+          }
+        },
+        "construction": "experiments/datasets/build_dataset_v2.py",
+        "labels": "implementer-written from the fixture corpus text; no independent annotation",
+        "test_corpus": "tests/fixtures/corpus_eval_utility (new in Phase 11; written and frozen before any Phase 11 system change; never used in development)",
+        "frozen": "2026-10-04, before Phase 11 fixes",
+        "reportable": false
+      }
+    },
+    "docker": "Docker version 29.8.1, build 4a63305"
+  }
+}

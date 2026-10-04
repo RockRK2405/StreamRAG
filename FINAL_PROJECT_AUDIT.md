@@ -89,5 +89,24 @@ The protocol for system changes: the Phase 10 test split was looked at during Ph
 longer blind. A **new held-out set (`streamrag_eval_v2`, new domain) is written and frozen before any system change**.
 Fixes are developed on the dev split plus the Phase 10 test split, and evaluated once on v2.
 
-The outcome of every item is recorded in `FINAL_BENCHMARK_RESULTS/README.md` and in the final report section of the
-README.
+Outcome of every audit item. The numbers are in `FINAL_BENCHMARK_RESULTS/README.md`.
+
+| # | gap | resolution | measured outcome |
+|---|---|---|---|
+| G1 | LLM timeout never falls back | `runtime/answers.py`: the extractive redo gets its own deadline | robustness `llm_timeout`: recovery 10 / 10 (Phase 10: 0 / 10) |
+| G2 | "Which documents do…" labelled meta-conversation | `controller/acts.py`: META only without corpus-anchored words outside the meta phrase | regression test; all 6 v2 "which form…" turns retrieve; demo scenario E ("Which documents do domestic applicants submit…") passes |
+| G3 | early commitment while streaming | `session/engine.py` (drop evidence only superseded partial queries found), `multi_retrieval/coordinator.py` (re-validate a need when its budget is spent) | v1 (development): stale values 3 / 13 → 0 / 13. v2 (held-out): 0 / 13; streaming vs batch gap net 1 turn |
+| G4 | no answerability check | LLM answerability flag implemented and measured; **off** by default | dev and v2: more correct abstentions (v2: 1 → 2 of 4) but lower correctness (v2: 0.718 → 0.662). Remains a limitation |
+| G5 | entity corrections keep the previous entity's claims | the G3 rules, plus the need re-validation | v1 turns fixed. v2 follow-up / correction turns are still weak (0.61 streaming vs 0.72 batch): `LIMITATIONS.md` §2 |
+| G6 | runtime delta ablation uninformative | measured instead with the extractive pipeline on v2 (`delta_full_restart`) | 1.49 vs 1.35 retrieval calls per turn (p = 0.016), same answers |
+| G7 | no HTTP API, demo UI, health checks or container | `src/streamrag/server/` (HTTP + SSE, UI, `/health`, `/ready`), `Dockerfile`, `docker-compose.yml` | `tests/server/`; Docker healthy in 8 s; `demo-check` 10 / 10 with and without the LLM |
+| G8 | no single final configuration; no environment configuration | `configs/profiles/final.yaml`, `load_final_config`, `STREAMRAG_*` variables, LLM host allowlist | `tests/test_config.py` |
+| G9 | stale `.env.example`, README and package metadata | rewritten; version 1.0.0 | — |
+| G10 | multi-hop analysis rarely fires on new domains | not changed (no held-out-safe fix) | v2 multi-hop correctness 0.571: `LIMITATIONS.md` §2 |
+
+Additional fixes found during Phase 11 development, each with a regression test:
+* claim decomposer garbling "A and B of C" lists;
+* false conflicts between documents scoped to different groups;
+* labelling of version conflicts.
+
+See `docs/architecture/14_final_architecture.md` §14.4.

@@ -1,0 +1,237 @@
+{
+  "python": {
+    "version": "3.12.0",
+    "implementation": "CPython",
+    "executable": "/Users/rudrakhale/Desktop/SamsungHackathon/.venv/bin/python"
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "onnxruntime": "1.30.0",
+    "tokenizers": "0.23.2",
+    "pydantic": "2.13.5",
+    "pyyaml": "6.0.3",
+    "snowballstemmer": "3.1.1",
+    "pypdf": "6.19.0",
+    "pytest": "9.1.1",
+    "huggingface-hub": "1.33.0"
+  },
+  "models": {
+    "all-minilm-l6-v2": {
+      "kind": "embedder",
+      "license": "Apache-2.0",
+      "name": "all-minilm-l6-v2",
+      "repo": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "weights_sha256": {
+        "onnx/model.onnx": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452"
+      }
+    },
+    "all-minilm-l6-v2-qint8-arm64": {
+      "kind": "embedder",
+      "license": "Apache-2.0",
+      "name": "all-minilm-l6-v2-qint8-arm64",
+      "repo": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "weights_sha256": {
+        "onnx/model_qint8_arm64.onnx": "4278337fd0ff3c68bfb6291042cad8ab363e1d9fbc43dcb499fe91c871902474"
+      }
+    },
+    "bge-small-en-v1.5": {
+      "kind": "embedder",
+      "license": "MIT",
+      "name": "bge-small-en-v1.5",
+      "repo": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "weights_sha256": {
+        "onnx/model.onnx": "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35"
+      }
+    },
+    "ms-marco-minilm-l6-v2": {
+      "kind": "reranker",
+      "license": "Apache-2.0",
+      "name": "ms-marco-minilm-l6-v2",
+      "repo": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "weights_sha256": {
+        "onnx/model.onnx": "5d3e70fd0c9ff14b9b5169a51e957b7a9c74897afd0a35ce4bd318150c1d4d4a"
+      }
+    },
+    "ms-marco-minilm-l6-v2-qint8-arm64": {
+      "kind": "reranker",
+      "license": "Apache-2.0",
+      "name": "ms-marco-minilm-l6-v2-qint8-arm64",
+      "repo": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "weights_sha256": {
+        "onnx/model_qint8_arm64.onnx": "3573b6b9593cb2f75987a31815d409ca3dd8808629118fd20451bb1a5d90cec7"
+      }
+    },
+    "nli-deberta-v3-xsmall": {
+      "kind": "nli",
+      "license": "Apache-2.0",
+      "name": "nli-deberta-v3-xsmall",
+      "repo": "cross-encoder/nli-deberta-v3-xsmall",
+      "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+      "weights_sha256": {
+        "onnx/model.onnx": "7105da41f625c42eca24e9465ec99150d02a80e644659d7a1daa93a6357155d4"
+      }
+    }
+  },
+  "llm": {
+    "name": "qwen3:4b",
+    "backend": "ollama (local)",
+    "url": "http://127.0.0.1:11434",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    },
+    "modified_at": "2026-10-03T13:20:18.768567751+05:30",
+    "ollama_version": "0.35.1",
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+  },
+  "database": "none - in-process BM25 (scipy sparse) and exact dense search (numpy) over the index files",
+  "hardware": {
+    "machine": "arm64",
+    "cpu": "Apple M5 Pro",
+    "cpu_count": 15,
+    "memory_bytes": "25769803776",
+    "model": "Mac17,9"
+  },
+  "os": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "release": "25.5.0"
+  },
+  "configuration": {
+    "file": "configs/default.yaml",
+    "config_hash": "923956a8d55351167242446771fa6d6f545b1a1cd8239f7af0bca897ad8fe28e",
+    "final_profile": "configs/profiles/final.yaml",
+    "final_config_hash": "9c54adb19e36adbf6a48b6f162073991af979fe286a81f78cb2f0bdf9d283a8d",
+    "experiments": "experiments/configs/{systems,experiments,final_benchmark}.yaml"
+  },
+  "git": {
+    "commit": "d130ad0136b0b3d23ec363c45a0c0769450b8dbd",
+    "dirty": true
+  },
+  "dataset": {
+    "streamrag_eval_v1": {
+      "version": "streamrag_eval_v1",
+      "files": {
+        "test": {
+          "path": "test.jsonl",
+          "sha256_16": "18e51582e184efd2",
+          "samples": 87,
+          "sessions": 70,
+          "by_type": {
+            "AMBIGUOUS": 5,
+            "CONTEXTUAL_FOLLOWUP": 5,
+            "CONTRADICTORY": 5,
+            "ENTITY_CORRECTION": 5,
+            "EXACT_TERM": 6,
+            "INSUFFICIENT_EVIDENCE": 5,
+            "MULTI_CONSTRAINT": 8,
+            "MULTI_HOP": 7,
+            "MULTI_INTENT": 5,
+            "REPEATED_QUERY": 5,
+            "SEMANTIC": 5,
+            "SIMPLE": 15,
+            "STREAMING_CORRECTION": 5,
+            "TEMPORAL": 6
+          },
+          "by_difficulty": {
+            "EASY": 27,
+            "HARD": 18,
+            "MEDIUM": 42
+          },
+          "by_corpus": {
+            "transit": 87
+          }
+        },
+        "dev": {
+          "path": "dev.jsonl",
+          "sha256_16": "17638ae166a734d5",
+          "samples": 129,
+          "sessions": 112,
+          "by_type": {
+            "AMBIGUOUS": 2,
+            "CONTEXTUAL_FOLLOWUP": 9,
+            "CONTRADICTORY": 8,
+            "ENTITY_CORRECTION": 2,
+            "EXACT_TERM": 7,
+            "INSUFFICIENT_EVIDENCE": 14,
+            "MULTI_CONSTRAINT": 8,
+            "MULTI_HOP": 5,
+            "MULTI_INTENT": 9,
+            "REPEATED_QUERY": 5,
+            "SEMANTIC": 7,
+            "SIMPLE": 46,
+            "TEMPORAL": 7
+          },
+          "by_difficulty": {
+            "EASY": 77,
+            "HARD": 6,
+            "MEDIUM": 46
+          },
+          "by_corpus": {
+            "adaptive": 83,
+            "conflict": 2,
+            "fixture": 27,
+            "grounding": 13,
+            "injection": 4
+          }
+        }
+      },
+      "construction": "experiments/datasets/build_dataset.py",
+      "labels": "implementer-written from the fixture corpus text; no independent annotation",
+      "test_corpus": "tests/fixtures/corpus_eval_transit (new in Phase 10; never used in development)",
+      "reportable": false
+    },
+    "streamrag_eval_v2": {
+      "version": "streamrag_eval_v2",
+      "files": {
+        "test": {
+          "path": "test.jsonl",
+          "sha256_16": "d318bf77d5dd40fc",
+          "samples": 81,
+          "sessions": 67,
+          "by_type": {
+            "AMBIGUOUS": 4,
+            "CONTEXTUAL_FOLLOWUP": 5,
+            "CONTRADICTORY": 4,
+            "ENTITY_CORRECTION": 5,
+            "EXACT_TERM": 7,
+            "INSUFFICIENT_EVIDENCE": 4,
+            "MULTI_CONSTRAINT": 8,
+            "MULTI_HOP": 7,
+            "MULTI_INTENT": 4,
+            "REPEATED_QUERY": 4,
+            "SEMANTIC": 5,
+            "SIMPLE": 15,
+            "STREAMING_CORRECTION": 4,
+            "TEMPORAL": 5
+          },
+          "by_difficulty": {
+            "EASY": 27,
+            "HARD": 21,
+            "MEDIUM": 33
+          },
+          "by_corpus": {
+            "utility": 81
+          }
+        }
+      },
+      "construction": "experiments/datasets/build_dataset_v2.py",
+      "labels": "implementer-written from the fixture corpus text; no independent annotation",
+      "test_corpus": "tests/fixtures/corpus_eval_utility (new in Phase 11; written and frozen before any Phase 11 system change; never used in development)",
+      "frozen": "2026-10-04, before Phase 11 fixes",
+      "reportable": false
+    }
+  },
+  "docker": "Docker version 29.8.1, build 4a63305"
+}

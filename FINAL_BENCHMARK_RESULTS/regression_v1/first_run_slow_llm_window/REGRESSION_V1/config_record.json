@@ -1,0 +1,237 @@
+{
+  "experiment_id": "REGRESSION_V1",
+  "timestamp": "2026-10-04T20:08:07",
+  "title": "Regression check on the Phase 10 test split (development data)",
+  "question": "Did the final system regress anywhere relative to Phase 10?",
+  "config": {
+    "title": "Regression check on the Phase 10 test split (development data)",
+    "question": "Did the final system regress anywhere relative to Phase 10?",
+    "splits": [
+      "test"
+    ],
+    "systems": [
+      "full_system",
+      "adaptive_rag",
+      "full_system_batch"
+    ],
+    "comparisons": [
+      [
+        "full_system_batch",
+        "full_system"
+      ]
+    ],
+    "metrics": [
+      "retrieval.recall@5",
+      "generation.answer_correct",
+      "generation.forbidden_hit",
+      "claims.claim_support_rate",
+      "hallucination.hallucinated_claim_rate",
+      "citation.citation_precision",
+      "latency.ttva_after_end",
+      "efficiency.retrieval_calls",
+      "efficiency.llm_calls"
+    ],
+    "experiment_id": "REGRESSION_V1"
+  },
+  "dataset_version": {
+    "name": "streamrag_eval_v1",
+    "test": "18e51582e184efd2",
+    "dev": "17638ae166a734d5"
+  },
+  "model": {
+    "llm": {
+      "name": "qwen3:4b",
+      "backend": "ollama (local)",
+      "url": "http://127.0.0.1:11434",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "modified_at": "2026-10-03T13:20:18.768567751+05:30",
+      "ollama_version": "0.35.1",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+    },
+    "temperature": 0.0,
+    "seed": 7,
+    "max_tokens": 1024,
+    "num_ctx": 8192
+  },
+  "embedding_model": "bge-small-en-v1.5",
+  "reranker": "ms-marco-minilm-l6-v2",
+  "verifier_instrument": "nli-deberta-v3-xsmall + rules (Phase 7 ClaimVerifier)",
+  "top_k": 5,
+  "systems": {
+    "full_system": {
+      "family": "runtime",
+      "generation": "llm",
+      "overrides": {
+        "adaptive_retrieval.enabled": true
+      },
+      "label": "Full system (streaming runtime + session + delta + cancellation + adaptive + grounding)",
+      "id": "full_system"
+    },
+    "adaptive_rag": {
+      "family": "pipeline",
+      "generation": "llm",
+      "overrides": {
+        "adaptive_retrieval.enabled": true
+      },
+      "label": "Adaptive RAG (batch session pipeline + adaptive retrieval + grounded answers)",
+      "id": "adaptive_rag"
+    },
+    "full_system_batch": {
+      "family": "runtime",
+      "generation": "llm",
+      "overrides": {
+        "adaptive_retrieval.enabled": true,
+        "controller.strategy": "end_only",
+        "generation.draft_mode": "off"
+      },
+      "label": "Batch RAG in the runtime (retrieval at utterance end, no drafts)",
+      "id": "full_system_batch"
+    }
+  },
+  "runtime_config": {
+    "max_concurrent_sessions": 8,
+    "max_concurrent_retrievals": 4,
+    "max_concurrent_llm_calls": 1,
+    "max_concurrent_cpu": 2,
+    "queues": {
+      "input": 64,
+      "retrieval": 64,
+      "llm": 8,
+      "cpu": 32,
+      "output": 4096
+    },
+    "timeouts_ms": {
+      "lexical": 2000,
+      "dense": 3000,
+      "assemble": 2000,
+      "generation": 60000,
+      "draft": 10000,
+      "validation_retrieval": 3000
+    },
+    "retry": {
+      "max_retries": 2,
+      "initial_delay_ms": 50.0,
+      "max_delay_ms": 1000.0,
+      "multiplier": 2.0,
+      "jitter": 0.2,
+      "seed": 7
+    },
+    "priorities": {
+      "final_answer": 0,
+      "retrieval_final": 1,
+      "validation_retrieval": 1,
+      "retrieval_provisional": 2,
+      "draft": 2,
+      "analytics": 3,
+      "aging_ms": 500.0
+    },
+    "budget": {
+      "turn_ms": 30000.0,
+      "generation_reserve_ms": 4200.0,
+      "validation_reserve_ms": 400.0
+    },
+    "sim_latency_ms": {
+      "lexical": 20.0,
+      "dense": 40.0,
+      "assemble": 2.0,
+      "generation": 2000.0,
+      "draft": 50.0,
+      "validation_retrieval": 30.0
+    },
+    "split_retrieval": true,
+    "coalescing_window_ms": 0.0,
+    "cancel_running": true,
+    "cancel_on_correction": true,
+    "output_max_hold_ms": 2000.0,
+    "shutdown_grace_ms": 5000.0,
+    "max_chunk_chars": 4000,
+    "max_inputs_per_session": 20000
+  },
+  "adaptive_retrieval_config": {
+    "enabled": false,
+    "lexicon": "/Users/rudrakhale/Desktop/SamsungHackathon/configs/retrieval_lexicon.yaml",
+    "initial_k": {
+      "SIMPLE": 3,
+      "MODERATE": 5,
+      "COMPLEX": 5,
+      "MULTI_HOP": 5
+    },
+    "k_schedule": [
+      5,
+      10,
+      20
+    ],
+    "final_k": 8,
+    "max_per_document": 3,
+    "simple_strategy": "LEXICAL",
+    "exact_id_strategy": "LEXICAL",
+    "semantic_oov_ratio": 0.5,
+    "rare_idf": 1.5,
+    "requirement_coverage": 0.6,
+    "min_gain": 0.05,
+    "rerank": "never",
+    "rerank_max_candidates": 20,
+    "expansion": true,
+    "max_expansions": 3,
+    "contradiction_retrieval": true,
+    "claim_driven": true,
+    "cache": true,
+    "cache_max_entries": 256,
+    "session_reuse": true,
+    "filter_fields": [
+      "applicant_type",
+      "country",
+      "region",
+      "product",
+      "language"
+    ],
+    "reference_date": "2026-10-03",
+    "tight_latency_ms": 150.0,
+    "routing": true,
+    "adaptive_k": true,
+    "iterative": true,
+    "multi_hop": true,
+    "temporal": true,
+    "authority": {
+      "status": {
+        "current": 1.0,
+        "active": 1.0,
+        "draft": 0.4,
+        "superseded": 0.2,
+        "archived": 0.2,
+        "expired": 0.2
+      },
+      "doc_type": {
+        "policy": 1.0,
+        "annex": 0.9,
+        "catalogue": 0.8,
+        "notice": 0.7,
+        "bulletin": 0.6
+      }
+    },
+    "budget": {
+      "max_queries": 5,
+      "max_results": 40,
+      "max_iterations": 3,
+      "max_latency_ms": 1500.0,
+      "max_parallel_tasks": 2,
+      "max_hops": 2
+    }
+  },
+  "git": {
+    "commit": "d130ad0136b0b3d23ec363c45a0c0769450b8dbd",
+    "dirty": true
+  },
+  "python": "3.12.0",
+  "machine": "macOS-26.5.1-arm64-arm-64bit",
+  "stats_seed": 20261004
+}

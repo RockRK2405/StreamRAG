@@ -1,0 +1,459 @@
+{
+  "ready": {
+    "ready": true,
+    "degraded": true,
+    "checks": {
+      "index": {
+        "ok": true,
+        "chunks": 27,
+        "test_fixture": true
+      },
+      "embedder": {
+        "ok": true
+      },
+      "verifier": {
+        "ok": true,
+        "model": "nli-deberta-v3-xsmall"
+      },
+      "llm": {
+        "ok": false,
+        "backend": "extractive",
+        "model": null,
+        "note": "extractive fallback answers (verified, no LLM)"
+      },
+      "runtime": {
+        "ok": true,
+        "sessions": 0,
+        "max_sessions": 8
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "normal",
+      "title": "A. Normal question",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.0,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 8.5,
+            "ttfa_ms": 34.2,
+            "ttva_ms": 1361.5
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "How much is tuition per semester for international students",
+              "text": "Tuition is 1,200 euros per semester for domestic students and 4,800 euros per semester for international students.",
+              "kind": "fact",
+              "citations": [
+                "FEES §1"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "HYBRID"
+      ]
+    },
+    {
+      "id": "multi_intent",
+      "title": "B. Several questions at once",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.91,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 11.8,
+            "ttfa_ms": 99.1,
+            "ttva_ms": 2276.1
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "What are the eligibility requirements for international students",
+              "text": "International students need a minimum grade average of 3.3 and an IELTS score of at least 6.5.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §1"
+              ]
+            },
+            {
+              "section": "which documents do they submit",
+              "text": "Domestic applicants submit the transcript of records and a residency certificate.",
+              "kind": "fact",
+              "citations": [
+                "SCH-DOM §2"
+              ]
+            },
+            {
+              "section": "which documents do they submit",
+              "text": "International applicants submit the transcript of records, a copy of the IELTS certificate.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §2"
+              ]
+            },
+            {
+              "section": "which documents do they submit",
+              "text": "International applicants submit the transcript of records, a copy of their passport and the IELTS certificate.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §2"
+              ]
+            },
+            {
+              "section": "how long does processing take for international applications",
+              "text": "International applications are processed within 25 working days.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §3"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "ITERATIVE",
+        "SEMANTIC"
+      ]
+    },
+    {
+      "id": "adaptive_simple",
+      "title": "C1. Adaptive retrieval: simple",
+      "passed": true,
+      "failures": [],
+      "wall_s": 1.55,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 9.0,
+            "ttfa_ms": 27.0,
+            "ttva_ms": 908.6
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "What is Form ISO-7 used",
+              "text": "Visa support letters are requested with Form ISO-7.",
+              "kind": "fact",
+              "citations": [
+                "VISA §1"
+              ]
+            },
+            {
+              "section": "What is Form ISO-7 used",
+              "text": "Visa support letters are issued within 5 working days.",
+              "kind": "fact",
+              "citations": [
+                "VISA §1"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "LEXICAL"
+      ]
+    },
+    {
+      "id": "adaptive_complex",
+      "title": "C2. Adaptive retrieval: constrained",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.0,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 11.8,
+            "ttfa_ms": 16.3,
+            "ttva_ms": 1360.5
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "How long does processing take for international students",
+              "text": "International applications are processed within 25 working days.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §3"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "HYBRID"
+      ]
+    },
+    {
+      "id": "live_correction",
+      "title": "D. Late correction",
+      "passed": true,
+      "failures": [],
+      "wall_s": 3.6,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 914.8,
+            "ttfa_ms": 927.3,
+            "ttva_ms": 1367.7
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "What are the eligibility requirements for the Merit Scholarship",
+              "text": "Domestic students need a minimum grade average of 3.0 and proof of residency in the region.",
+              "kind": "fact",
+              "citations": [
+                "SCH-DOM §1"
+              ]
+            },
+            {
+              "section": "What are the eligibility requirements for the Merit Scholarship",
+              "text": "International students need a minimum grade average of 3.3 and an IELTS score of at least 6.5.",
+              "kind": "conflict",
+              "citations": [
+                "SCH-INTL §1"
+              ]
+            },
+            {
+              "section": "What are the eligibility requirements for the Merit Scholarship",
+              "text": "In 2025 international students needed a minimum grade average of 3.5 and an IELTS score of at least 7.0.",
+              "kind": "conflict",
+              "citations": [
+                "SCH-INTL-2025 §1"
+              ]
+            }
+          ]
+        },
+        "u2": {
+          "metrics": {
+            "ttfe_ms": 473.3,
+            "ttfa_ms": 480.6,
+            "ttva_ms": 913.7
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "What are the eligibility requirements for the Merit Scholarship",
+              "text": "International students need a minimum grade average of 3.3 and an IELTS score of at least 6.5.",
+              "kind": "conflict",
+              "citations": [
+                "SCH-INTL §1"
+              ]
+            },
+            {
+              "section": "What are the eligibility requirements for the Merit Scholarship",
+              "text": "In 2025 international students needed a minimum grade average of 3.5 and an IELTS score of at least 7.0.",
+              "kind": "conflict",
+              "citations": [
+                "SCH-INTL-2025 §1"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "LEXICAL"
+      ]
+    },
+    {
+      "id": "asr_revision",
+      "title": "D2. Speech-recognition revision",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.45,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 12.5,
+            "ttfa_ms": 17.0,
+            "ttva_ms": 1811.7
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "How long does processing take for international students",
+              "text": "International applications are processed within 25 working days.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL §3"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "HYBRID"
+      ]
+    },
+    {
+      "id": "evidence",
+      "title": "E. Evidence and citations",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.0,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 7.3,
+            "ttfa_ms": 10.0,
+            "ttva_ms": 1359.7
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "Which documents do domestic applicants submit for the scholarship",
+              "text": "Domestic applicants submit the transcript of records and a residency certificate.",
+              "kind": "fact",
+              "citations": [
+                "SCH-DOM §2"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "LEXICAL"
+      ]
+    },
+    {
+      "id": "contradiction",
+      "title": "F1. Conflicting sources",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.0,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 6.5,
+            "ttfa_ms": 36.2,
+            "ttva_ms": 1364.5
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "When does move-in start for the international student residence",
+              "text": "Move-in for the international student residence starts on 25 August 2026.",
+              "kind": "conflict",
+              "citations": [
+                "HOUSING-A §1"
+              ]
+            },
+            {
+              "section": "When does move-in start for the international student residence",
+              "text": "Move-in for the international student residence starts on 1 September 2026.",
+              "kind": "conflict",
+              "citations": [
+                "HOUSING-B §1"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "LEXICAL"
+      ]
+    },
+    {
+      "id": "temporal",
+      "title": "F2. Versioned documents",
+      "passed": true,
+      "failures": [],
+      "wall_s": 2.0,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 7.3,
+            "ttfa_ms": 10.2,
+            "ttva_ms": 1359.6
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "Which IELTS score did international students need in 2025",
+              "text": "In 2025 international students needed a minimum grade average of 3.5 and an IELTS score of at least 7.0.",
+              "kind": "fact",
+              "citations": [
+                "SCH-INTL-2025 §1"
+              ]
+            }
+          ]
+        }
+      },
+      "plans": [
+        "FILTERED",
+        "LEXICAL"
+      ]
+    },
+    {
+      "id": "uncertainty",
+      "title": "F3. Not in the sources",
+      "passed": true,
+      "failures": [],
+      "wall_s": 1.6,
+      "turns": {
+        "u1": {
+          "metrics": {
+            "ttfe_ms": 948.3,
+            "ttfa_ms": 975.5,
+            "ttva_ms": 975.7
+          },
+          "status": "VALIDATED_FINAL",
+          "mode": "full",
+          "claims": [
+            {
+              "section": "Does the Merit Scholarship",
+              "text": "The Riverbank Merit Scholarship is open to full-time undergraduate students in their first or second year.",
+              "kind": "fact",
+              "citations": [
+                "SCH-RULES §1"
+              ]
+            },
+            {
+              "section": "cover health insurance",
+              "text": "The retrieved documents do not contain an answer to “cover health insurance”.",
+              "kind": "uncertainty",
+              "citations": []
+            }
+          ]
+        }
+      },
+      "plans": [
+        "ITERATIVE",
+        "SEMANTIC"
+      ]
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "total": 10,
+    "llm": {
+      "ok": false,
+      "backend": "extractive",
+      "model": null,
+      "note": "extractive fallback answers (verified, no LLM)"
+    }
+  }
+}

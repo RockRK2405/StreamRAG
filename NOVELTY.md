@@ -45,6 +45,8 @@ chunk.
    * Phase 11 added two general rules:
      * evidence that only superseded partial-transcript queries retrieved is dropped when the refined query returns;
      * a need whose query budget is exhausted is re-validated against its latest result.
+   * Measured after the fixes: the streaming-vs-batch gap fell from 7 to 2 turns on v1 (development data) and is a
+     net 1 turn on the held-out v2. No stale values were asserted on either set.
    * This failure mode does not exist in turn-based RAG.
 
 ## Strongest innovation
@@ -56,8 +58,8 @@ The combination in points 1 and 5:
 
 The measured trade-off is real and reported:
 * streaming delivers first evidence and first answer content far earlier;
-* reuse and early commitment can cost answer quality, which the Phase 11 fixes address and the held-out v2 benchmark
-  measures.
+* reuse and early commitment can cost answer quality. The Phase 11 fixes reduced this, as measured above. Answer
+  correctness on v2 is still not better than strong baselines (`LIMITATIONS.md` §2).
 
 ## Engineering vs research novelty
 
