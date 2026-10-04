@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "description": "Measured work of one adaptive run (cost / operation counts, brief §67).",
+  "properties": {
+    "cache_hits": {
+      "default": 0,
+      "title": "Cache Hits",
+      "type": "integer"
+    },
+    "cache_misses": {
+      "default": 0,
+      "title": "Cache Misses",
+      "type": "integer"
+    },
+    "cancelled": {
+      "default": 0,
+      "title": "Cancelled",
+      "type": "integer"
+    },
+    "chunks_returned": {
+      "default": 0,
+      "title": "Chunks Returned",
+      "type": "integer"
+    },
+    "dense_searches": {
+      "default": 0,
+      "title": "Dense Searches",
+      "type": "integer"
+    },
+    "lexical_searches": {
+      "default": 0,
+      "title": "Lexical Searches",
+      "type": "integer"
+    },
+    "llm_calls": {
+      "default": 0,
+      "title": "Llm Calls",
+      "type": "integer"
+    },
+    "reranked_candidates": {
+      "default": 0,
+      "title": "Reranked Candidates",
+      "type": "integer"
+    },
+    "reranker_calls": {
+      "default": 0,
+      "title": "Reranker Calls",
+      "type": "integer"
+    },
+    "searches": {
+      "default": 0,
+      "title": "Searches",
+      "type": "integer"
+    },
+    "session_reuse": {
+      "default": 0,
+      "title": "Session Reuse",
+      "type": "integer"
+    }
+  },
+  "title": "OperationCounts",
+  "type": "object"
+}

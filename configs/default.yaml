@@ -15,6 +15,9 @@ corpus:
   on_invalid_document: skip                     # skip (recorded in manifest) | error
   doc_id_strategy: native_or_stem               # native_or_stem | native_or_ordinal
   native_doc_id_pattern: "^(?i:doc)[ _-]?(\\d+)"
+  # Phase 9: front-matter fields kept as (sanitised, untrusted) document metadata - filters and validity only
+  metadata_fields: [version, effective_date, published_date, valid_until, status, supersedes, doc_type,
+                    applicant_type, country, region, year, product, language]
 
 normalization:
   unicode_form: NFKC
@@ -216,3 +219,42 @@ runtime:
   shutdown_grace_ms: 5000
   max_chunk_chars: 4000
   max_inputs_per_session: 20000
+
+# Phase 9: adaptive retrieval intelligence (docs/retrieval/01_query_analysis.md ... 11_budget_management.md,
+# docs/architecture/13_adaptive_retrieval.md). Off by default; team engineering values calibrated on the dev
+# fixture suites (research/phase9) - NOT REPORTABLE. Corpus text never changes any of these.
+adaptive_retrieval:
+  enabled: false
+  lexicon: configs/retrieval_lexicon.yaml
+  initial_k: {SIMPLE: 3, MODERATE: 5, COMPLEX: 5, MULTI_HOP: 5}
+  k_schedule: [5, 10, 20]          # adaptive top-k after an insufficient round
+  final_k: 8
+  max_per_document: 3              # source diversity
+  simple_strategy: LEXICAL         # research/phase9/calibrate_routing.py (simple-query fast path)
+  exact_id_strategy: LEXICAL
+  semantic_oov_ratio: 0.5
+  rare_idf: 1.5
+  requirement_coverage: 0.6
+  min_gain: 0.05
+  rerank: never                    # research/phase9 reranker evaluation
+  rerank_max_candidates: 20
+  expansion: true
+  max_expansions: 3
+  contradiction_retrieval: true
+  claim_driven: true
+  cache: true
+  cache_max_entries: 256
+  session_reuse: true
+  filter_fields: [applicant_type, country, region, product, language]
+  reference_date: null             # null = today (validity of "current" documents)
+  tight_latency_ms: 150            # remaining budget below this -> fast path (cache / lexical, small k, one round)
+  routing: true                    # ablation switches (research/phase9): strategy selection
+  adaptive_k: true                 #   adaptive top-k (k by complexity, 5 -> 10 -> 20)
+  iterative: true                  #   more than one retrieval round
+  multi_hop: true                  #   hops through bridge statements
+  temporal: true                   #   validity filtering / temporal conflict resolution
+  authority:
+    status: {current: 1.0, active: 1.0, draft: 0.4, superseded: 0.2, archived: 0.2, expired: 0.2}
+    doc_type: {policy: 1.0, annex: 0.9, catalogue: 0.8, notice: 0.7, bulletin: 0.6}
+  budget: {max_queries: 5, max_results: 40, max_iterations: 3, max_latency_ms: 1500, max_parallel_tasks: 2,
+           max_hops: 2}

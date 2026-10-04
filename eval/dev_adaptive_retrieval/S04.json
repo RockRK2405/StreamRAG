@@ -1,0 +1,30 @@
+{
+  "case_id": "S04",
+  "corpus": "adaptive",
+  "category": "constraint_change",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How long does processing take for international applicants?",
+      "gold": {
+        "citations": [
+          "INTL-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Actually, for domestic applicants instead.",
+      "gold": {
+        "citations": [
+          "DOM-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

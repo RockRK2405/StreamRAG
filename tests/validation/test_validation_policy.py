@@ -66,3 +66,25 @@ def test_consistency_compares_only_the_same_proposition():
                         [("k", "Applicants need proof of residence.")]) == [("n", "k")]
     assert cc.conflicts([("n", "Ladders must be returned to the tool shed.")],
                         [("k", "Ladders are permitted only when a second worker holds the base.")]) == []
+
+
+def test_claim_contradicting_two_retained_claims_is_removed_once(tmp_path_factory):
+    """Phase 9 regression (found by the real-LLM run): a new claim that contradicts two other claims produced two
+    (a, b) pairs and the second removal raised ValueError. It must be rejected once and the answer completed."""
+    from grounding_helpers import grounding_stack
+    from streamrag.session import AdaptivePipeline
+    st = grounding_stack(tmp_path_factory, "corpus_grounding", verifier="rules")
+    p = AdaptivePipeline(st)
+    real = p.grounding.consistency.conflicts
+
+    def twice(new, kept):
+        ids = [c for c, _ in new]
+        return [(ids[0], ids[1]), (ids[0], ids[2])] if len(ids) >= 3 else real(new, kept)
+    p.grounding.consistency.conflicts = twice
+    try:
+        r = p.process("u1", "What are the eligibility requirements for the permit?", 1000.0)
+    finally:
+        p.close()
+    ga = r.grounded
+    assert ga is not None and ga.text
+    assert sum(1 for x in ga.rejected if x.status == "CONSISTENCY_CONFLICT") <= 1

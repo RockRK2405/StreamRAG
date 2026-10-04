@@ -1,0 +1,20 @@
+{
+  "case_id": "A27",
+  "corpus": "adaptive",
+  "category": "temporal",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Which public holidays are there in 2026?",
+      "gold": {
+        "citations": [
+          "HOLIDAYS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

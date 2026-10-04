@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - IMPLEMENTER-LABELLED - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "reranker": "ms-marco-minilm-l6-v2",
+    "verifier": "nli-deberta-v3-xsmall",
+    "generation": "extractive (no LLM)",
+    "reference_date": "2026-10-03",
+    "eval_set": "eval/dev_adaptive_retrieval (implementer-labelled, fixture corpora)",
+    "design": "retrieval stage only, 5 interleaved repetitions per case, per-turn median"
+  },
+  "C_fixed_hybrid": {
+    "retrieval_latency_ms": {
+      "n": 71,
+      "p50": 5.701,
+      "p95": 6.629,
+      "mean": 5.719,
+      "max": 9.426
+    },
+    "retrieval_cpu_ms": {
+      "n": 72,
+      "p50": 30.022,
+      "p95": 51.571,
+      "mean": 29.454,
+      "max": 54.553
+    },
+    "by_category_p50": {
+      "ambiguous": 4.52,
+      "constraint": 5.862,
+      "constraint_change": 6.062,
+      "contextual_follow_up": 6.229,
+      "contradiction": 5.566,
+      "cross_query_reuse": 5.973,
+      "entity_correction": 4.881,
+      "equivalent_repeat": 5.012,
+      "exact_keyword": 5.377,
+      "follow_up": 5.872,
+      "insufficient": 5.741,
+      "late_constraint": 5.95,
+      "multi_hop": 5.953,
+      "multi_intent": 8.933,
+      "repeated_question": 5.49,
+      "semantic": 5.72,
+      "simple": 5.455,
+      "temporal": 6.281
+    },
+    "turns": 71,
+    "reps": 5
+  },
+  "ADAPTIVE": {
+    "retrieval_latency_ms": {
+      "n": 71,
+      "p50": 6.56,
+      "p95": 16.622,
+      "mean": 8.091,
+      "max": 27.361
+    },
+    "retrieval_cpu_ms": {
+      "n": 72,
+      "p50": 6.425,
+      "p95": 91.38,
+      "mean": 27.157,
+      "max": 166.087
+    },
+    "by_category_p50": {
+      "ambiguous": 7.209,
+      "constraint": 9.355,
+      "constraint_change": 13.744,
+      "contextual_follow_up": 10.899,
+      "contradiction": 6.967,
+      "cross_query_reuse": 4.368,
+      "entity_correction": 14.652,
+      "equivalent_repeat": 5.112,
+      "exact_keyword": 4.206,
+      "follow_up": 4.909,
+      "insufficient": 8.715,
+      "late_constraint": 19.344,
+      "multi_hop": 16.639,
+      "multi_intent": 14.216,
+      "repeated_question": 4.909,
+      "semantic": 4.892,
+      "simple": 4.674,
+      "temporal": 9.934
+    },
+    "turns": 71,
+    "reps": 5
+  },
+  "ratio_adaptive_over_fixed": {
+    "p50": 1.151,
+    "p95": 2.507,
+    "mean": 1.415
+  }
+}

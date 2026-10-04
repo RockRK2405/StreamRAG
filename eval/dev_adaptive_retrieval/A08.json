@@ -1,0 +1,20 @@
+{
+  "case_id": "A08",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Within how many days must new residents register their address?",
+      "gold": {
+        "citations": [
+          "ADDRESS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

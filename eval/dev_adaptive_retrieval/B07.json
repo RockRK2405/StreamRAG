@@ -1,0 +1,20 @@
+{
+  "case_id": "B07",
+  "corpus": "fixture",
+  "category": "semantic",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What should the keeper use to clean the lens?",
+      "gold": {
+        "citations": [
+          "fixture_lighthouse_manual §1.2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

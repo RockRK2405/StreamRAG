@@ -1,0 +1,20 @@
+{
+  "case_id": "A21",
+  "corpus": "adaptive",
+  "category": "constraint",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Which documents do domestic applicants submit?",
+      "gold": {
+        "citations": [
+          "DOM-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

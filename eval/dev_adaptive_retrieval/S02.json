@@ -1,0 +1,40 @@
+{
+  "case_id": "S02",
+  "corpus": "adaptive",
+  "category": "repeated_question",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the application fee for a residence permit?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "How long does processing take for domestic applicants?",
+      "gold": {
+        "citations": [
+          "DOM-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u3",
+      "utterance_text": "What is the application fee for a residence permit?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

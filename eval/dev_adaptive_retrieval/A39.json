@@ -1,0 +1,18 @@
+{
+  "case_id": "A39",
+  "corpus": "adaptive",
+  "category": "insufficient",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Can applicants pay the fee by credit card?",
+      "gold": {
+        "citations": [],
+        "expect": "INSUFFICIENT"
+      }
+    }
+  ]
+}

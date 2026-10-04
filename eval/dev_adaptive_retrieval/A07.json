@@ -1,0 +1,20 @@
+{
+  "case_id": "A07",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How soon must a vehicle be registered after purchase?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "B10",
+  "corpus": "grounding",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How are permit applications submitted?",
+      "gold": {
+        "citations": [
+          "fixture_permit_handbook §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

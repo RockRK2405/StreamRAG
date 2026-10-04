@@ -1,0 +1,3 @@
+# eval/dev_adaptive_retrieval (TEST FIXTURE ONLY - NOT REPORTABLE)
+
+Phase 9 dev cases written by `research/phase9/build_eval.py`. Labels were written by the implementer of the adaptive retrieval code by reading the fictional fixture corpora (no independent annotation, no held-out split, tiny corpora). Gold = section-level citations that state what is asked; `expect` = the evidence state the corpus supports. A-cases and S-sessions use `tests/fixtures/corpus_adaptive`; B-cases reuse the Phase 3/7 fixture corpora (gold taken from `tests/fixtures/eval/fixture_retrieval.jsonl` and `eval/dev_grounded` where they overlap).

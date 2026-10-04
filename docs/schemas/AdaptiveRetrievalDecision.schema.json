@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "RetrievalStrategy": {
+      "enum": [
+        "FAST_VECTOR",
+        "LEXICAL",
+        "HYBRID",
+        "FILTERED",
+        "SEMANTIC",
+        "MULTI_HOP",
+        "ITERATIVE",
+        "CACHE_REUSE",
+        "SESSION_REUSE"
+      ],
+      "title": "RetrievalStrategy",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "title": "Action",
+      "type": "string"
+    },
+    "actual_gain": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actual Gain"
+    },
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "expected_gain": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Gain"
+    },
+    "inputs": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Inputs",
+      "type": "object"
+    },
+    "latency_cost_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Latency Cost Ms",
+      "type": "number"
+    },
+    "query_id": {
+      "title": "Query Id",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "result": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Result",
+      "type": "object"
+    },
+    "strategy": {
+      "$ref": "#/$defs/RetrievalStrategy"
+    },
+    "timestamp_ms": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Timestamp Ms",
+      "type": "number"
+    }
+  },
+  "required": [
+    "decision_id",
+    "query_id",
+    "strategy",
+    "action",
+    "reason"
+  ],
+  "title": "RetrievalDecision",
+  "type": "object"
+}

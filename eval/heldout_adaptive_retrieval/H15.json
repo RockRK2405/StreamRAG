@@ -1,0 +1,22 @@
+{
+  "case_id": "H15",
+  "corpus": "adaptive",
+  "category": "exact_keyword",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Is the PPO open on 25 December?",
+      "gold": {
+        "citations": [
+          "FORMS §2",
+          "HOLIDAYS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

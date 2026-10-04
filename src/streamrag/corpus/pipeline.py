@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass, field
 
+from streamrag.corpus.metadata import sanitize_metadata
 from streamrag.config.settings import StreamRagConfig
 from streamrag.corpus.chunker import chunk_section, count_tokens
 from streamrag.corpus.ids import assign_document_ids, native_document_id, render_chunk_id, render_citation
@@ -92,7 +93,8 @@ def build_corpus(cfg: StreamRagConfig) -> BuiltCorpus:
         native = native_document_id(raw.entry.relpath, raw.front_matter, cfg.corpus.native_doc_id_pattern) is not None
         doc = CorpusDocument(document_id=doc_id, native_id=native, source_path=raw.entry.relpath,
                              source_sha256=raw.entry.sha256, format=raw.format, title=title, text=norm.text,
-                             page_offsets=norm.page_offsets, sections=sections, normalization_log=raw.log + norm.log)
+                             page_offsets=norm.page_offsets, sections=sections, normalization_log=raw.log + norm.log,
+                             metadata=sanitize_metadata(raw.front_matter, cfg.corpus.metadata_fields))
         documents.append(doc)
         files[raw.entry.relpath] = files[raw.entry.relpath].model_copy(update={"document_id": doc_id})
         with Stopwatch() as s3:

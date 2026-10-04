@@ -1,0 +1,21 @@
+{
+  "case_id": "H11",
+  "corpus": "adaptive",
+  "category": "temporal",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Which requirement was added in the 2026 edition?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

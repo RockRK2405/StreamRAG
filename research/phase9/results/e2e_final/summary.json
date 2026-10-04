@@ -1,0 +1,1282 @@
+{
+  "meta": {
+    "REPORTABLE": false,
+    "banner": "DEV FIXTURE DOMAIN - IMPLEMENTER-LABELLED - NOT AN OFFICIAL BENCHMARK RESULT - NOT REPORTABLE",
+    "machine": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.0",
+    "cpu_count": 15,
+    "embedder": "bge-small-en-v1.5 (ONNX)",
+    "reranker": "ms-marco-minilm-l6-v2",
+    "verifier": "nli-deberta-v3-xsmall",
+    "generation": "extractive (no LLM)",
+    "reference_date": "2026-10-03",
+    "eval_set": "eval/dev_adaptive_retrieval (implementer-labelled, fixture corpora)",
+    "llm": "qwen3:4b (REAL)",
+    "mode": "realtime runtime"
+  },
+  "passed": 19,
+  "total": 24,
+  "scenarios": [
+    {
+      "name": "01_simple_question",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "HYBRID",
+              "strategy_reason": "complexity MODERATE: ambiguous",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "A residence permit must be renewed every 2 years. [RENEW \u00a71] Renewal requests can be submitted up to 30 days before the permit expires using Form PX-118. [RENEW \u00a71]",
+          "citations": [
+            "RENEW \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 5,
+          "claims_rejected": 0,
+          "citations_validated": 3,
+          "streamed_answer_events": 41,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "HYBRID",
+        "LEXICAL"
+      ],
+      "untraceable": 0,
+      "events": 157,
+      "checks": [
+        {
+          "check": "fast path LEXICAL",
+          "pass": false
+        },
+        {
+          "check": "answer cites RENEW \u00a71",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "02_multi_intent",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "ITERATIVE",
+              "strategy_reason": "complexity COMPLEX: multiple_needs",
+              "complexity": "COMPLEX",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['domestic']}",
+              "complexity": "COMPLEX",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "domestic"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "What is the application fee:\nThe application fee for a residence permit is 55 euros. [ELIG-2026 \u00a72] Applicants under 25 pay a reduced fee of: 30 euros. [ELIG-2026 \u00a72]\n\nHow long does processing take for domestic applicants:\nApplications from domestic applicants are processed within 10 working days. [DOM-2026 \u00a72]",
+          "citations": [
+            "ELIG-2026 \u00a72",
+            "DOM-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 8,
+          "claims_rejected": 1,
+          "citations_validated": 3,
+          "streamed_answer_events": 55,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "ITERATIVE",
+        "FILTERED"
+      ],
+      "untraceable": 0,
+      "events": 204,
+      "checks": [
+        {
+          "check": "one plan per need (2)",
+          "pass": true
+        },
+        {
+          "check": "cites ELIG-2026 \u00a72 and DOM-2026 \u00a72",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "03_contextual_follow_up",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "Applicants must be at least 18 years old. [ELIG-2026 \u00a71] Applicants must hold a valid passport. [ELIG-2026 \u00a71] Applicants must have a registered address in Fixture City. [ELIG-2026 \u00a71]",
+          "citations": [
+            "ELIG-2026 \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 6,
+          "claims_rejected": 0,
+          "citations_validated": 2,
+          "streamed_answer_events": 31,
+          "llm_calls": 1,
+          "turn_completed": true
+        },
+        {
+          "utterance_id": "u2",
+          "plans": [
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['international']}",
+              "complexity": "COMPLEX",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "PARTIAL"
+          ],
+          "stops": [
+            "NO_EXPECTED_GAIN"
+          ],
+          "hops": [],
+          "answer": "Applicants must be at least 18 years old. [ELIG-2026 \u00a71] Applicants must hold a valid passport. [ELIG-2026 \u00a71] Applicants must have a registered address in Fixture City. [ELIG-2026 \u00a71] Not established: The retrieved documents do not say how this applies to international applicants.",
+          "citations": [
+            "ELIG-2026 \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 3,
+          "claims_rejected": 0,
+          "citations_validated": 1,
+          "streamed_answer_events": 19,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "LEXICAL",
+        "FILTERED"
+      ],
+      "untraceable": 0,
+      "events": 219,
+      "checks": [
+        {
+          "check": "follow-up retrieval FILTERED international",
+          "pass": true
+        },
+        {
+          "check": "follow-up cites INTL-2026 \u00a71",
+          "pass": false
+        }
+      ]
+    },
+    {
+      "name": "04_exact_entity",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "exact identifiers ['PX-204'] known to the lexical index",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "exact identifiers ['PX-204'] known to the lexical index",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "Form PX-204 is the application form for international applicants. [FORMS \u00a71; INTL-2026 \u00a71] International applicants must submit Form PX-204 together with a certified copy of their visa. [INTL-2026 \u00a71]",
+          "citations": [
+            "FORMS \u00a71",
+            "INTL-2026 \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 6,
+          "claims_rejected": 0,
+          "citations_validated": 2,
+          "streamed_answer_events": 33,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "LEXICAL"
+      ],
+      "untraceable": 0,
+      "events": 139,
+      "checks": [
+        {
+          "check": "LEXICAL on the identifier",
+          "pass": true
+        },
+        {
+          "check": "cites FORMS \u00a71 or INTL-2026 \u00a71",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "05_temporal",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "explicit date 'December 2025'",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": null,
+                "valid_at": "2025-12-01",
+                "valid_to": "2025-12-31"
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "The application fee for a residence permit is 40 euros. [ELIG-2024 \u00a72]",
+          "citations": [
+            "ELIG-2024 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 3,
+          "claims_rejected": 0,
+          "citations_validated": 2,
+          "streamed_answer_events": 25,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "FILTERED"
+      ],
+      "untraceable": 0,
+      "events": 119,
+      "checks": [
+        {
+          "check": "FILTERED by the December 2025 period",
+          "pass": true
+        },
+        {
+          "check": "cites ELIG-2024 \u00a72, not ELIG-2026 \u00a72",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "06_insufficient",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "SUFFICIENT",
+            "INSUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "NO_EXPECTED_GAIN"
+          ],
+          "hops": [],
+          "answer": "Applicants who receive income support do not pay the residence permit application fee. [WAIVERS \u00a71] The sources differ: \u201cApplicants under 25 pay a reduced fee of 30 euros\u201d [ELIG-2026 \u00a72] / \u201cMarket stalls pay a reduced fee of 60 euros\u201d [BIZ-2026 \u00a72] / \u201cThe application fee for a residence permit is 55 euros\u201d [ELIG-2026 \u00a72].",
+          "citations": [
+            "WAIVERS \u00a71",
+            "ELIG-2026 \u00a72",
+            "BIZ-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 6,
+          "claims_rejected": 1,
+          "citations_validated": 2,
+          "streamed_answer_events": 33,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "LEXICAL"
+      ],
+      "untraceable": 0,
+      "events": 139,
+      "checks": [
+        {
+          "check": "evidence INSUFFICIENT",
+          "pass": true
+        },
+        {
+          "check": "answer states the gap",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "07_contradictory",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "CONTRADICTORY"
+          ],
+          "stops": [
+            "CONTRADICTION"
+          ],
+          "hops": [],
+          "answer": "The sources differ: \u201cThe Permit Processing Office opens at 9:00 on weekdays\u201d [NOTICE-A \u00a71] / \u201cThe Permit Processing Office opens at 8:30 on weekdays\u201d [NOTICE-B \u00a71]. The Permit Processing Office (PPO) handles all residence permit applications. [FORMS \u00a72] The PPO is closed on public holidays. [FORMS \u00a72]",
+          "citations": [
+            "NOTICE-A \u00a71",
+            "NOTICE-B \u00a71",
+            "FORMS \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 2,
+          "claims_rejected": 5,
+          "citations_validated": 2,
+          "streamed_answer_events": 35,
+          "llm_calls": 2,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL"
+      ],
+      "untraceable": 0,
+      "events": 124,
+      "checks": [
+        {
+          "check": "evidence CONTRADICTORY, stop CONTRADICTION",
+          "pass": true
+        },
+        {
+          "check": "answer reports 9:00 and 8:30",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "08_multi_hop",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "MULTI_HOP",
+              "strategy_reason": "complexity MULTI_HOP: entity_aspect_gap:zemland",
+              "complexity": "MULTI_HOP",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 3,
+          "assessments": [
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [
+            "zemland -> Group B"
+          ],
+          "answer": "Zemland is classified as Group B. [ANNEX-C \u00a71; GROUP-RULES \u00a72] Group B applicants must provide a certified police clearance certificate. [GROUP-RULES \u00a72] Group B applicants must provide attend an in-person interview. [GROUP-RULES \u00a72]",
+          "citations": [
+            "ANNEX-C \u00a71",
+            "GROUP-RULES \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 4,
+          "claims_rejected": 2,
+          "citations_validated": 2,
+          "streamed_answer_events": 33,
+          "llm_calls": 2,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "MULTI_HOP"
+      ],
+      "untraceable": 0,
+      "events": 119,
+      "checks": [
+        {
+          "check": "hop zemland -> Group B",
+          "pass": true
+        },
+        {
+          "check": "cites GROUP-RULES \u00a72",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "09_cached_question",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "The application fee for a residence permit is 55 euros. [ELIG-2026 \u00a72] Applicants under 25 pay a reduced fee of 30 euros. [ELIG-2026 \u00a72]",
+          "citations": [
+            "ELIG-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 5,
+          "claims_rejected": 0,
+          "citations_validated": 2,
+          "streamed_answer_events": 29,
+          "llm_calls": 1,
+          "turn_completed": true
+        },
+        {
+          "utterance_id": "u2",
+          "plans": [
+            {
+              "strategy": "LEXICAL",
+              "strategy_reason": "simple-query fast path (simple_strategy, calibrated)",
+              "complexity": "SIMPLE",
+              "top_k": 3,
+              "retrievers": [
+                "bm25"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "explicit date '2026'",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": null,
+                "valid_at": "2026-01-01",
+                "valid_to": "2026-12-31"
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "The public holidays in 2026 are 1 January, 1 May, and 25 December. [HOLIDAYS \u00a71] The sources differ: \u201cThe public holidays in 2026 are 1 January, 1 May and 25 December\u201d [HOLIDAYS \u00a71] / \u201cThe PPO is closed on public holidays\u201d [FORMS \u00a72]. Municipal offices are closed on these public holidays. [FORMS \u00a72; HOLIDAYS \u00a71]",
+          "citations": [
+            "HOLIDAYS \u00a71",
+            "FORMS \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 4,
+          "claims_rejected": 2,
+          "citations_validated": 2,
+          "streamed_answer_events": 35,
+          "llm_calls": 1,
+          "turn_completed": true
+        },
+        {
+          "utterance_id": "u3",
+          "plans": [
+            {
+              "strategy": "HYBRID",
+              "strategy_reason": "complexity MODERATE: context_dependent",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 2,
+          "assessments": [
+            "INSUFFICIENT"
+          ],
+          "stops": [
+            "NO_EXPECTED_GAIN"
+          ],
+          "hops": [],
+          "answer": "Which public holidays are in 2026:\nThe public holidays in 2026 are 1 January, 1 May, and 25 December. [HOLIDAYS \u00a71] Municipal offices are closed on these public holidays. [FORMS \u00a72; HOLIDAYS \u00a71]\n\nWhat is the application fee for a residence permit:\nThe application fee for a residence permit is 55 euros. [ELIG-2026 \u00a72] Applicants under 25 pay a reduced fee of 30 euros. [ELIG-2026 \u00a72]",
+          "citations": [
+            "HOLIDAYS \u00a71",
+            "FORMS \u00a72",
+            "ELIG-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 5,
+          "claims_rejected": 1,
+          "citations_validated": 2,
+          "streamed_answer_events": 51,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "LEXICAL",
+        "LEXICAL",
+        "LEXICAL",
+        "FILTERED",
+        "HYBRID"
+      ],
+      "untraceable": 0,
+      "events": 427,
+      "checks": [
+        {
+          "check": "no adaptive search for the repeat",
+          "pass": false
+        },
+        {
+          "check": "repeat cites ELIG-2026 \u00a72",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "10_changed_entity",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "MULTI_HOP",
+              "strategy_reason": "complexity MULTI_HOP: entity_aspect_gap:zemland",
+              "complexity": "MULTI_HOP",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "MULTI_HOP",
+              "strategy_reason": "complexity MULTI_HOP: entity_aspect_gap:zemland",
+              "complexity": "MULTI_HOP",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 6,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [
+            "zemland -> Group B",
+            "zemland -> Group B"
+          ],
+          "answer": "Group B applicants must provide a certified police clearance certificate. [GROUP-RULES \u00a72] Group B applicants must attend an in-person interview. [GROUP-RULES \u00a72] Zemland is classified as Group B. [ANNEX-C \u00a71; GROUP-RULES \u00a72]",
+          "citations": [
+            "GROUP-RULES \u00a72",
+            "ANNEX-C \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 6,
+          "claims_rejected": 0,
+          "citations_validated": 2,
+          "streamed_answer_events": 33,
+          "llm_calls": 1,
+          "turn_completed": true
+        },
+        {
+          "utterance_id": "u2",
+          "plans": [
+            {
+              "strategy": "MULTI_HOP",
+              "strategy_reason": "complexity MULTI_HOP: entity_aspect_gap:norvia",
+              "complexity": "MULTI_HOP",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS"
+          ],
+          "invalidations": [
+            "entity_changed"
+          ],
+          "adaptive_searches": 3,
+          "assessments": [
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [
+            "norvia -> Group A"
+          ],
+          "answer": "The sources differ: \u201cGroup A applicants need no additional documents\u201d [GROUP-RULES \u00a71] / \u201cFurther requirements depend on the country group of the applicant; see the Country Classification Annex\u201d [INTL-2026 \u00a71]. Norvia is classified as Group A. [ANNEX-C \u00a71; GROUP-RULES \u00a71] Further requirements depend on the country group of the applicant. [INTL-2026 \u00a71] See the Country Classification Annex. [INTL-2026 \u00a71]",
+          "citations": [
+            "GROUP-RULES \u00a71",
+            "ANNEX-C \u00a71",
+            "INTL-2026 \u00a71"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 5,
+          "claims_rejected": 2,
+          "citations_validated": 2,
+          "streamed_answer_events": 41,
+          "llm_calls": 2,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "MULTI_HOP",
+        "MULTI_HOP",
+        "MULTI_HOP"
+      ],
+      "untraceable": 0,
+      "events": 284,
+      "checks": [
+        {
+          "check": "cache invalidated: entity_changed",
+          "pass": true
+        },
+        {
+          "check": "hop norvia -> Group A",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "11_changed_constraint",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "HYBRID",
+              "strategy_reason": "complexity MODERATE: ambiguous",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['international']}",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "International applicants have applications processed within 30 working days. [INTL-2026 \u00a72]",
+          "citations": [
+            "INTL-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 4,
+          "claims_rejected": 1,
+          "citations_validated": 2,
+          "streamed_answer_events": 30,
+          "llm_calls": 1,
+          "turn_completed": true
+        },
+        {
+          "utterance_id": "u2",
+          "plans": [
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['domestic', 'international']}",
+              "complexity": "COMPLEX",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "domestic",
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['domestic', 'international']}",
+              "complexity": "COMPLEX",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "domestic",
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [
+            "constraint_changed"
+          ],
+          "adaptive_searches": 2,
+          "assessments": [
+            "SUFFICIENT",
+            "PARTIAL"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "NO_EXPECTED_GAIN"
+          ],
+          "hops": [],
+          "answer": "International applicants have applications processed within 30 working days. [INTL-2026 \u00a72] Not established: The retrieved documents do not say how this applies for domestic applicants instead.",
+          "citations": [
+            "INTL-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 3,
+          "claims_rejected": 1,
+          "citations_validated": 2,
+          "streamed_answer_events": 32,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "HYBRID",
+        "FILTERED",
+        "FILTERED",
+        "FILTERED"
+      ],
+      "untraceable": 0,
+      "events": 280,
+      "checks": [
+        {
+          "check": "re-plan FILTERED domestic",
+          "pass": false
+        },
+        {
+          "check": "cites DOM-2026 \u00a72",
+          "pass": false
+        }
+      ]
+    },
+    {
+      "name": "12_streaming_correction",
+      "turns": [
+        {
+          "utterance_id": "u1",
+          "plans": [
+            {
+              "strategy": "HYBRID",
+              "strategy_reason": "complexity MODERATE: ambiguous",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": null,
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['international']}",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            },
+            {
+              "strategy": "FILTERED",
+              "strategy_reason": "metadata constraint {'applicant_type': ['international']}",
+              "complexity": "MODERATE",
+              "top_k": 5,
+              "retrievers": [
+                "bm25",
+                "dense"
+              ],
+              "filters": {
+                "document_ids": null,
+                "section_ids": null,
+                "metadata": {
+                  "applicant_type": [
+                    "international"
+                  ]
+                },
+                "valid_at": null,
+                "valid_to": null
+              },
+              "reranking": false
+            }
+          ],
+          "cache": [
+            "CACHE_MISS",
+            "CACHE_MISS",
+            "CACHE_MISS"
+          ],
+          "invalidations": [],
+          "adaptive_searches": 1,
+          "assessments": [
+            "SUFFICIENT",
+            "SUFFICIENT",
+            "SUFFICIENT"
+          ],
+          "stops": [
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE",
+            "SUFFICIENT_EVIDENCE"
+          ],
+          "hops": [],
+          "answer": "International applicants have applications processed within 30 working days. [INTL-2026 \u00a72]",
+          "citations": [
+            "INTL-2026 \u00a72"
+          ],
+          "answer_status": "VALIDATED_FINAL",
+          "backend": "ollama",
+          "claims_verified": 5,
+          "claims_rejected": 2,
+          "citations_validated": 3,
+          "streamed_answer_events": 47,
+          "llm_calls": 1,
+          "turn_completed": true
+        }
+      ],
+      "strategies": [
+        "HYBRID",
+        "FILTERED",
+        "FILTERED"
+      ],
+      "untraceable": 0,
+      "events": 213,
+      "checks": [
+        {
+          "check": "last plan filters international",
+          "pass": true
+        },
+        {
+          "check": "cites INTL-2026 \u00a72",
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

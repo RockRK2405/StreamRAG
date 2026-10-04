@@ -18,6 +18,24 @@
           "default": null,
           "title": "Document Ids"
         },
+        "metadata": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata"
+        },
         "section_ids": {
           "anyOf": [
             {
@@ -32,6 +50,30 @@
           ],
           "default": null,
           "title": "Section Ids"
+        },
+        "valid_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid At"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid To"
         }
       },
       "title": "RetrievalFilters",

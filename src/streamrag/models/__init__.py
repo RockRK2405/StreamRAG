@@ -78,6 +78,7 @@ def _phase4_models() -> dict:
     from streamrag.answer_state.models import GroundedAnswer
     from streamrag.citations.models import Citation as GroundedCitation
     from streamrag.claims.models import ClaimPlan, ClaimVerification
+    from streamrag.adaptive import models as am
     return {"RetrievalDecision": RetrievalDecision, "QueryRecord": QueryRecord, "UnifiedEvidenceSet": UnifiedEvidenceSet,
             # Phase 6
             "SessionState": SessionState, "SessionStateVersion": SessionStateVersion, "SessionArchive": SessionArchive,
@@ -85,6 +86,12 @@ def _phase4_models() -> dict:
             "EvidenceAssignment": EvidenceAssignment,
             # Phase 7
             "GroundedAnswer": GroundedAnswer, "GroundedCitation": GroundedCitation, "ClaimPlan": ClaimPlan,
-            "ClaimVerification": ClaimVerification}
+            "ClaimVerification": ClaimVerification,
+            # Phase 9 (adaptive retrieval; "Adaptive" prefix: the Phase 4 controller owns RetrievalDecision)
+            "QueryAnalysis": am.QueryAnalysis, "RewrittenQuery": am.RewrittenQuery,
+            "EvidenceRequirement": am.EvidenceRequirement, "SufficiencyAssessment": am.SufficiencyAssessment,
+            "AdaptiveRetrievalPlan": am.RetrievalPlan, "AdaptiveRetrievalDecision": am.RetrievalDecision,
+            "RetrievalHop": am.RetrievalHop, "RetrievalState": am.RetrievalState,
+            "OperationCounts": am.OperationCounts}
 
 __all__ = [n for n in dir() if not n.startswith("_")]

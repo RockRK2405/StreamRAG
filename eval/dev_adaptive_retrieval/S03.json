@@ -1,0 +1,32 @@
+{
+  "case_id": "S03",
+  "corpus": "adaptive",
+  "category": "entity_correction",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Do applicants from Zemland need an interview?",
+      "gold": {
+        "citations": [
+          "ANNEX-C §1",
+          "GROUP-RULES §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Sorry, I meant Norvia, not Zemland.",
+      "gold": {
+        "citations": [
+          "ANNEX-C §1",
+          "GROUP-RULES §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

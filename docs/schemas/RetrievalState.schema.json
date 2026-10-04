@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "RetrievalStrategy": {
+      "enum": [
+        "FAST_VECTOR",
+        "LEXICAL",
+        "HYBRID",
+        "FILTERED",
+        "SEMANTIC",
+        "MULTI_HOP",
+        "ITERATIVE",
+        "CACHE_REUSE",
+        "SESSION_REUSE"
+      ],
+      "title": "RetrievalStrategy",
+      "type": "string"
+    },
+    "StopReason": {
+      "enum": [
+        "SUFFICIENT_EVIDENCE",
+        "LATENCY_LIMIT",
+        "QUERY_LIMIT",
+        "ITERATION_LIMIT",
+        "NO_EXPECTED_GAIN",
+        "CONTRADICTION",
+        "NO_RESULTS",
+        "ERROR",
+        "USER_CANCELLED"
+      ],
+      "title": "StopReason",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "budget_remaining": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Budget Remaining",
+      "type": "object"
+    },
+    "coverage": {
+      "default": 0.0,
+      "title": "Coverage",
+      "type": "number"
+    },
+    "current_strategy": {
+      "$ref": "#/$defs/RetrievalStrategy"
+    },
+    "evidence_count": {
+      "default": 0,
+      "title": "Evidence Count",
+      "type": "integer"
+    },
+    "evidence_quality": {
+      "default": 0.0,
+      "title": "Evidence Quality",
+      "type": "number"
+    },
+    "iteration": {
+      "default": 0,
+      "title": "Iteration",
+      "type": "integer"
+    },
+    "latency_spent_ms": {
+      "default": 0.0,
+      "title": "Latency Spent Ms",
+      "type": "number"
+    },
+    "queries_executed": {
+      "default": 0,
+      "title": "Queries Executed",
+      "type": "integer"
+    },
+    "stop_reason": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StopReason"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "current_strategy"
+  ],
+  "title": "RetrievalState",
+  "type": "object"
+}

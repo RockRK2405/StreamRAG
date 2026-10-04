@@ -1,0 +1,20 @@
+{
+  "case_id": "B03",
+  "corpus": "fixture",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the maximum number of crates a picker may fill per shift?",
+      "gold": {
+        "citations": [
+          "Doc_07 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

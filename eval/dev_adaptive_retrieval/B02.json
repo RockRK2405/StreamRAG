@@ -1,0 +1,20 @@
+{
+  "case_id": "B02",
+  "corpus": "fixture",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How often does the fog signal sound during a storm?",
+      "gold": {
+        "citations": [
+          "fixture_lighthouse_manual §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

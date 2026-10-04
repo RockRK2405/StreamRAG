@@ -1,0 +1,21 @@
+{
+  "case_id": "H18",
+  "corpus": "adaptive",
+  "category": "semantic",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How many days do international applicants wait for a decision?",
+      "gold": {
+        "citations": [
+          "INTL-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

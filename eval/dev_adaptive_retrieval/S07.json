@@ -1,0 +1,30 @@
+{
+  "case_id": "S07",
+  "corpus": "adaptive",
+  "category": "cross_query_reuse",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the application fee for a residence permit?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "Is there a reduced application fee for applicants under 25?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

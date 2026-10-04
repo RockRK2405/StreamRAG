@@ -77,6 +77,10 @@ class RuntimeRetrievalExecutor:
     # ------------------------------------------------------------------ executor interface (StreamingSession)
     def submit(self, job) -> None:
         rs = self.rs
+        rec0 = rs.session.ledger.get(job.query_id)
+        if rs.adaptive is not None and rec0 is not None and rec0.intent_id is not None:
+            self._submit_adaptive(job, rec0)
+            return
         try:
             plan = rs.service.plan(RetrievalRequest(query=job.query_text, options=job.options))
         except Exception as exc:                          # noqa: BLE001 - invalid query: reported, not raised
@@ -96,6 +100,71 @@ class RuntimeRetrievalExecutor:
                                meta={"query_id": job.query_id, "intent_id": rec.intent_id, "kind": kind})
             q.task_ids[kind] = task.task_id
             rs.scheduler.submit(task, self._work(kind, plan), lambda r, k=kind, qid=job.query_id: self._part_done(qid, k, r))
+
+    # ------------------------------------------------------------------ Phase 9: adaptive retrieval task
+    def _submit_adaptive(self, job, rec) -> None:
+        """One RETRIEVAL task runs the adaptive controller for the need (docs/architecture/13 §runtime): the session
+        snapshot is taken here, on the loop; the controller runs on a retrieval worker with the task's cancellation
+        checkpoint and the remaining deadline as its latency budget; its buffered events are emitted on the loop
+        when the result is committed through the StateCoordinator (stale results are discarded as before)."""
+        from types import SimpleNamespace
+        rs = self.rs
+        ad, mi = rs.adaptive, rs.session.mi
+        now = rs.runtime.clock.now_ms()
+        for inv in ad.sync_changes(mi.engine.changes, mi.tracker, now):
+            rs.emit(E.RETRIEVAL_INVALIDATED, "adaptive_retrieval", inv, rec.utterance_id)
+        view = ad.view(mi.engine, dict(rs.session.evidence), mi.tracker)
+        changes = [c for c in mi.engine.changes if c.utterance_id == rec.utterance_id]
+        action = SimpleNamespace(intent_id=rec.intent_id, query=SimpleNamespace(text=job.query_text))
+        q = self.agg.queries[job.query_id] = _QueryJob(job, None, ["adaptive"], time.perf_counter())
+        cause = rs.bus.anchor("query", job.query_id)
+        task = rs.new_task(TaskType.RETRIEVAL, rs.retrieval_priority(rec), rec.utterance_id, cause,
+                           idempotency_key=f"{rs.session_id}:{rs.state.epoch}:adaptive:{job.query_id}",
+                           meta={"query_id": job.query_id, "intent_id": rec.intent_id, "kind": "adaptive"})
+        q.task_ids["adaptive"] = task.task_id
+        budget = None if task.deadline_ms is None else max(1.0, task.deadline_ms - now)
+        faults, sid = rs.faults, rs.session_id
+
+        def run(wctx):
+            if faults is not None:
+                faults.hit("network", wctx, sid)
+            wctx.checkpoint()
+            # injected dense faults apply to every dense search of the controller (as to every dense subtask of the
+            # fixed path); the wait is cancellation-aware
+            hook = None if faults is None else (lambda spec: faults.hit("dense", wctx, sid)
+                                                if "dense" in spec.retrievers else None)
+            req = ad.request(job.query_id, action, mi.tracker, view, changes, latency_budget_ms=budget,
+                             checkpoint=wctx.checkpoint, now_ms=now, search_hook=hook)
+            return ad.run(req)
+
+        rs.scheduler.submit(task, run, lambda r, qid=job.query_id: self._adaptive_done(qid, r))
+
+    def _adaptive_done(self, qid: str, r) -> None:
+        rs = self.rs
+        q = self.agg.queries.get(qid)
+        if q is None or q.done and q.cancel_reason == "superseded_before_start":
+            return
+        q.wall_ms += float(r.metadata.get("exec_ms") or 0.0)
+        q.statuses["adaptive"] = r.status
+        if q.cancel_reason is not None or r.status == TaskStatus.CANCELLED:
+            self._finish_cancelled(qid, q)
+            return
+        if not r.ok:
+            self._fail(qid, q, r.error or r.status.value)
+            return
+        res = r.result
+        rec = rs.session.ledger.get(qid)
+        with rs.bus.dispatch(cause=rs.task_event(r.task_id), task_id=r.task_id):
+            for t, payload in res.events:
+                rs.emit(E[t], "adaptive_retrieval", payload, rec.utterance_id, intent_id=rec.intent_id,
+                        query_id=qid)
+        if res.state.stop_reason is not None and res.state.stop_reason.value == "ERROR" and not res.evidence.items:
+            self._fail(qid, q, next((s["error"] for s in res.searches if s["error"]), "adaptive_error"))
+            return
+        bt = rs.adaptive.bridge_terms(res)
+        if bt and rs.query_current(qid):
+            rs.session.mi.engine.retrieval_terms[rec.intent_id] = bt
+        self._commit(qid, q, r, res.evidence)
 
     def cancel_queued(self, qid: str) -> bool:
         """True only if none of the query's subtasks had started (Phase 4 'never ran' semantics)."""

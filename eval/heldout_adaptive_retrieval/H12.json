@@ -1,0 +1,22 @@
+{
+  "case_id": "H12",
+  "corpus": "adaptive",
+  "category": "multi_hop",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What extra documents do applicants from Estria provide?",
+      "gold": {
+        "citations": [
+          "ANNEX-C §1",
+          "GROUP-RULES §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

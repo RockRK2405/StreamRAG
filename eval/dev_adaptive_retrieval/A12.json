@@ -1,0 +1,21 @@
+{
+  "case_id": "A12",
+  "corpus": "adaptive",
+  "category": "exact_keyword",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "When is the PPO closed?",
+      "gold": {
+        "citations": [
+          "FORMS §2",
+          "HOLIDAYS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "H08",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Where are business licence applications submitted?",
+      "gold": {
+        "citations": [
+          "BIZ-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

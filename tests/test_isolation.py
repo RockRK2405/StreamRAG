@@ -15,7 +15,7 @@ NETWORK_MODULES = {"socket", "urllib", "http", "requests", "httpx", "aiohttp", "
                    "smtplib", "websocket", "websockets", "streamrag.tools"}
 ISOLATED_PACKAGES = ["corpus", "retrieval", "models", "config", "telemetry", "bench", "streaming", "controller",
                      "ledger", "replay", "intents", "multi_retrieval", "fusion", "session", "context", "delta",
-                     "claims", "answers", "citations", "validation", "answer_state", "runtime"]
+                     "claims", "answers", "citations", "validation", "answer_state", "runtime", "adaptive"]
 # Phase 7: ``generation`` is the one package that opens a socket - to the local LLM server only (loopback URLs are
 # enforced by GroundingResources.build; tests/generation/test_generation.py::test_llm_url_must_be_loopback).
 LOOPBACK_ONLY = ["generation"]

@@ -1,0 +1,31 @@
+{
+  "case_id": "S01",
+  "corpus": "adaptive",
+  "category": "contextual_follow_up",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What are the eligibility requirements for a residence permit?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "What about international applicants?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §1",
+          "INTL-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

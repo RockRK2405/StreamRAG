@@ -136,6 +136,7 @@ class RuntimeSession:
     # ------------------------------------------------------------------ construction / reset
     def _build(self) -> None:
         rt = self.runtime
+        self.adaptive = None                    # Phase 9: set below when adaptive retrieval is enabled
         self.executor = RuntimeRetrievalExecutor(self)
         stack = None
         if self.cfg.multi_intent.enabled:
@@ -157,6 +158,9 @@ class RuntimeSession:
             mem = mi.engine.memory
             self.state.checkpoint = mem.create_snapshot
             self.state.restore = mem.restore_snapshot
+            if self.cfg.adaptive_retrieval.enabled:
+                from streamrag.adaptive.integration import SessionAdaptiveRetriever
+                self.adaptive = SessionAdaptiveRetriever(self.service, self.cfg, parallel=False, inline_dense=True)
 
     # ------------------------------------------------------------------ helpers used by executor / lane
     def emit(self, type_, component: str, payload: dict, uid: str | None = None, intent_id: str | None = None,

@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "conflicts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "coverage": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Coverage",
+      "type": "number"
+    },
+    "met": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Met",
+      "type": "array"
+    },
+    "quality": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Quality",
+      "type": "number"
+    },
+    "reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "resolved_conflicts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Resolved Conflicts",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "SUFFICIENT",
+        "PARTIAL",
+        "INSUFFICIENT",
+        "CONTRADICTORY"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "unattainable": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Unattainable",
+      "type": "array"
+    },
+    "unmet": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Unmet",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "coverage",
+    "quality"
+  ],
+  "title": "SufficiencyAssessment",
+  "type": "object"
+}

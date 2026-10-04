@@ -76,6 +76,9 @@ class AdaptiveSessionEngine:
                                     {"config_hash": config_hash, "index_content_hash": index_hash,
                                      "delta_scope": sc.delta_scope, "cache": sc.cache, "full_restart": full_restart})
         self.known: dict[str, Intent] = {}
+        # Phase 9: terms an adaptive multi-hop retrieval linked to the need ("Ruritania" -> "Zone 2"): the bridge
+        # target's words also make a sentence relevant to the need (bounded: <= 6 words per hop, sanitised)
+        self.retrieval_terms: dict[str, list[str]] = {}
         self.pre_change_status: dict[str, str] = {}          # claim status before the pending change(s)
         self.pending_changes: list[ContextChange] = []
         self.pending_queries: list[str] = []
@@ -253,8 +256,12 @@ class AdaptiveSessionEngine:
             self.cache.put(self.cache.key(q.terms), query_id, [e.evidence_id for e in es.items])
         self.timings["evidence_update"].append((time.perf_counter() - t0) * 1000.0)
         t1 = time.perf_counter()
-        cands = self.extractor.select(q.terms if q else self.terms_fn(it.resolved_text), self.store, intent_id,
+        own_terms = list(q.terms if q else self.terms_fn(it.resolved_text))
+        bridge = [t for t in self.retrieval_terms.get(intent_id, []) if t not in own_terms]   # Phase 9 hop targets
+        cands = self.extractor.select(own_terms + bridge, self.store, intent_id,
                                       self.terms_fn(it.topic) if it.topic else None)
+        if bridge:      # a sentence relevant only through the bridge words is about another entity of the class
+            cands = [c for c in cands if set(self.terms_fn(c.text)) & set(own_terms)]
         frame = self.frames.frame_of(intent_id)
         prev_sel = list(self.graph.selected.get(intent_id, []))
         new_sel = []

@@ -228,6 +228,8 @@ class AnswerLane:
                         self.finals[req.uid] = ga
                         self.coord.grounded[req.uid] = ga
                         self._last_final = ga
+                        if rs.adaptive is not None:             # Phase 9: verified claims -> claim cache
+                            rs.adaptive.on_grounded(ga)
                         rs.emit(E.ANSWER_COMMITTED, "answer_lane",
                                 {"answer_id": ga.answer_id, "version": ga.version, "status": ga.status,
                                  "partial": ga.partial, "mode": req.mode, "backend": ga.backend,

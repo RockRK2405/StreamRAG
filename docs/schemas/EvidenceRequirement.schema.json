@@ -1,0 +1,167 @@
+{
+  "additionalProperties": false,
+  "description": "What evidence a claim of the answer needs (claim-driven retrieval, docs/retrieval/05).",
+  "properties": {
+    "alternatives": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "default": {},
+      "title": "Alternatives",
+      "type": "object"
+    },
+    "claim_slot": {
+      "title": "Claim Slot",
+      "type": "string"
+    },
+    "constraint_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraint Terms",
+      "type": "array"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "key_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Key Terms",
+      "type": "array"
+    },
+    "kind": {
+      "enum": [
+        "value",
+        "fact",
+        "condition",
+        "bridge",
+        "comparison_item",
+        "definition"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "default": {},
+      "title": "Metadata",
+      "type": "object"
+    },
+    "min_sources": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Min Sources",
+      "type": "integer"
+    },
+    "query_text": {
+      "default": "",
+      "title": "Query Text",
+      "type": "string"
+    },
+    "requirement_id": {
+      "title": "Requirement Id",
+      "type": "string"
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution"
+    },
+    "status": {
+      "default": "UNMET",
+      "enum": [
+        "UNMET",
+        "MET",
+        "CONFLICT"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Terms",
+      "type": "array"
+    },
+    "valid_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid At"
+    },
+    "valid_to": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid To"
+    },
+    "value_kind": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Kind"
+    },
+    "values": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "default": {},
+      "title": "Values",
+      "type": "object"
+    }
+  },
+  "required": [
+    "requirement_id",
+    "claim_slot",
+    "kind"
+  ],
+  "title": "EvidenceRequirement",
+  "type": "object"
+}

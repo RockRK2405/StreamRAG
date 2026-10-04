@@ -1,0 +1,20 @@
+{
+  "case_id": "A20",
+  "corpus": "adaptive",
+  "category": "constraint",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How long does processing take for international applicants?",
+      "gold": {
+        "citations": [
+          "INTL-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

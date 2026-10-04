@@ -1,0 +1,22 @@
+{
+  "case_id": "A40",
+  "corpus": "adaptive",
+  "category": "ambiguous",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What about the fee?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2",
+          "BIZ-2026 §2",
+          "VEH-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

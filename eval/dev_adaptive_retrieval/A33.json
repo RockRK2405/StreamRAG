@@ -1,0 +1,21 @@
+{
+  "case_id": "A33",
+  "corpus": "adaptive",
+  "category": "multi_intent",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How much is the vehicle registration fee and what documents are needed for registration?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §1",
+          "VEH-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

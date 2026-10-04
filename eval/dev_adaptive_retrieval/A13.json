@@ -1,0 +1,21 @@
+{
+  "case_id": "A13",
+  "corpus": "adaptive",
+  "category": "exact_keyword",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Which form is used to renew a residence permit?",
+      "gold": {
+        "citations": [
+          "FORMS §1",
+          "RENEW §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

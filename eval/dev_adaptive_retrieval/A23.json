@@ -1,0 +1,20 @@
+{
+  "case_id": "A23",
+  "corpus": "adaptive",
+  "category": "temporal",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What was the application fee in December 2025?",
+      "gold": {
+        "citations": [
+          "ELIG-2024 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

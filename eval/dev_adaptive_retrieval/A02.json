@@ -1,0 +1,20 @@
+{
+  "case_id": "A02",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How old must applicants be?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

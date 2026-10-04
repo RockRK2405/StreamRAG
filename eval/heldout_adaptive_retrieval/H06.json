@@ -1,0 +1,21 @@
+{
+  "case_id": "H06",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How often must vehicles older than four years be inspected?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

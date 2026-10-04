@@ -1,0 +1,20 @@
+{
+  "case_id": "A01",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the application fee for a residence permit?",
+      "gold": {
+        "citations": [
+          "ELIG-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

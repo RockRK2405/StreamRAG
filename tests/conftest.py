@@ -41,3 +41,21 @@ def cfg_factory(tmp_path):
     def factory(**kw):
         return make_cfg(tmp_path, **kw)
     return factory
+
+
+# ---------------------------------------------------------------- Phase 9 adaptive retrieval
+ADAPTIVE_CORPUS = FIX / "corpus_adaptive"
+REFERENCE_DATE = "2026-10-03"
+
+
+@pytest.fixture(scope="session")
+def adaptive_env(tmp_path_factory):
+    """(cfg, service) over the Phase 9 fixture corpus with the deterministic hashing embedder."""
+    from streamrag.retrieval import RetrievalService
+    tmp = tmp_path_factory.mktemp("adaptive")
+    cfg = make_cfg(tmp, corpus=ADAPTIVE_CORPUS, **{"adaptive_retrieval.enabled": True,
+                                                    "adaptive_retrieval.reference_date": REFERENCE_DATE})
+    b = build_index(cfg)
+    svc = RetrievalService.from_config(cfg, index_path=b.path)
+    yield cfg, svc
+    svc.close()

@@ -1,0 +1,67 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "bridge": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bridge"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "hop_id": {
+      "title": "Hop Id",
+      "type": "string"
+    },
+    "parent_hop_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Hop Id"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "query": {
+      "title": "Query",
+      "type": "string"
+    },
+    "status": {
+      "default": "PLANNED",
+      "enum": [
+        "PLANNED",
+        "COMPLETED",
+        "FAILED",
+        "SKIPPED"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "hop_id",
+    "query",
+    "purpose"
+  ],
+  "title": "RetrievalHop",
+  "type": "object"
+}

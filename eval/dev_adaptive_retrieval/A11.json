@@ -1,0 +1,20 @@
+{
+  "case_id": "A11",
+  "corpus": "adaptive",
+  "category": "exact_keyword",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Who has to present Form VR-12?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

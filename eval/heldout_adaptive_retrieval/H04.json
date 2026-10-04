@@ -1,0 +1,21 @@
+{
+  "case_id": "H04",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Is address registration free of charge?",
+      "gold": {
+        "citations": [
+          "ADDRESS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

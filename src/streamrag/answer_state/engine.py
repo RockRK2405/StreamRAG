@@ -287,6 +287,8 @@ class GroundedAnswerEngine:
             new = [(c, claims[c].text) for c in ids if claims[c].origin != "kept" and claims[c].kind == "fact"]
             old = [(c, claims[c].text) for c in ids if claims[c].origin == "kept" and claims[c].kind == "fact"]
             for a, b in self.consistency.conflicts(new, old):
+                if a not in sec_claims[s.section_id]:
+                    continue                            # already removed: one claim can contradict several others
                 consistency_pairs.append((a, b))
                 ea, eb = set(claims[a].evidence_ids), set(claims[b].evidence_ids)
                 if ea and eb and not ea & eb:                    # different sources disagree: present both

@@ -13,6 +13,13 @@ from streamrag.models.base import Contract
 class RetrievalFilters(Contract):
     document_ids: list[str] | None = None
     section_ids: list[str] | None = None   # matched against "<document_id>§<section_id>" or bare section ids
+    # Phase 9: document metadata. field -> allowed values; a document without the field (or with value "all")
+    # applies to everyone and passes. ``valid_at`` (ISO date): effective_date <= valid_at <= valid_until; with
+    # ``valid_to`` the question is about a period: the document's validity window must overlap [valid_at, valid_to].
+    # A publication date is never a validity start.
+    metadata: dict[str, list[str]] | None = None
+    valid_at: str | None = None
+    valid_to: str | None = None
 
 
 class RetrievalOptions(Contract):

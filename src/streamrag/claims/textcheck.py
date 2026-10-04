@@ -62,7 +62,8 @@ _VALUE_PATTERNS = {
                             re.I),
     "time": re.compile(r"\b(january|february|march|april|may|june|july|august|september|october|november|december|"
                        r"monday|tuesday|wednesday|thursday|friday|saturday|sunday|morning|evening|night|noon|midnight|"
-                       r"sunset|sunrise|dawn|dusk|week|month|year|season|\d{1,2}(:\d{2})?\s*(am|pm)|\d{4})\b", re.I),
+                       r"sunset|sunrise|dawn|dusk|week|month|year|season|weekdays?|weekends?|holidays?|\d{1,2}(:\d{2})?\s*(am|pm)|"
+                       r"\d{1,2}:\d{2}|\d{4})\b", re.I),
     "age": re.compile(rf"\b{_NUMWORD}\s+years?\s+old\b|\b(?:at least|under|over|older than|younger than)\s+\d+", re.I),
     "measure": re.compile(r"\b\d+(?:[.,]\d+)?\s*(millimet(re|er)s?|mm|centimet(re|er)s?|cm|met(re|er)s?|m|"
                           r"kilomet(re|er)s?|km|grams?|g|kilograms?|kg|litres?|liters?|l|feet|foot|ft|inch(es)?|"

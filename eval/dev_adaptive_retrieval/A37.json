@@ -1,0 +1,18 @@
+{
+  "case_id": "A37",
+  "corpus": "adaptive",
+  "category": "insufficient",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How much does it cost to renew a residence permit?",
+      "gold": {
+        "citations": [],
+        "expect": "INSUFFICIENT"
+      }
+    }
+  ]
+}

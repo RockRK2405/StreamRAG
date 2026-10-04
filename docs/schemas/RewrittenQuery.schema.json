@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "Expansion": {
+      "additionalProperties": false,
+      "properties": {
+        "for_term": {
+          "title": "For Term",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "synonym",
+            "acronym",
+            "alias"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "term": {
+          "title": "Term",
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "source",
+        "for_term",
+        "reason"
+      ],
+      "title": "Expansion",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Rewrites never change the need: every content term of ``contextual`` is kept in the retrieval queries\n(a test checks the invariant); expansions are additive and bounded.",
+  "properties": {
+    "contextual": {
+      "title": "Contextual",
+      "type": "string"
+    },
+    "dense_query": {
+      "title": "Dense Query",
+      "type": "string"
+    },
+    "dropped_entities": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Dropped Entities",
+      "type": "array"
+    },
+    "expanded": {
+      "title": "Expanded",
+      "type": "string"
+    },
+    "expansions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Expansion"
+      },
+      "title": "Expansions",
+      "type": "array"
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "lexical_query": {
+      "title": "Lexical Query",
+      "type": "string"
+    },
+    "normalized": {
+      "title": "Normalized",
+      "type": "string"
+    },
+    "original": {
+      "title": "Original",
+      "type": "string"
+    }
+  },
+  "required": [
+    "original",
+    "normalized",
+    "contextual",
+    "expanded",
+    "lexical_query",
+    "dense_query"
+  ],
+  "title": "RewrittenQuery",
+  "type": "object"
+}

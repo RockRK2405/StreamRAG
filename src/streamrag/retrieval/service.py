@@ -37,6 +37,27 @@ _METHOD = {("bm25", False): "bm25", ("dense", False): "dense", ("hybrid", False)
            ("bm25", True): "bm25_rerank", ("dense", True): "dense_rerank", ("hybrid", True): "hybrid_rrf_rerank"}
 
 
+def doc_matches(meta: dict, fields: dict[str, list[str]] | None, valid_at: str | None,
+                valid_to: str | None = None) -> bool:
+    """Phase 9 metadata filter. A document without a field, or with the value "all", applies to everyone. Validity:
+    the document's [effective_date, valid_until] window must contain ``valid_at`` (or overlap [valid_at, valid_to]);
+    a document without validity dates passes."""
+    for k, allowed in (fields or {}).items():
+        v = meta.get(k)
+        if v is None:
+            continue
+        vals = {x.strip().lower() for x in str(v).split(",")}
+        if "all" not in vals and not vals & {a.lower() for a in allowed}:
+            return False
+    if valid_at:
+        start, end = meta.get("effective_date"), meta.get("valid_until")
+        if start is not None and str(start) > (valid_to or valid_at):
+            return False
+        if end is not None and str(end) < valid_at:
+            return False
+    return True
+
+
 @dataclass
 class RetrievalPlan:
     request: RetrievalRequest
@@ -67,6 +88,11 @@ class RetrievalService:
         self._executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="streamrag-retrieval")
         chunks = bundle.chunks
         self._doc_ids = np.array([c.document_id for c in chunks], dtype=object)
+        # Phase 9: document metadata (filters, validity dates, evidence metadata)
+        try:
+            self.doc_meta: dict[str, dict] = {d.document_id: dict(d.metadata) for d in bundle.documents()}
+        except (OSError, AttributeError):
+            self.doc_meta = {}
         self._citations = np.array([c.citation for c in chunks], dtype=object)
         self._section_ids = np.array([c.section_id for c in chunks], dtype=object)
 
@@ -128,9 +154,12 @@ class RetrievalService:
             raise InvalidQueryError("query is empty")
 
     def _mask(self, f: RetrievalFilters | None) -> np.ndarray | None:
-        if f is None or (f.document_ids is None and f.section_ids is None):
+        if f is None or (f.document_ids is None and f.section_ids is None and not f.metadata and not f.valid_at):
             return None
         mask = np.ones(len(self.bundle.chunks), dtype=bool)
+        if f.metadata or f.valid_at:
+            ok = {d for d, m in self.doc_meta.items() if doc_matches(m, f.metadata, f.valid_at, f.valid_to)}
+            mask &= np.isin(self._doc_ids, list(ok))
         if f.document_ids is not None:
             mask &= np.isin(self._doc_ids, list(f.document_ids))
         if f.section_ids is not None:
@@ -310,4 +339,5 @@ class RetrievalService:
             bm25_score=c.lex_score, bm25_rank=c.lex_rank, dense_score=c.dense_score, dense_rank=c.dense_rank,
             rrf_score=c.rrf, rerank_score=c.rerank,
             alternates=[chunks[r].chunk_id for r in c.alternates], overlaps_with=[chunks[r].chunk_id for r in c.overlaps],
-            metadata={"title": ch.title, "token_count": ch.token_count, "part": ch.part})
+            metadata={**{k: v for k, v in self.doc_meta.get(ch.document_id, {}).items()},
+                      "title": ch.title, "token_count": ch.token_count, "part": ch.part})

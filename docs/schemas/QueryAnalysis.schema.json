@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "QueryComplexity": {
+      "enum": [
+        "SIMPLE",
+        "MODERATE",
+        "COMPLEX",
+        "MULTI_HOP"
+      ],
+      "title": "QueryComplexity",
+      "type": "string"
+    },
+    "TemporalSpec": {
+      "additionalProperties": false,
+      "description": "What point in time a question is about. ``valid_at`` is compared with document validity windows\n(effective_date <= valid_at <= valid_until); a publication date is never used as the validity start.",
+      "properties": {
+        "cue": {
+          "default": "",
+          "title": "Cue",
+          "type": "string"
+        },
+        "explicit": {
+          "default": false,
+          "title": "Explicit",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "none",
+          "enum": [
+            "none",
+            "current",
+            "past",
+            "as_of"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "valid_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid At"
+        }
+      },
+      "title": "TemporalSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "ambiguous": {
+      "default": false,
+      "title": "Ambiguous",
+      "type": "boolean"
+    },
+    "bridge_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Bridge Terms",
+      "type": "array"
+    },
+    "comparison": {
+      "default": false,
+      "title": "Comparison",
+      "type": "boolean"
+    },
+    "complexity": {
+      "$ref": "#/$defs/QueryComplexity"
+    },
+    "constraint_texts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraint Texts",
+      "type": "array"
+    },
+    "context_dependent": {
+      "default": false,
+      "title": "Context Dependent",
+      "type": "boolean"
+    },
+    "entities": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Entities",
+      "type": "array"
+    },
+    "exact_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Exact Ids",
+      "type": "array"
+    },
+    "metadata_filters": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "default": {},
+      "title": "Metadata Filters",
+      "type": "object"
+    },
+    "n_intents": {
+      "default": 1,
+      "minimum": 1,
+      "title": "N Intents",
+      "type": "integer"
+    },
+    "oov_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Oov Terms",
+      "type": "array"
+    },
+    "query_id": {
+      "title": "Query Id",
+      "type": "string"
+    },
+    "question_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Question Terms",
+      "type": "array"
+    },
+    "rare_terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Rare Terms",
+      "type": "array"
+    },
+    "reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "signals": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Signals",
+      "type": "object"
+    },
+    "temporal": {
+      "$ref": "#/$defs/TemporalSpec",
+      "default": {
+        "cue": "",
+        "explicit": false,
+        "kind": "none",
+        "valid_at": null
+      }
+    },
+    "terms": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Terms",
+      "type": "array"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "value_kind": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Kind"
+    }
+  },
+  "required": [
+    "query_id",
+    "text",
+    "complexity"
+  ],
+  "title": "QueryAnalysis",
+  "type": "object"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "A35",
+  "corpus": "adaptive",
+  "category": "contradiction",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What time does the PPO open on weekdays?",
+      "gold": {
+        "citations": [
+          "NOTICE-A §1",
+          "NOTICE-B §1"
+        ],
+        "expect": "CONTRADICTORY"
+      }
+    }
+  ]
+}

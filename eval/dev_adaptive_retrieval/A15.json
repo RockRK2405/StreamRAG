@@ -1,0 +1,20 @@
+{
+  "case_id": "A15",
+  "corpus": "adaptive",
+  "category": "semantic",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Is there any way to avoid paying the permit charge?",
+      "gold": {
+        "citations": [
+          "WAIVERS §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

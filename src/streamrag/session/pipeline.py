@@ -22,6 +22,7 @@ from streamrag.delta.models import DeltaPlan
 from streamrag.intents.tracker import IntentTracker
 from streamrag.ledger.ledger import QueryLedger
 from streamrag.models.answers import AnswerVersion
+from streamrag.models.events import EventType as E
 from streamrag.models.events import TelemetryEvent
 from streamrag.models.retrieval import RetrievalOptions
 from streamrag.multi_retrieval import MultiQueryRetriever
@@ -44,6 +45,7 @@ class TurnResult:
     timings_ms: dict[str, float] = field(default_factory=dict)
     queries: dict[str, str] = field(default_factory=dict)       # intent id -> active query text after the turn
     grounded: object = None                                     # Phase 7 GroundedAnswer (generation.enabled)
+    adaptive: list = field(default_factory=list)                # Phase 9 AdaptiveResult per executed query
 
 
 class AdaptivePipeline:
@@ -64,6 +66,10 @@ class AdaptivePipeline:
                                              max_concurrent=self.cfg.multi_intent.max_concurrent_retrievals)
         self.dispatch = dispatch
         self.evidence: dict[str, object] = {}
+        self.adaptive = None                                     # Phase 9: adaptive retrieval (docs/architecture/13)
+        if self.cfg.adaptive_retrieval.enabled:
+            from streamrag.adaptive.integration import SessionAdaptiveRetriever
+            self.adaptive = SessionAdaptiveRetriever(stack.service, self.cfg, parallel=True)
         self.results: list[TurnResult] = []
         self.grounding = None                                    # Phase 7: grounded answers after every turn
         if self.cfg.generation.enabled:
@@ -73,6 +79,8 @@ class AdaptivePipeline:
 
     def close(self) -> None:
         self.retriever.close()
+        if self.adaptive is not None:
+            self.adaptive.close()
 
     @property
     def events(self) -> list[TelemetryEvent]:
@@ -129,6 +137,9 @@ class AdaptivePipeline:
         else:
             res.plan = plan
             res.changes = [c for c in self.engine.changes if c.change_id in plan.change_ids]
+            if self.adaptive is not None:
+                for inv in self.adaptive.sync_changes(self.engine.changes, self.tracker, now):
+                    self._emit(E.RETRIEVAL_INVALIDATED, "adaptive_retrieval", inv, uid)
             t1 = time.perf_counter()
             self._execute(plan, uid, now, res)
             timings["retrieval"] = (time.perf_counter() - t1) * 1000.0
@@ -137,6 +148,8 @@ class AdaptivePipeline:
             t_g = time.perf_counter()
             res.grounded = self.grounding.answer(res.answer, self.grounding_context(uid, now), now)
             timings["grounded_answer"] = (time.perf_counter() - t_g) * 1000.0
+            if self.adaptive is not None:
+                self.adaptive.on_grounded(res.grounded)
         for k, v in self.engine.timings.items():
             new = v[n_t.get(k, 0):]
             if new:
@@ -202,6 +215,9 @@ class AdaptivePipeline:
                 res.reused_active += 1
         if not creates:
             return
+        if self.adaptive is not None:
+            self._execute_adaptive(creates, uid, now, res)
+            return
         out = self.retriever.retrieve([a.query for a, _ in creates], self.dispatch)
         by = out.by_intent()
         for a, rec in creates:
@@ -216,6 +232,37 @@ class AdaptivePipeline:
                                citations=[e.citation for e in o.evidence.items])
             self.engine.on_result(a.intent_id, rec.query_id, o.evidence, now, uid)
         res.retrievals += len(creates)
+
+
+    def _execute_adaptive(self, creates, uid: str, now: float, res: TurnResult) -> None:
+        """Phase 9: one adaptive controller run per need (strategy, k, iterations, reuse decided per need)."""
+        ad = self.adaptive
+        view = ad.view(self.engine, self.evidence, self.tracker)
+        reqs = [ad.request(rec.query_id, a, self.tracker, view, res.changes, now_ms=now) for a, rec in creates]
+        if self.dispatch == "parallel" and len(reqs) > 1:
+            outs = list(self.retriever._pool.map(ad.run, reqs))
+        else:
+            outs = [ad.run(r) for r in reqs]
+        for (a, rec), r in zip(creates, outs):
+            for t, payload in r.events:
+                self._emit(E[t], "adaptive_retrieval", payload, uid, a.intent_id, rec.query_id)
+            es = r.evidence
+            if r.state.stop_reason is not None and r.state.stop_reason.value == "ERROR" and not es.items:
+                self.ledger.update(rec.query_id, status="failed", retrieval_status="error",
+                                   error=next((s["error"] for s in r.searches if s["error"]), "adaptive_error"))
+                res.adaptive.append(r)
+                continue
+            self.evidence[rec.query_id] = es
+            self.ledger.update(rec.query_id, status="completed", retrieval_status=es.trace.status,
+                               evidence_ids=[e.evidence_id for e in es.items], evidence_set_id=es.evidence_set_id,
+                               citations=[e.citation for e in es.items])
+            bt = ad.bridge_terms(r)
+            if bt:
+                self.engine.retrieval_terms[a.intent_id] = bt
+            self.engine.on_result(a.intent_id, rec.query_id, es, now, uid)
+            res.adaptive.append(r)
+            res.retrievals += 1 if r.ops.searches else 0
+            res.cache_hits += 1 if r.ops.cache_hits or r.ops.session_reuse else 0
 
 
 class FullRestartPipeline:

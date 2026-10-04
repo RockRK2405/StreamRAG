@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "RetrievalFilters": {
+      "additionalProperties": false,
+      "properties": {
+        "document_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Ids"
+        },
+        "metadata": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata"
+        },
+        "section_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section Ids"
+        },
+        "valid_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid At"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid To"
+        }
+      },
+      "title": "RetrievalFilters",
+      "type": "object"
+    },
+    "RetrievalStrategy": {
+      "enum": [
+        "FAST_VECTOR",
+        "LEXICAL",
+        "HYBRID",
+        "FILTERED",
+        "SEMANTIC",
+        "MULTI_HOP",
+        "ITERATIVE",
+        "CACHE_REUSE",
+        "SESSION_REUSE"
+      ],
+      "title": "RetrievalStrategy",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evidence_threshold": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Evidence Threshold",
+      "type": "number"
+    },
+    "filters": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RetrievalFilters"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intent Id"
+    },
+    "latency_budget_ms": {
+      "exclusiveMinimum": 0,
+      "title": "Latency Budget Ms",
+      "type": "number"
+    },
+    "max_iterations": {
+      "minimum": 1,
+      "title": "Max Iterations",
+      "type": "integer"
+    },
+    "max_top_k": {
+      "minimum": 1,
+      "title": "Max Top K",
+      "type": "integer"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "query_id": {
+      "title": "Query Id",
+      "type": "string"
+    },
+    "requirements": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Requirements",
+      "type": "array"
+    },
+    "rerank_reason": {
+      "default": "",
+      "title": "Rerank Reason",
+      "type": "string"
+    },
+    "reranking": {
+      "default": false,
+      "title": "Reranking",
+      "type": "boolean"
+    },
+    "retrievers": {
+      "default": [],
+      "items": {
+        "enum": [
+          "bm25",
+          "dense"
+        ],
+        "type": "string"
+      },
+      "title": "Retrievers",
+      "type": "array"
+    },
+    "stop_condition": {
+      "title": "Stop Condition",
+      "type": "string"
+    },
+    "strategy": {
+      "$ref": "#/$defs/RetrievalStrategy"
+    },
+    "strategy_reason": {
+      "title": "Strategy Reason",
+      "type": "string"
+    },
+    "top_k": {
+      "minimum": 1,
+      "title": "Top K",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "plan_id",
+    "query_id",
+    "strategy",
+    "strategy_reason",
+    "top_k",
+    "max_top_k",
+    "max_iterations",
+    "latency_budget_ms",
+    "evidence_threshold",
+    "stop_condition"
+  ],
+  "title": "RetrievalPlan",
+  "type": "object"
+}

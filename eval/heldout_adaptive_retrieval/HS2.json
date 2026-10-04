@@ -1,0 +1,31 @@
+{
+  "case_id": "HS2",
+  "corpus": "adaptive",
+  "category": "repeated_question",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the processing time for international applicants?",
+      "gold": {
+        "citations": [
+          "INTL-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "What is the processing time for international applicants?",
+      "gold": {
+        "citations": [
+          "INTL-2026 §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

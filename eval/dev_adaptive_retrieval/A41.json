@@ -1,0 +1,22 @@
+{
+  "case_id": "A41",
+  "corpus": "adaptive",
+  "category": "ambiguous",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How long does it take?",
+      "gold": {
+        "citations": [
+          "DOM-2026 §2",
+          "INTL-2026 §2",
+          "BIZ-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

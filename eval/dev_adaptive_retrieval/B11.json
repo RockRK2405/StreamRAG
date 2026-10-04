@@ -1,0 +1,21 @@
+{
+  "case_id": "B11",
+  "corpus": "conflict",
+  "category": "contradiction",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Below which wind speed does the observatory open its dome?",
+      "gold": {
+        "citations": [
+          "fixture_dome_notes_new §1",
+          "fixture_dome_notes_old §1"
+        ],
+        "expect": "CONTRADICTORY"
+      }
+    }
+  ]
+}

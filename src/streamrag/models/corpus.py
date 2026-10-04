@@ -57,6 +57,7 @@ class CorpusDocument(Contract):
     page_offsets: list[tuple[int, int, int]] = []   # (page_number, char_start, char_end)
     sections: list[CorpusSection] = []
     normalization_log: list[str] = []  # e.g. removed headers/footers, encoding fallbacks
+    metadata: dict[str, str | int | float | bool] = {}   # Phase 9: sanitised whitelisted front matter
 
 
 class CorpusChunk(Contract):

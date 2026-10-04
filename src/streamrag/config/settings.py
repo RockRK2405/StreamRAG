@@ -36,6 +36,12 @@ class CorpusConfig(_Cfg):
     on_invalid_document: Literal["skip", "error"] = "skip"
     doc_id_strategy: Literal["native_or_stem", "native_or_ordinal"] = "native_or_stem"
     native_doc_id_pattern: str = r"^(?i:doc)[ _-]?(\d+)"
+    # Phase 9: front-matter fields kept as document metadata (whitelist; values sanitised, see corpus/metadata.py).
+    # Metadata is corpus content - untrusted: it can narrow retrieval (filters, validity dates) but never steer
+    # routing, budgets or prompts.
+    metadata_fields: list[str] = ["version", "effective_date", "published_date", "valid_until", "status",
+                                  "supersedes", "doc_type", "applicant_type", "country", "region", "year", "product",
+                                  "language"]
 
 
 class NormalizationConfig(_Cfg):
@@ -317,6 +323,56 @@ class RuntimeConfig(_Cfg):
     max_inputs_per_session: int = Field(20000, ge=1)
 
 
+class AdaptiveBudget(_Cfg):
+    """Per-need retrieval budget (docs/retrieval/11). Trusted configuration only: corpus text never changes it."""
+    max_queries: int = Field(5, ge=1)                 # searches (lexical and / or dense) per need
+    max_results: int = Field(40, ge=1)                # evidence items examined per need (sum of k over searches)
+    max_iterations: int = Field(3, ge=1)              # retrieve -> assess rounds
+    max_latency_ms: float = Field(1500.0, gt=0)       # wall time of the adaptive loop (search + assessment)
+    max_parallel_tasks: int = Field(2, ge=1)          # concurrent searches of one need (lexical || dense)
+    max_hops: int = Field(2, ge=1)                    # multi-hop depth (hop 0 = the question itself)
+
+
+class AdaptiveRetrievalConfig(_Cfg):
+    """Phase 9: adaptive retrieval intelligence (docs/retrieval/01-11 Phase 9 series, docs/architecture/13).
+    Off by default: the Phase 3-8 fixed policy stays the default until a real corpus validates the adaptive one.
+    Defaults are team engineering values calibrated on the dev fixture suites (research/phase9) - NOT REPORTABLE."""
+    enabled: bool = False
+    lexicon: Path = Path("configs/retrieval_lexicon.yaml")
+    initial_k: dict[str, int] = {"SIMPLE": 3, "MODERATE": 5, "COMPLEX": 5, "MULTI_HOP": 5}
+    k_schedule: list[int] = [5, 10, 20]               # adaptive top-k: next k after an insufficient round
+    final_k: int = Field(8, ge=1)                     # evidence items handed to the claim / answer stages
+    max_per_document: int = Field(3, ge=1)            # source diversity cap in the final evidence
+    simple_strategy: Literal["HYBRID", "LEXICAL", "FAST_VECTOR"] = "LEXICAL"  # research/phase9/calibrate_routing.py
+    exact_id_strategy: Literal["HYBRID", "LEXICAL"] = "LEXICAL"
+    semantic_oov_ratio: float = Field(0.5, ge=0, le=1)   # >= this share of query terms unknown to BM25 -> SEMANTIC
+    rare_idf: float = Field(1.5, ge=0)                # analyzed term with IDF >= this is "rare" (entity / id signal)
+    requirement_coverage: float = Field(0.6, ge=0, le=1)   # share of a requirement's terms evidence must contain
+    min_gain: float = Field(0.05, ge=0)               # marginal value below which another round is not worth it
+    rerank: Literal["never", "policy", "always"] = "never"   # research/phase9 reranker evaluation decides
+    rerank_max_candidates: int = Field(20, ge=1)
+    expansion: bool = True                            # bounded alias / acronym / synonym expansion (lexical query)
+    max_expansions: int = Field(3, ge=0)
+    contradiction_retrieval: bool = True              # one targeted search to resolve a value conflict
+    claim_driven: bool = True                         # requirements per claim slot (else: one requirement per need)
+    cache: bool = True                                # adaptive query cache (validity-signature checked)
+    cache_max_entries: int = Field(256, ge=1)
+    session_reuse: bool = True                        # assess session evidence before searching
+    filter_fields: list[str] = ["applicant_type", "country", "region", "product", "language"]
+    reference_date: str | None = None                 # ISO date for "current" validity; None = today
+    tight_latency_ms: float = Field(150.0, ge=0)      # remaining budget below this -> fast path, one round, no rerank
+    # ablation switches (research/phase9/ablation): every component can be turned off independently
+    routing: bool = True                              # off: always HYBRID (no strategy selection, no filters)
+    adaptive_k: bool = True                           # off: k = k_schedule[0] for every need, no k expansion
+    iterative: bool = True                            # off: one retrieval round
+    multi_hop: bool = True                            # off: no hops (MULTI_HOP needs are routed to ITERATIVE)
+    temporal: bool = True                             # off: no validity filtering / temporal conflict resolution
+    authority: dict[str, dict[str, float]] = {
+        "status": {"current": 1.0, "active": 1.0, "draft": 0.4, "superseded": 0.2, "archived": 0.2, "expired": 0.2},
+        "doc_type": {"policy": 1.0, "annex": 0.9, "catalogue": 0.8, "notice": 0.7, "bulletin": 0.6}}
+    budget: AdaptiveBudget = AdaptiveBudget()
+
+
 class TelemetryConfig(_Cfg):
     log_level: str = "INFO"
     log_format: Literal["json", "text"] = "json"
@@ -342,6 +398,7 @@ class StreamRagConfig(_Cfg):
     session: SessionConfig = SessionConfig()
     generation: GenerationConfig = GenerationConfig()
     runtime: RuntimeConfig = RuntimeConfig()
+    adaptive_retrieval: AdaptiveRetrievalConfig = AdaptiveRetrievalConfig()
     telemetry: TelemetryConfig = TelemetryConfig()
 
     def resolve_paths(self, base: Path) -> "StreamRagConfig":
@@ -353,7 +410,11 @@ class StreamRagConfig(_Cfg):
         controller = self.controller.model_copy(update={"lexicon": (lex if lex.is_absolute() else base / lex).resolve()})
         ilex = self.multi_intent.lexicon
         multi = self.multi_intent.model_copy(update={"lexicon": (ilex if ilex.is_absolute() else base / ilex).resolve()})
-        return self.model_copy(update={"paths": resolved, "controller": controller, "multi_intent": multi})
+        alex = self.adaptive_retrieval.lexicon
+        adaptive = self.adaptive_retrieval.model_copy(
+            update={"lexicon": (alex if alex.is_absolute() else base / alex).resolve()})
+        return self.model_copy(update={"paths": resolved, "controller": controller, "multi_intent": multi,
+                                       "adaptive_retrieval": adaptive})
 
 
 def _canonical(obj: Any) -> str:

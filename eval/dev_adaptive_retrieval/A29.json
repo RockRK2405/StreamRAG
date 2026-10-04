@@ -1,0 +1,21 @@
+{
+  "case_id": "A29",
+  "corpus": "adaptive",
+  "category": "multi_hop",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Do applicants from Norvia need additional documents?",
+      "gold": {
+        "citations": [
+          "ANNEX-C §1",
+          "GROUP-RULES §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+# Phase 9 adaptive retrieval lexicon (docs/retrieval/01, 02, 07). Domain-neutral English only: no corpus vocabulary,
+# no answers. Trusted configuration: it decides how queries are analysed, never retrieved text.
+
+# Temporal cues (docs/retrieval/01 §temporal). Explicit dates / years are parsed by pattern, not listed here.
+temporal:
+  current: [current, currently, now, today, latest, "this year", presently, "in force", "at the moment", newest]
+  past: [previous, previously, former, formerly, earlier, old, older, "used to", "back in", originally]
+
+# Statements that link an entity to a class / group / other entity (multi-hop bridges, docs/retrieval/07):
+# "<entity> <cue> <target>".
+relation_cues: ["is classified as", "are classified as", "is categorised as", "is categorized as", "belongs to",
+                "belong to", "falls under", "fall under", "is part of", "is a member of", "is treated as",
+                "counts as", "is grouped as", "is assigned to", "is listed as"]
+
+# Cross-references to another document: "<cue> <document title>".
+reference_cues: ["see the", "refer to the", "as described in the", "as set out in the", "according to the",
+                 "listed in the", "defined in the"]
+
+# A metadata value said in the question becomes a filter only in a constraint position: one of these words within
+# the three words before it ("fee for international applicants"), or inside a constraint the Phase 5/6 interpreter
+# parsed. Corpus metadata alone (a document declaring a value) can never create a filter.
+constraint_markers: [for, from, as, if, only, when, being, regarding]
+
+# Comparison questions (two or more items must each be supported).
+comparison_cues: [compare, comparison, difference, differences, differ, versus, vs, "compared to", "compared with"]
+
+# Bounded lexical expansion (docs/retrieval/02). General-purpose English synonym groups; an expansion is added to
+# the LEXICAL query only, at most adaptive_retrieval.max_expansions per query, never replacing a query word.
+# Acronyms / aliases are mined from the corpus ("Long Name (LN)") and validated (docs/retrieval/02 §aliases).
+synonyms:
+  - [cost, fee, price, charge]
+  - [deadline, "time limit", "due date"]
+  - [renew, renewal, extend, extension]
+  - [require, requirement, "must provide", mandatory]
+  - [document, documents, paperwork]
+  - [pay, payment, fee]

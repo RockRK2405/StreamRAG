@@ -1,0 +1,20 @@
+{
+  "case_id": "A10",
+  "corpus": "adaptive",
+  "category": "exact_keyword",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "Where do I submit Form BL-310?",
+      "gold": {
+        "citations": [
+          "BIZ-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

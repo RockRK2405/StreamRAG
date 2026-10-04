@@ -1,0 +1,31 @@
+{
+  "case_id": "HS1",
+  "corpus": "adaptive",
+  "category": "follow_up",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - written after code freeze",
+  "run_policy": "run once after freeze; no fixes based on it",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How much is the vehicle registration fee?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    },
+    {
+      "utterance_id": "u2",
+      "utterance_text": "And how often are old vehicles inspected?",
+      "gold": {
+        "citations": [
+          "VEH-2026 §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

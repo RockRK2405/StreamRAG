@@ -1,0 +1,20 @@
+{
+  "case_id": "B09",
+  "corpus": "grounding",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How often must permits be renewed?",
+      "gold": {
+        "citations": [
+          "fixture_permit_handbook §3"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

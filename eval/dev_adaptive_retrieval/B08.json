@@ -1,0 +1,21 @@
+{
+  "case_id": "B08",
+  "corpus": "grounding",
+  "category": "contradiction",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What is the application fee for a new permit?",
+      "gold": {
+        "citations": [
+          "fixture_permit_notice_2023 §1",
+          "fixture_permit_notice_2025 §1"
+        ],
+        "expect": "CONTRADICTORY"
+      }
+    }
+  ]
+}

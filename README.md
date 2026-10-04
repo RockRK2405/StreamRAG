@@ -1,6 +1,6 @@
 # StreamRAG — Samsung PRISM GenAI Hackathon 2026–27, Theme 4: Streaming Live RAG
 
-**Current phase: Phase 8, the streaming runtime** (asynchronous orchestration: concurrent workers, cancellation, timeouts, retries, backpressure, stale-result protection, degraded modes, replay), running the Phase 7 grounded answers, the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
+**Current phase: Phase 9, adaptive retrieval intelligence** (per-need query analysis, claim-driven evidence requirements, routing among nine retrieval strategies, adaptive top-k, bounded iterative / multi-hop retrieval, contradiction-aware retrieval, validity-checked caches; off by default), on top of the Phase 8 streaming runtime, the Phase 7 grounded answers, the Phase 6 adaptive session, Phase 5 multi-intent retrieval, the Phase 4 streaming engine and the Phase 3 retrieval foundation.
 
 Implemented:
 - corpus ingestion with stable citation IDs;
@@ -13,6 +13,7 @@ Implemented:
 - **adaptive sessions** (`session.enabled: true`): late details, retractions and corrections across turns become typed context changes; a delta planner re-queries only the affected needs (or reuses earlier evidence); evidence and claims carry lifecycles; the answer is a versioned, claim-level state with diffs and minimal-regeneration markers (`docs/session/`, ADR-016, `PHASE_6_ADAPTIVE_RAG_REPORT.md`).
 
 - **grounded answers** (`generation.enabled: true`): evidence-derived claim plans, generation by a local LLM (Ollama, structured JSON, extractive fallback), entailment verification of every claim, citations to the supporting sentence of the indexed chunk, repair / bounded retrieval fallback for unsupported claims, drafts while the user speaks and validated finals per turn (`docs/answer/`, ADR-017, `PHASE_7_GROUNDED_GENERATION_REPORT.md`). See `PHASE_2_SYSTEM_SPECIFICATION.md` for the full design.
+- **adaptive retrieval** (`adaptive_retrieval.enabled: true`, off by default): per need, an explainable complexity analysis and claim slots choose the retrieval strategy (lexical fast path, filtered by user-stated metadata / validity, semantic, multi-hop, iterative, cache / session reuse) and a bounded retrieve-assess loop stops on sufficient evidence, contradiction, budget or no expected gain (`docs/retrieval/01_query_analysis.md` …, ADR-019, `PHASE_9_ADAPTIVE_RETRIEVAL_REPORT.md`).
 
 > **Official corpus status: NOT_AVAILABLE.** No Theme 4 corpus has been supplied yet. Everything under `tests/fixtures/` is a **TEST FIXTURE** (synthetic, fictional) used only to test software. No retrieval-quality results exist yet. Check the status with `streamrag corpus-status`.
 
@@ -72,6 +73,44 @@ Native document IDs (e.g. files named `Doc_12_….pdf`, or a front-matter `id:`)
 - `stream` prints controller decisions, query versions, retrievals and lead time. Add `--mode realtime` for the asyncio wall-clock mode, or `--policy end_only|every_chunk` for the ablation baselines.
 - `--multi-intent` (Phase 5) decomposes each utterance into intents, retrieves per intent (only new or changed intents while the user speaks) and prints the fused evidence.
 - `replay` re-runs the trace. A virtual trace must match exactly. A realtime trace must match in behavior (decisions, queries, retrieval outcomes), because its timestamps carry real jitter.
+
+## Adaptive retrieval (Phase 9)
+
+```bash
+.venv/bin/streamrag --set adaptive_retrieval.enabled=true --set generation.enabled=true --set generation.backend=extractive stream --session --runtime --interval-ms 300 --text "What documents does | an applicant from | Zemland need?" --corpus tests/fixtures/corpus_adaptive
+```
+
+- `adaptive_retrieval.enabled` replaces the fixed per-need retrieval with `streamrag.adaptive.AdaptiveRetrievalController`: explainable complexity analysis, claim slots, a logged strategy choice (`strategy_reason`), a bounded retrieve-assess loop with explicit stop reasons, hops, contradiction search and validity-checked caches (`adaptive_retrieval:` in `configs/default.yaml`, `configs/retrieval_lexicon.yaml`, `docs/retrieval/01_query_analysis.md` … `11_budget_management.md`, `docs/architecture/13_adaptive_retrieval.md`, ADR-019). Off by default: fixture results only.
+
+```bash
+.venv/bin/python research/phase9/calibrate_routing.py --index-root /tmp/idx9
+```
+
+```bash
+.venv/bin/python research/phase9/run_benchmarks.py --index-root /tmp/idx9
+```
+
+```bash
+.venv/bin/python research/phase9/run_experiments.py --index-root /tmp/idx9 --reps 5
+```
+
+```bash
+.venv/bin/python research/phase9/runtime_h5.py --index-root /tmp/idx9
+```
+
+```bash
+.venv/bin/python research/phase9/llm_quality.py --index-root /tmp/idx9
+```
+
+```bash
+.venv/bin/python research/phase9/e2e_final.py --index-root /tmp/idx9
+```
+
+```bash
+.venv/bin/python research/phase9/make_tables.py
+```
+
+`llm_quality.py` and `e2e_final.py` need `ollama serve`; `make_tables.py` renders `research/phase9/results/tables.md`.
 
 ## Streaming runtime (Phase 8)
 
@@ -213,10 +252,12 @@ src/streamrag/
   answer_state/    grounded answer engine (plan -> generate -> verify -> repair -> cite -> validate), renderer
   runtime/         Phase 8: StreamingRuntime - event bus, task scheduler, worker pools, cancellation, timeouts,
                    retries, backpressure, state coordinator, answer lane, streamer, replay, fault injection
+  adaptive/        Phase 9: query analysis, rewriting, claim requirements, sufficiency gate, routing policy,
+                   stopping, caches, adaptive retrieval controller, session / runtime integration
   telemetry/       structured logging, JSONL event sink, timing
   tools/           build-time model download (the only network code)
 tests/             unit/integration tests; tests/fixtures = TEST FIXTURES only
-research/          phase1–7 measurements and reports
+research/          phase1–9 measurements and reports
 docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 ```
 
@@ -225,6 +266,7 @@ docs/              architecture diagrams, ADRs, retrieval docs, JSON schemas
 | Document | Contents |
 |---|---|
 | `PHASE_7_GROUNDED_GENERATION_REPORT.md` | Phase 7: grounded generation, claim verification, citations; benchmark, ablations, hallucination tests |
+| `PHASE_9_ADAPTIVE_RETRIEVAL_REPORT.md` | Phase 9: adaptive retrieval - routing, claim-driven sufficiency, iterative / multi-hop / contradiction-aware retrieval, caches; baselines, ablations, hypotheses H1-H5, latency, operation counts |
 | `PHASE_8_STREAMING_RUNTIME_REPORT.md` | Phase 8: streaming runtime - concurrency, cancellation, backpressure, race protection, degraded modes, replay; concurrency / cancellation / backpressure / failure / load benchmarks |
 | `PHASE_6_ADAPTIVE_RAG_REPORT.md` | Phase 6: adaptive session RAG; dev-suite, stress-set, full-restart, ablation and scaling results |
 | `PHASE_5_MULTI_INTENT_REPORT.md` | Phase 5: multi-intent decomposition, delta retrieval, fusion; dev-suite results |

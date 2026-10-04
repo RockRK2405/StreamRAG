@@ -1,0 +1,20 @@
+{
+  "case_id": "A03",
+  "corpus": "adaptive",
+  "category": "simple",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "How often must a residence permit be renewed?",
+      "gold": {
+        "citations": [
+          "RENEW §1"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}

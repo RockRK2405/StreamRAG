@@ -1,0 +1,21 @@
+{
+  "case_id": "A28",
+  "corpus": "adaptive",
+  "category": "multi_hop",
+  "is_fixture": true,
+  "reportable": false,
+  "labeler": "implementer (Phase 9) - not independent",
+  "turns": [
+    {
+      "utterance_id": "u1",
+      "utterance_text": "What documents does an applicant from Zemland need?",
+      "gold": {
+        "citations": [
+          "ANNEX-C §1",
+          "GROUP-RULES §2"
+        ],
+        "expect": "SUFFICIENT"
+      }
+    }
+  ]
+}
