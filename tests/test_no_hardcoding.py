@@ -60,7 +60,12 @@ def test_guide_example_vocabulary_not_in_source():
 
 
 def test_no_benchmark_specific_branches():
+    # Application code only: the Phase 10 measurement harness (src/streamrag/evaluation) must read the dataset's
+    # label fields (expected_answer, ...). It stays covered by the two scans above, and
+    # tests/evaluation/test_dataset_and_leakage.py forbids any system module from importing it.
     for p in (REPO / "src").rglob("*.py"):
+        if "evaluation" in p.relative_to(REPO / "src").parts:
+            continue
         text = p.read_text()
         for rx in SUSPICIOUS:
             assert not rx.search(text), f"suspicious pattern {rx.pattern} in {p}"

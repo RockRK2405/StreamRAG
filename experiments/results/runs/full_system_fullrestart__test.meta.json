@@ -1,0 +1,24 @@
+{
+  "system": "full_system_fullrestart",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "session.full_restart": true
+    },
+    "label": "S - delta retrieval (every need re-planned each turn)",
+    "id": "full_system_fullrestart"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 264.1,
+  "finished": "2026-10-04T12:00:55.609095",
+  "evidence_rederived": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 18,
+    "turns_without_trace": 0,
+    "original": "full_system_fullrestart__test.pre_evidence_fix.jsonl"
+  }
+}

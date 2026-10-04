@@ -1,0 +1,42 @@
+# Project-specific quality gates for the full system (experiments/runners/check_regression.py,
+# docs/evaluation/regression.md). These are NOT universal quality targets.
+#
+# Basis: each threshold is the Phase 10 measurement of `full_system` on the streamrag_eval_v1 test split
+# (experiments/results/EXP01_baselines/results.json, 87 turns, fixture corpus), loosened by the regression tolerance
+# in regression_rules.yaml: 0.025 for rates (about two turns), 25 % relative for latency. The gates therefore mean
+# "no worse than the Phase 10 measurement". The full system passes them by construction today, so passing is not
+# evidence of quality. They must be re-derived on the official corpus and the target hardware.
+system: full_system
+gates:
+  retrieval_recall:
+    metric: retrieval.recall@5
+    min: 0.883            # measured 0.908
+    basis: "Phase 10 full_system Recall@5 0.908 - 0.025"
+  answer_correctness:
+    metric: generation.answer_correct
+    min: 0.705            # measured 0.730
+    basis: "Phase 10 full_system answer correctness 0.730 - 0.025 (label key strings)"
+  stale_values:
+    metric: generation.forbidden_hit
+    max: 0.256            # measured 0.231
+    basis: "Phase 10 full_system stale / forbidden value rate 0.231 + 0.025"
+  grounding_hallucination:
+    metric: hallucination.hallucinated_claim_rate
+    max: 0.039            # measured 0.014
+    basis: "Phase 10 full_system hallucinated claim rate 0.014 + 0.025 (model-free: values absent from evidence and question)"
+  grounding_claim_support:
+    metric: claims.claim_support_rate
+    min: 0.975            # measured 1.000
+    basis: "Phase 10 full_system 1.000 - 0.025; verifier-judged with the system's own verifier (biased, see report section 23)"
+  citation_precision:
+    metric: citation.citation_precision
+    min: 0.975            # measured 1.000
+    basis: "Phase 10 full_system 1.000 - 0.025; verifier-judged"
+  latency_ttva_p95:
+    metric: latency.ttva_after_end.p95
+    max: 6042             # measured 4833 ms
+    basis: "Phase 10 full_system TTVA after utterance end p95 4833 ms x 1.25 (Apple M5 Pro, local qwen3:4b)"
+  reliability:
+    metric: failure_rate
+    max: 0.0
+    basis: "no failed sample in Phase 10 (0 / 87)"

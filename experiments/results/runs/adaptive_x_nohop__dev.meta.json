@@ -1,0 +1,18 @@
+{
+  "system": "adaptive_x_nohop",
+  "split": "dev",
+  "spec": {
+    "family": "pipeline",
+    "generation": "extractive",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "adaptive_retrieval.multi_hop": false
+    },
+    "label": "adaptive without multi-hop",
+    "id": "adaptive_x_nohop"
+  },
+  "samples": 129,
+  "failed": 0,
+  "wall_s": 2.8,
+  "finished": "2026-10-04T11:43:16.928082"
+}

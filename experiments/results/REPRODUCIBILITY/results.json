@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "purpose": "second run of stored variants, identical configuration",
+    "reportable": false,
+    "llm": {
+      "name": "qwen3:4b",
+      "backend": "ollama (local)",
+      "url": "http://127.0.0.1:11434",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "modified_at": "2026-10-03T13:20:18.768567751+05:30",
+      "ollama_version": "0.35.1",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+    }
+  },
+  "systems": {
+    "adaptive_x": {
+      "status": "COMPLETED",
+      "turns": 87,
+      "identical_answer_text": 1.0,
+      "identical_evidence": 1.0,
+      "identical_answer_correct": 1.0,
+      "identical_status": 1.0,
+      "answer_correct_mean": {
+        "run1": 0.7838,
+        "run2": 0.7838
+      },
+      "ttva_after_end_abs_diff_ms": {
+        "median": 1.1,
+        "max": 144.3,
+        "n": 87
+      },
+      "ttva_after_end_rel_diff": {
+        "median": 0.1397,
+        "max": 8.478
+      },
+      "differing_answers": []
+    },
+    "naive_rag": {
+      "status": "COMPLETED",
+      "turns": 87,
+      "identical_answer_text": 1.0,
+      "identical_evidence": 1.0,
+      "identical_answer_correct": 1.0,
+      "identical_status": 1.0,
+      "answer_correct_mean": {
+        "run1": 0.8514,
+        "run2": 0.8514
+      },
+      "ttva_after_end_abs_diff_ms": {
+        "median": 72.2,
+        "max": 460.6,
+        "n": 87
+      },
+      "ttva_after_end_rel_diff": {
+        "median": 0.0375,
+        "max": 0.3099
+      },
+      "differing_answers": []
+    },
+    "adaptive_rag": {
+      "status": "COMPLETED",
+      "turns": 87,
+      "identical_answer_text": 0.9885057471264368,
+      "identical_evidence": 1.0,
+      "identical_answer_correct": 1.0,
+      "identical_status": 1.0,
+      "answer_correct_mean": {
+        "run1": 0.7973,
+        "run2": 0.7973
+      },
+      "ttva_after_end_abs_diff_ms": {
+        "median": 39.3,
+        "max": 692.1,
+        "n": 87
+      },
+      "ttva_after_end_rel_diff": {
+        "median": 0.0256,
+        "max": 0.9705
+      },
+      "differing_answers": [
+        "T19"
+      ]
+    },
+    "full_system": {
+      "status": "COMPLETED",
+      "turns": 87,
+      "identical_answer_text": 0.9885057471264368,
+      "identical_evidence": 1.0,
+      "identical_answer_correct": 1.0,
+      "identical_status": 1.0,
+      "answer_correct_mean": {
+        "run1": 0.7297,
+        "run2": 0.7297
+      },
+      "ttva_after_end_abs_diff_ms": {
+        "median": 45.3,
+        "max": 1024.7,
+        "n": 85
+      },
+      "ttva_after_end_rel_diff": {
+        "median": 0.0261,
+        "max": 6.2849
+      },
+      "differing_answers": [
+        "T19"
+      ]
+    }
+  }
+}

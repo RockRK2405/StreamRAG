@@ -1,0 +1,109 @@
+item,query,answer,citations,correctness_1_3,relevance_1_3,grounding_1_3,completeness_1_3,citation_usefulness_1_3,notes
+1,How much is a day pass and how long is a single ticket valid?,A single ride ticket is valid for 90 minutes after validation. A single ride ticket is valid for 120 minutes after validation. A single ride costs 2.80 euros. A day pass costs 8.00 euros. A monthly pass costs 72 euros. A single ride costs 2.40 euros. A day pass costs 7.00 euros. A monthly pass costs 65 euros. An unused monthly pass can be refunded within 14 days of purchase.,FARES-2025 §2; FARES-2026 §2; FARES-2026 §1; FARES-2026 §1; FARES-2026 §1; FARES-2025 §1; FARES-2025 §1; FARES-2025 §1; REFUNDS §1,,,,,,
+2,"If I forget my wallet on the bus, how long will you hold on to it?","If I forget my wallet on the bus, I will need to wait up to 30 days for the wallet to be held by the central depot.",LOST §1,,,,,,
+3,How much extra is a trip to Quarry Lane?,Quarry Lane is classified as Zone B. [ZONES §1] Not established: The retrieved documents do not state the value asked for in “How much extra is a trip to Quarry Lane”.,ZONES §1,,,,,,
+4,What is the student discount on a day pass?,Students receive a 50 percent discount on the monthly pass.,CONC-STUDENT §1,,,,,,
+5,What is the student discount on a day pass?,,,,,,,,
+6,What has to be submitted together with Form TR-210?,Students must submit Form TR-210 along with a current enrolment certificate. [CONC-STUDENT §2] Students apply a current enrolment certificate. [CONC-STUDENT §2],CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+7,What is the penalty fare and how can I reduce it?,"What is the penalty fare:
+A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES §1] The penalty fare is reduced to 30 euros if paid within 7 days. [PENALTIES §2]
+
+How can I reduce it:
+The penalty fare can be reduced to 30 euros by paying within 7 days. [PENALTIES §2]",PENALTIES §1; PENALTIES §2; PENALTIES §2,,,,,,
+8,Which form do I need?,Seniors apply with Form TR-305 of age. [CONC-SENIOR §2] Seniors apply with proof of age. [CONC-SENIOR §2] Students apply a current enrolment certificate. [CONC-STUDENT §2] The sources differ: “Seniors apply with Form TR-305 and proof of age” [CONC-SENIOR §2] / “Students apply with Form TR-210 and a current enrolment certificate” [CONC-STUDENT §2].,CONC-SENIOR §2; CONC-SENIOR §2; CONC-STUDENT §2; CONC-SENIOR §2; CONC-STUDENT §2,,,,,,
+9,What is the supplement for trips to Harbor Point?,"Trips that end in Zone C need a supplement of 1.20 euros, and the ticket must be validated before boarding. Harbor Point is classified as Zone C.",ZONE-RULES §3; ZONES §1,,,,,,
+10,How much is a day pass and how long is a single ticket valid?,A day pass costs 8.00 euros. A single ticket is valid for 120 minutes after validation.,FARES-2026 §1; FARES-2026 §1,,,,,,
+11,What is the supplement for trips to Harbor Point?,"Harbor Point is classified as Zone C. Trips that end in Zone C need a supplement of 1.20 euros, and the ticket must be validated before boarding.",ZONES §1; ZONE-RULES §3,,,,,,
+12,How long are lost items kept?,Lost items are kept for 30 days at the central depot.,LOST §1,,,,,,
+13,How much does a replacement travel card cost?,A replacement card costs 5 euros.,TCO §1,,,,,,
+14,"Sorry, I meant the form for the student concession instead.",Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+15,Which form do I need?,Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days. Seniors apply with Form TR-305 and proof of age. Senior applications are processed within 10 working days.,CONC-STUDENT §2; CONC-STUDENT §2; CONC-SENIOR §2; CONC-SENIOR §2,,,,,,
+16,How long does processing take for students?,Student applications are processed within 5 working days. [CONC-STUDENT §2] Senior applications are processed within 10 working days. [CONC-SENIOR §2],CONC-STUDENT §2; CONC-SENIOR §2,,,,,,
+17,How many wheelchair spaces does each bus have?,Every bus has two wheelchair spaces near the middle door.,ACCESS §1,,,,,,
+18,How much extra is a trip to Quarry Lane?,"A trip to Quarry Lane requires a supplement of 1.20 euros if it ends in Zone C, and 0.50 euros if it ends in Zone B.",ZONE-RULES §3; ZONE-RULES §2,,,,,,
+19,What has to be submitted together with Form TR-210?,Students apply with Form TR-210 and a current enrolment certificate. Seniors apply with Form TR-305 and proof of age. Refunds are requested with Form TR-410 and are paid within 21 days.,CONC-STUDENT §2; CONC-SENIOR §2; REFUNDS §2,,,,,,
+20,When is the TCO closed?,The TCO is closed on Sundays.,TCO §2,,,,,,
+21,How many wheelchair spaces does each bus have?,,,,,,,,
+22,What does a monthly pass cost?,A monthly pass costs 72 euros. A monthly pass costs 65 euros. Students receive a 50 percent discount on the monthly pass. An unused monthly pass can be refunded within 14 days of purchase.,FARES-2026 §1; FARES-2025 §1; CONC-STUDENT §1; REFUNDS §1,,,,,,
+23,When is the TCO closed?,The TCO is closed on Sundays.,TCO §2,,,,,,
+24,And how long was it valid in 2025?,"In 2025, a single ride ticket was valid for 90 minutes after validation.",FARES-2025 §2,,,,,,
+25,On which days in 2026 does the holiday timetable apply?,"Which days have a holiday timetable in 2026:
+On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable. [HOLIDAY-SERVICE §1]
+
+On which days in 2026 does the holiday timetable apply:
+On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable. [HOLIDAY-SERVICE §1]",HOLIDAY-SERVICE §1; HOLIDAY-SERVICE §1,,,,,,
+26,Can I pay the penalty fare by credit card?,,,,,,,,
+27,How long does processing take for students?,Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+28,Is it free?,Riders aged 65 or older travel free outside peak hours. [CONC-SENIOR §1],CONC-SENIOR §1,,,,,,
+29,How much does a replacement travel card cost?,A replacement travel card costs 5 euros. [TCO §1] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO §1],TCO §1; TCO §1,,,,,,
+30,What does a monthly pass cost?,A monthly pass costs 72 euros. [FARES-2026 §1],FARES-2026 §1,,,,,,
+31,What has to be submitted together with Form TR-210?,Students apply with Form TR-210 and a current enrolment certificate.,CONC-STUDENT §2,,,,,,
+32,"Sorry, I meant the form for the student concession instead.",Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days. Students receive a 50 percent discount on the monthly pass.,CONC-STUDENT §2; CONC-STUDENT §2; CONC-STUDENT §1,,,,,,
+33,What is the penalty fare and how can I reduce it?,The penalty fare is 60 euros for a rider without a valid ticket. The penalty can be reduced to 30 euros if paid within 7 days.,PENALTIES §1; PENALTIES §2,,,,,,
+34,How long does processing take for seniors applying for the concession?,Senior applications are processed within 10 working days.,CONC-SENIOR §2,,,,,,
+35,How far ahead do I need to arrange help at the station?,Travel assistance at stations must be booked at least 24 hours in advance.,ACCESS §2,,,,,,
+36,"If I forget my wallet on the bus, how long will you hold on to it?",The sources differ: “The night bus N4 departs every 20 minutes between midnight and 5:00” [NOTICE-X §1] / “The night bus N4 departs every 30 minutes between midnight and 5:00” [NOTICE-Y §1]. Not established: The retrieved documents do not say how this applies to I forget my wallet on the bus. Not established: The retrieved documents do not state the value asked for in “how long will you hold on to it”.,NOTICE-X §1; NOTICE-Y §1,,,,,,
+37,How long do I have to wait for the night bus N4?,The night bus N4 departs every 20 minutes between midnight and 5:00. The night bus N4 departs every 30 minutes between midnight and 5:00.,NOTICE-X §1; NOTICE-Y §1,,,,,,
+38,What discount do students get on the monthly pass?,Students receive a 50 percent discount on the monthly pass.,CONC-STUDENT §1,,,,,,
+39,How often does the N4 night bus run?,The sources differ: “The night bus N4 departs every 20 minutes between midnight and 5:00” [NOTICE-X §1] / “The night bus N4 departs every 30 minutes between midnight and 5:00” [NOTICE-Y §1].,NOTICE-X §1; NOTICE-Y §1,,,,,,
+40,How long does processing take for seniors applying for the concession?,Senior applications are processed within 10 working days.,CONC-SENIOR §2,,,,,,
+41,"Sorry, I meant the monthly pass, not the day pass.",Not established: The retrieved documents do not contain an answer to “How much does a the monthly pass cost”.,,,,,,,
+42,"Sorry, I meant the form for the student concession instead.",Students apply with Form TR-210. [CONC-STUDENT §2] Students must submit a current enrolment certificate. [CONC-STUDENT §2] Student applications are processed within 5 working days. [CONC-STUDENT §2],CONC-STUDENT §2; CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+43,Which days have a holiday timetable in 2026?,"On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable. [HOLIDAY-SERVICE §1]",HOLIDAY-SERVICE §1,,,,,,
+44,When is the TCO closed?,The TCO is open from Monday to Saturday. [TCO §2] The TCO is closed on Sundays. [TCO §2] Not established: The retrieved documents do not state the value asked for in “When is the TCO closed”.,TCO §2; TCO §2,,,,,,
+45,And how long was it valid in 2025?,"How long is a single ride ticket valid:
+A single ride ticket is valid for 120 minutes after validation. [FARES-2026 §2; FARES-2026 §3]
+
+How long was single ride ticket valid valid in 2025:
+The sources differ: “A single ride ticket is valid for 90 minutes after validation” [FARES-2025 §2] / “A single ride ticket is valid for 120 minutes after validation” [FARES-2026 §2]. Not established: The retrieved documents do not state the value asked for in “how long was it valid in 2025”.",FARES-2026 §2; FARES-2026 §3; FARES-2025 §2; FARES-2026 §2,,,,,,
+46,Is it free?,Riders aged 65 or older travel free outside peak hours.,CONC-SENIOR §1,,,,,,
+47,What is the current price of a single ride?,The current price of a single ride is 2.80 euros.,FARES-2026 §1,,,,,,
+48,Which form do I need?,Refunds are requested with Form TR-410 and are paid within 21 days. Seniors apply with Form TR-305 and proof of age. Senior applications are processed within 10 working days. Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,REFUNDS §2; CONC-SENIOR §2; CONC-SENIOR §2; CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+49,How far ahead do I need to arrange help at the station?,Travel assistance at stations must be booked at least 24 hours in advance.,ACCESS §2,,,,,,
+50,How much is a day pass and how long is a single ticket valid?,"How much is a day pass:
+A day pass costs 8.00 euros. [FARES-2026 §1]
+
+How long is a single ticket valid:
+The sources differ: “A single ride ticket is valid for 120 minutes after validation” [FARES-2026 §2] / “A single ride ticket is valid for 90 minutes after validation” [FARES-2025 §2].",FARES-2026 §1; FARES-2026 §2; FARES-2025 §2,,,,,,
+51,"If I forget my wallet on the bus, how long will you hold on to it?","If I forget my wallet on the bus, how long will you hold on to it?",LOST §1,,,,,,
+52,And for students?,A monthly pass costs 72 euros. [FARES-2026 §1] Not established: The retrieved documents do not say how this applies for students.,FARES-2026 §1,,,,,,
+53,And for students?,Students receive a 50 percent discount on the monthly pass. Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,CONC-STUDENT §1; CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+54,How long are lost items kept?,"How long are lost items kept:
+Items found on vehicles are kept for 30 days at the central depot. [LOST §1]
+
+How long are lost items kept:
+Items found on vehicles are kept for 30 days at the central depot. [LOST §1]",LOST §1; LOST §1,,,,,,
+55,How many wheelchair spaces does each bus have?,Every bus has two wheelchair spaces near the middle door. [ACCESS §1],ACCESS §1,,,,,,
+56,How long are lost items kept?,Lost items are kept for 30 days at the central depot.,LOST §1,,,,,,
+57,How often does the N4 night bus run?,The night bus N4 departs every 20 minutes between midnight and 5:00. The night bus N4 departs every 30 minutes between midnight and 5:00.,NOTICE-X §1; NOTICE-Y §1,,,,,,
+58,And for students?,Students receive a 50 percent discount on the monthly pass. Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,CONC-STUDENT §1; CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+59,How long does processing take for students?,Students apply with Form TR-210 and a current enrolment certificate. Student applications are processed within 5 working days.,CONC-STUDENT §2; CONC-STUDENT §2,,,,,,
+60,How long do I have to wait for the night bus N4?,The night bus N4 departs every 20 minutes between midnight and 5:00. The night bus N4 departs every 30 minutes between midnight and 5:00.,NOTICE-X §1; NOTICE-Y §1,,,,,,
+61,What discount do students get on the monthly pass?,Students receive a 50 percent discount on the monthly pass. [CONC-STUDENT §1],CONC-STUDENT §1,,,,,,
+62,On which days in 2026 does the holiday timetable apply?,,,,,,,,
+63,"Sorry, I meant the monthly pass, not the day pass.",An unused monthly pass can be refunded within 14 days of purchase.,REFUNDS §1,,,,,,
+64,How often does the N4 night bus run?,The night bus N4 departs every 20 minutes between midnight and 5:00. The night bus N4 departs every 30 minutes between midnight and 5:00.,NOTICE-X §1; NOTICE-Y §1,,,,,,
+65,Can I pay the penalty fare by credit card?,A rider without a valid ticket must pay a penalty fare of 60 euros. [PENALTIES §1] The penalty fare can be reduced to 30 euros if paid within 7 days. [PENALTIES §2],PENALTIES §1; PENALTIES §2,,,,,,
+66,How long does processing take for seniors applying for the concession?,Senior applications are processed within 10 working days. [CONC-SENIOR §2],CONC-SENIOR §2,,,,,,
+67,Can I pay the penalty fare by credit card?,"The penalty fare can be paid by credit card, but the evidence does not specify whether credit card payments are accepted for penalties.",PENALTIES §2,,,,,,
+68,What does a monthly pass cost?,A monthly pass costs 65 euros. A monthly pass costs 72 euros.,FARES-2025 §1; FARES-2026 §1,,,,,,
+69,And how long was it valid in 2025?,"In 2025, a single ride ticket was valid for 90 minutes after validation.",FARES-2025 §2,,,,,,
+70,How much does a replacement travel card cost?,A replacement card costs 5 euros.,TCO §1,,,,,,
+71,How long do I have to wait for the night bus N4?,The sources differ: “The night bus N4 departs every 20 minutes between midnight and 5:00” [NOTICE-X §1] / “The night bus N4 departs every 30 minutes between midnight and 5:00” [NOTICE-Y §1].,NOTICE-X §1; NOTICE-Y §1,,,,,,
+72,How much extra is a trip to Quarry Lane?,,,,,,,,
+73,How far ahead do I need to arrange help at the station?,"How far ahead do:
+Not established: The retrieved documents do not contain an answer to “How far ahead do”.
+
+To arrange help at the station:
+Travel assistance at stations must be booked at least 24 hours in advance. [ACCESS §2]",ACCESS §2,,,,,,
+74,What is the current price of a single ride?,The current price of a single ride is 2.80 euros.,FARES-2026 §1,,,,,,
+75,What is the supplement for trips to Harbor Point?,Harbor Point is classified as Zone C. [ZONES §1] Trips that end in Zone C require a supplement of 1.20 euros. [ZONE-RULES §3] Trips that end in Zone B need a supplement of 0.50 euros. [ZONE-RULES §2] Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES §3] The ticket must be validated before boarding. [ZONE-RULES §3],ZONES §1; ZONE-RULES §3; ZONE-RULES §2; ZONE-RULES §3; ZONE-RULES §3,,,,,,
+76,On which days in 2026 does the holiday timetable apply?,"On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",HOLIDAY-SERVICE §1,,,,,,
+77,What discount do students get on the monthly pass?,Students receive a 50 percent discount on the monthly pass.,CONC-STUDENT §1,,,,,,
+78,What is the current price of a single ride?,A single ride costs 2.80 euros. [FARES-2026 §1],FARES-2026 §1,,,,,,
+79,What is the penalty fare and how can I reduce it?,The penalty fare is 60 euros for a rider without a valid ticket. The penalty can be reduced to 30 euros if paid within.7 days.,PENALTIES §1; PENALTIES §2,,,,,,
+80,Which days have a holiday timetable in 2026?,"On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",HOLIDAY-SERVICE §1,,,,,,
+81,Is it free?,Riders aged 65 or older travel free outside peak hours.,CONC-SENIOR §1,,,,,,
+82,What is the student discount on a day pass?,Students receive a 50 percent discount on the monthly pass. [CONC-STUDENT §1],CONC-STUDENT §1,,,,,,
+83,Which days have a holiday timetable in 2026?,,,,,,,,
+84,"Sorry, I meant the monthly pass, not the day pass.",The monthly pass costs 72 euros. The monthly pass costs 65 euros for students. An unused monthly pass can be refunded within 14 days of purchase.,FARES-2026 §1; FARES-2025 §1; REFUNDS §1,,,,,,

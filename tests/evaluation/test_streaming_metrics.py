@@ -37,12 +37,13 @@ def test_turn_evidence_reads_each_turns_fused_evidence():
     """Runtime turn evidence comes from the turn's own EVIDENCE_FUSED events (not the end-of-session ledger)."""
     from streamrag.evaluation.systems import turn_evidence
 
-    def ev(seq, uid, typ, items=None):
+    def ev(seq, uid, typ, items=None, citations=None):
         return {"seq": seq, "utterance_id": uid, "type": typ,
-                "payload": {"items": [{"evidence_id": i} for i in (items or [])]}}
-    evs = [ev(1, "u1", "EVIDENCE_FUSED", ["a", "b"]), ev(2, "u1", "EVIDENCE_FUSED", ["c", "a"]),
-           ev(3, "u1", "ANSWER_COMMITTED"), ev(4, "u1", "EVIDENCE_FUSED", ["late"]),
+                "payload": {"items": [{"evidence_id": i, "citation": i.upper()} for i in (items or [])],
+                            "citations": citations or []}}
+    evs = [ev(1, "u1", "EVIDENCE_FUSED", ["a", "b", "d"]), ev(2, "u1", "EVIDENCE_FUSED", ["c", "a"]),
+           ev(3, "u1", "ANSWER_COMMITTED", citations=["C", "B"]), ev(4, "u1", "EVIDENCE_FUSED", ["late"]),
            ev(5, "u2", "EVIDENCE_FUSED", ["x"]), ev(6, "u2", "ANSWER_COMMITTED")]
-    assert turn_evidence(evs, "u1") == ["c", "a", "b"]      # latest fusion first, then reused items; not after commit
-    assert turn_evidence(evs, "u2") == ["x"]                 # a later turn does not overwrite an earlier one
-    assert turn_evidence(evs, "u3") is None                  # no fusion -> no evidence handed on
+    assert turn_evidence(evs, "u1") == ["c", "a", "b"]   # last fusion, + draft item still cited (b), not d / late
+    assert turn_evidence(evs, "u2") == ["x"]             # a later turn does not overwrite an earlier one
+    assert turn_evidence(evs, "u3") is None              # no fusion -> no evidence handed on

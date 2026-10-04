@@ -1,0 +1,62 @@
+{
+  "cancel_off": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 7,
+    "turns_without_trace": 0,
+    "original": "cancel_off__test.pre_evidence_fix.jsonl"
+  },
+  "cancel_off_remote": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 6,
+    "turns_without_trace": 0,
+    "original": "cancel_off_remote__test.pre_evidence_fix.jsonl"
+  },
+  "cancel_on": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 7,
+    "turns_without_trace": 0,
+    "original": "cancel_on__test.pre_evidence_fix.jsonl"
+  },
+  "cancel_on_remote": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 6,
+    "turns_without_trace": 0,
+    "original": "cancel_on_remote__test.pre_evidence_fix.jsonl"
+  },
+  "full_system": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 16,
+    "turns_without_trace": 0,
+    "original": "full_system__test.pre_evidence_fix.jsonl"
+  },
+  "full_system_batch": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 8,
+    "turns_without_trace": 0,
+    "original": "full_system_batch__test.pre_evidence_fix.jsonl"
+  },
+  "full_system_fullrestart": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 18,
+    "turns_without_trace": 0,
+    "original": "full_system_fullrestart__test.pre_evidence_fix.jsonl"
+  },
+  "full_system_nocancel": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 16,
+    "turns_without_trace": 0,
+    "original": "full_system_nocancel__test.pre_evidence_fix.jsonl"
+  },
+  "full_system_queryonly": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 19,
+    "turns_without_trace": 0,
+    "original": "full_system_queryonly__test.pre_evidence_fix.jsonl"
+  },
+  "streaming_fixed": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 16,
+    "turns_without_trace": 0,
+    "original": "streaming_fixed__test.pre_evidence_fix.jsonl"
+  }
+}

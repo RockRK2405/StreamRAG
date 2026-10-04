@@ -4,7 +4,8 @@
                      pattern (stale / unsupported value) matches; 0 otherwise           (expected claims needed)
   completeness       expected claims stated / expected claims                            (same as claim coverage)
   forbidden_hit      1 if a forbidden pattern matches the answer                         (forbidden needed)
-  abstained          the answer says the information is not available (Phase 7 ABSTAIN patterns)
+  abstained          the answer says the information is not available (Phase 7 ABSTAIN patterns), or the answer is
+                     empty (no assertion made - an empty answer is a non-answer, not an explicit abstention)
   insufficiency_ok   INSUFFICIENT samples: abstained and no forbidden match              (expected_state needed)
   conflict_reported  CONTRADICTORY samples with conflict values: every value occurs in the answer
   faithfulness       verifier-judged claim support rate (see claims.py)

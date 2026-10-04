@@ -1,0 +1,18 @@
+{
+  "system": "adaptive_x_fixedk",
+  "split": "dev",
+  "spec": {
+    "family": "pipeline",
+    "generation": "extractive",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "adaptive_retrieval.adaptive_k": false
+    },
+    "label": "adaptive without adaptive k (k=5)",
+    "id": "adaptive_x_fixedk"
+  },
+  "samples": 129,
+  "failed": 0,
+  "wall_s": 3.1,
+  "finished": "2026-10-04T11:32:52.376486"
+}

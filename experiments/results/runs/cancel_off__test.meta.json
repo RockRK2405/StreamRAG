@@ -1,0 +1,32 @@
+{
+  "system": "cancel_off",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overlap_turns": true,
+    "gap_ms": 400,
+    "query_types": [
+      "ENTITY_CORRECTION",
+      "STREAMING_CORRECTION"
+    ],
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "runtime.cancel_running": false,
+      "runtime.cancel_on_correction": false,
+      "controller.cancel_superseded": "never"
+    },
+    "label": "no cancellation",
+    "id": "cancel_off"
+  },
+  "samples": 15,
+  "failed": 0,
+  "wall_s": 36.7,
+  "finished": "2026-10-04T11:36:58.714470",
+  "evidence_rederived": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 7,
+    "turns_without_trace": 0,
+    "original": "cancel_off__test.pre_evidence_fix.jsonl"
+  }
+}

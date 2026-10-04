@@ -1,0 +1,1961 @@
+{
+  "meta": {
+    "system": "full_system (runtime + adaptive + qwen3:4b)",
+    "faults": "SYNTHETIC (FaultInjector)",
+    "reportable": false,
+    "questions": [
+      "T01",
+      "T04",
+      "T08",
+      "T13",
+      "T16",
+      "T21",
+      "T27",
+      "T31",
+      "T44",
+      "T17"
+    ]
+  },
+  "summary": {
+    "retrieval_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "vector_db_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "network_transient": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "llm_timeout": {
+      "runs": 10,
+      "recovery_rate": 0.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "llm_error": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "verifier_failure": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 1.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "malformed_query": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.0,
+      "failure_propagation_rate": null
+    },
+    "rapid_updates": {
+      "runs": 10,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": 0.0,
+      "incorrect_answer_rate": 0.1,
+      "failure_propagation_rate": null
+    },
+    "propagation": {
+      "runs": 5,
+      "recovery_rate": 1.0,
+      "degraded_success_rate": null,
+      "incorrect_answer_rate": null,
+      "failure_propagation_rate": 0.0
+    }
+  },
+  "rows": [
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow long is a single ride ticket valid\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError",
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow much does a replacement travel card cost\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError",
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhat happens\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.51
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "How much is a day pass:\nNot established: The retrieved documents do not contain an answer to \u201cHow much is a day pass\u201d.\n\nHow long is a single ticket valid:\nNot established: The retrieved documents do not contain an answer to \u201chow long is a single ticket valid\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError",
+        "RuntimeError",
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.26
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow long does processing take for students\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhat is the current price of a single ride\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhat supplement applies for a trip to Millbrook\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError",
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow much is a single ride\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 0.51
+    },
+    {
+      "scenario": "retrieval_failure",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "What is the penalty fare:\nNot established: The retrieved documents do not contain an answer to \u201cWhat is the penalty fare\u201d.\n\nHow can I reduce it:\nNot established: The retrieved documents do not contain an answer to \u201chow can I reduce it\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "RETRIEVAL_DEGRADED",
+          "active": [
+            "RETRIEVAL_DEGRADED"
+          ],
+          "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+        }
+      ],
+      "error_events": [
+        "RuntimeError",
+        "RuntimeError"
+      ],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.01
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.0
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.53
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.92
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.61
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nA single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.29
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.85
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.87
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Trips ending in Zone A require no supplement. [ZONE-RULES \u00a71] Trips ending in Zone B require a supplement of 0.50 euros. [ZONE-RULES \u00a72] Trips ending in Zone C require a supplement of 1.20 euros. [ZONE-RULES \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.4
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.27
+    },
+    {
+      "scenario": "vector_db_failure",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty fare is reduced to 30 euros if paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty fare can be reduced to 30 euros by paying within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.83
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.08
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.49
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.92
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.64
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.99
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.84
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.85
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Trips ending in Zone A require no supplement. [ZONE-RULES \u00a71] Trips that end in Zone A need no supplement. [ZONE-RULES \u00a71] Trips that end in Zone B need a supplement of 0.50 euros. [ZONE-RULES \u00a72] Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES \u00a73] The ticket must be validated before boarding. [ZONE-RULES \u00a73] Millbrook is classified as Zone A. [ZONES \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 5.17
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.08
+    },
+    {
+      "scenario": "network_transient",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty fare is reduced to 30 euros if paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty fare can be reduced to 30 euros by paying within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.71
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T01",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T4 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.62
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T04",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T4 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.6
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T08",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T3 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.61
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T13",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T3 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.61
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T16",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T7 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.62
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T21",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T3 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.61
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T27",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T3 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.61
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T31",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T5 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.63
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T44",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T3 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.6
+    },
+    {
+      "scenario": "llm_timeout",
+      "sample_id": "T17",
+      "recovered": 0.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 0.0,
+      "abstained": 1.0,
+      "answer": "",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "answer T4 TIMED_OUT: deadline_exceeded"
+        }
+      ],
+      "error_events": [
+        "TIMED_OUT"
+      ],
+      "backend": null,
+      "fallback": null,
+      "wall_s": 29.61
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros from 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.8
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.51
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71] A monthly pass costs 72 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA4: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 1.26
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.76
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Trips that end in Zone A need no supplement. [ZONE-RULES \u00a71] Trips that end in Zone B need a supplement of 0.50 euros. [ZONE-RULES \u00a72] Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES \u00a73] The ticket must be validated before boarding. [ZONE-RULES \u00a73] Millbrook is classified as Zone A. [ZONES \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA3: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.78
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros from 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 0.51
+    },
+    {
+      "scenario": "llm_error",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty is reduced to 30 euros if it is paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty is reduced to 30 euros if it is paid within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [
+        {
+          "mode": "GENERATION_DEGRADED",
+          "active": [
+            "GENERATION_DEGRADED"
+          ],
+          "reason": "GA2: backend_error: ValueError: injected LLM error"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama->extractive",
+      "fallback": "backend_error: ValueError: injected LLM error",
+      "wall_s": 1.01
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T4 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.95
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T4 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.39
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T3 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.06
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T3 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.68
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T7 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 6.79
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T3 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.93
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T3 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.04
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The sources differ: \u201cTrips that end in Zone A need no supplement\u201d [ZONE-RULES \u00a71] / \u201cTrips that end in Zone B need a supplement of 0.50 euros\u201d [ZONE-RULES \u00a72]. Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES \u00a73] The ticket must be validated before boarding. [ZONE-RULES \u00a73] Millbrook is classified as Zone A. [ZONES \u00a71]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T5 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 7.32
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros from 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros. [FARES-2026 \u00a73]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T3 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.42
+    },
+    {
+      "scenario": "verifier_failure",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 1.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty is reduced to 30 euros if it is paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty is reduced to 30 euros if it is paid within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [
+        {
+          "mode": "VALIDATION_DEGRADED",
+          "active": [
+            "VALIDATION_DEGRADED"
+          ],
+          "reason": "answer T4 FAILED: RuntimeError: verification (NLI) failure: injected verification failure"
+        }
+      ],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 6.81
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.24
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.77
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.2
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.14
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.45
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.23
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 2.19
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Trips ending in Zone A require no supplement. [ZONE-RULES \u00a71] Trips that end in Zone A need no supplement. [ZONE-RULES \u00a71] Trips that end in Zone B need a supplement of 0.50 euros. [ZONE-RULES \u00a72] Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES \u00a73] The ticket must be validated before boarding. [ZONE-RULES \u00a73] Millbrook is classified as Zone A. [ZONES \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 6.01
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros for a duration of 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.77
+    },
+    {
+      "scenario": "malformed_query",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty fare is reduced to 30 euros if paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty fare can be reduced to 30 euros by paying within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.2
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T01",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.4
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T04",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.93
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T08",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.36
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T13",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 1.0,
+      "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.2
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T16",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.27
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T21",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 1.0,
+      "answer_correct": 0.0,
+      "abstained": 0.0,
+      "answer": "Student applications are processed within 5 working days. [CONC-STUDENT \u00a72] Senior applications are processed within 10 working days. [CONC-SENIOR \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.95
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T27",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "A single ride costs 2.80 euros. [FARES-2026 \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 1.31
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T31",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "Trips ending in Zone A require no supplement. [ZONE-RULES \u00a71] Trips that end in Zone A need no supplement. [ZONE-RULES \u00a71] Trips that end in Zone B need a supplement of 0.50 euros. [ZONE-RULES \u00a72] Trips that end in Zone C need a supplement of 1.20 euros. [ZONE-RULES \u00a73] The ticket must be validated before boarding. [ZONE-RULES \u00a73] Millbrook is classified as Zone A. [ZONES \u00a71]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 4.65
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T44",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "The 2026 fare table raised the single ride fare from 2.40 euros to 2.80 euros from 90 to 120 minutes. [FARES-2026 \u00a73] The 2026 fare table raised the single ride fare from 2.40 euros to extended single ride validity from 90 to 120 minutes. [FARES-2026 \u00a73]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.58
+    },
+    {
+      "scenario": "rapid_updates",
+      "sample_id": "T17",
+      "recovered": 1.0,
+      "degraded_success": 0.0,
+      "incorrect_answer": 0.0,
+      "answer_correct": 1.0,
+      "abstained": 0.0,
+      "answer": "What is the penalty fare:\nA rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] The penalty fare is reduced to 30 euros if paid within 7 days. [PENALTIES \u00a72]\n\nHow can I reduce it:\nThe penalty fare can be reduced to 30 euros by paying within 7 days. [PENALTIES \u00a72]",
+      "degraded_modes": [],
+      "error_events": [],
+      "backend": "ollama",
+      "fallback": null,
+      "wall_s": 3.1
+    },
+    {
+      "scenario": "propagation",
+      "sample_id": "T01",
+      "propagated": 0.0,
+      "recovered": 1.0,
+      "faulted_session": {
+        "scenario": "propagation",
+        "sample_id": "T01",
+        "recovered": 1.0,
+        "degraded_success": 1.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 0.0,
+        "abstained": 1.0,
+        "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow long is a single ride ticket valid\u201d.",
+        "degraded_modes": [
+          {
+            "mode": "RETRIEVAL_DEGRADED",
+            "active": [
+              "RETRIEVAL_DEGRADED"
+            ],
+            "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+          }
+        ],
+        "error_events": [
+          "RuntimeError",
+          "RuntimeError"
+        ],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "clean_B": {
+        "scenario": "propagation",
+        "sample_id": "T01",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "faulted_B": {
+        "scenario": "propagation",
+        "sample_id": "T01",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "A single ride ticket is valid for 120 minutes after validation. [FARES-2026 \u00a72; FARES-2026 \u00a73]",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      }
+    },
+    {
+      "scenario": "propagation",
+      "sample_id": "T04",
+      "propagated": 0.0,
+      "recovered": 1.0,
+      "faulted_session": {
+        "scenario": "propagation",
+        "sample_id": "T04",
+        "recovered": 1.0,
+        "degraded_success": 1.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 0.0,
+        "abstained": 1.0,
+        "answer": "Not established: The retrieved documents do not contain an answer to \u201cHow much does a replacement travel card cost\u201d.",
+        "degraded_modes": [
+          {
+            "mode": "RETRIEVAL_DEGRADED",
+            "active": [
+              "RETRIEVAL_DEGRADED"
+            ],
+            "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+          }
+        ],
+        "error_events": [
+          "RuntimeError",
+          "RuntimeError"
+        ],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "clean_B": {
+        "scenario": "propagation",
+        "sample_id": "T04",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "faulted_B": {
+        "scenario": "propagation",
+        "sample_id": "T04",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "A replacement travel card costs 5 euros. [TCO \u00a71] The Travel Card Office (TCO) issues all concession cards and replaces lost travel cards. [TCO \u00a71]",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      }
+    },
+    {
+      "scenario": "propagation",
+      "sample_id": "T08",
+      "propagated": 0.0,
+      "recovered": 1.0,
+      "faulted_session": {
+        "scenario": "propagation",
+        "sample_id": "T08",
+        "recovered": 1.0,
+        "degraded_success": 1.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 0.0,
+        "abstained": 1.0,
+        "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhat happens\u201d.",
+        "degraded_modes": [
+          {
+            "mode": "RETRIEVAL_DEGRADED",
+            "active": [
+              "RETRIEVAL_DEGRADED"
+            ],
+            "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+          }
+        ],
+        "error_events": [
+          "RuntimeError"
+        ],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "clean_B": {
+        "scenario": "propagation",
+        "sample_id": "T08",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 1.0,
+        "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "faulted_B": {
+        "scenario": "propagation",
+        "sample_id": "T08",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 1.0,
+        "answer": "A rider without a valid ticket pays a penalty fare of 60 euros. [PENALTIES \u00a71] Not established: The retrieved documents do not say how this applies to I get caught riding without paying.",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      }
+    },
+    {
+      "scenario": "propagation",
+      "sample_id": "T13",
+      "propagated": 0.0,
+      "recovered": 1.0,
+      "faulted_session": {
+        "scenario": "propagation",
+        "sample_id": "T13",
+        "recovered": 1.0,
+        "degraded_success": 1.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 0.0,
+        "abstained": 1.0,
+        "answer": "Not established: The retrieved documents do not contain an answer to \u201cWhen is the TCO closed\u201d.",
+        "degraded_modes": [
+          {
+            "mode": "RETRIEVAL_DEGRADED",
+            "active": [
+              "RETRIEVAL_DEGRADED"
+            ],
+            "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+          }
+        ],
+        "error_events": [
+          "RuntimeError"
+        ],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "clean_B": {
+        "scenario": "propagation",
+        "sample_id": "T13",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 1.0,
+        "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "faulted_B": {
+        "scenario": "propagation",
+        "sample_id": "T13",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 1.0,
+        "answer": "The TCO is open from Monday to Saturday. [TCO \u00a72] The TCO is closed on Sundays. [TCO \u00a72] Not established: The retrieved documents do not state the value asked for in \u201cWhen is the TCO closed\u201d.",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      }
+    },
+    {
+      "scenario": "propagation",
+      "sample_id": "T16",
+      "propagated": 0.0,
+      "recovered": 1.0,
+      "faulted_session": {
+        "scenario": "propagation",
+        "sample_id": "T16",
+        "recovered": 1.0,
+        "degraded_success": 1.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 0.0,
+        "abstained": 1.0,
+        "answer": "How much is a day pass:\nNot established: The retrieved documents do not contain an answer to \u201cHow much is a day pass\u201d.\n\nHow long is a single ticket valid:\nNot established: The retrieved documents do not contain an answer to \u201chow long is a single ticket valid\u201d.",
+        "degraded_modes": [
+          {
+            "mode": "RETRIEVAL_DEGRADED",
+            "active": [
+              "RETRIEVAL_DEGRADED"
+            ],
+            "reason": "retrieval failed for Q1: PermanentError: injected network failure"
+          }
+        ],
+        "error_events": [
+          "RuntimeError",
+          "RuntimeError",
+          "RuntimeError"
+        ],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "clean_B": {
+        "scenario": "propagation",
+        "sample_id": "T16",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      },
+      "faulted_B": {
+        "scenario": "propagation",
+        "sample_id": "T16",
+        "recovered": 1.0,
+        "degraded_success": 0.0,
+        "incorrect_answer": 0.0,
+        "answer_correct": 1.0,
+        "abstained": 0.0,
+        "answer": "How much is a day pass:\nA day pass costs 8.00 euros. [FARES-2026 \u00a71]\n\nHow long is a single ticket valid:\nThe sources differ: \u201cA single ride ticket is valid for 120 minutes after validation\u201d [FARES-2026 \u00a72] / \u201cA single ride ticket is valid for 90 minutes after validation\u201d [FARES-2025 \u00a72].",
+        "degraded_modes": [],
+        "error_events": [],
+        "backend": "ollama",
+        "fallback": null,
+        "wall_s": 0.0
+      }
+    }
+  ]
+}

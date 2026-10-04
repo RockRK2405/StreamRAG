@@ -1,0 +1,24 @@
+{
+  "system": "full_system_queryonly",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "adaptive_retrieval.claim_driven": false
+    },
+    "label": "S - claim-driven retrieval",
+    "id": "full_system_queryonly"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 266.2,
+  "finished": "2026-10-04T11:52:07.734958",
+  "evidence_rederived": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 19,
+    "turns_without_trace": 0,
+    "original": "full_system_queryonly__test.pre_evidence_fix.jsonl"
+  }
+}

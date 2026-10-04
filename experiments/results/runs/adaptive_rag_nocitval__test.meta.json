@@ -1,0 +1,18 @@
+{
+  "system": "adaptive_rag_nocitval",
+  "split": "test",
+  "spec": {
+    "family": "pipeline",
+    "generation": "llm",
+    "answer_mode": "no_citation_validation",
+    "overrides": {
+      "adaptive_retrieval.enabled": true
+    },
+    "label": "S_batch - citation validation (verified claims, LLM citation labels kept)",
+    "id": "adaptive_rag_nocitval"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 344.5,
+  "finished": "2026-10-04T12:17:02.220902"
+}

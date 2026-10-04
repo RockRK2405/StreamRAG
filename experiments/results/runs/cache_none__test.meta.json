@@ -1,0 +1,20 @@
+{
+  "system": "cache_none",
+  "split": "test",
+  "spec": {
+    "family": "pipeline",
+    "generation": "extractive",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "session.cache": false,
+      "adaptive_retrieval.cache": false,
+      "adaptive_retrieval.session_reuse": false
+    },
+    "label": "no cache",
+    "id": "cache_none"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 2.0,
+  "finished": "2026-10-04T11:36:07.602141"
+}

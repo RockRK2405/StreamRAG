@@ -1,0 +1,17 @@
+{
+  "system": "hybrid_rag",
+  "split": "test",
+  "spec": {
+    "family": "free",
+    "mode": "hybrid",
+    "k": 5,
+    "rerank": false,
+    "generation": "llm",
+    "label": "B Hybrid RAG (BM25 + vector, RRF top-5 -> LLM)",
+    "id": "hybrid_rag"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 178.5,
+  "finished": "2026-10-04T11:15:10.444985"
+}

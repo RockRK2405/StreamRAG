@@ -1,0 +1,128 @@
+[
+  {
+    "metric": "Recall@5",
+    "naive_rag": "0.976",
+    "hybrid_rag": "0.994",
+    "adaptive_rag": "0.915",
+    "full_system": "0.908"
+  },
+  {
+    "metric": "Recall@10",
+    "naive_rag": "0.976",
+    "hybrid_rag": "0.994",
+    "adaptive_rag": "0.915",
+    "full_system": "0.908"
+  },
+  {
+    "metric": "MRR",
+    "naive_rag": "0.867",
+    "hybrid_rag": "0.836",
+    "adaptive_rag": "0.900",
+    "full_system": "0.891"
+  },
+  {
+    "metric": "Answer correctness",
+    "naive_rag": "0.851",
+    "hybrid_rag": "0.892",
+    "adaptive_rag": "0.797",
+    "full_system": "0.730"
+  },
+  {
+    "metric": "Claim support (verifier-judged)",
+    "naive_rag": "0.824",
+    "hybrid_rag": "0.861",
+    "adaptive_rag": "1.000",
+    "full_system": "1.000"
+  },
+  {
+    "metric": "Groundedness (supported and cited)",
+    "naive_rag": "0.824",
+    "hybrid_rag": "0.861",
+    "adaptive_rag": "1.000",
+    "full_system": "1.000"
+  },
+  {
+    "metric": "Hallucinated claim rate",
+    "naive_rag": "0.018",
+    "hybrid_rag": "0.012",
+    "adaptive_rag": "0.012",
+    "full_system": "0.014"
+  },
+  {
+    "metric": "Citation precision",
+    "naive_rag": "0.825",
+    "hybrid_rag": "0.843",
+    "adaptive_rag": "1.000",
+    "full_system": "1.000"
+  },
+  {
+    "metric": "TTFE ms p50 / p95 (from first chunk)",
+    "naive_rag": "NOT MEASURED",
+    "hybrid_rag": "NOT MEASURED",
+    "adaptive_rag": "NOT MEASURED",
+    "full_system": "261 / 767"
+  },
+  {
+    "metric": "TTFA ms p50 / p95 (from first chunk)",
+    "naive_rag": "NOT MEASURED",
+    "hybrid_rag": "NOT MEASURED",
+    "adaptive_rag": "NOT MEASURED",
+    "full_system": "271 / 1632"
+  },
+  {
+    "metric": "TTVA ms p50 / p95 (from first chunk)",
+    "naive_rag": "NOT MEASURED",
+    "hybrid_rag": "NOT MEASURED",
+    "adaptive_rag": "NOT MEASURED",
+    "full_system": "2,367 / 5561"
+  },
+  {
+    "metric": "TTFE ms p50 / p95 (after utterance end)",
+    "naive_rag": "3 / 4",
+    "hybrid_rag": "5 / 8",
+    "adaptive_rag": "13 / 29",
+    "full_system": "NOT MEASURED"
+  },
+  {
+    "metric": "TTVA ms p50 / p95 (after utterance end)",
+    "naive_rag": "1,784 / 4450",
+    "hybrid_rag": "1,844 / 3657",
+    "adaptive_rag": "1,621 / 5763",
+    "full_system": "1,690 / 4833"
+  },
+  {
+    "metric": "Total latency ms p50 / p95 (after utterance end)",
+    "naive_rag": "1,784 / 4450",
+    "hybrid_rag": "1,844 / 3657",
+    "adaptive_rag": "1,621 / 5763",
+    "full_system": "NOT MEASURED"
+  },
+  {
+    "metric": "Retrieval calls / query",
+    "naive_rag": "1.000",
+    "hybrid_rag": "1.000",
+    "adaptive_rag": "1.115",
+    "full_system": "1.391"
+  },
+  {
+    "metric": "LLM calls / query",
+    "naive_rag": "1.000",
+    "hybrid_rag": "1.000",
+    "adaptive_rag": "1.287",
+    "full_system": "1.276"
+  },
+  {
+    "metric": "Cache hit rate",
+    "naive_rag": "0.000",
+    "hybrid_rag": "0.000",
+    "adaptive_rag": "0.034",
+    "full_system": "0.023"
+  },
+  {
+    "metric": "Failure rate (failed samples)",
+    "naive_rag": "0.000",
+    "hybrid_rag": "0.000",
+    "adaptive_rag": "0.000",
+    "full_system": "0.000"
+  }
+]

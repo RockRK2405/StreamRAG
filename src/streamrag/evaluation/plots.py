@@ -103,10 +103,12 @@ def strip(title: str, groups: list[tuple[str, list[float]]], unit: str = " ms", 
             body.append(f'<circle class="m1 ring" cx="{x:.1f}" cy="{y}" r="4" fill-opacity="0.55">'
                         f'<title>{escape(label)}: {v:,.0f}{unit}</title></circle>')
         if s:
-            for p, name in ((0.5, "p50"), (0.95, "p95")):
-                if name == "p95" and len(s) < 20:
+            from streamrag.evaluation.metrics.latency import percentiles
+            pc = percentiles(s)                      # same definition (and minimum n) as the tables
+            for name in ("p50", "p95"):
+                q = pc.get(name)
+                if q is None:
                     continue
-                q = s[min(len(s) - 1, int(round((len(s) - 1) * p)))]
                 x = lab_w + plot_w * q / mx
                 body.append(f'<line class="b" x1="{x}" y1="{y - 11}" x2="{x}" y2="{y + 11}" stroke-width="2"/>'
                             f'<text class="ax" x="{x}" y="{y - 13}" text-anchor="middle">{name} {q:,.0f}</text>')
@@ -116,8 +118,8 @@ def strip(title: str, groups: list[tuple[str, list[float]]], unit: str = " ms", 
 def scatter(title: str, points: list[tuple[str, float, float]], xlab: str, ylab: str, subtitle: str = "",
             highlight: set[str] | None = None) -> str:
     """Labelled points (identity by direct label; the proposed system(s) in the accent hue)."""
-    w, h = 760, 440
-    L, R, T, B = 70, 170, 60, 60
+    w, h = 760, 460
+    L, R, T, B = 70, 170, 80, 60
     pw, ph = w - L - R, h - T - B
     xs = [p[1] for p in points]
     ys = [p[2] for p in points]
@@ -125,36 +127,41 @@ def scatter(title: str, points: list[tuple[str, float, float]], xlab: str, ylab:
     ymn = max(0.0, (min(ys) if ys else 0) - 0.1)
     ymx = min(1.0, (max(ys) if ys else 1) + 0.05) if ys and max(ys) <= 1 else _nice_max(max(ys) if ys else 1)
     body = []
+    xfmt = "{:,.0f}" if xmx >= 10 else "{:.2f}"
     for k in range(5):
         y = T + ph * k / 4
         yv = ymx - (ymx - ymn) * k / 4
         x = L + pw * k / 4
         body.append(f'<line class="g" x1="{L}" y1="{y}" x2="{L + pw}" y2="{y}"/>'
                     f'<text class="ax" x="{L - 6}" y="{y + 3}" text-anchor="end">{yv:.2f}</text>'
-                    f'<text class="ax" x="{x}" y="{T + ph + 16}" text-anchor="middle">{xmx * k / 4:,.0f}</text>')
+                    f'<text class="ax" x="{x}" y="{T + ph + 16}" text-anchor="middle">{xfmt.format(xmx * k / 4)}</text>')
     body.append(f'<line class="b" x1="{L}" y1="{T + ph}" x2="{L + pw}" y2="{T + ph}"/>'
                 f'<text class="lab" x="{L + pw / 2}" y="{h - 14}" text-anchor="middle">{escape(xlab)}</text>'
-                f'<text class="lab" x="16" y="{T - 10}">{escape(ylab)}</text>')
+                f'<text class="lab" x="16" y="{T - 16}">{escape(ylab)}</text>')
     placed: list[tuple[float, float]] = []
-    for name, xv, yv in sorted(points, key=lambda p: p[1]):
+    marks, labels = [], []
+    for name, xv, yv in sorted(points, key=lambda p: -p[2]):          # top to bottom: labels stack downwards
         x = L + pw * xv / xmx
         y = T + ph * (ymx - yv) / (ymx - ymn) if ymx > ymn else T
         cls = "m2" if highlight and name in highlight else "m1"
-        body.append(f'<circle class="{cls} ring" cx="{x:.1f}" cy="{y:.1f}" r="5"><title>{escape(name)}: '
-                    f'{xlab} {xv:,.0f}, {ylab} {yv:.3f}</title></circle>')
+        marks.append(f'<circle class="{cls} ring" cx="{x:.1f}" cy="{y:.1f}" r="5"><title>{escape(name)}: '
+                     f'{xlab} {xfmt.format(xv)}, {ylab} {yv:.3f}</title></circle>')
         ly = y + 4
         while any(abs(ly - py) < 13 and abs(x - px) < 160 for px, py in placed):
             ly += 13
         placed.append((x, ly))
-        body.append(f'<text class="val" x="{x + 9:.1f}" y="{ly:.1f}">{escape(name)}</text>')
+        if abs(ly - (y + 4)) > 1:                 # label moved off its dot: hairline leader keeps identity clear
+            labels.append(f'<line class="b" x1="{x + 4:.1f}" y1="{y + 3:.1f}" x2="{x + 12:.1f}" y2="{ly - 4:.1f}"/>')
+        labels.append(f'<text class="val" x="{x + 14:.1f}" y="{ly:.1f}">{escape(name)}</text>')
+    body += labels + marks
     return _svg(w, h, "".join(body), title, subtitle)
 
 
 def steps(title: str, series: list[tuple[str, list[tuple[float, float]]]], xlab: str, ylab: str,
           subtitle: str = "") -> str:
     """Up to two step lines (legend + direct end labels)."""
-    w, h = 760, 380
-    L, R, T, B = 60, 150, 70, 56
+    w, h = 760, 410
+    L, R, T, B = 60, 150, 100, 56
     pw, ph = w - L - R, h - T - B
     xmx = _nice_max(max((x for _, pts in series for x, _ in pts), default=1))
     ymx = max(1.0, max((y for _, pts in series for _, y in pts), default=1))
@@ -166,7 +173,7 @@ def steps(title: str, series: list[tuple[str, list[tuple[float, float]]]], xlab:
                     f'<text class="ax" x="{L - 6}" y="{y + 3}" text-anchor="end">{ymx * (1 - k / 4):.2f}</text>'
                     f'<text class="ax" x="{x}" y="{T + ph + 16}" text-anchor="middle">{xmx * k / 4:,.0f}</text>')
     body.append(f'<text class="lab" x="{L + pw / 2}" y="{h - 12}" text-anchor="middle">{escape(xlab)}</text>'
-                f'<text class="lab" x="16" y="{T - 22}">{escape(ylab)}</text>')
+                f'<text class="lab" x="16" y="{T - 12}">{escape(ylab)}</text>')
     for i, (name, pts) in enumerate(series[:2]):
         cls = f"l{i + 1}"
         d = ""
@@ -181,6 +188,6 @@ def steps(title: str, series: list[tuple[str, list[tuple[float, float]]]], xlab:
             body.append(f'<path class="{cls}" d="{d}"><title>{escape(name)}</title></path>')
             body.append(f'<text class="val" x="{ex + 6}" y="{ey + 4 + i * 12:.1f}">{escape(name)}</text>')
         lx = L + i * 230
-        body.append(f'<line class="{cls}" x1="{lx}" y1="{T - 40}" x2="{lx + 18}" y2="{T - 40}"/>'
-                    f'<text class="lab" x="{lx + 24}" y="{T - 36}">{escape(name)}</text>')
+        body.append(f'<line class="{cls}" x1="{lx}" y1="{T - 36}" x2="{lx + 18}" y2="{T - 36}"/>'
+                    f'<text class="lab" x="{lx + 24}" y="{T - 32}">{escape(name)}</text>')
     return _svg(w, h, "".join(body), title, subtitle)

@@ -1,0 +1,112 @@
+[
+  {
+    "system": "Full system (S)",
+    "harness": "streaming runtime",
+    "quality": 0.7297,
+    "grounding": 1.0,
+    "hallucinated": 0.0144,
+    "latency": "1690 / 4833",
+    "retrieval_calls": 1.3908,
+    "llm_calls": 1.2759,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S - adaptive retrieval (= baseline D)",
+    "harness": "streaming runtime",
+    "quality": 0.7027,
+    "grounding": 1.0,
+    "hallucinated": 0.0163,
+    "latency": "2130 / 6714",
+    "retrieval_calls": 1.5172,
+    "llm_calls": 1.4713,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S - claim-driven",
+    "harness": "streaming runtime",
+    "quality": 0.7027,
+    "grounding": 1.0,
+    "hallucinated": 0.0144,
+    "latency": "1631 / 4571",
+    "retrieval_calls": 1.4023,
+    "llm_calls": 1.3103,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S - session memory",
+    "harness": "streaming runtime",
+    "quality": 0.7162,
+    "grounding": 1.0,
+    "hallucinated": 0.015,
+    "latency": "1648 / 5323",
+    "retrieval_calls": 1.3678,
+    "llm_calls": 1.2644,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S - delta retrieval",
+    "harness": "streaming runtime",
+    "quality": 0.7297,
+    "grounding": 1.0,
+    "hallucinated": 0.0144,
+    "latency": "1632 / 4610",
+    "retrieval_calls": 1.3908,
+    "llm_calls": 1.2759,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S - cancellation",
+    "harness": "streaming runtime",
+    "quality": 0.7297,
+    "grounding": 1.0,
+    "hallucinated": 0.0144,
+    "latency": "1601 / 4536",
+    "retrieval_calls": 1.3908,
+    "llm_calls": 1.2759,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "Adaptive RAG, batch (S_batch)",
+    "harness": "batch pipeline",
+    "quality": 0.7973,
+    "grounding": 1.0,
+    "hallucinated": 0.0123,
+    "latency": "1621 / 5763",
+    "retrieval_calls": 1.1149,
+    "llm_calls": 1.2874,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S_batch - verification",
+    "harness": "batch pipeline",
+    "quality": 0.8649,
+    "grounding": 0.8471,
+    "hallucinated": 0.0098,
+    "latency": "1519 / 5621",
+    "retrieval_calls": 1.1149,
+    "llm_calls": 1.0,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S_batch - citation validation",
+    "harness": "batch pipeline",
+    "quality": 0.7703,
+    "grounding": 1.0,
+    "hallucinated": 0.0,
+    "latency": "1557 / 5547",
+    "retrieval_calls": 1.1149,
+    "llm_calls": 1.0,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  },
+  {
+    "system": "S_batch + reranking",
+    "harness": "batch pipeline",
+    "quality": 0.7973,
+    "grounding": 1.0,
+    "hallucinated": 0.0144,
+    "latency": "1691 / 5591",
+    "retrieval_calls": 1.1149,
+    "llm_calls": 1.2529,
+    "reliability": "0 failed, 0 with orchestration failure of 87"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "system": "topk_5",
+  "split": "dev",
+  "spec": {
+    "family": "pipeline",
+    "generation": "extractive",
+    "overrides": {
+      "adaptive_retrieval.enabled": false,
+      "multi_intent.max_candidates_per_intent": 5
+    },
+    "label": "fixed k=5",
+    "id": "topk_5"
+  },
+  "samples": 129,
+  "failed": 0,
+  "wall_s": 5.8,
+  "finished": "2026-10-04T11:32:26.126913"
+}

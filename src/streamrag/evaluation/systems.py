@@ -346,27 +346,30 @@ async def _drive_session(spec: dict, st, session: list[EvalSample], llm, faults=
 
 
 def turn_evidence(events, uid: str) -> list[str] | None:
-    """Evidence handed to the answer stage for turn ``uid``: the items of the turn's EVIDENCE_FUSED events up to its
-    last ANSWER_COMMITTED - latest fusion first (its rank order), then items only in earlier fusions of the same turn
-    (their answer sections can be reused in the committed answer). None if the turn fused no evidence. Read from the
-    events, not from the session ledger, because later turns supersede the ledger state. Accepts TelemetryEvent
-    objects or trace dicts."""
+    """Evidence handed to the final answer of turn ``uid``: the items of the turn's last EVIDENCE_FUSED event before
+    its last ANSWER_COMMITTED (rank order), plus items of earlier fusions of the same turn that the committed answer
+    still cites (answer sections reused from a draft). Draft-time evidence the final answer does not use is left out,
+    which matches the batch pipeline (final retrieval state of the turn). None if the turn fused no evidence. Read
+    from the events, not from the session ledger, because later turns supersede the ledger state. Accepts
+    TelemetryEvent objects or trace dicts."""
     def get(e, k):
         if isinstance(e, dict):
             return e[k]
         v = getattr(e, k)
         return v.value if k == "type" else v
     mine = [e for e in events if get(e, "utterance_id") == uid]
-    commits = [get(e, "seq") for e in mine if get(e, "type") == "ANSWER_COMMITTED"]
-    fused = [e for e in mine if get(e, "type") == "EVIDENCE_FUSED" and (not commits or get(e, "seq") <= commits[-1])]
+    commits = [e for e in mine if get(e, "type") == "ANSWER_COMMITTED"]
+    last_seq = get(commits[-1], "seq") if commits else None
+    fused = [e for e in mine if get(e, "type") == "EVIDENCE_FUSED" and (last_seq is None or get(e, "seq") <= last_seq)]
     if not fused:
         return None
-    ids: list[str] = []
-    for e in reversed(fused):
+    ids = [it["evidence_id"] for it in get(fused[-1], "payload").get("items") or [] if it.get("evidence_id")]
+    cited = set(get(commits[-1], "payload").get("citations") or []) if commits else set()
+    for e in reversed(fused[:-1]):
         for it in get(e, "payload").get("items") or []:
-            if it.get("evidence_id") and it["evidence_id"] not in ids:
+            if it.get("evidence_id") and it.get("citation") in cited and it["evidence_id"] not in ids:
                 ids.append(it["evidence_id"])
-    return ids
+    return list(dict.fromkeys(ids))
 
 
 def run_runtime(spec: dict, st, session: list[EvalSample], llm, trace_dir: Path | None = None,

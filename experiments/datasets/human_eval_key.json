@@ -1,0 +1,338 @@
+{
+  "1": {
+    "sample_id": "T16",
+    "system_variant": "naive_rag"
+  },
+  "2": {
+    "sample_id": "T06",
+    "system_variant": "naive_rag"
+  },
+  "3": {
+    "sample_id": "T33",
+    "system_variant": "full_system"
+  },
+  "4": {
+    "sample_id": "T49",
+    "system_variant": "hybrid_rerank"
+  },
+  "5": {
+    "sample_id": "T49",
+    "system_variant": "naive_rag"
+  },
+  "6": {
+    "sample_id": "T14",
+    "system_variant": "full_system"
+  },
+  "7": {
+    "sample_id": "T17",
+    "system_variant": "full_system"
+  },
+  "8": {
+    "sample_id": "T38",
+    "system_variant": "full_system"
+  },
+  "9": {
+    "sample_id": "S06.1",
+    "system_variant": "hybrid_rerank"
+  },
+  "10": {
+    "sample_id": "T16",
+    "system_variant": "hybrid_rerank"
+  },
+  "11": {
+    "sample_id": "S06.1",
+    "system_variant": "naive_rag"
+  },
+  "12": {
+    "sample_id": "S12.2",
+    "system_variant": "naive_rag"
+  },
+  "13": {
+    "sample_id": "T04",
+    "system_variant": "hybrid_rerank"
+  },
+  "14": {
+    "sample_id": "S09.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "15": {
+    "sample_id": "T38",
+    "system_variant": "naive_rag"
+  },
+  "16": {
+    "sample_id": "SC1",
+    "system_variant": "full_system"
+  },
+  "17": {
+    "sample_id": "T03",
+    "system_variant": "naive_rag"
+  },
+  "18": {
+    "sample_id": "T33",
+    "system_variant": "naive_rag"
+  },
+  "19": {
+    "sample_id": "T14",
+    "system_variant": "hybrid_rerank"
+  },
+  "20": {
+    "sample_id": "S11.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "21": {
+    "sample_id": "T03",
+    "system_variant": "hybrid_rerank"
+  },
+  "22": {
+    "sample_id": "SC2",
+    "system_variant": "hybrid_rerank"
+  },
+  "23": {
+    "sample_id": "S11.2",
+    "system_variant": "naive_rag"
+  },
+  "24": {
+    "sample_id": "S04.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "25": {
+    "sample_id": "S15.2",
+    "system_variant": "full_system"
+  },
+  "26": {
+    "sample_id": "T48",
+    "system_variant": "naive_rag"
+  },
+  "27": {
+    "sample_id": "SC1",
+    "system_variant": "hybrid_rerank"
+  },
+  "28": {
+    "sample_id": "T39",
+    "system_variant": "full_system"
+  },
+  "29": {
+    "sample_id": "T04",
+    "system_variant": "full_system"
+  },
+  "30": {
+    "sample_id": "SC2",
+    "system_variant": "full_system"
+  },
+  "31": {
+    "sample_id": "T14",
+    "system_variant": "naive_rag"
+  },
+  "32": {
+    "sample_id": "S09.2",
+    "system_variant": "naive_rag"
+  },
+  "33": {
+    "sample_id": "T17",
+    "system_variant": "hybrid_rerank"
+  },
+  "34": {
+    "sample_id": "T23",
+    "system_variant": "hybrid_rerank"
+  },
+  "35": {
+    "sample_id": "T10",
+    "system_variant": "naive_rag"
+  },
+  "36": {
+    "sample_id": "T06",
+    "system_variant": "full_system"
+  },
+  "37": {
+    "sample_id": "T43",
+    "system_variant": "naive_rag"
+  },
+  "38": {
+    "sample_id": "T22",
+    "system_variant": "hybrid_rerank"
+  },
+  "39": {
+    "sample_id": "T41",
+    "system_variant": "full_system"
+  },
+  "40": {
+    "sample_id": "T23",
+    "system_variant": "naive_rag"
+  },
+  "41": {
+    "sample_id": "S08.2",
+    "system_variant": "full_system"
+  },
+  "42": {
+    "sample_id": "S09.2",
+    "system_variant": "full_system"
+  },
+  "43": {
+    "sample_id": "S15.1",
+    "system_variant": "full_system"
+  },
+  "44": {
+    "sample_id": "S11.2",
+    "system_variant": "full_system"
+  },
+  "45": {
+    "sample_id": "S04.2",
+    "system_variant": "full_system"
+  },
+  "46": {
+    "sample_id": "T39",
+    "system_variant": "naive_rag"
+  },
+  "47": {
+    "sample_id": "T27",
+    "system_variant": "naive_rag"
+  },
+  "48": {
+    "sample_id": "T38",
+    "system_variant": "hybrid_rerank"
+  },
+  "49": {
+    "sample_id": "T10",
+    "system_variant": "hybrid_rerank"
+  },
+  "50": {
+    "sample_id": "T16",
+    "system_variant": "full_system"
+  },
+  "51": {
+    "sample_id": "T06",
+    "system_variant": "hybrid_rerank"
+  },
+  "52": {
+    "sample_id": "S01.2",
+    "system_variant": "full_system"
+  },
+  "53": {
+    "sample_id": "S01.2",
+    "system_variant": "naive_rag"
+  },
+  "54": {
+    "sample_id": "S12.2",
+    "system_variant": "full_system"
+  },
+  "55": {
+    "sample_id": "T03",
+    "system_variant": "full_system"
+  },
+  "56": {
+    "sample_id": "S12.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "57": {
+    "sample_id": "T41",
+    "system_variant": "naive_rag"
+  },
+  "58": {
+    "sample_id": "S01.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "59": {
+    "sample_id": "SC1",
+    "system_variant": "naive_rag"
+  },
+  "60": {
+    "sample_id": "T43",
+    "system_variant": "hybrid_rerank"
+  },
+  "61": {
+    "sample_id": "T22",
+    "system_variant": "full_system"
+  },
+  "62": {
+    "sample_id": "S15.2",
+    "system_variant": "naive_rag"
+  },
+  "63": {
+    "sample_id": "S08.2",
+    "system_variant": "naive_rag"
+  },
+  "64": {
+    "sample_id": "T41",
+    "system_variant": "hybrid_rerank"
+  },
+  "65": {
+    "sample_id": "T48",
+    "system_variant": "full_system"
+  },
+  "66": {
+    "sample_id": "T23",
+    "system_variant": "full_system"
+  },
+  "67": {
+    "sample_id": "T48",
+    "system_variant": "hybrid_rerank"
+  },
+  "68": {
+    "sample_id": "SC2",
+    "system_variant": "naive_rag"
+  },
+  "69": {
+    "sample_id": "S04.2",
+    "system_variant": "naive_rag"
+  },
+  "70": {
+    "sample_id": "T04",
+    "system_variant": "naive_rag"
+  },
+  "71": {
+    "sample_id": "T43",
+    "system_variant": "full_system"
+  },
+  "72": {
+    "sample_id": "T33",
+    "system_variant": "hybrid_rerank"
+  },
+  "73": {
+    "sample_id": "T10",
+    "system_variant": "full_system"
+  },
+  "74": {
+    "sample_id": "T27",
+    "system_variant": "hybrid_rerank"
+  },
+  "75": {
+    "sample_id": "S06.1",
+    "system_variant": "full_system"
+  },
+  "76": {
+    "sample_id": "S15.2",
+    "system_variant": "hybrid_rerank"
+  },
+  "77": {
+    "sample_id": "T22",
+    "system_variant": "naive_rag"
+  },
+  "78": {
+    "sample_id": "T27",
+    "system_variant": "full_system"
+  },
+  "79": {
+    "sample_id": "T17",
+    "system_variant": "naive_rag"
+  },
+  "80": {
+    "sample_id": "S15.1",
+    "system_variant": "hybrid_rerank"
+  },
+  "81": {
+    "sample_id": "T39",
+    "system_variant": "hybrid_rerank"
+  },
+  "82": {
+    "sample_id": "T49",
+    "system_variant": "full_system"
+  },
+  "83": {
+    "sample_id": "S15.1",
+    "system_variant": "naive_rag"
+  },
+  "84": {
+    "sample_id": "S08.2",
+    "system_variant": "hybrid_rerank"
+  }
+}

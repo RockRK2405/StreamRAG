@@ -1,0 +1,18 @@
+{
+  "system": "adaptive_x_single",
+  "split": "test",
+  "spec": {
+    "family": "pipeline",
+    "generation": "extractive",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "adaptive_retrieval.iterative": false
+    },
+    "label": "adaptive, single pass",
+    "id": "adaptive_x_single"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 1.7,
+  "finished": "2026-10-04T11:43:08.439986"
+}

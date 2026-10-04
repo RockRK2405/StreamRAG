@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "note": "measured on this machine; process = the evaluation process (not the LLM server)"
+  },
+  "memory_peak_rss_mb": {
+    "python + imports": 39.8,
+    "+ index, BM25, bge-small embedder, NLI (stack)": 1011.8,
+    "+ cross-encoder reranker (second stack)": 1180.7,
+    "+ verification instrument": 1274.9
+  },
+  "cpu_per_call": {
+    "dense top-5": {
+      "n": 30,
+      "cpu_ms_median": 23.15,
+      "cpu_ms_p90": 26.69,
+      "wall_ms_median": 3.33,
+      "wall_ms_p90": 3.79
+    },
+    "hybrid top-5": {
+      "n": 30,
+      "cpu_ms_median": 24.97,
+      "cpu_ms_p90": 27.68,
+      "wall_ms_median": 3.63,
+      "wall_ms_p90": 3.95
+    },
+    "hybrid top-5 + rerank": {
+      "n": 30,
+      "cpu_ms_median": 278.28,
+      "cpu_ms_p90": 296.79,
+      "wall_ms_median": 31.59,
+      "wall_ms_p90": 34.08
+    },
+    "verify 1 claim vs 5 sections": {
+      "n": 30,
+      "cpu_ms_median": 86.55,
+      "cpu_ms_p90": 240.37,
+      "wall_ms_median": 21.75,
+      "wall_ms_p90": 59.97
+    }
+  },
+  "disk_mb": {
+    "index (transit)": 0.13,
+    "model all-minilm-l6-v2": 86.67,
+    "model all-minilm-l6-v2-qint8-arm64": 22.41,
+    "model bge-small-en-v1.5": 127.61,
+    "model ms-marco-minilm-l6-v2": 87.48,
+    "model ms-marco-minilm-l6-v2-qint8-arm64": 22.81,
+    "model nli-deberta-v3-xsmall": 279.29
+  },
+  "llm_server": {
+    "ollama_ps": "NAME        ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3:4b    359d7dd4bcda    3.9 GB    100% GPU     8192       4 minutes from now",
+    "process_rss_mb": {
+      "3568": 30.9
+    },
+    "runner_rss_mb": {}
+  },
+  "gpu_memory": "NOT MEASURED (no discrete GPU; Ollama uses Apple Metal unified memory, see ollama_ps)"
+}

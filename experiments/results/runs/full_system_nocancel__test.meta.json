@@ -1,0 +1,26 @@
+{
+  "system": "full_system_nocancel",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": true,
+      "runtime.cancel_running": false,
+      "runtime.cancel_on_correction": false,
+      "controller.cancel_superseded": "never"
+    },
+    "label": "S - cancellation",
+    "id": "full_system_nocancel"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 264.5,
+  "finished": "2026-10-04T12:05:20.254459",
+  "evidence_rederived": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 16,
+    "turns_without_trace": 0,
+    "original": "full_system_nocancel__test.pre_evidence_fix.jsonl"
+  }
+}

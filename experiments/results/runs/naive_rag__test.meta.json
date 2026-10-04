@@ -1,0 +1,17 @@
+{
+  "system": "naive_rag",
+  "split": "test",
+  "spec": {
+    "family": "free",
+    "mode": "dense",
+    "k": 5,
+    "rerank": false,
+    "generation": "llm",
+    "label": "A Naive RAG (vector top-5 -> LLM)",
+    "id": "naive_rag"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 182.2,
+  "finished": "2026-10-04T11:12:07.070122"
+}

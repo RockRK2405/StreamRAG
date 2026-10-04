@@ -89,7 +89,7 @@ class ExperimentRunner:
         if not (path.exists() and not rerun):
             self._run(system, split, log)
         else:
-            log("run_reused", system=system, split=split, path=str(path.relative_to(self.repo)))
+            log("run_reused", system=system, split=split, path=self._rel(path))
         return self.scored(system, split, log, rescore=rerun)
 
     def _run(self, system: str, split: str, log: Logger) -> None:
@@ -268,13 +268,17 @@ class ExperimentRunner:
                     n += 1
         log("failure_cases", path=str(store), records=n)
 
+    def _rel(self, p: Path) -> str:
+        """Repository-relative path when the results live in the repository, else the absolute path."""
+        return str(p.relative_to(self.repo)) if p.is_relative_to(self.repo) else str(p)
+
     def _trace_path(self, r: dict) -> str | None:
         """Runtime event trace of the turn's session (runs/traces/<variant>__<session>.jsonl), if one was written."""
         if r["split"] not in self._sessions:
             self._sessions[r["split"]] = {s.sample_id: s.session_id for s in self.samples(r["split"])}
         sid = self._sessions[r["split"]].get(r["sample_id"])
         p = self.results / "runs" / "traces" / f"{r['system_variant']}__{(sid or '').replace('.', '-')}.jsonl"
-        return str(p.relative_to(self.repo)) if sid and p.exists() else None
+        return self._rel(p) if sid and p.exists() else None
 
     def config_record(self, cfg: dict) -> dict:
         man = json.loads((self.dataset_dir / "manifest.json").read_text())

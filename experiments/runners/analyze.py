@@ -18,6 +18,7 @@ import csv
 import html
 import json
 import random
+import statistics
 import sys
 from pathlib import Path
 
@@ -212,8 +213,9 @@ def main() -> None:
     if sy1:
         plots["01_retrieval_quality"] = P.hbar("Retrieval quality: Recall@5 (test split)",
                                                [(LABEL[n], m(sy1.get(n), "retrieval.recall@5")) for n in base],
-                                               subtitle="share of gold sections in the top 5 evidence items; 81 turns "
-                                                        "with gold", vmax=1.0)
+                                               subtitle="share of gold sections in the top 5 evidence items; "
+                                                        f"{m(sy1.get('full_system'), 'retrieval.recall@5', 'n')} turns "
+                                                        "with gold sections", vmax=1.0)
         plots["01b_answer_correct"] = P.hbar("Answer correctness (test split)",
                                              [(LABEL[n], m(sy1.get(n), "generation.answer_correct")) for n in base],
                                              subtitle="all expected key facts stated, no forbidden value; real LLM "
@@ -317,7 +319,15 @@ def main() -> None:
                "completion and is not flagged, so 'wasted' under-counts waste in the no-cancellation variants.", "",
                table(["variant", "total worker ms", "of which wasted (flagged)", "useful", "wasted generation ms",
                       "LLM calls (sum)", "cancelled tasks", "stale discarded"],
-                     [[LABEL[n]] + waste(r6, n) for n in names6]), ""]
+                     [[LABEL[n]] + waste(r6, n) for n in names6]), "",
+               "## EXP06 final vs superseded turns", "",
+               "> Added after the first EXP06 results were seen (disclosed in the report): in the overlap protocol the "
+               "first question of a correction session is superseded 400 ms after it ends, so cancelling its answer is "
+               "the intended behaviour. 'Final turns' = the last turn of each session (the corrected question, plus "
+               "the single-turn streamed corrections).", "",
+               table(["variant", "final turns", "final: answer correct", "final: TTVA after end p50 ms",
+                      "final: TTVA after end max ms", "superseded first turns", "superseded: answered"],
+                     [[LABEL[n]] + final_turns(r6, n) for n in names6]), ""]
     err_rows = rows("EXP01_baselines") + [x for e in ("ABLATION_runtime", "ABLATION_answer_stage")
                                           for x in rows(e) if x["system_variant"] not in base]
     err_names = list(dict.fromkeys(x["system_variant"] for x in err_rows))
@@ -416,6 +426,23 @@ def error_budget(rs: list[dict], names: list[str]) -> str:
             ("turn not completed", lambda x: (x.get("error") or "").startswith("turn_not_completed"))]
     body = [[lab] + [sum(1 for x in rs if x["system_variant"] == n and fn(x)) for n in names] for lab, fn in spec]
     return table(["reliability (turn counts)"] + [LABEL.get(n, n) for n in names], body)
+
+
+def final_turns(r6: list[dict], n: str) -> list:
+    data = {x["sample_id"]: x for x in (json.loads(y) for y in (REPO / "experiments" / "datasets" / "streamrag_eval_v1"
+                                                                / "test.jsonl").read_text().splitlines())}
+    last: dict[str, int] = {}
+    for x in data.values():
+        last[x["session_id"]] = max(last.get(x["session_id"], 0), x["turn_index"])
+    mine = [x for x in r6 if x["system_variant"] == n]
+    fin = [x for x in mine if data[x["sample_id"]]["turn_index"] == last[data[x["sample_id"]]["session_id"]]]
+    sup = [x for x in mine if x not in fin]
+    ac = [x["metrics"]["generation"]["answer_correct"] for x in fin if x["metrics"]["generation"]["answer_correct"]
+          is not None]
+    tv = sorted(x["metrics"]["latency"]["ttva_after_end"] for x in fin
+                if x["metrics"]["latency"].get("ttva_after_end") is not None)
+    return [len(fin), sum(ac) / len(ac) if ac else None, round(statistics.median(tv), 1) if tv else None,
+            tv[-1] if tv else None, len(sup), sum(1 for x in sup if (x["answer"] or "").strip())]
 
 
 def ablation_table(ab, ab2) -> list[dict]:

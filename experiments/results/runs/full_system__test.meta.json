@@ -1,0 +1,23 @@
+{
+  "system": "full_system",
+  "split": "test",
+  "spec": {
+    "family": "runtime",
+    "generation": "llm",
+    "overrides": {
+      "adaptive_retrieval.enabled": true
+    },
+    "label": "Full system (streaming runtime + session + delta + cancellation + adaptive + grounding)",
+    "id": "full_system"
+  },
+  "samples": 87,
+  "failed": 0,
+  "wall_s": 268.2,
+  "finished": "2026-10-04T11:31:43.607582",
+  "evidence_rederived": {
+    "from": "event traces (systems.turn_evidence)",
+    "turns_changed": 16,
+    "turns_without_trace": 0,
+    "original": "full_system__test.pre_evidence_fix.jsonl"
+  }
+}

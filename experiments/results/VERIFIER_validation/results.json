@@ -1,0 +1,1242 @@
+{
+  "meta": {
+    "instrument": "Phase 7 ClaimVerifier (nli-deberta-v3-xsmall + rules)",
+    "labels": "by construction (perturbations of reference claims)",
+    "reportable": false
+  },
+  "n": 172,
+  "accuracy": 0.9419,
+  "precision_supported": 0.8958,
+  "recall_supported": 0.8958,
+  "false_acceptance_rate": 0.0403,
+  "confusion": {
+    "tp": 43,
+    "fp": 5,
+    "fn": 5,
+    "tn": 119
+  },
+  "by_kind": {
+    "entity_swap": {
+      "n": 46,
+      "judged_supported": 2
+    },
+    "negation": {
+      "n": 40,
+      "judged_supported": 3
+    },
+    "number_swap": {
+      "n": 38,
+      "judged_supported": 0
+    },
+    "original": {
+      "n": 48,
+      "judged_supported": 43
+    }
+  },
+  "rows": [
+    {
+      "claim": "A single ride ticket is valid for 120 minutes after validation.",
+      "kind": "original",
+      "text": "A single ride ticket is valid for 120 minutes after validation.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes after validation.",
+      "kind": "number_swap",
+      "text": "A single ride ticket is valid for 127 minutes after validation.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes after validation.",
+      "kind": "negation",
+      "text": "A single ride ticket is not valid for 120 minutes after validation.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes after validation.",
+      "kind": "entity_swap",
+      "text": "A single ride ticket is valid for 30 days after validation.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Items found on vehicles are kept for 30 days.",
+      "kind": "original",
+      "text": "Items found on vehicles are kept for 30 days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Items found on vehicles are kept for 30 days.",
+      "kind": "number_swap",
+      "text": "Items found on vehicles are kept for 37 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Items found on vehicles are kept for 30 days.",
+      "kind": "negation",
+      "text": "Items found on vehicles are not kept for 30 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Items found on vehicles are kept for 30 days.",
+      "kind": "entity_swap",
+      "text": "Items found on vehicles are kept for two.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Every bus has two wheelchair spaces.",
+      "kind": "original",
+      "text": "Every bus has two wheelchair spaces.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Every bus has two wheelchair spaces.",
+      "kind": "entity_swap",
+      "text": "Every bus has 5 euros wheelchair spaces.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "A replacement card costs 5 euros.",
+      "kind": "original",
+      "text": "A replacement card costs 5 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A replacement card costs 5 euros.",
+      "kind": "number_swap",
+      "text": "A replacement card costs 12 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A replacement card costs 5 euros.",
+      "kind": "negation",
+      "text": "A replacement card do not costs 5 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A replacement card costs 5 euros.",
+      "kind": "entity_swap",
+      "text": "A replacement card costs 21 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Refunds are paid within 21 days.",
+      "kind": "original",
+      "text": "Refunds are paid within 21 days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Refunds are paid within 21 days.",
+      "kind": "number_swap",
+      "text": "Refunds are paid within 28 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Refunds are paid within 21 days.",
+      "kind": "negation",
+      "text": "Refunds are not paid within 21 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Refunds are paid within 21 days.",
+      "kind": "entity_swap",
+      "text": "Refunds are paid within 7:00.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Bicycles are allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "kind": "original",
+      "text": "Bicycles are allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Bicycles are allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "kind": "number_swap",
+      "text": "Bicycles are allowed on trains outside peak hours; peak hours are 14:00 to 9:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Bicycles are allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "kind": "negation",
+      "text": "Bicycles are not allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Bicycles are allowed on trains outside peak hours; peak hours are 7:00 to 9:00 on weekdays.",
+      "kind": "entity_swap",
+      "text": "Bicycles are allowed on trains outside peak hours; peak hours are 60 euros to 9:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "PARTIALLY_SUPPORTED"
+    },
+    {
+      "claim": "A rider without a valid ticket pays a penalty fare of 60 euros.",
+      "kind": "original",
+      "text": "A rider without a valid ticket pays a penalty fare of 60 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A rider without a valid ticket pays a penalty fare of 60 euros.",
+      "kind": "number_swap",
+      "text": "A rider without a valid ticket pays a penalty fare of 67 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A rider without a valid ticket pays a penalty fare of 60 euros.",
+      "kind": "entity_swap",
+      "text": "A rider without a valid ticket pays a penalty fare of 65.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Riders aged 65 or older travel free outside peak hours.",
+      "kind": "original",
+      "text": "Riders aged 65 or older travel free outside peak hours.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Riders aged 65 or older travel free outside peak hours.",
+      "kind": "number_swap",
+      "text": "Riders aged 72 or older travel free outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Riders aged 65 or older travel free outside peak hours.",
+      "kind": "negation",
+      "text": "Riders aged 65 or older do not travel free outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Riders aged 65 or older travel free outside peak hours.",
+      "kind": "entity_swap",
+      "text": "Riders aged 24 hours or older travel free outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Travel assistance must be booked at least 24 hours in advance.",
+      "kind": "original",
+      "text": "Travel assistance must be booked at least 24 hours in advance.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Travel assistance must be booked at least 24 hours in advance.",
+      "kind": "number_swap",
+      "text": "Travel assistance must be booked at least 31 hours in advance.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Travel assistance must be booked at least 24 hours in advance.",
+      "kind": "negation",
+      "text": "do not Travel assistance must be booked at least 24 hours in advance.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Travel assistance must be booked at least 24 hours in advance.",
+      "kind": "entity_swap",
+      "text": "Travel assistance must be booked at least free in advance.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Refunds are requested with Form TR-410.",
+      "kind": "original",
+      "text": "Refunds are requested with Form TR-410.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Refunds are requested with Form TR-410.",
+      "kind": "number_swap",
+      "text": "Refunds are requested with Form TR-417.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Refunds are requested with Form TR-410.",
+      "kind": "negation",
+      "text": "Refunds are not requested with Form TR-410.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Seniors apply with Form TR-305 and proof of age.",
+      "kind": "original",
+      "text": "Seniors apply with Form TR-305 and proof of age.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Seniors apply with Form TR-305 and proof of age.",
+      "kind": "number_swap",
+      "text": "Seniors apply with Form TR-312 and proof of age.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Seniors apply with Form TR-305 and proof of age.",
+      "kind": "negation",
+      "text": "Seniors do not apply with Form TR-305 and proof of age.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The TCO is closed on Sundays.",
+      "kind": "original",
+      "text": "The TCO is closed on Sundays.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The TCO is closed on Sundays.",
+      "kind": "negation",
+      "text": "The TCO is not closed on Sundays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The TCO is closed on Sundays.",
+      "kind": "entity_swap",
+      "text": "The TCO is closed on seniors.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210 and a current enrolment certificate.",
+      "kind": "original",
+      "text": "Students apply with Form TR-210 and a current enrolment certificate.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210 and a current enrolment certificate.",
+      "kind": "number_swap",
+      "text": "Students apply with Form TR-217 and a current enrolment certificate.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210 and a current enrolment certificate.",
+      "kind": "negation",
+      "text": "Students do not apply with Form TR-210 and a current enrolment certificate.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210 and a current enrolment certificate.",
+      "kind": "entity_swap",
+      "text": "Students apply with Form TR-210 and a current Sunday.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The TCO issues all concession cards.",
+      "kind": "original",
+      "text": "The TCO issues all concession cards.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The TCO issues all concession cards.",
+      "kind": "entity_swap",
+      "text": "The TCO issues all enrolment certificate.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A day pass costs 8.00 euros.",
+      "kind": "original",
+      "text": "A day pass costs 8.00 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A day pass costs 8.00 euros.",
+      "kind": "number_swap",
+      "text": "A day pass costs 9.50 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A day pass costs 8.00 euros.",
+      "kind": "negation",
+      "text": "A day pass do not costs 8.00 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A day pass costs 8.00 euros.",
+      "kind": "entity_swap",
+      "text": "A day pass costs concession cards euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes.",
+      "kind": "original",
+      "text": "A single ride ticket is valid for 120 minutes.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes.",
+      "kind": "number_swap",
+      "text": "A single ride ticket is valid for 127 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes.",
+      "kind": "negation",
+      "text": "A single ride ticket is not valid for 120 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride ticket is valid for 120 minutes.",
+      "kind": "entity_swap",
+      "text": "A single ride ticket is valid for 8.00.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The penalty fare is 60 euros.",
+      "kind": "original",
+      "text": "The penalty fare is 60 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The penalty fare is 60 euros.",
+      "kind": "number_swap",
+      "text": "The penalty fare is 67 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The penalty fare is 60 euros.",
+      "kind": "negation",
+      "text": "The penalty fare is not 60 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The penalty fare is 60 euros.",
+      "kind": "entity_swap",
+      "text": "The penalty fare is 120 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "It is reduced to 30 euros if paid within 7 days.",
+      "kind": "original",
+      "text": "It is reduced to 30 euros if paid within 7 days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "It is reduced to 30 euros if paid within 7 days.",
+      "kind": "number_swap",
+      "text": "It is reduced to 37 euros if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "It is reduced to 30 euros if paid within 7 days.",
+      "kind": "negation",
+      "text": "It is not reduced to 30 euros if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "It is reduced to 30 euros if paid within 7 days.",
+      "kind": "entity_swap",
+      "text": "It is reduced to 60 euros if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Lost items are kept for 30 days.",
+      "kind": "original",
+      "text": "Lost items are kept for 30 days.",
+      "label": "SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Lost items are kept for 30 days.",
+      "kind": "number_swap",
+      "text": "Lost items are kept for 37 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Lost items are kept for 30 days.",
+      "kind": "negation",
+      "text": "Lost items are not kept for 30 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Lost items are kept for 30 days.",
+      "kind": "entity_swap",
+      "text": "Lost items are kept for 30 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "A collection fee of 3 euros applies.",
+      "kind": "original",
+      "text": "A collection fee of 3 euros applies.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A collection fee of 3 euros applies.",
+      "kind": "number_swap",
+      "text": "A collection fee of 10 euros applies.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A collection fee of 3 euros applies.",
+      "kind": "entity_swap",
+      "text": "A collection fee of 30 days applies.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "kind": "original",
+      "text": "Peak hours are 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "kind": "number_swap",
+      "text": "Peak hours are 14:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "kind": "negation",
+      "text": "Peak hours are not 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00 and 16:00 to 18:00 on weekdays.",
+      "kind": "entity_swap",
+      "text": "Peak hours are 3 euros to 9:00 and 16:00 to 18:00 on weekdays.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Folded bicycles are allowed at all times.",
+      "kind": "original",
+      "text": "Folded bicycles are allowed at all times.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Folded bicycles are allowed at all times.",
+      "kind": "negation",
+      "text": "Folded bicycles are not allowed at all times.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Folded bicycles are allowed at all times.",
+      "kind": "entity_swap",
+      "text": "Folded bicycles are allowed at 7:00.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Student applications are processed within 5 working days.",
+      "kind": "original",
+      "text": "Student applications are processed within 5 working days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Student applications are processed within 5 working days.",
+      "kind": "number_swap",
+      "text": "Student applications are processed within 12 working days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Student applications are processed within 5 working days.",
+      "kind": "negation",
+      "text": "Student applications are not processed within 5 working days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Student applications are processed within 5 working days.",
+      "kind": "entity_swap",
+      "text": "Student applications are processed within 16:00.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students receive a 50 percent discount on the monthly pass.",
+      "kind": "original",
+      "text": "Students receive a 50 percent discount on the monthly pass.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Students receive a 50 percent discount on the monthly pass.",
+      "kind": "number_swap",
+      "text": "Students receive a 57 percent discount on the monthly pass.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students receive a 50 percent discount on the monthly pass.",
+      "kind": "negation",
+      "text": "Students do not receive a 50 percent discount on the monthly pass.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students receive a 50 percent discount on the monthly pass.",
+      "kind": "entity_swap",
+      "text": "Students receive a all times discount on the monthly pass.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Senior applications are processed within 10 working days.",
+      "kind": "original",
+      "text": "Senior applications are processed within 10 working days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Senior applications are processed within 10 working days.",
+      "kind": "number_swap",
+      "text": "Senior applications are processed within 17 working days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Senior applications are processed within 10 working days.",
+      "kind": "negation",
+      "text": "Senior applications are not processed within 10 working days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Senior applications are processed within 10 working days.",
+      "kind": "entity_swap",
+      "text": "Senior applications are processed within 5 working days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A monthly pass costs 72 euros.",
+      "kind": "original",
+      "text": "A monthly pass costs 72 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A monthly pass costs 72 euros.",
+      "kind": "number_swap",
+      "text": "A monthly pass costs 79 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A monthly pass costs 72 euros.",
+      "kind": "negation",
+      "text": "A monthly pass do not costs 72 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A monthly pass costs 72 euros.",
+      "kind": "entity_swap",
+      "text": "A monthly pass costs 50 percent.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride cost 2.40 euros.",
+      "kind": "original",
+      "text": "In 2025 a single ride cost 2.40 euros.",
+      "label": "SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride cost 2.40 euros.",
+      "kind": "number_swap",
+      "text": "In 2032 a single ride cost 2.40 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride cost 2.40 euros.",
+      "kind": "negation",
+      "text": "In 2025 a single ride do not cost 2.40 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "In 2025 a single ride cost 2.40 euros.",
+      "kind": "entity_swap",
+      "text": "In 2025 a single ride cost 10 working days euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride costs 2.80 euros.",
+      "kind": "original",
+      "text": "A single ride costs 2.80 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "A single ride costs 2.80 euros.",
+      "kind": "number_swap",
+      "text": "A single ride costs 4.30 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride costs 2.80 euros.",
+      "kind": "negation",
+      "text": "A single ride do not costs 2.80 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "A single ride costs 2.80 euros.",
+      "kind": "entity_swap",
+      "text": "A single ride costs 72 euros euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Until 31 January 2026 a monthly pass cost 65 euros.",
+      "kind": "original",
+      "text": "Until 31 January 2026 a monthly pass cost 65 euros.",
+      "label": "SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Until 31 January 2026 a monthly pass cost 65 euros.",
+      "kind": "number_swap",
+      "text": "Until 38 January 2026 a monthly pass cost 65 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Until 31 January 2026 a monthly pass cost 65 euros.",
+      "kind": "negation",
+      "text": "Until 31 January 2026 a monthly pass do not cost 65 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Until 31 January 2026 a monthly pass cost 65 euros.",
+      "kind": "entity_swap",
+      "text": "Until 31 January 2026 a monthly pass cost 2.40.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "The 2026 table raised the single fare from 2.40 to 2.80 euros.",
+      "kind": "original",
+      "text": "The 2026 table raised the single fare from 2.40 to 2.80 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The 2026 table raised the single fare from 2.40 to 2.80 euros.",
+      "kind": "number_swap",
+      "text": "The 2033 table raised the single fare from 2.40 to 2.80 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "The 2026 table raised the single fare from 2.40 to 2.80 euros.",
+      "kind": "entity_swap",
+      "text": "The 2026 table raised the single fare from 2.40 to 65 euros euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Single ride validity was extended from 90 to 120 minutes.",
+      "kind": "original",
+      "text": "Single ride validity was extended from 90 to 120 minutes.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Single ride validity was extended from 90 to 120 minutes.",
+      "kind": "number_swap",
+      "text": "Single ride validity was extended from 97 to 120 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Single ride validity was extended from 90 to 120 minutes.",
+      "kind": "entity_swap",
+      "text": "Single ride validity was extended from 90 to 65 euros minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "kind": "original",
+      "text": "On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "kind": "number_swap",
+      "text": "On 8 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "kind": "negation",
+      "text": "On 1 January, 1 May and 25 December 2026 all lines do not run the Sunday timetable.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "On 1 January, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "kind": "entity_swap",
+      "text": "On 2.80, 1 May and 25 December 2026 all lines run the Sunday timetable.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Millbrook is classified as Zone A.",
+      "kind": "original",
+      "text": "Millbrook is classified as Zone A.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Millbrook is classified as Zone A.",
+      "kind": "negation",
+      "text": "Millbrook is not classified as Zone A.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Millbrook is classified as Zone A.",
+      "kind": "entity_swap",
+      "text": "Millbrook is classified as 120.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Trips that end in Zone A need no supplement.",
+      "kind": "original",
+      "text": "Trips that end in Zone A need no supplement.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Trips that end in Zone A need no supplement.",
+      "kind": "negation",
+      "text": "Trips that end in Zone A need supplement.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Trips that end in Zone A need no supplement.",
+      "kind": "entity_swap",
+      "text": "Trips that end in Zone A need 1 January.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Harbor Point is classified as Zone C.",
+      "kind": "original",
+      "text": "Harbor Point is classified as Zone C.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Harbor Point is classified as Zone C.",
+      "kind": "negation",
+      "text": "Harbor Point is not classified as Zone C.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Harbor Point is classified as Zone C.",
+      "kind": "entity_swap",
+      "text": "Harbor Point is classified as 1 May.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "For Zone C the ticket must be validated before boarding.",
+      "kind": "original",
+      "text": "For Zone C the ticket must be validated before boarding.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "For Zone C the ticket must be validated before boarding.",
+      "kind": "negation",
+      "text": "For Zone C the ticket must not be validated before boarding.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "For Zone C the ticket must be validated before boarding.",
+      "kind": "entity_swap",
+      "text": "For Zone C the ticket must be 25 December.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Quarry Lane is classified as Zone B.",
+      "kind": "original",
+      "text": "Quarry Lane is classified as Zone B.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Quarry Lane is classified as Zone B.",
+      "kind": "negation",
+      "text": "Quarry Lane is not classified as Zone B.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Quarry Lane is classified as Zone B.",
+      "kind": "entity_swap",
+      "text": "Quarry Lane is classified as Zone A.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Trips that end in Zone B need a supplement of 0.50 euros.",
+      "kind": "original",
+      "text": "Trips that end in Zone B need a supplement of 0.50 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Trips that end in Zone B need a supplement of 0.50 euros.",
+      "kind": "number_swap",
+      "text": "Trips that end in Zone B need a supplement of 2.00 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Trips that end in Zone B need a supplement of 0.50 euros.",
+      "kind": "negation",
+      "text": "Trips that end in Zone B do not need a supplement of 0.50 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Trips that end in Zone B need a supplement of 0.50 euros.",
+      "kind": "entity_swap",
+      "text": "Trips that end in Zone B need a supplement of no supplement euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "The Travel Card Office issues all concession cards.",
+      "kind": "original",
+      "text": "The Travel Card Office issues all concession cards.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The Travel Card Office issues all concession cards.",
+      "kind": "negation",
+      "text": "The do not Travel Card Office issues all concession cards.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The Travel Card Office issues all concession cards.",
+      "kind": "entity_swap",
+      "text": "The Zone C issues all concession cards.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Zone C trips need a supplement of 1.20 euros.",
+      "kind": "original",
+      "text": "Zone C trips need a supplement of 1.20 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Zone C trips need a supplement of 1.20 euros.",
+      "kind": "number_swap",
+      "text": "Zone C trips need a supplement of 2.70 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Zone C trips need a supplement of 1.20 euros.",
+      "kind": "negation",
+      "text": "Zone C trips do not need a supplement of 1.20 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Zone C trips need a supplement of 1.20 euros.",
+      "kind": "entity_swap",
+      "text": "Zone C trips need a supplement of validated before boarding euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The penalty is reduced to 30 euros if paid within 7 days.",
+      "kind": "original",
+      "text": "The penalty is reduced to 30 euros if paid within 7 days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "The penalty is reduced to 30 euros if paid within 7 days.",
+      "kind": "number_swap",
+      "text": "The penalty is reduced to 37 euros if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The penalty is reduced to 30 euros if paid within 7 days.",
+      "kind": "negation",
+      "text": "The penalty is not reduced to 30 euros if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "The penalty is reduced to 30 euros if paid within 7 days.",
+      "kind": "entity_swap",
+      "text": "The penalty is reduced to Zone B if paid within 7 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride ticket was valid for 90 minutes.",
+      "kind": "original",
+      "text": "In 2025 a single ride ticket was valid for 90 minutes.",
+      "label": "SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride ticket was valid for 90 minutes.",
+      "kind": "number_swap",
+      "text": "In 2032 a single ride ticket was valid for 90 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "In 2025 a single ride ticket was valid for 90 minutes.",
+      "kind": "entity_swap",
+      "text": "In 2025 a single ride ticket was valid for 0.50.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Zone B trips need a supplement of 0.50 euros.",
+      "kind": "original",
+      "text": "Zone B trips need a supplement of 0.50 euros.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Zone B trips need a supplement of 0.50 euros.",
+      "kind": "number_swap",
+      "text": "Zone B trips need a supplement of 2.00 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Zone B trips need a supplement of 0.50 euros.",
+      "kind": "negation",
+      "text": "Zone B trips do not need a supplement of 0.50 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Zone B trips need a supplement of 0.50 euros.",
+      "kind": "entity_swap",
+      "text": "Zone B trips need a supplement of Travel Card Office euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210.",
+      "kind": "original",
+      "text": "Students apply with Form TR-210.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210.",
+      "kind": "number_swap",
+      "text": "Students apply with Form TR-217.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210.",
+      "kind": "negation",
+      "text": "Students do not apply with Form TR-210.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Students apply with Form TR-210.",
+      "kind": "entity_swap",
+      "text": "Students apply with Form 1.20.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "kind": "original",
+      "text": "Peak hours are 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "kind": "number_swap",
+      "text": "Peak hours are 14:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "kind": "negation",
+      "text": "Peak hours are not 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Peak hours are 7:00 to 9:00; bicycles are allowed only outside peak hours.",
+      "kind": "entity_swap",
+      "text": "Peak hours are 30 euros to 9:00; bicycles are allowed only outside peak hours.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "claim": "An unused monthly pass can be refunded within 14 days.",
+      "kind": "original",
+      "text": "An unused monthly pass can be refunded within 14 days.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "An unused monthly pass can be refunded within 14 days.",
+      "kind": "number_swap",
+      "text": "An unused monthly pass can be refunded within 21 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "An unused monthly pass can be refunded within 14 days.",
+      "kind": "negation",
+      "text": "An unused monthly pass can not be refunded within 14 days.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "An unused monthly pass can be refunded within 14 days.",
+      "kind": "entity_swap",
+      "text": "An unused monthly pass can be refunded within 90 minutes.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Quarry Lane trips need a supplement of 0.50 euros.",
+      "kind": "original",
+      "text": "Quarry Lane trips need a supplement of 0.50 euros.",
+      "label": "SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Quarry Lane trips need a supplement of 0.50 euros.",
+      "kind": "number_swap",
+      "text": "Quarry Lane trips need a supplement of 2.00 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Quarry Lane trips need a supplement of 0.50 euros.",
+      "kind": "negation",
+      "text": "Quarry Lane trips do not need a supplement of 0.50 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "Quarry Lane trips need a supplement of 0.50 euros.",
+      "kind": "entity_swap",
+      "text": "Quarry Lane trips need a supplement of TR-210 euros.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "1 January, 1 May and 25 December 2026.",
+      "kind": "original",
+      "text": "1 January, 1 May and 25 December 2026.",
+      "label": "SUPPORTED",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "1 January, 1 May and 25 December 2026.",
+      "kind": "number_swap",
+      "text": "8 January, 1 May and 25 December 2026.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "CONTRADICTED"
+    },
+    {
+      "claim": "1 January, 1 May and 25 December 2026.",
+      "kind": "entity_swap",
+      "text": "1 January, TR-210 and 25 December 2026.",
+      "label": "NOT_SUPPORTED",
+      "verdict": "UNSUPPORTED"
+    }
+  ]
+}

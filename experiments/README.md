@@ -20,6 +20,8 @@ as `NOT MEASURED` or `NOT RUN`.
 | `runners/verifier_validation.py` | accuracy of the claim-verification instrument on perturbed claims (labels by construction) |
 | `runners/robustness.py` | full system under injected faults and hostile input (Phase 8 FaultInjector; SYNTHETIC faults) |
 | `runners/reproducibility.py` | second run of selected variants; compares answers, evidence, labels and latency |
+| `runners/resources.py` | `results/RESOURCES/results.json`: peak memory per component, CPU per call, model and index sizes, LLM server footprint |
+| `runners/rederive_runtime_evidence.py` | one-off repair of runtime runs stored before the turn-evidence fix, from their event traces (originals kept as `*.pre_evidence_fix.jsonl`) |
 | `runners/environment.py` | `results/environment.json`: packages, model files + hashes, LLM digest, hardware, OS, config hash, git |
 | `runners/analyze.py` | `results/tables.md`, `results/final_comparison.json`, `results/ablation_table.json`, `results/dashboard.html`, `plots/*.svg`, human-eval sheet |
 | `runners/make_regression_baseline.py`, `runners/check_regression.py` | regression reference and check (`docs/evaluation/regression.md`) |
@@ -48,6 +50,9 @@ ollama serve
 ```
 ```bash
 .venv/bin/python experiments/runners/reproducibility.py --index-root /tmp/idx10
+```
+```bash
+.venv/bin/python experiments/runners/resources.py --index-root /tmp/idx10
 ```
 ```bash
 .venv/bin/python experiments/runners/environment.py
