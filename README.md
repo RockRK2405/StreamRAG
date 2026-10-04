@@ -17,7 +17,7 @@ corrects themselves.
 |---|---|
 | source code | this repository (`src/streamrag/`), tag `PRISM_GENAI_HACKATHON_Y2026` |
 | requirements | `requirements.txt` (pinned: `requirements.lock`) |
-| presentation | `FINAL_PRESENTATION.md` (18 slides); PPT file: see the `presentation/` folder |
+| presentation | `presentation/StreamRAG_Theme4_Submission.pptx` (official template, 12 slides); speaker version: `FINAL_PRESENTATION.md` (18 slides) |
 | demo video | _link to be added_ |
 | AI disclosure | `AI_DISCLOSURE.md` (draft of the official form) |
 | results | `FINAL_BENCHMARK_RESULTS/README.md` |
