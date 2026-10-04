@@ -1,0 +1,101 @@
+# System variants under evaluation (Phase 10). family: free | pipeline | runtime (src/streamrag/evaluation/systems.py)
+# generation: llm (local qwen3:4b via Ollama, temperature 0, seed 7) | extractive (deterministic, no LLM)
+# Every fixed system uses k = 5 per need (the Phase 5-8 default). Reranking is off unless stated.
+
+# ---------------------------------------------------------------- baselines (brief §7-10)
+naive_rag:            {family: free, mode: dense, k: 5, rerank: false, generation: llm,
+                       label: "A Naive RAG (vector top-5 -> LLM)"}
+hybrid_rag:           {family: free, mode: hybrid, k: 5, rerank: false, generation: llm,
+                       label: "B Hybrid RAG (BM25 + vector, RRF top-5 -> LLM)"}
+hybrid_rerank:        {family: free, mode: hybrid, k: 5, rerank: true, generation: llm,
+                       label: "C Hybrid + cross-encoder rerank top-5 -> LLM"}
+streaming_fixed:      {family: runtime, generation: llm, overrides: {adaptive_retrieval.enabled: false},
+                       label: "D Streaming RAG without adaptive retrieval (Phase 8 runtime, fixed hybrid)"}
+# ---------------------------------------------------------------- proposed
+adaptive_rag:         {family: pipeline, generation: llm, overrides: {adaptive_retrieval.enabled: true},
+                       label: "Adaptive RAG (batch session pipeline + adaptive retrieval + grounded answers)"}
+full_system:          {family: runtime, generation: llm, overrides: {adaptive_retrieval.enabled: true},
+                       label: "Full system (streaming runtime + session + delta + cancellation + adaptive + grounding)"}
+# ---------------------------------------------------------------- runtime ablations (LLM)
+full_system_queryonly:  {family: runtime, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.claim_driven: false},
+                         label: "S - claim-driven retrieval"}
+full_system_memoryless: {family: runtime, generation: llm, memoryless: true,
+                         overrides: {adaptive_retrieval.enabled: true}, label: "S - session memory (fresh session per turn)"}
+full_system_fullrestart: {family: runtime, generation: llm,
+                          overrides: {adaptive_retrieval.enabled: true, session.full_restart: true},
+                          label: "S - delta retrieval (every need re-planned each turn)"}
+full_system_nocancel:   {family: runtime, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, runtime.cancel_running: false,
+                                     runtime.cancel_on_correction: false, controller.cancel_superseded: never},
+                         label: "S - cancellation"}
+full_system_batch:      {family: runtime, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, controller.strategy: end_only,
+                                     generation.draft_mode: "off"},
+                         label: "Batch RAG in the runtime (retrieval at utterance end, no drafts)"}
+# ---------------------------------------------------------------- answer-stage ablations (batch, LLM)
+adaptive_rag_queryonly: {family: pipeline, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.claim_driven: false},
+                         label: "Adaptive RAG - claim-driven (query-driven sufficiency)"}
+adaptive_rag_unverified: {family: pipeline, generation: llm, answer_mode: unverified,
+                          overrides: {adaptive_retrieval.enabled: true},
+                          label: "S_batch - evidence verification (free LLM answer over the same evidence)"}
+adaptive_rag_nocitval:  {family: pipeline, generation: llm, answer_mode: no_citation_validation,
+                         overrides: {adaptive_retrieval.enabled: true},
+                         label: "S_batch - citation validation (verified claims, LLM citation labels kept)"}
+adaptive_rag_rerank:    {family: pipeline, generation: llm,
+                         overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.rerank: always},
+                         label: "S_batch + reranking (cross-encoder on every search)"}
+pipeline_fixed:         {family: pipeline, generation: llm, overrides: {adaptive_retrieval.enabled: false},
+                         label: "Session pipeline, fixed hybrid retrieval, grounded answers"}
+adaptive_rag_nocontra:  {family: pipeline, generation: llm,
+                         query_types: [CONTRADICTORY, TEMPORAL],
+                         overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.contradiction_retrieval: false,
+                                     adaptive_retrieval.temporal: false},
+                         label: "Adaptive RAG - contradiction / temporal handling"}
+# ---------------------------------------------------------------- cancellation experiment (overlapping turns)
+cancel_on:            {family: runtime, generation: llm, overlap_turns: true, gap_ms: 400,
+                       query_types: [ENTITY_CORRECTION, STREAMING_CORRECTION],
+                       overrides: {adaptive_retrieval.enabled: true}, label: "cooperative cancellation (default)"}
+cancel_off:           {family: runtime, generation: llm, overlap_turns: true, gap_ms: 400,
+                       query_types: [ENTITY_CORRECTION, STREAMING_CORRECTION],
+                       overrides: {adaptive_retrieval.enabled: true, runtime.cancel_running: false,
+                                   runtime.cancel_on_correction: false, controller.cancel_superseded: never},
+                       label: "no cancellation"}
+cancel_on_remote:     {family: runtime, generation: llm, overlap_turns: true, gap_ms: 400, dense_delay_ms: 300,
+                       query_types: [ENTITY_CORRECTION, STREAMING_CORRECTION],
+                       overrides: {adaptive_retrieval.enabled: true},
+                       label: "cooperative cancellation, +300 ms per dense search (SYNTHETIC remote index)"}
+cancel_off_remote:    {family: runtime, generation: llm, overlap_turns: true, gap_ms: 400, dense_delay_ms: 300,
+                       query_types: [ENTITY_CORRECTION, STREAMING_CORRECTION],
+                       overrides: {adaptive_retrieval.enabled: true, runtime.cancel_running: false,
+                                   runtime.cancel_on_correction: false, controller.cancel_superseded: never},
+                       label: "no cancellation, +300 ms per dense search (SYNTHETIC remote index)"}
+# ---------------------------------------------------------------- extractive variants (deterministic, no LLM)
+topk_3:   {family: pipeline, generation: extractive,
+           overrides: {adaptive_retrieval.enabled: false, multi_intent.max_candidates_per_intent: 3}, label: "fixed k=3"}
+topk_5:   {family: pipeline, generation: extractive,
+           overrides: {adaptive_retrieval.enabled: false, multi_intent.max_candidates_per_intent: 5}, label: "fixed k=5"}
+topk_10:  {family: pipeline, generation: extractive,
+           overrides: {adaptive_retrieval.enabled: false, multi_intent.max_candidates_per_intent: 10}, label: "fixed k=10"}
+topk_20:  {family: pipeline, generation: extractive,
+           overrides: {adaptive_retrieval.enabled: false, multi_intent.max_candidates_per_intent: 20}, label: "fixed k=20"}
+adaptive_x:            {family: pipeline, generation: extractive, overrides: {adaptive_retrieval.enabled: true},
+                        label: "adaptive (extractive answers)"}
+adaptive_x_fixedk:     {family: pipeline, generation: extractive,
+                        overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.adaptive_k: false},
+                        label: "adaptive without adaptive k (k=5)"}
+adaptive_x_single:     {family: pipeline, generation: extractive,
+                        overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.iterative: false},
+                        label: "adaptive, single pass"}
+adaptive_x_nohop:      {family: pipeline, generation: extractive,
+                        overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.multi_hop: false},
+                        label: "adaptive without multi-hop"}
+cache_none:            {family: pipeline, generation: extractive,
+                        overrides: {adaptive_retrieval.enabled: true, session.cache: false, adaptive_retrieval.cache: false,
+                                    adaptive_retrieval.session_reuse: false}, label: "no cache"}
+cache_session:         {family: pipeline, generation: extractive,
+                        overrides: {adaptive_retrieval.enabled: true, adaptive_retrieval.session_reuse: false},
+                        label: "query / session caches (no evidence or validated-claim reuse)"}
+delta_full_restart:    {family: pipeline, generation: extractive, full_restart_pipeline: true,
+                        overrides: {adaptive_retrieval.enabled: true}, label: "full re-retrieval each turn"}

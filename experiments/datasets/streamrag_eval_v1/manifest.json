@@ -1,0 +1,72 @@
+{
+  "version": "streamrag_eval_v1",
+  "files": {
+    "test": {
+      "path": "test.jsonl",
+      "sha256_16": "18e51582e184efd2",
+      "samples": 87,
+      "sessions": 70,
+      "by_type": {
+        "AMBIGUOUS": 5,
+        "CONTEXTUAL_FOLLOWUP": 5,
+        "CONTRADICTORY": 5,
+        "ENTITY_CORRECTION": 5,
+        "EXACT_TERM": 6,
+        "INSUFFICIENT_EVIDENCE": 5,
+        "MULTI_CONSTRAINT": 8,
+        "MULTI_HOP": 7,
+        "MULTI_INTENT": 5,
+        "REPEATED_QUERY": 5,
+        "SEMANTIC": 5,
+        "SIMPLE": 15,
+        "STREAMING_CORRECTION": 5,
+        "TEMPORAL": 6
+      },
+      "by_difficulty": {
+        "EASY": 27,
+        "HARD": 18,
+        "MEDIUM": 42
+      },
+      "by_corpus": {
+        "transit": 87
+      }
+    },
+    "dev": {
+      "path": "dev.jsonl",
+      "sha256_16": "17638ae166a734d5",
+      "samples": 129,
+      "sessions": 112,
+      "by_type": {
+        "AMBIGUOUS": 2,
+        "CONTEXTUAL_FOLLOWUP": 9,
+        "CONTRADICTORY": 8,
+        "ENTITY_CORRECTION": 2,
+        "EXACT_TERM": 7,
+        "INSUFFICIENT_EVIDENCE": 14,
+        "MULTI_CONSTRAINT": 8,
+        "MULTI_HOP": 5,
+        "MULTI_INTENT": 9,
+        "REPEATED_QUERY": 5,
+        "SEMANTIC": 7,
+        "SIMPLE": 46,
+        "TEMPORAL": 7
+      },
+      "by_difficulty": {
+        "EASY": 77,
+        "HARD": 6,
+        "MEDIUM": 46
+      },
+      "by_corpus": {
+        "adaptive": 83,
+        "conflict": 2,
+        "fixture": 27,
+        "grounding": 13,
+        "injection": 4
+      }
+    }
+  },
+  "construction": "experiments/datasets/build_dataset.py",
+  "labels": "implementer-written from the fixture corpus text; no independent annotation",
+  "test_corpus": "tests/fixtures/corpus_eval_transit (new in Phase 10; never used in development)",
+  "reportable": false
+}

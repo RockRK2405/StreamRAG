@@ -210,6 +210,7 @@ class SessionConfig(_Cfg):
     frame_overlap_min: int = Field(1, ge=0)              # shared topic terms that keep a new need in the frame
     claims_per_intent: int = Field(4, ge=1)              # extractive claims registered per intent version
     claim_min_relevance: float = Field(0.2, ge=0, le=1)  # min share of the intent's terms in a claim sentence
+    full_restart: bool = False                           # ablation (Phase 10): re-plan every need each turn, no reuse
 
 
 class GenerationConfig(_Cfg):

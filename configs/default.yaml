@@ -170,10 +170,12 @@ session:
   frame_overlap_min: 1             # a new need sharing >= this many topic terms stays in the current frame
   claims_per_intent: 4             # extractive claims registered per intent version
   claim_min_relevance: 0.2         # min share of the intent's query terms a claim sentence must contain
+  full_restart: false             # ablation switch (Phase 10): re-plan every need each turn (no delta / reuse)
 
 # --------------------------------------------------------------------------------------------------
 # Phase 7: grounded answer generation + claim verification + citations (docs/answer/, ADR-017).
 # Team engineering defaults (NOT official thresholds); see PHASE_7_GROUNDED_GENERATION_REPORT.md.
+
 generation:
   enabled: false                   # true (with session.enabled): grounded answers at the end of every turn
   backend: auto                    # auto | ollama | extractive  (auto: ollama if reachable, else extractive)

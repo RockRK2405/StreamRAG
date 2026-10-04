@@ -82,7 +82,12 @@ def test_session_reset_and_cancel_during_active_tasks(stack):
             rt.push_transcript_delta(sid, "u1", c)
             await asyncio.sleep(0.05)
         rt.end_utterance(sid, "u1")
-        await asyncio.sleep(0.3)
+        # wait for the condition the test is about (final-answer generation in flight on the llm pool) instead of a
+        # fixed sleep: under CPU load the work running at a fixed instant can be a task already superseded
+        for _ in range(1000):
+            if any(not e.zombie and e.task.session_id == sid for e in rt.scheduler.pools["llm"].running.values()):
+                break
+            await asyncio.sleep(0.01)
         rs = rt.sessions[sid]
         busy_before = rt.scheduler.busy(lambda t: t.session_id == sid)
         rt.reset_session(sid)                                      # generation still running

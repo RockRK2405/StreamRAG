@@ -1,0 +1,25 @@
+# Regression rules for experiments/runners/check_regression.py (docs/evaluation/regression.md).
+# direction: which way is better. tolerance: absolute; relative_tolerance: fraction of the baseline (larger applies).
+# Basis of the tolerances (not universal thresholds):
+#   * quality / grounding rates on the 87-turn test split: one turn flipping moves a mean by ~0.0115, so 0.025 (about
+#     two turns) separates a real change from one flipped turn. The LLM runs at temperature 0 with a fixed seed;
+#     the measured run-to-run agreement is in experiments/results/REPRODUCIBILITY/results.json.
+#   * latency: wall-clock on a shared laptop CPU with a local LLM; 0.25 relative covers the run-to-run differences
+#     measured in experiments/results/REPRODUCIBILITY (see PHASE_10_EVALUATION_REPORT.md section 19) - re-derive on
+#     the target hardware.
+#   * operation counts are deterministic for a fixed configuration and dataset: tolerance 0.
+metrics:
+  retrieval.recall@5:            {direction: higher, tolerance: 0.025}
+  retrieval.mrr:                 {direction: higher, tolerance: 0.025}
+  evidence.evidence_precision:   {direction: higher, tolerance: 0.025}
+  generation.answer_correct:     {direction: higher, tolerance: 0.025}
+  generation.completeness:       {direction: higher, tolerance: 0.025}
+  generation.forbidden_hit:      {direction: lower,  tolerance: 0.025}
+  claims.claim_support_rate:     {direction: higher, tolerance: 0.025}
+  hallucination.hallucinated_claim_rate: {direction: lower, tolerance: 0.025}
+  citation.citation_precision:   {direction: higher, tolerance: 0.025}
+  latency.ttva_after_end:        {direction: lower,  relative_tolerance: 0.25}
+  latency.ttva_after_end.p95:    {direction: lower,  relative_tolerance: 0.25}
+  efficiency.retrieval_calls:    {direction: lower,  tolerance: 0.0}
+  efficiency.llm_calls:          {direction: lower,  tolerance: 0.0}
+  failure_rate:                  {direction: lower,  tolerance: 0.0}

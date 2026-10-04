@@ -1,0 +1,108 @@
+# Phase 10 experiments (brief §25-§35). metrics: dotted <group>.<metric> used for the paired comparisons.
+EXP01_baselines:
+  title: Baseline retrieval comparison
+  question: How do naive, hybrid, hybrid + rerank, streaming without adaptivity, adaptive RAG and the full system compare?
+  splits: [test]
+  systems: [naive_rag, hybrid_rag, hybrid_rerank, streaming_fixed, adaptive_rag, full_system]
+  comparisons: [[naive_rag, hybrid_rag], [hybrid_rag, hybrid_rerank], [hybrid_rerank, adaptive_rag],
+                [naive_rag, full_system], [streaming_fixed, full_system], [adaptive_rag, full_system]]
+  metrics: [retrieval.recall@5, retrieval.mrr, evidence.evidence_precision, generation.answer_correct,
+            generation.completeness, claims.claim_support_rate, hallucination.hallucinated_claim_rate,
+            citation.citation_precision, latency.ttva_after_end, efficiency.retrieval_calls]
+EXP02_adaptive_topk:
+  title: Adaptive top-k
+  question: Does adaptive k reach the quality of a large fixed k with less retrieval volume?
+  splits: [test, dev]
+  systems: [topk_3, topk_5, topk_10, topk_20, adaptive_x_fixedk, adaptive_x]
+  comparisons: [[topk_5, adaptive_x], [topk_10, adaptive_x], [topk_20, adaptive_x], [adaptive_x_fixedk, adaptive_x]]
+  metrics: [retrieval.recall@5, retrieval.recall@10, retrieval.mrr, evidence.evidence_precision,
+            generation.answer_correct, efficiency.chunks_retrieved, efficiency.retrieval_calls, latency.ttva_after_end]
+EXP03_claim_driven:
+  title: Claim-driven retrieval
+  question: Does claim-driven retrieval improve claim support over query-driven retrieval?
+  splits: [test]
+  systems: [adaptive_rag_queryonly, adaptive_rag]
+  comparisons: [[adaptive_rag_queryonly, adaptive_rag]]
+  metrics: [claims.claim_support_rate, hallucination.unsupported_claim_rate, generation.answer_correct,
+            generation.completeness, retrieval.recall@5, efficiency.retrieval_calls, latency.ttva_after_end]
+EXP04_cache:
+  title: Cache reuse
+  question: Do the session caches and validated-evidence reuse reduce retrieval work without hurting quality?
+  splits: [test, dev]
+  query_types: [CONTEXTUAL_FOLLOWUP, ENTITY_CORRECTION, REPEATED_QUERY]
+  systems: [cache_none, cache_session, adaptive_x]
+  comparisons: [[cache_none, cache_session], [cache_none, adaptive_x], [cache_session, adaptive_x]]
+  metrics: [efficiency.retrieval_calls, efficiency.embeddings, efficiency.cache_hit, efficiency.evidence_reused,
+            latency.ttva_after_end, generation.answer_correct, retrieval.recall@5]
+EXP05_delta:
+  title: Delta retrieval
+  question: Does delta retrieval reduce redundant work when a question is refined or corrected?
+  splits: [test, dev]
+  query_types: [CONTEXTUAL_FOLLOWUP, ENTITY_CORRECTION, REPEATED_QUERY]
+  systems: [delta_full_restart, adaptive_x]
+  comparisons: [[delta_full_restart, adaptive_x]]
+  metrics: [efficiency.retrieval_calls, efficiency.embeddings, efficiency.evidence_reused, latency.ttva_after_end,
+            generation.answer_correct, retrieval.recall@5]
+EXP06_cancellation:
+  title: Cancellation
+  question: Does cooperative cancellation reduce wasted computation when the user changes the question?
+  splits: [test]
+  query_types: [ENTITY_CORRECTION, STREAMING_CORRECTION]
+  systems: [cancel_off, cancel_on, cancel_off_remote, cancel_on_remote]
+  comparisons: [[cancel_off, cancel_on], [cancel_off_remote, cancel_on_remote]]
+  metrics: [latency.ttva, latency.total, efficiency.retrieval_calls, efficiency.llm_calls, generation.answer_correct]
+EXP07_streaming:
+  title: Streaming responsiveness
+  question: Does streaming reduce perceived response latency compared with batch processing?
+  splits: [test]
+  systems: [full_system_batch, full_system]
+  comparisons: [[full_system_batch, full_system]]
+  metrics: [latency.ttfe, latency.ttfa, latency.ttva, latency.total, latency.ttva_after_end, latency.ttfa_after_end,
+            generation.answer_correct]
+EXP08_iterative:
+  title: Iterative retrieval
+  question: What does adaptive iterative retrieval add over a single pass, and what does it cost?
+  splits: [test, dev]
+  systems: [adaptive_x_single, adaptive_x]
+  comparisons: [[adaptive_x_single, adaptive_x]]
+  metrics: [retrieval.recall@5, retrieval.mrr, evidence.evidence_coverage, generation.answer_correct,
+            efficiency.retrieval_calls, latency.ttva_after_end]
+EXP09_multihop:
+  title: Multi-hop retrieval
+  question: Does multi-hop retrieval answer questions that need two documents?
+  splits: [test, dev]
+  query_types: [MULTI_HOP]
+  scored_types: [MULTI_HOP]
+  systems: [topk_5, adaptive_x_nohop, adaptive_x]
+  comparisons: [[topk_5, adaptive_x], [adaptive_x_nohop, adaptive_x]]
+  metrics: [retrieval.recall@5, evidence.evidence_recall, evidence.evidence_coverage, generation.answer_correct,
+            efficiency.retrieval_calls, latency.ttva_after_end]
+EXP10_contradiction:
+  title: Contradiction resolution
+  question: Does contradiction-aware retrieval improve reliability on conflicting / versioned documents?
+  splits: [test]
+  query_types: [CONTRADICTORY, TEMPORAL]
+  scored_types: [CONTRADICTORY, TEMPORAL]
+  systems: [hybrid_rerank, pipeline_fixed, adaptive_rag_nocontra, adaptive_rag]
+  comparisons: [[hybrid_rerank, adaptive_rag], [pipeline_fixed, adaptive_rag], [adaptive_rag_nocontra, adaptive_rag]]
+  metrics: [generation.answer_correct, generation.forbidden_hit, generation.conflict_reported,
+            evidence.contradictory_evidence, efficiency.retrieval_calls]
+ABLATION_runtime:
+  title: Ablation (streaming runtime)
+  question: What does each component of the full system contribute?
+  splits: [test]
+  systems: [full_system, streaming_fixed, full_system_queryonly, full_system_memoryless, full_system_fullrestart,
+            full_system_nocancel]
+  comparisons: [[full_system, streaming_fixed], [full_system, full_system_queryonly], [full_system, full_system_memoryless],
+                [full_system, full_system_fullrestart], [full_system, full_system_nocancel]]
+  metrics: [generation.answer_correct, retrieval.recall@5, claims.claim_support_rate, citation.citation_precision,
+            latency.ttva_after_end, efficiency.retrieval_calls]
+ABLATION_answer_stage:
+  title: Ablation (answer stage, batch pipeline)
+  question: What do evidence verification, citation validation and reranking contribute?
+  splits: [test]
+  systems: [adaptive_rag, adaptive_rag_unverified, adaptive_rag_nocitval, adaptive_rag_rerank]
+  comparisons: [[adaptive_rag, adaptive_rag_unverified], [adaptive_rag, adaptive_rag_nocitval],
+                [adaptive_rag, adaptive_rag_rerank]]
+  metrics: [generation.answer_correct, claims.claim_support_rate, hallucination.unsupported_claim_rate,
+            hallucination.hallucinated_claim_rate, citation.citation_precision, latency.ttva_after_end]

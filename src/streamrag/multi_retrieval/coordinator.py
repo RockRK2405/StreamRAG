@@ -107,7 +107,8 @@ class MultiIntentCoordinator:
             from streamrag.session.engine import AdaptiveSessionEngine
             self.engine = AdaptiveSessionEngine(session.session_id, session.cfg, self.tracker, session.ledger,
                                                 stack.query_builder, stack.index_hash, session.options,
-                                                emit=session.emit, config_hash=str(session.meta.get("config_hash", "")))
+                                                emit=session.emit, full_restart=session.cfg.session.full_restart,
+                                                config_hash=str(session.meta.get("config_hash", "")))
         self.grounding = None                           # Phase 7 GroundedAnswerEngine (generation.enabled)
         self.answer_lane = None                         # Phase 8: runtime answer lane (async drafts / finals)
         self.grounded: dict[str, object] = {}           # utterance -> final GroundedAnswer of its turn
